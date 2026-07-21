@@ -247,6 +247,113 @@ export function CoverPanda(p: P) {
   );
 }
 
+/* ---------- 全身 Q 版东方龙 v2：有身体/四肢/长身鱼尾/鹿角狮鬃长须 ---------- */
+// 单只龙，局部坐标以头中心为 (0,0)，外层用 translate 定位。mood 控制表情与手势。
+function DragonFull({
+  cx,
+  cy,
+  s,
+  body,
+  mood,
+}: {
+  cx: number;
+  cy: number;
+  s: number;
+  body: string;
+  mood: "hong" | "qing";
+}) {
+  const out = TEAL_D;
+  return (
+    <g transform={`translate(${cx} ${cy}) scale(${s})`}>
+      {/* 长身鱼尾（身后，先画） */}
+      <path
+        d="M22 78 C 64 84, 78 120, 52 134 C 40 141, 24 134, 30 120"
+        fill={body}
+        stroke={out}
+        strokeWidth={3}
+        strokeLinejoin="round"
+      />
+      <path d="M52 134 C 66 132, 76 140, 78 150 C 66 148, 58 144, 52 134 Z" fill={GOLD} stroke={out} strokeWidth={2.4} strokeLinejoin="round" />
+      <path d="M52 134 C 60 144, 58 156, 50 162 C 46 152, 46 142, 52 134 Z" fill={GOLD} stroke={out} strokeWidth={2.4} strokeLinejoin="round" />
+      {/* 背鬃（蓬松，身体同色） */}
+      <circle cx={-40} cy={6} r={9} fill={body} opacity={0.85} />
+      <circle cx={-44} cy={26} r={9} fill={body} opacity={0.85} />
+      <circle cx={-42} cy={48} r={8} fill={body} opacity={0.85} />
+      {/* 身体（梨形坐姿） */}
+      <path
+        d="M0 24 C -34 24, -40 66, -33 96 C -27 120, 27 120, 33 96 C 40 66, 34 24, 0 24 Z"
+        fill={body}
+        stroke={out}
+        strokeWidth={3.2}
+        strokeLinejoin="round"
+      />
+      {/* 肚子 */}
+      <ellipse cx={0} cy={88} rx={21} ry={25} fill={GOLD} stroke={out} strokeWidth={2.4} />
+      {/* 后脚 + 三趾 */}
+      {[-19, 19].map((fx) => (
+        <g key={fx}>
+          <ellipse cx={fx} cy={116} rx={12} ry={8} fill={body} stroke={out} strokeWidth={2.6} />
+          <path d={`M${fx - 5} 122 v4 M${fx} 123 v4 M${fx + 5} 122 v4`} stroke={out} strokeWidth={2} strokeLinecap="round" />
+        </g>
+      ))}
+      {/* 头 */}
+      <circle cx={0} cy={0} r={49} fill={body} stroke={out} strokeWidth={3.4} />
+      {/* 鹿角 */}
+      <path d="M-17 -40 C -23 -56, -19 -64, -13 -70 M-19 -54 C -27 -58, -31 -64, -31 -70" stroke={GOLD} strokeWidth={3.4} strokeLinecap="round" fill="none" />
+      <path d="M17 -40 C 23 -56, 19 -64, 13 -70 M19 -54 C 27 -58, 31 -64, 31 -70" stroke={GOLD} strokeWidth={3.4} strokeLinecap="round" fill="none" />
+      {/* 狮鬃（脸颊蓬松） */}
+      <path d="M-46 -6 C -58 -2, -62 8, -60 18" stroke={body} strokeWidth={8} strokeLinecap="round" fill="none" opacity={0.8} />
+      <path d="M46 -6 C 58 -2, 62 8, 60 18" stroke={body} strokeWidth={8} strokeLinecap="round" fill="none" opacity={0.8} />
+      {/* 长须 */}
+      <path d="M-30 12 C -46 18, -54 30, -58 46" stroke={out} strokeWidth={2.2} strokeLinecap="round" fill="none" opacity={0.65} />
+      <path d="M30 12 C 46 18, 54 30, 58 46" stroke={out} strokeWidth={2.2} strokeLinecap="round" fill="none" opacity={0.65} />
+      {/* 眼 */}
+      <circle cx={-15} cy={-4} r={6.5} fill={out} />
+      <circle cx={15} cy={-4} r={6.5} fill={out} />
+      <circle cx={-13} cy={-6} r={2.2} fill="#fff" />
+      <circle cx={17} cy={-6} r={2.2} fill="#fff" />
+      {/* 腮红 */}
+      <circle cx={-30} cy={12} r={5.5} fill={RED} opacity={0.25} />
+      <circle cx={30} cy={12} r={5.5} fill={RED} opacity={0.25} />
+      {/* 嘴 */}
+      {mood === "hong" ? (
+        <>
+          <path d="M-12 14 C -6 22, 6 22, 12 14" stroke={out} strokeWidth={2.8} strokeLinecap="round" fill="none" />
+          <path d="M-5 18 C -5 26, 5 26, 5 18 Z" fill={RED} stroke={out} strokeWidth={2} strokeLinejoin="round" />
+        </>
+      ) : (
+        <path d="M-12 15 C -6 21, 6 21, 12 15" stroke={out} strokeWidth={2.8} strokeLinecap="round" fill="none" />
+      )}
+      {/* 手 / 手势 */}
+      {mood === "hong" ? (
+        <>
+          <path d="M40 44 C 54 38, 64 30, 66 18" stroke={out} strokeWidth={3.4} strokeLinecap="round" fill="none" />
+          <circle cx={67} cy={14} r={8.5} fill={GOLD} stroke={out} strokeWidth={2.6} />
+          <circle cx={-40} cy={62} r={8} fill={GOLD} stroke={out} strokeWidth={2.6} />
+        </>
+      ) : (
+        <>
+          <path d="M-22 56 C -10 50, 10 50, 22 56" stroke={out} strokeWidth={3.2} strokeLinecap="round" fill="none" />
+          <circle cx={0} cy={56} r={9} fill={GOLD} stroke={out} strokeWidth={2.6} />
+        </>
+      )}
+    </g>
+  );
+}
+
+// 双龙并排全身版（替代旧的"双蛋头"）
+export function DragonPair({ className = "", ...p }: P & { className?: string }) {
+  return (
+    <svg viewBox="0 0 360 300" className={className} fill="none" aria-hidden {...p}>
+      <ellipse cx="180" cy="262" rx="140" ry="20" fill={TEAL} opacity="0.08" />
+      <DragonFull cx={120} cy={120} s={1} body={QING} mood="qing" />
+      <DragonFull cx={244} cy={112} s={1.12} body={HONG} mood="hong" />
+      <circle cx="40" cy="70" r="5" fill={ORANGE} opacity="0.7" />
+      <path d="M320 60 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3 Z" fill={GOLD} />
+    </svg>
+  );
+}
+
 export const themeCover = {
   cny: CoverCny,
   zodiac: CoverZodiac,

@@ -8,7 +8,7 @@ import { KitCard } from "@/components/KitCard";
 import { SubscribeForm } from "@/components/SubscribeForm";
 import { Reveal } from "@/components/Reveal";
 import {
-  DragonDuo,
+  DragonPair,
   DecoLantern,
   DecoCloud,
   DecoEnvelope,
@@ -93,7 +93,7 @@ export function HomeContent() {
                 {/* 柔光盘 */}
                 <div aria-hidden className="absolute w-[20rem] h-[20rem] rounded-full bg-white/70 shadow-[0_30px_60px_-20px_rgb(45_106_79/0.25)]" />
                 <div aria-hidden className="absolute w-[20rem] h-[20rem] rounded-full border-2 border-dashed border-teal/20 spin-slow" />
-                <DragonDuo className="relative w-[24rem] max-w-full drop-shadow-sm float-1" />
+                <DragonPair className="relative w-[24rem] max-w-full drop-shadow-sm float-1" />
                 {/* 漂浮装饰 */}
                 <DecoLantern className="absolute top-2 right-6 w-12 sway" />
                 <DecoCloud className="absolute top-10 left-0 w-20 float-2 opacity-90" />
@@ -212,7 +212,7 @@ export function HomeContent() {
           <Reveal delay={150}>
             <div className="relative flex items-center justify-center h-72">
               <div aria-hidden className="absolute w-60 h-60 rounded-full bg-white/60" />
-              <DragonDuo className="relative w-80 max-w-full float-1" />
+              <DragonPair className="relative w-80 max-w-full float-1" />
               <DecoLantern className="absolute top-0 right-8 w-10 sway" />
               <DecoEnvelope className="absolute bottom-2 left-6 w-10 float-3" />
             </div>
