@@ -7,8 +7,8 @@ import { kits, featuredKitIds } from "@/lib/kits";
 import { KitCard } from "@/components/KitCard";
 import { SubscribeForm } from "@/components/SubscribeForm";
 import { Reveal } from "@/components/Reveal";
+import { DragonArtStage } from "@/components/DragonArtStage";
 import {
-  BrandMotif,
   InkStroke,
   DecoLantern,
   DecoCloud,
@@ -100,10 +100,10 @@ export function HomeContent() {
               </div>
             </Reveal>
 
-            {/* 右：印章+民俗组合（焦点，无生物） */}
+            {/* 右：稳定的双龙舞台。资产未到位时仅显示临时徽章，不伪造龙。 */}
             <Reveal delay={150} className="lg:col-span-5">
-              <div className="relative flex items-center justify-center h-[20rem] sm:h-[24rem]">
-                <BrandMotif className="w-[22rem] max-w-full" />
+              <div className="dragon-art-stage relative flex items-center justify-center h-[20rem] sm:h-[24rem]">
+                <DragonArtStage className="w-[22rem] max-w-full" alt={t.hero.mascotAlt} />
               </div>
             </Reveal>
           </div>
@@ -213,8 +213,8 @@ export function HomeContent() {
             </div>
           </Reveal>
           <Reveal delay={150}>
-            <div className="relative flex items-center justify-center h-72">
-              <BrandMotif className="w-80 max-w-full" />
+            <div className="dragon-art-stage relative flex items-center justify-center h-72">
+              <DragonArtStage className="w-80 max-w-full" alt={t.hero.mascotAlt} />
             </div>
           </Reveal>
         </div>

@@ -1,12 +1,25 @@
-// Loong Kits 标志 —— 一方红印章（篆刻感）作为图形标记，配 wordmark 由导航栏排版。
-// 印章是中国品牌最稳的视觉锚：缩到 16px 仍是一枚清楚的印，放大也耐看。
-// 配色取《视觉规范》强调色中国红 #C8102E；印文用思源宋体粗，方正如刻。
+import Image from "next/image";
+import { dragonAssets } from "@/lib/brandAssets";
 
 const RED = "#C8102E";
 const RED_D = "#9E0C24";
 const CREAM = "#FAF7F2";
 
 export function Logo({ size = 32, className = "" }: { size?: number; className?: string }) {
+  // 真实双龙 Logo 到位后自动使用；在此之前保留清晰、诚实的龙字印章。
+  if (dragonAssets.ready) {
+    return (
+      <Image
+        src={dragonAssets.logo.src}
+        alt="Loong Kits Hong and Qing dragon logo"
+        width={dragonAssets.logo.width}
+        height={dragonAssets.logo.height}
+        className={`object-contain ${className}`}
+        style={{ width: size, height: size }}
+      />
+    );
+  }
+
   return (
     <svg
       width={size}
@@ -14,30 +27,19 @@ export function Logo({ size = 32, className = "" }: { size?: number; className?:
       viewBox="0 0 48 48"
       className={className}
       role="img"
-      aria-label="Loong Kits 印章标志"
+      aria-label="Loong Kits 临时龙字印章标志"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* 印身：圆角方印 + 内陷细边，模拟篆刻边框 */}
       <rect x="2" y="2" width="44" height="44" rx="9" fill={RED} />
       <rect x="2" y="2" width="44" height="44" rx="9" fill="url(#sealShade)" />
       <rect x="6.5" y="6.5" width="35" height="35" rx="5.5" fill="none" stroke={CREAM} strokeWidth="1.6" opacity="0.85" />
-      {/* 四角刻痕，增篆刻质感 */}
       <g stroke={CREAM} strokeWidth="1.4" opacity="0.5" strokeLinecap="round">
         <path d="M9 12 V9 H12" />
         <path d="M39 12 V9 H36" />
         <path d="M9 36 V39 H12" />
         <path d="M39 36 V39 H36" />
       </g>
-      {/* 印文 龙 */}
-      <text
-        x="24"
-        y="33"
-        textAnchor="middle"
-        fontFamily="'Noto Serif SC', 'Songti SC', serif"
-        fontWeight="700"
-        fontSize="25"
-        fill={CREAM}
-      >
+      <text x="24" y="33" textAnchor="middle" fontFamily="'Noto Serif SC', 'Songti SC', serif" fontWeight="700" fontSize="25" fill={CREAM}>
         龙
       </text>
       <defs>

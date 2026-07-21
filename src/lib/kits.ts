@@ -24,12 +24,6 @@ export const themeLabels: Record<ThemeId, Record<Lang, string>> = {
   panda: { en: "Panda Friends", zh: "熊猫" },
 };
 
-export const themeIcons: Record<ThemeId, string> = {
-  cny: "🏮",
-  zodiac: "🐉",
-  panda: "🐼",
-};
-
 export const themeDesc: Record<ThemeId, Record<Lang, string>> = {
   cny: {
     en: "Stories, crafts & traditions for Chinese New Year",

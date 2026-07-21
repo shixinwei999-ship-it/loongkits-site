@@ -4,6 +4,7 @@ import { useLang } from "@/lib/i18n";
 import { freePage, common } from "@/lib/content";
 import { SubscribeForm } from "@/components/SubscribeForm";
 import { Reveal } from "@/components/Reveal";
+import { DecoCloud, DecoSeal } from "@/components/Illustration";
 
 export function FreeContent() {
   const { lang } = useLang();
@@ -27,10 +28,9 @@ export function FreeContent() {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div className="relative bg-teal/5 rounded-2xl h-64 flex items-center justify-center overflow-hidden">
                 <div aria-hidden className="absolute w-48 h-48 rounded-full border-2 border-dashed border-teal/15" />
-                <span className="text-6xl animate-float" role="img" aria-label={t.zodiac.title}>
-                  🐉
-                </span>
-                <span aria-hidden className="absolute bottom-4 right-6 text-2xl animate-float-slow">🐼</span>
+                <DecoSeal char="十" color="#2D6A4F" className="w-24 h-24 float-1" />
+                <DecoCloud className="absolute top-7 left-7 w-16 float-2 opacity-70" />
+                <DecoSeal char="生" className="absolute bottom-6 right-7 w-11 h-11 float-3" />
               </div>
               <div>
                 <span className="chip mb-4">{lang === "en" ? "First freebie" : "第一份免费礼"}</span>

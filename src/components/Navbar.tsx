@@ -30,9 +30,9 @@ export function Navbar() {
     <nav className="fixed top-0 w-full bg-cream/95 backdrop-blur-sm z-50 border-b border-teal/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link href="/" className="flex items-center gap-2 text-2xl font-bold text-teal font-nunito">
+          <Link href="/" className="flex items-center gap-2 text-2xl font-bold font-nunito" aria-label="Loong Kits home">
             <Logo size={30} />
-            Loong Kits
+            <span className="tracking-[-0.02em]"><span className="text-teal">Loong</span><span className="text-orange"> Kits</span></span>
           </Link>
 
           {/* 桌面导航 */}
