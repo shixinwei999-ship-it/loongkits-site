@@ -68,6 +68,7 @@ export const home: Bi<{
     families: { title: string; desc: string; cta: string };
     teachers: { title: string; desc: string; cta: string };
   };
+  promise: { title: string; text: string; points: string[] };
   freeSample: { title: string; desc: string };
 }> = {
   en: {
@@ -90,6 +91,11 @@ export const home: Bi<{
     audience: {
       families: { title: "For Families", desc: "Culture roots for your kids", cta: "Explore" },
       teachers: { title: "For Teachers", desc: "Classroom-ready resources", cta: "Explore" },
+    },
+    promise: {
+      title: "Made to be printed, not just scrolled",
+      text: "Every kit is a real, hand-finished PDF you print at home — stories, tracing pages, flashcards and crafts your child can actually hold. No screens. No apps. No subscriptions.",
+      points: ["A4 + Letter, print-ready", "Bilingual EN / 中文 on every page", "Age-tuned from 3 to 18"],
     },
     freeSample: {
       title: "Try a Free Kit",
@@ -116,6 +122,11 @@ export const home: Bi<{
     audience: {
       families: { title: "给家庭", desc: "给孩子种下文化根", cta: "进入" },
       teachers: { title: "给老师", desc: "课堂即用资源", cta: "进入" },
+    },
+    promise: {
+      title: "为打印而生，不是刷完就忘",
+      text: "每个学习包都是一份真正打磨过的可打印 PDF——故事、描红、闪卡、手工，孩子能拿在手里。不用屏幕，不用 App，不用订阅。",
+      points: ["A4 + Letter 双尺寸，直接打印", "每页中英双语对照", "3 到 18 岁分龄设计"],
     },
     freeSample: {
       title: "免费试一个",

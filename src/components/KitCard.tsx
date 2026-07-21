@@ -4,48 +4,56 @@ import { useLang } from "@/lib/i18n";
 import { common } from "@/lib/content";
 import {
   type Kit,
-  themeIcons,
-  themeDesc,
+  themeLabels,
   ageLabels,
   kitTitle,
   formatPages,
 } from "@/lib/kits";
+import { themeCover } from "@/components/Illustration";
+import { IconArrowRight } from "@/components/icons";
 
 export function KitCard({ kit }: { kit: Kit }) {
   const { lang } = useLang();
   const t = common[lang];
+  const Cover = themeCover[kit.theme];
 
   return (
-    <div className="card-kit flex flex-col">
-      <div className="relative h-48 bg-teal/5 flex items-center justify-center">
-        <span className="text-5xl" role="img" aria-label={kit.theme}>
-          {themeIcons[kit.theme]}
+    <div className="card-kit flex flex-col h-full">
+      <div className="relative h-52 overflow-hidden">
+        <div className="kit-cover h-full w-full">
+          <Cover />
+        </div>
+        {/* 主题角标：印章式 */}
+        <span className="absolute top-3 left-3 chip !bg-white/90 !border-white/60 backdrop-blur-sm text-[0.7rem]">
+          {themeLabels[kit.theme][lang]}
         </span>
         {kit.tag && (
-          <span className="absolute top-4 right-4 bg-orange text-white text-xs font-bold px-3 py-1 rounded-full">
+          <span className="seal absolute top-3 right-3 px-2.5 py-1 text-xs font-bold">
             {kit.tag[lang]}
           </span>
         )}
       </div>
+
       <div className="p-6 flex flex-col flex-1">
-        <h3 className="text-lg font-bold text-ink mb-1 font-nunito">{kitTitle(kit, lang)}</h3>
-        <p className="text-sm text-ink-light mb-1">{themeDesc[kit.theme][lang]}</p>
-        <p className="text-sm text-ink-light mb-4">
+        <p className="text-xs font-bold uppercase tracking-wider text-orange mb-1.5">
           {ageLabels[kit.age][lang]} · {formatPages(kit.pages, lang)}
         </p>
-        <div className="flex justify-between items-center mt-auto">
-          <span className="text-xl font-bold text-teal">${kit.priceUsd}</span>
+        <h3 className="text-xl font-extrabold text-ink mb-3 font-nunito leading-tight">
+          {kitTitle(kit, lang)}
+        </h3>
+        <div className="flex justify-between items-center mt-auto pt-2">
+          <span className="text-2xl font-extrabold text-teal font-nunito">${kit.priceUsd}</span>
           {kit.gumroadUrl ? (
             <a
               href={kit.gumroadUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary text-sm py-2 px-4"
+              className="btn-primary text-sm !py-2.5 !px-4"
             >
-              {t.buy}
+              {t.buy} <IconArrowRight size={16} />
             </a>
           ) : (
-            <span className="btn-disabled text-sm py-2 px-4" title={t.comingSoonNote}>
+            <span className="btn-disabled text-sm !py-2.5 !px-4" title={t.comingSoonNote}>
               {t.comingSoon}
             </span>
           )}
