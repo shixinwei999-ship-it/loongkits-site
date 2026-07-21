@@ -8,11 +8,12 @@ import { KitCard } from "@/components/KitCard";
 import { SubscribeForm } from "@/components/SubscribeForm";
 import { Reveal } from "@/components/Reveal";
 import {
-  DragonPair,
+  BrandMotif,
+  InkStroke,
   DecoLantern,
   DecoCloud,
-  DecoEnvelope,
   DecoSeal,
+  CloudSolid,
 } from "@/components/Illustration";
 import {
   IconDownload,
@@ -45,6 +46,9 @@ const stats = {
   ],
 };
 
+// 竖排书法回声已撤：单字符水印（如承诺段的「印」）够用，多字竖排在窄视口会换行裁切，
+// 看起来像坏掉的东西——不冒这个险。
+
 export function HomeContent() {
   const { lang } = useLang();
   const t = home[lang];
@@ -54,26 +58,35 @@ export function HomeContent() {
 
   return (
     <>
-      {/* ============ HERO ============ */}
-      <section className="bg-paper relative overflow-hidden pt-14 pb-20 px-4 sm:px-6 lg:px-8">
-        {/* 书法水印 */}
-        <span aria-hidden className="watermark hidden xl:block absolute right-6 top-24 text-[7rem]">
-          让中国文化活起来
-        </span>
+      {/* ============ HERO：字体主导的编辑式首屏 ============ */}
+      <section className="bg-paper relative overflow-hidden pt-16 pb-20 px-4 sm:px-6 lg:px-8">
+        {/* 氛围层：漂浮元素只放四角，绝不进入右侧徽章区，避免与 medallion 撞车；
+            徽章自带环状民俗元素，首屏的"活"由它承载。 */}
+        <DecoCloud className="absolute top-5 left-[2%] w-20 float-2 opacity-70" />
+        <DecoLantern className="absolute top-8 right-[6%] w-12 sway hidden sm:block" />
+        <DecoSeal char="福" className="absolute bottom-10 left-[3%] w-10 float-3 hidden lg:block opacity-90" />
 
         <div className="max-w-7xl mx-auto relative">
-          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-6 items-center">
-            {/* 左：文案 */}
-            <Reveal>
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-4 items-center">
+            {/* 左：大字 */}
+            <Reveal className="lg:col-span-7">
               <div className="relative z-10">
                 <span className="chip mb-7">
                   <span className="seal w-6 h-6 text-[0.7rem]" aria-hidden>龙</span>
                   {lang === "en" ? "Bilingual · EN / 中文 · Printable" : "中英双语 · 可打印 · 3–18 岁"}
                 </span>
-                <h1 className={lang === "en" ? "display text-ink mb-6" : "display-zh text-ink mb-6"}>
-                  {t.hero.title}
-                </h1>
-                <p className="text-lg sm:text-xl text-ink-light mb-9 max-w-md leading-relaxed">
+
+                <p className="font-nunito font-extrabold uppercase tracking-[0.28em] text-orange text-sm mb-4">
+                  {lang === "en" ? "Printable Chinese Culture Kits" : "可打印的中国文化学习包"}
+                </p>
+
+                <div className="relative inline-block">
+                  <h1 className="display-zh text-ink">{t.hero.title}</h1>
+                  {/* 自绘飞白，垫在标题下方 */}
+                  <InkStroke className="absolute -bottom-6 left-0 w-[78%] h-10 text-teal/70" color="currentColor" />
+                </div>
+
+                <p className="text-lg sm:text-xl text-ink-light mt-10 mb-9 max-w-md leading-relaxed">
                   {t.hero.subtitle}
                 </p>
                 <div className="flex flex-wrap gap-4">
@@ -87,32 +100,21 @@ export function HomeContent() {
               </div>
             </Reveal>
 
-            {/* 右：双龙舞台 + 漂浮元素 */}
-            <Reveal delay={150}>
-              <div className="relative h-[22rem] sm:h-[26rem] flex items-center justify-center">
-                {/* 柔光盘 */}
-                <div aria-hidden className="absolute w-[20rem] h-[20rem] rounded-full bg-white/70 shadow-[0_30px_60px_-20px_rgb(45_106_79/0.25)]" />
-                <div aria-hidden className="absolute w-[20rem] h-[20rem] rounded-full border-2 border-dashed border-teal/20 spin-slow" />
-                <DragonPair className="relative w-[24rem] max-w-full drop-shadow-sm float-1" />
-                {/* 漂浮装饰 */}
-                <DecoLantern className="absolute top-2 right-6 w-12 sway" />
-                <DecoCloud className="absolute top-10 left-0 w-20 float-2 opacity-90" />
-                <DecoEnvelope className="absolute bottom-4 left-8 w-12 float-3" />
-                <DecoSeal char="福" className="absolute bottom-8 right-10 w-12 float-2" />
+            {/* 右：印章+民俗组合（焦点，无生物） */}
+            <Reveal delay={150} className="lg:col-span-5">
+              <div className="relative flex items-center justify-center h-[20rem] sm:h-[24rem]">
+                <BrandMotif className="w-[22rem] max-w-full" />
               </div>
             </Reveal>
           </div>
 
-          {/* 数据条：大尺度数字 + 品牌色图标舞台 */}
+          {/* 数据条 */}
           <Reveal delay={250}>
-            <dl className="relative z-10 mt-12 grid grid-cols-2 md:grid-cols-4 gap-px bg-teal/10 rounded-3xl shadow-[0_20px_45px_-22px_rgb(45_106_79/0.4)] overflow-hidden">
+            <dl className="relative z-10 mt-14 grid grid-cols-2 md:grid-cols-4 gap-px bg-teal/10 rounded-3xl shadow-[0_20px_45px_-22px_rgb(45_106_79/0.4)] overflow-hidden">
               {stats[lang].map((s, i) => {
                 const Ic = statIcons[i];
                 return (
-                  <div
-                    key={s.label}
-                    className="flex flex-col items-center text-center px-4 py-7 bg-white"
-                  >
+                  <div key={s.label} className="flex flex-col items-center text-center px-4 py-7 bg-white">
                     <span className="icon-stage w-11 h-11 mb-3 bg-teal/10 text-teal">
                       <Ic size={22} />
                     </span>
@@ -129,7 +131,8 @@ export function HomeContent() {
 
       {/* ============ HOW IT WORKS（深色翻页） ============ */}
       <section className="section-teal py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-        <DecoCloud className="absolute top-10 right-10 w-28 opacity-20 float-2" />
+        <CloudSolid className="absolute top-10 right-10 w-28 opacity-20 float-2" color="#ffffff" />
+        <CloudSolid className="absolute bottom-10 left-8 w-20 opacity-10 float-3" color="#ffffff" />
         <div className="max-w-5xl mx-auto relative">
           <Reveal>
             <div className="text-center mb-16">
@@ -191,7 +194,7 @@ export function HomeContent() {
 
       {/* ============ PROMISE（暖色翻页） ============ */}
       <section className="section-warm py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-        <span aria-hidden className="watermark absolute left-4 top-16 text-[6rem] !opacity-[0.05]">印</span>
+        <span aria-hidden className="vert-calligraphy absolute left-4 top-16 text-[5rem] text-teal/[0.05]">印</span>
         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center relative">
           <Reveal>
             <div>
@@ -211,10 +214,7 @@ export function HomeContent() {
           </Reveal>
           <Reveal delay={150}>
             <div className="relative flex items-center justify-center h-72">
-              <div aria-hidden className="absolute w-60 h-60 rounded-full bg-white/60" />
-              <DragonPair className="relative w-80 max-w-full float-1" />
-              <DecoLantern className="absolute top-0 right-8 w-10 sway" />
-              <DecoEnvelope className="absolute bottom-2 left-6 w-10 float-3" />
+              <BrandMotif className="w-80 max-w-full" />
             </div>
           </Reveal>
         </div>
