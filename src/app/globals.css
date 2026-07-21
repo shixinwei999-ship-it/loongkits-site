@@ -14,6 +14,13 @@
   --font-nunito: 'Nunito', 'Noto Sans SC', sans-serif;
   --font-inter: 'Inter', 'Noto Sans SC', sans-serif;
   --font-serif-sc: 'Noto Serif SC', serif;
+  --color-cream: #FAF7F2;
+  --color-teal: #2D6A4F;
+  --color-teal-dark: #1F4A38;
+  --color-orange: #F4A261;
+  --color-red: #C8102E;
+  --color-ink: #2B2B2B;
+  --color-ink-light: #8A8A8A;
 }
 
 html {
@@ -38,29 +45,72 @@ h1, h2, h3, h4, h5, h6 {
 
 /* 大卡片基础样式 */
 .card-kit {
-  @apply bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300;
+  background-color: white;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  transition: box-shadow 0.3s;
 }
 
-.card-kit-image {
-  @apply w-full h-64 object-cover;
+.card-kit:hover {
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
 /* 按钮样式 */
 .btn-primary {
-  @apply bg-teal text-white font-semibold py-3 px-6 rounded-xl hover:bg-teal-dark transition-colors duration-200;
+  background-color: var(--color-teal);
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  transition: background-color 0.2s;
+  display: inline-block;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-teal-dark);
 }
 
 .btn-secondary {
-  @apply bg-white text-teal font-semibold py-3 px-6 rounded-xl border-2 border-teal hover:bg-teal hover:text-white transition-colors duration-200;
+  background-color: white;
+  color: var(--color-teal);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  border: 2px solid var(--color-teal);
+  transition: all 0.2s;
+  display: inline-block;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-teal);
+  color: white;
 }
 
 .btn-accent {
-  @apply bg-orange text-white font-semibold py-3 px-6 rounded-xl hover:opacity-90 transition-opacity duration-200;
+  background-color: var(--color-orange);
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  transition: opacity 0.2s;
+  display: inline-block;
+}
+
+.btn-accent:hover {
+  opacity: 0.9;
 }
 
 /* 图标容器 */
 .icon-lg {
-  @apply w-20 h-20 flex items-center justify-center rounded-2xl bg-teal/10 text-teal;
+  width: 5rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  background-color: rgba(45, 106, 79, 0.1);
+  color: var(--color-teal);
 }
 
 /* 语言切换动画 */
@@ -70,7 +120,8 @@ h1, h2, h3, h4, h5, h6 {
 
 /* 响应式图片 */
 .img-responsive {
-  @apply w-full h-auto;
+  width: 100%;
+  height: auto;
 }
 
 /* 自定义滚动条 */
