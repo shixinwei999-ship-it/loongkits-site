@@ -69,7 +69,7 @@ export const home: Bi<{
     teachers: { title: string; desc: string; cta: string };
   };
   promise: { title: string; text: string; points: string[] };
-  freeSample: { title: string; desc: string };
+  freeSample: { title: string; desc: string; cta: string };
 }> = {
   en: {
     hero: {
@@ -98,8 +98,9 @@ export const home: Bi<{
       points: ["A4 + Letter, print-ready", "Bilingual EN / 中文 on every page", "Age-tuned from 3 to 18"],
     },
     freeSample: {
-      title: "Try a Free Kit",
-      desc: "Be the first to know when our free zodiac worksheet launches",
+      title: "Try a Free Worksheet",
+      desc: "Meet the 12 zodiac animals with a four-page bilingual printable for ages 4–8.",
+      cta: "Explore the free worksheet",
     },
   },
   zh: {
@@ -129,8 +130,9 @@ export const home: Bi<{
       points: ["A4 + Letter 双尺寸，直接打印", "每页中英双语对照", "3 到 18 岁分龄设计"],
     },
     freeSample: {
-      title: "免费试一个",
-      desc: "免费生肖练习纸上线时，第一时间通知你",
+      title: "免费试一份练习包",
+      desc: "面向 4–8 岁的四页双语生肖练习包，认识十二生肖、描红和连线都在里面。",
+      cta: "查看免费练习包",
     },
   },
 };
@@ -190,34 +192,142 @@ export const kitsPage: Bi<{
 export const freePage: Bi<{
   title: string;
   subtitle: string;
-  zodiac: { title: string; desc: string; cta: string };
-  email: { title: string; desc: string };
+  zodiac: { eyebrow: string; title: string; desc: string; detail: string; facts: string[]; downloads: { a4: string; letter: string } };
+  guide: { title: string; desc: string; points: { title: string; desc: string }[] };
+  follow: { title: string; desc: string };
 }> = {
   en: {
     title: "Free Resources",
-    subtitle: "Download and print instantly",
+    subtitle: "Useful bilingual printables for real tables and classrooms.",
     zodiac: {
-      title: "Zodiac Animals Worksheet",
-      desc: "12 zodiac animals coloring page + Chinese character tracing. In production now.",
-      cta: "Coming soon",
+      eyebrow: "First free printable",
+      title: "Zodiac Animals Starter Worksheet",
+      desc: "A four-page bilingual introduction to the 12 zodiac animals: vocabulary, tracing, matching, and a short guide for grown-ups.",
+      detail: "See the activity guide",
+      facts: ["4 pages", "Ages 4–8", "EN / 中文"],
+      downloads: { a4: "Download A4 PDF", letter: "Download US Letter PDF" },
     },
-    email: {
-      title: "Get More Freebies",
-      desc: "Join the list for weekly free resources",
+    guide: {
+      title: "Made to use together",
+      desc: "Print one copy, then point, say, trace, and match. The last page includes a 15–20 minute family or classroom routine.",
+      points: [
+        { title: "Real printable pages", desc: "Preview the same pages you download." },
+        { title: "Two paper sizes", desc: "Choose A4 or US Letter and print at 100%." },
+        { title: "Start small", desc: "Pick three animals for a first session." },
+      ],
+    },
+    follow: {
+      title: "More resources in progress",
+      desc: "Follow @loongkits for new printables and cultural learning ideas.",
     },
   },
   zh: {
     title: "免费资源",
-    subtitle: "下载即可打印",
+    subtitle: "给真实学习桌和课堂准备的中英双语可打印内容。",
     zodiac: {
-      title: "生肖动物练习纸",
-      desc: "12 生肖涂色页 + 汉字描红。正在制作中。",
-      cta: "即将上线",
+      eyebrow: "第一份免费练习包",
+      title: "十二生肖双语入门练习包",
+      desc: "四页中英双语练习：认识十二生肖、词汇、汉字描红、配对活动，还有给家庭和老师的小指南。",
+      detail: "查看活动指南",
+      facts: ["4 页内容", "4–8 岁", "中英双语"],
+      downloads: { a4: "下载 A4 PDF", letter: "下载 US Letter PDF" },
     },
-    email: {
-      title: "获取更多免费资源",
-      desc: "订阅通讯，每周获取免费资源",
+    guide: {
+      title: "一起学，才更好玩",
+      desc: "打印一份，指一指、说一说、描一描、连一连。最后一页准备了 15–20 分钟的家庭或课堂活动流程。",
+      points: [
+        { title: "真实可打印页面", desc: "网页预览与下载内容完全一致。" },
+        { title: "两种纸张尺寸", desc: "选择 A4 或 US Letter，按 100% 打印。" },
+        { title: "从三个生肖开始", desc: "第一次学习，先选三个生肖就好。" },
+      ],
     },
+    follow: {
+      title: "更多资源正在制作",
+      desc: "关注 @loongkits，获取新的可打印资源和文化学习灵感。",
+    },
+  },
+};
+
+export const zodiacResourcePage: Bi<{
+  back: string;
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  facts: { label: string; value: string }[];
+  downloads: { a4: string; letter: string };
+  downloadNote: string;
+  coverAlt: string;
+  vocabularyAlt: string;
+  previewCaption: string;
+  inside: { eyebrow: string; title: string; description: string; items: { title: string; description: string }[] };
+  guide: { eyebrow: string; title: string; description: string; steps: string[] };
+  final: { title: string; description: string };
+}> = {
+  en: {
+    back: "← Free resources",
+    eyebrow: "Free printable · EN / 中文",
+    title: "Meet the 12 Zodiac Animals",
+    subtitle: "A four-page bilingual starter worksheet for naming, tracing, matching, and talking about the Chinese zodiac together.",
+    facts: [{ label: "Pages", value: "4" }, { label: "Ages", value: "4–8" }, { label: "Time", value: "15–20 min" }],
+    downloads: { a4: "Download A4 PDF", letter: "Download US Letter PDF" },
+    downloadNote: "Choose the paper size you use at home or school. Print at 100%.",
+    coverAlt: "Cover preview of the Zodiac Animals Starter Worksheet",
+    vocabularyAlt: "Vocabulary page preview with all 12 Chinese zodiac animals",
+    previewCaption: "Preview from the printable PDF · four pages in total",
+    inside: {
+      eyebrow: "What’s inside",
+      title: "Four pages, one gentle first step",
+      description: "The pages are designed to be used aloud and by hand. Start with names, then move into character tracing and a simple matching activity.",
+      items: [
+        { title: "12 animal words", description: "Chinese characters, pinyin, and English names in one visual word wall." },
+        { title: "Trace and match", description: "Four key characters plus a low-pressure matching activity." },
+        { title: "Use-it-today guide", description: "A print setup and a short routine for families or classrooms." },
+      ],
+    },
+    guide: {
+      eyebrow: "Use together",
+      title: "A 15–20 minute routine",
+      description: "There is no need to finish every page at once. A short, spoken first session is often the best start for bilingual learners.",
+      steps: [
+        "Choose three animals. Point to each one and say the Chinese word together.",
+        "Trace one character slowly with a pencil, following the pale model.",
+        "Use the matching section, then ask: Which animal do you like, and why?",
+      ],
+    },
+    final: { title: "Ready for the table", description: "Download the paper size that fits your printer, then learn side by side." },
+  },
+  zh: {
+    back: "← 返回免费资源",
+    eyebrow: "免费打印 · 中英双语",
+    title: "认识十二生肖",
+    subtitle: "四页双语入门练习：说出名字、描红、连线，再一起聊聊中国生肖。",
+    facts: [{ label: "页数", value: "4" }, { label: "适合年龄", value: "4–8 岁" }, { label: "活动时间", value: "15–20 分钟" }],
+    downloads: { a4: "下载 A4 PDF", letter: "下载 US Letter PDF" },
+    downloadNote: "选择家里或学校使用的纸张尺寸，按 100% 比例打印。",
+    coverAlt: "十二生肖双语入门练习包封面预览",
+    vocabularyAlt: "十二生肖中英文词汇页预览",
+    previewCaption: "真实可打印 PDF 页面预览 · 共 4 页",
+    inside: {
+      eyebrow: "里面有什么",
+      title: "四页内容，轻松开始",
+      description: "这些页面适合边说边做：先认识名字，再描红，最后完成一个简单的连线小游戏。",
+      items: [
+        { title: "12 个生肖词汇", description: "一页认识汉字、拼音和英文名称。" },
+        { title: "描一描 · 连一连", description: "四个重点汉字，加上低压力的配对活动。" },
+        { title: "今天就能用的小指南", description: "准备了打印提示和家庭/课堂活动流程。" },
+      ],
+    },
+    guide: {
+      eyebrow: "一起学",
+      title: "15–20 分钟活动流程",
+      description: "不用一次做完全部内容。对于双语学习者，短一点、能开口说的第一轮学习通常效果更好。",
+      steps: [
+        "选三个生肖，指一指、一起说出中文名字。",
+        "用铅笔慢慢描一个汉字，沿着浅色范字走。",
+        "完成连线后问问孩子：你喜欢哪一个生肖？为什么？",
+      ],
+    },
+    final: { title: "准备好上桌了", description: "选择适合打印机的纸张尺寸，和孩子或学生一起开始。" },
   },
 };
 
@@ -226,6 +336,7 @@ export const familiesPage: Bi<{
   subtitle: string;
   why: { title: string; reasons: { icon: string; title: string; desc: string }[] };
   how: { title: string; steps: string[] };
+  resource: { title: string; desc: string; cta: string };
   cta: string;
 }> = {
   en: {
@@ -249,6 +360,11 @@ export const familiesPage: Bi<{
         "Watch your child learn and have fun",
       ],
     },
+    resource: {
+      title: "Start with a 15-minute zodiac activity",
+      desc: "Use our free printable to point, say, trace, and match the 12 zodiac animals together.",
+      cta: "Open the free worksheet",
+    },
     cta: "Browse Kits",
   },
   zh: {
@@ -267,6 +383,11 @@ export const familiesPage: Bi<{
       title: "如何使用",
       steps: ["选择适合孩子年龄的学习包", "在家下载并打印", "按照家长指南进行活动", "看着孩子快乐学习"],
     },
+    resource: {
+      title: "从一份 15 分钟生肖活动开始",
+      desc: "使用我们的免费练习包，和孩子一起指一指、说一说、描一描、连一连十二生肖。",
+      cta: "打开免费练习包",
+    },
     cta: "浏览学习包",
   },
 };
@@ -276,6 +397,7 @@ export const teachersPage: Bi<{
   subtitle: string;
   why: { title: string; reasons: { icon: string; title: string; desc: string }[] };
   bulk: { title: string; desc: string; cta: string };
+  resource: { title: string; desc: string; cta: string };
   cta: string;
 }> = {
   en: {
@@ -295,6 +417,11 @@ export const teachersPage: Bi<{
       desc: "Need multiple copies? We offer special pricing for teachers and schools.",
       cta: "Contact Us",
     },
+    resource: {
+      title: "Try a ready-to-print zodiac lesson starter",
+      desc: "A four-page bilingual worksheet with vocabulary, tracing, matching, and a 15–20 minute classroom routine.",
+      cta: "Open the free worksheet",
+    },
     cta: "Browse Kits",
   },
   zh: {
@@ -313,6 +440,11 @@ export const teachersPage: Bi<{
       title: "班级价格",
       desc: "需要多份副本？我们为老师和学校提供特别价格。",
       cta: "联系我们",
+    },
+    resource: {
+      title: "先试一份可直接打印的生肖活动",
+      desc: "四页双语练习含词汇、描红、连线和 15–20 分钟课堂活动流程。",
+      cta: "打开免费练习包",
     },
     cta: "浏览学习包",
   },

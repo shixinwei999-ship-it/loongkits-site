@@ -8,57 +8,94 @@ const viewports = [
   { name: "desktop", width: 1440, height: 1050, isMobile: false },
   { name: "mobile", width: 390, height: 844, isMobile: true },
 ];
+const pages = [
+  {
+    name: "home",
+    path: "/",
+    expectedImages: ["hong-qing-hero.webp", "hong-qing-logo.webp"],
+  },
+  {
+    name: "free",
+    path: "/free",
+    expectedImages: ["preview-cover.webp"],
+    downloads: [
+      "/resources/zodiac-animals/v1/zodiac-animals-starter-a4.pdf",
+      "/resources/zodiac-animals/v1/zodiac-animals-starter-letter.pdf",
+    ],
+  },
+  {
+    name: "zodiac-animals",
+    path: "/free/zodiac-animals",
+    expectedImages: ["preview-cover.webp", "preview-vocabulary.webp"],
+    downloads: [
+      "/resources/zodiac-animals/v1/zodiac-animals-starter-a4.pdf",
+      "/resources/zodiac-animals/v1/zodiac-animals-starter-letter.pdf",
+    ],
+  },
+];
 
 await mkdir(outputDir, { recursive: true });
 const browser = await chromium.launch();
 
 try {
-  for (const viewport of viewports) {
-    const page = await browser.newPage({
-      viewport: { width: viewport.width, height: viewport.height },
-      isMobile: viewport.isMobile,
-      deviceScaleFactor: 1,
-    });
+  for (const route of pages) {
+    for (const viewport of viewports) {
+      const page = await browser.newPage({
+        viewport: { width: viewport.width, height: viewport.height },
+        isMobile: viewport.isMobile,
+        deviceScaleFactor: 1,
+      });
 
-    await page.goto(baseUrl, { waitUntil: "networkidle" });
-    const heroImage = page.locator('img[src*="hong-qing-hero.webp"]');
-    const logoImage = page.locator('img[src*="hong-qing-logo.webp"]');
-    await heroImage.waitFor();
-    await logoImage.waitFor();
+      await page.goto(new URL(route.path, baseUrl).toString(), { waitUntil: "networkidle" });
 
-    const metrics = await page.evaluate(() => {
-      const hero = document.querySelector('img[src*="hong-qing-hero.webp"]');
-      const logo = document.querySelector('img[src*="hong-qing-logo.webp"]');
-
-      if (!(hero instanceof HTMLImageElement) || !(logo instanceof HTMLImageElement)) {
-        throw new Error("Expected dragon artwork was not rendered.");
+      for (const imageName of route.expectedImages) {
+        await page.locator(`img[src*="${imageName}"]`).first().waitFor();
       }
 
-      return {
-        hero: {
-          complete: hero.complete,
-          naturalWidth: hero.naturalWidth,
-          naturalHeight: hero.naturalHeight,
-          rect: hero.getBoundingClientRect().toJSON(),
-        },
-        logo: {
-          complete: logo.complete,
-          naturalWidth: logo.naturalWidth,
-          naturalHeight: logo.naturalHeight,
-          rect: logo.getBoundingClientRect().toJSON(),
-        },
-        horizontalOverflow: document.documentElement.scrollWidth > window.innerWidth,
-      };
-    });
+      const metrics = await page.evaluate((expectedImages) => {
+        const images = expectedImages.map((imageName) => {
+          const image = document.querySelector(`img[src*="${imageName}"]`);
+          if (!(image instanceof HTMLImageElement)) {
+            throw new Error(`Expected image was not rendered: ${imageName}`);
+          }
+          return {
+            imageName,
+            complete: image.complete,
+            naturalWidth: image.naturalWidth,
+            naturalHeight: image.naturalHeight,
+            rect: image.getBoundingClientRect().toJSON(),
+          };
+        });
 
-    const hiddenContent = await page.locator('[class*="opacity-0"]').count();
-    if (!metrics.hero.complete || metrics.hero.naturalWidth === 0 || metrics.horizontalOverflow || hiddenContent > 0) {
-      throw new Error(`${viewport.name} rendering check failed: ${JSON.stringify({ ...metrics, hiddenContent })}`);
+        return {
+          images,
+          horizontalOverflow: document.documentElement.scrollWidth > window.innerWidth,
+          hiddenContent: document.querySelectorAll('[class*="opacity-0"]').length,
+        };
+      }, route.expectedImages);
+
+      if (
+        metrics.horizontalOverflow ||
+        metrics.hiddenContent > 0 ||
+        metrics.images.some((image) => !image.complete || image.naturalWidth === 0)
+      ) {
+        throw new Error(`${route.name}/${viewport.name} rendering check failed: ${JSON.stringify(metrics)}`);
+      }
+
+      if (route.downloads) {
+        for (const href of route.downloads) {
+          const response = await page.request.get(new URL(href, baseUrl).toString());
+          const contentType = response.headers()["content-type"] ?? "";
+          if (!response.ok() || !contentType.includes("application/pdf") || (await response.body()).length < 1000) {
+            throw new Error(`${route.name} download check failed for ${href}: ${response.status()} ${contentType}`);
+          }
+        }
+      }
+
+      await page.screenshot({ path: path.join(outputDir, `${route.name}-${viewport.name}.png`), fullPage: true });
+      console.log(`${route.name}/${viewport.name}: ${JSON.stringify(metrics)}`);
+      await page.close();
     }
-
-    await page.screenshot({ path: path.join(outputDir, `${viewport.name}.png`), fullPage: true });
-    console.log(`${viewport.name}: ${JSON.stringify(metrics)}`);
-    await page.close();
   }
 } finally {
   await browser.close();

@@ -5,7 +5,6 @@ import { useLang } from "@/lib/i18n";
 import { home } from "@/lib/content";
 import { kits, featuredKitIds } from "@/lib/kits";
 import { KitCard } from "@/components/KitCard";
-import { SubscribeForm } from "@/components/SubscribeForm";
 import { Reveal } from "@/components/Reveal";
 import { DragonArtStage } from "@/components/DragonArtStage";
 import {
@@ -238,8 +237,10 @@ export function HomeContent() {
           <div className="max-w-3xl mx-auto text-center relative">
             <DecoSeal char="赠" className="w-14 h-14 mx-auto mb-7 float-1" />
             <h2 className="display text-ink !text-4xl sm:!text-5xl mb-5">{t.freeSample.title}</h2>
-            <p className="text-lg text-ink-light mb-9 max-w-xl mx-auto">{t.freeSample.desc}</p>
-            <SubscribeForm />
+            <p className="text-lg text-ink-light mb-7 max-w-xl mx-auto">{t.freeSample.desc}</p>
+            <Link href="/free/zodiac-animals" className="btn-primary text-base">
+              {t.freeSample.cta} <IconArrowRight size={18} />
+            </Link>
           </div>
         </Reveal>
       </section>

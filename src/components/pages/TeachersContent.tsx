@@ -54,6 +54,16 @@ export function TeachersContent() {
         </Reveal>
 
         <Reveal>
+          <section className="mb-16 border-t-2 border-teal pt-8">
+            <h2 className="text-2xl font-bold text-ink font-nunito">{t.resource.title}</h2>
+            <p className="text-ink-light mt-3 max-w-2xl">{t.resource.desc}</p>
+            <Link href="/free/zodiac-animals" className="arrow-link text-teal font-bold mt-5 hover:underline">
+              {t.resource.cta} <span className="arrow">→</span>
+            </Link>
+          </section>
+        </Reveal>
+
+        <Reveal>
           <div className="text-center">
             <Link href="/kits" className="btn-primary text-lg px-8 py-4">
               {t.cta} <span className="arrow inline-block transition-transform hover:translate-x-1">→</span>

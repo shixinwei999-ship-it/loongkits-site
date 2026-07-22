@@ -4,7 +4,10 @@ import { FreeContent } from "@/components/pages/FreeContent";
 export const metadata: Metadata = {
   title: "Free Resources",
   description:
-    "Free printable Chinese culture resources for kids: zodiac animals coloring pages, Chinese character tracing worksheets, and weekly freebies for heritage families.",
+    "Free bilingual printable Chinese culture resources for children, families, and classrooms. Start with our Zodiac Animals Starter Worksheet.",
+  alternates: {
+    canonical: "/free",
+  },
 };
 
 export default function FreePage() {
