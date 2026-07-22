@@ -1,11 +1,13 @@
 "use client";
 
 // 中文学习等级系统：用 1–10 级取代按年龄，因为十几岁才开始学的人也从 1 级走起。
-// 结构 = 篇章 → 等级 → 课(学什么 + 作业)。顶部一条“汉字三千年”演化时间线讲清中文怎么走到今天；
-// 等级区是一条贯穿的“闯关梯子”：节点带状态、可展开看技能标签/课表/可玩小测/可发音词/产出/下载；
-// 顶部活数字给真实体量感，3 题自评帮你定位起点。每级、每字都可点听。
+// 闭环逻辑：点任意一关 = 进入该级（单开 + 平滑滚动 + 节点高亮“进行中”）；学完本级小测，
+// 点“通关并进入下一级”会把进度记在这台设备（localStorage），梯子节点点亮为“已通关”，
+// 并自动展开下一关——有进、有练、有结、有下一关，形成完整闭环。顶部进度条反映通关数。
+// 每关 = 技能标签 + 课表(学什么+作业) + 即时反馈小测 + 可发音字 + 本级产出 + 可打印包。
+// 顶部“汉字三千年”演化时间线讲清中文怎么走到今天；3 题自评帮你定位起点。
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useLang } from "@/lib/i18n";
 import { Reveal } from "@/components/Reveal";
@@ -25,6 +27,47 @@ import {
 import { getResource } from "@/lib/learningPaths";
 
 type Bi<T> = Record<"en" | "zh", T>;
+
+const PROGRESS_KEY = "lk-levels-done-v1";
+
+function useLevelProgress() {
+  const [done, setDone] = useState<Set<number>>(new Set());
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(PROGRESS_KEY);
+      if (raw) setDone(new Set(JSON.parse(raw) as number[]));
+    } catch {
+      /* ignore */
+    }
+  }, []);
+  const markDone = (n: number) =>
+    setDone((prev) => {
+      const next = new Set(prev);
+      next.add(n);
+      try {
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify([...next]));
+      } catch {
+        /* ignore */
+      }
+      return next;
+    });
+  const reset = () => {
+    setDone(new Set());
+    try {
+      localStorage.removeItem(PROGRESS_KEY);
+    } catch {
+      /* ignore */
+    }
+  };
+  return { done, markDone, reset };
+}
+
+function scrollToLevel(n: number) {
+  // 等 DOM 展开后再滚，sticky 顶栏由 scroll-mt 抵消。
+  requestAnimationFrame(() => {
+    document.getElementById(`lvl-${n}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
 
 const EVOLUTION: { era: Bi<string>; when: Bi<string>; char: string; note: Bi<string>; trait: Bi<string> }[] = [
   { era: { en: "Oracle bone", zh: "甲骨文" }, when: { en: "c. 1200 BCE", zh: "约公元前 1200 年" }, char: "日", note: { en: "Carved on bone and shell — thin, angular, still close to a picture.", zh: "刻在龟甲兽骨上——细瘦、方折，还像一幅画。" }, trait: { en: "picture → line", zh: "图画 → 线条" } },
@@ -52,48 +95,79 @@ function useActiveBand(ids: string[]) {
   return active;
 }
 
-function LevelCard({ lv, isFirst, isLast }: { lv: Level; isFirst: boolean; isLast: boolean }) {
+function LevelCard({
+  lv,
+  open,
+  done,
+  onEnter,
+  onToggle,
+  onAdvance,
+  isLastLevel,
+}: {
+  lv: Level;
+  open: boolean;
+  done: boolean;
+  onEnter: () => void;
+  onToggle: () => void;
+  onAdvance: () => void;
+  isLastLevel: boolean;
+}) {
   const { lang } = useLang();
-  const [open, setOpen] = useState(lv.n === 1);
   const band = getBand(lv.band);
   const resource = lv.resourceSlug ? getResource(lv.resourceSlug) : undefined;
+
+  // 节点三态：进行中(展开) / 已通关 / 未开始
+  const nodeState = open ? "active" : done ? "done" : "todo";
 
   return (
     <div className="relative grid grid-cols-[2.75rem_1fr] gap-3 sm:gap-4">
       {/* 梯子节点 + 连线 */}
       <div className="flex flex-col items-center">
-        <span aria-hidden className={`w-0.5 ${isFirst ? "h-6 bg-transparent" : "h-6 bg-gradient-to-b from-[#b3121f]/15 to-[#b3121f]/30"}`} />
+        <span aria-hidden className="h-6 w-0.5 bg-gradient-to-b from-transparent to-[#b3121f]/25" />
         <button
           type="button"
-          onClick={() => setOpen((o) => !o)}
+          onClick={onEnter}
           aria-expanded={open}
-          aria-label={`${lang === "en" ? "Level" : "第"} ${lv.n}`}
-          className={`relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full font-nunito text-sm font-extrabold transition-all duration-300 ${
-            open ? "bg-[#b3121f] text-white shadow-[0_10px_24px_-10px_rgba(157,15,27,0.8)]" : "border-2 border-[#b3121f]/30 bg-white text-[#b3121f] hover:border-[#b3121f]"
+          aria-label={`${lang === "en" ? "Enter Level" : "进入第"} ${lv.n}`}
+          title={lang === "en" ? `Enter Level ${lv.n}` : `进入第 ${lv.n} 级`}
+          className={`relative z-10 flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-full font-nunito text-sm font-extrabold transition-all duration-300 hover:scale-110 ${
+            nodeState === "active"
+              ? "bg-[#b3121f] text-white shadow-[0_10px_24px_-10px_rgba(157,15,27,0.85)] ring-4 ring-[#b3121f]/15"
+              : nodeState === "done"
+                ? "bg-teal text-white shadow-[0_8px_18px_-10px_rgba(45,106,79,0.8)]"
+                : "border-2 border-[#b3121f]/30 bg-white text-[#b3121f] hover:border-[#b3121f]"
           }`}
         >
-          {open && <span aria-hidden className="absolute inset-0 animate-ping rounded-full bg-[#b3121f]/30" />}
-          <span className="relative">{lv.n}</span>
+          {nodeState === "active" && <span aria-hidden className="absolute inset-0 animate-ping rounded-full bg-[#b3121f]/30" />}
+          <span className="relative">{nodeState === "done" ? "✓" : lv.n}</span>
         </button>
-        {!isLast && <span aria-hidden className="w-0.5 flex-1 bg-gradient-to-b from-[#b3121f]/25 to-[#b3121f]/10" />}
+        <span aria-hidden className="w-0.5 flex-1 bg-gradient-to-b from-[#b3121f]/25 to-[#b3121f]/10" />
       </div>
 
       {/* 卡 */}
       <div
         id={`lvl-${lv.n}`}
         className={`scroll-mt-28 mb-5 rounded-2xl border bg-white transition-all duration-300 ${
-          open ? "border-[#b3121f]/35 shadow-[0_22px_50px_-34px_rgba(157,15,27,0.55)]" : "border-teal/12 hover:border-[#b3121f]/30"
+          open ? "border-[#b3121f]/40 shadow-[0_22px_50px_-34px_rgba(157,15,27,0.55)]" : done ? "border-teal/30" : "border-teal/12 hover:border-[#b3121f]/30"
         }`}
       >
-        <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} className="flex w-full items-center gap-4 p-5 text-left sm:p-6">
+        <button type="button" onClick={onToggle} aria-expanded={open} className="flex w-full cursor-pointer items-center gap-4 p-5 text-left sm:p-6">
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2">
               <h3 className="font-nunito text-xl font-extrabold text-ink sm:text-2xl">{lv.title[lang]}</h3>
               {band && <span className={`rounded-full bg-teal/8 px-2.5 py-0.5 text-[0.62rem] font-semibold uppercase tracking-wider ${band.accent}`}>{band.name[lang]}</span>}
+              {done && !open && (
+                <span className="inline-flex items-center gap-1 rounded-full bg-teal/10 px-2.5 py-0.5 text-[0.62rem] font-bold text-teal">
+                  <IconCheck size={11} /> {lang === "en" ? "Cleared" : "已通关"}
+                </span>
+              )}
             </div>
             <p className="mt-1 text-sm text-ink-light leading-relaxed">{lv.tagline[lang]}</p>
           </div>
-          <svg viewBox="0 0 24 24" className={`h-5 w-5 shrink-0 text-teal transition-transform duration-300 ${open ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          <span className="hidden shrink-0 rounded-lg bg-[#b3121f] px-3 py-1.5 text-xs font-bold text-white sm:inline-flex sm:items-center sm:gap-1">
+            {open ? (lang === "en" ? "Close" : "收起") : (lang === "en" ? "Enter" : "进入")} <IconArrowRight size={13} className={open ? "rotate-90" : ""} />
+          </span>
+          <svg viewBox="0 0 24 24" className={`h-5 w-5 shrink-0 text-teal transition-transform duration-300 sm:hidden ${open ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
             <path d="M6 9l6 6 6-6" />
           </svg>
         </button>
@@ -168,6 +242,41 @@ function LevelCard({ lv, isFirst, isLast }: { lv: Level; isFirst: boolean; isLas
                 </div>
               )}
             </div>
+
+            {/* 通关闭环 */}
+            <div className="flex flex-wrap items-center gap-4 rounded-2xl border-2 border-dashed border-teal/30 bg-gradient-to-r from-teal/[0.05] to-amber-50/60 p-5">
+              <div className="flex-1 min-w-[12rem]">
+                {done ? (
+                  <p className="flex items-center gap-2 font-nunito text-base font-extrabold text-teal">
+                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-teal text-white"><IconCheck size={14} /></span>
+                    {lang === "en" ? "Level cleared — well done." : "本级已通关，干得漂亮。"}
+                  </p>
+                ) : (
+                  <p className="text-sm text-ink-light leading-relaxed">
+                    {lang === "en" ? "Finished the lessons and the check above? Clear this level and unlock the next rung." : "上面的课和小测做完了？通关本级，点亮下一格。"}
+                  </p>
+                )}
+              </div>
+              {isLastLevel ? (
+                <span className="inline-flex items-center gap-2 rounded-full bg-amber-400 px-4 py-2.5 text-sm font-extrabold text-[#7a2a00] shadow-sm">
+                  🎉 {lang === "en" ? "You reached the top" : "你已登顶"}
+                </span>
+              ) : (
+                <button
+                  type="button"
+                  onClick={onAdvance}
+                  className="group/adv inline-flex items-center gap-2 rounded-xl bg-[#b3121f] px-5 py-2.5 text-sm font-bold text-white shadow-[0_12px_26px_-12px_rgba(157,15,27,0.8)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#9c0f1b]"
+                >
+                  {done
+                    ? (lang === "en" ? `Re-enter Level ${lv.n + 1}` : `再进第 ${lv.n + 1} 级`)
+                    : (lang === "en" ? `Clear & go to Level ${lv.n + 1}` : `通关 · 进入第 ${lv.n + 1} 级`)}
+                  <IconArrowRight size={16} className="transition-transform duration-200 group-hover/adv:translate-x-1" />
+                </button>
+              )}
+              <span className="w-full text-[0.68rem] text-ink-light/80 sm:w-auto">
+                {lang === "en" ? "Progress is saved on this device only." : "通关进度只记在这台设备上。"}
+              </span>
+            </div>
           </div>
         )}
       </div>
@@ -178,14 +287,51 @@ function LevelCard({ lv, isFirst, isLast }: { lv: Level; isFirst: boolean; isLas
 export function LevelSystem() {
   const { lang } = useLang();
   const active = useActiveBand(bands.map((b) => `band-${b.id}`));
+  const { done, markDone, reset } = useLevelProgress();
+  const [openLevel, setOpenLevel] = useState<number | null>(1);
+
+  const enter = (n: number) => {
+    setOpenLevel(n);
+    scrollToLevel(n);
+  };
+  const toggle = (n: number) => {
+    setOpenLevel((cur) => {
+      const next = cur === n ? null : n;
+      if (next) scrollToLevel(next);
+      return next;
+    });
+  };
+  const advance = (n: number) => {
+    markDone(n);
+    if (n < levels.length) enter(n + 1);
+  };
+
+  // 支持从锚点 #lvl-n 进入对应等级（首页/自评跳转过来时自动展开）。
+  useEffect(() => {
+    const fromHash = () => {
+      const m = /^#lvl-(\d+)$/.exec(window.location.hash);
+      if (m) enter(Number(m[1]));
+    };
+    fromHash();
+    window.addEventListener("hashchange", fromHash);
+    return () => window.removeEventListener("hashchange", fromHash);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const cleared = done.size;
+  const total = levels.length;
+  const pct = Math.round((cleared / total) * 100);
 
   const t = {
     eyebrow: { en: "The course · 10 levels", zh: "课程 · 十个等级" },
     title: { en: "One ladder, from zero to fluent", zh: "一架梯子，从零到自如" },
     intro: {
-      en: "No ages, no grades — just levels. A teenager who starts today and a six-year-old both stand on Level 1 and climb the same rungs. Each level has real lessons and homework you can print; tap any character to hear it.",
-      zh: "不看年龄、不看年级，只看等级。今天才开始的十几岁孩子，和六岁的孩子，都站在第 1 级，爬同一架梯子。每一级都有真正的课和能打印的作业；点任何一个字都能听。",
+      en: "No ages, no grades — just levels. Tap any rung to enter that level, work its lessons and check, then clear it to light the next one. A teenager who starts today and a six-year-old both stand on Level 1.",
+      zh: "不看年龄、不看年级，只看等级。点任意一格进入该级，上课、做小测，通关后点亮下一格。今天才开始的十几岁孩子，和六岁的孩子，都站在第 1 级。",
     },
+    progressLabel: { en: "Your progress", zh: "你的进度" },
+    progressOf: { en: "cleared", zh: "已通关" },
+    resetProgress: { en: "Reset", zh: "重置" },
     earTitle: { en: "Brand new? Warm up your ear first", zh: "完全零基础？先练练耳朵" },
     earText: { en: "Before Level 1, play with the four tones, pinyin and strokes in the interactive room — no account, no pressure.", zh: "在第 1 级之前，先去互动练功房玩四声、拼音和笔画——不用注册，没有压力。" },
     earCta: { en: "Open the practice room", zh: "打开练功房" },
@@ -196,7 +342,7 @@ export function LevelSystem() {
       zh: "你要学的这些字，不是一下子出现的。它们被刻、被铸、被统一、被压方、被打磨——同一个字，被书写它的工具一次次重塑。跟着一套文字，从骨头走到你手里的纸。",
     },
     levelsEyebrow: { en: "The ten levels", zh: "十个等级" },
-    levelsTitle: { en: "Climb the ladder, rung by rung", zh: "一格一格，往上爬" },
+    levelsTitle: { en: "Tap a rung to enter", zh: "点一格，进入这一关" },
     jump: { en: "Jump to", zh: "跳到" },
     placeEyebrow: { en: "Not sure where to start?", zh: "不知道从哪级开始？" },
     placeTitle: { en: "Three questions place you on the ladder", zh: "三道题，把你放到梯子上" },
@@ -329,9 +475,9 @@ export function LevelSystem() {
                           {t.placeResultTail[lang]}（{score}/{placementQuiz.length}）
                         </p>
                         <div className="mt-4 flex flex-wrap gap-3">
-                          <a href={`#lvl-${lvl}`} className="inline-flex items-center gap-1.5 rounded-lg bg-[#b3121f] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#9c0f1b]">
-                            {lang === "en" ? `Go to Level ${lvl}` : `去第 ${lvl} 级`} <IconArrowRight size={15} />
-                          </a>
+                          <button type="button" onClick={() => enter(lvl)} className="inline-flex items-center gap-1.5 rounded-lg bg-[#b3121f] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#9c0f1b]">
+                            {lang === "en" ? `Enter Level ${lvl}` : `进入第 ${lvl} 级`} <IconArrowRight size={15} />
+                          </button>
                           <Link href="/learn/chinese" className="inline-flex items-center gap-1.5 rounded-lg border border-teal px-4 py-2 text-sm font-bold text-teal transition-colors hover:bg-teal hover:text-white">
                             {t.placeRefine[lang]}
                           </Link>
@@ -350,8 +496,25 @@ export function LevelSystem() {
       <section className="bg-cream/40 px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
         <div className="mx-auto max-w-5xl">
           <Reveal>
-            <p className="font-inter text-xs font-semibold uppercase tracking-[0.14em] text-[#b3121f] mb-4">{t.levelsEyebrow[lang]}</p>
-            <h2 className="display-zh text-ink !text-3xl sm:!text-4xl">{t.levelsTitle[lang]}</h2>
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <p className="font-inter text-xs font-semibold uppercase tracking-[0.14em] text-[#b3121f] mb-4">{t.levelsEyebrow[lang]}</p>
+                <h2 className="display-zh text-ink !text-3xl sm:!text-4xl">{t.levelsTitle[lang]}</h2>
+              </div>
+              {/* 进度 */}
+              <div className="flex items-center gap-3 rounded-full border border-teal/15 bg-white px-4 py-2">
+                <span className="font-inter text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-ink-light">{t.progressLabel[lang]}</span>
+                <span className="font-nunito text-lg font-extrabold text-[#b3121f]">{cleared}/{total}</span>
+                <span aria-hidden className="h-1.5 w-20 overflow-hidden rounded-full bg-teal/10">
+                  <span className="block h-full rounded-full bg-teal transition-all duration-500" style={{ width: `${pct}%` }} />
+                </span>
+                {cleared > 0 && (
+                  <button type="button" onClick={reset} className="text-[0.62rem] font-semibold text-ink-light underline-offset-2 hover:text-[#b3121f] hover:underline">
+                    {t.resetProgress[lang]}
+                  </button>
+                )}
+              </div>
+            </div>
           </Reveal>
 
           {/* 篇章跳转 chips */}
@@ -389,8 +552,17 @@ export function LevelSystem() {
                     </div>
                   </div>
                   <div>
-                    {bandLevels.map((lv, i) => (
-                      <LevelCard key={lv.n} lv={lv} isFirst={i === 0} isLast={i === bandLevels.length - 1} />
+                    {bandLevels.map((lv) => (
+                      <LevelCard
+                        key={lv.n}
+                        lv={lv}
+                        open={openLevel === lv.n}
+                        done={done.has(lv.n)}
+                        onEnter={() => enter(lv.n)}
+                        onToggle={() => toggle(lv.n)}
+                        onAdvance={() => advance(lv.n)}
+                        isLastLevel={lv.n === total}
+                      />
                     ))}
                   </div>
                 </div>

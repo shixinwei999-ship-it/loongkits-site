@@ -22,7 +22,7 @@ const pages = [
   {
     name: "home",
     path: "/",
-    expectedImages: ["festive-hero.webp", "prek-greet.webp", "g15-reunion.webp", "g68-region.webp", "g912-curate.webp"],
+    expectedImages: ["golden-dragon.webp", "prek-greet.webp", "g15-reunion.webp", "g68-region.webp", "g912-curate.webp"],
   },
   {
     name: "free",

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useLang } from "@/lib/i18n";
 import { common } from "@/lib/content";
 import {
@@ -9,20 +10,22 @@ import {
   kitTitle,
   formatPages,
 } from "@/lib/kits";
-import { themeCover } from "@/components/Illustration";
 import { IconArrowRight } from "@/components/icons";
 
 export function KitCard({ kit }: { kit: Kit }) {
   const { lang } = useLang();
   const t = common[lang];
-  const Cover = themeCover[kit.theme];
 
   return (
     <div className="card-kit flex flex-col h-full">
       <div className="relative h-52 overflow-hidden">
-        <div className="kit-cover h-full w-full">
-          <Cover />
-        </div>
+        <Image
+          src={`/kit-covers/${kit.theme}.webp`}
+          alt={themeLabels[kit.theme][lang]}
+          fill
+          sizes="(max-width: 768px) 100vw, 33vw"
+          className="kit-cover object-cover"
+        />
         {/* 主题角标：印章式 */}
         <span className="absolute top-3 left-3 chip !bg-white/90 !border-white/60 backdrop-blur-sm text-[0.7rem]">
           {themeLabels[kit.theme][lang]}
