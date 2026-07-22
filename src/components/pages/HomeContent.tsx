@@ -33,11 +33,13 @@ export function HomeContent() {
     <>
       {/* ============ HERO：纯中国红 + 右侧金龙，单一行动 ============ */}
       <section className="group/hero relative isolate flex min-h-[92vh] items-center overflow-hidden bg-gradient-to-br from-[#c01525] via-[#b3121f] to-[#8e0d18]">
-        {/* 氛围层：纸纹 + 龙后放射金光 + 暗祥云，让红底有层次、有势 */}
+        {/* 氛围层：纸纹 + 龙后放射金光 + 暗祥云 + 聚光暗角，把红底做成舞台 */}
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div className="paper-grain absolute inset-0 opacity-[0.12]" />
           {/* 龙背后的放射金光 */}
           <div className="absolute right-[6%] top-1/2 h-[120%] w-[60%] -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(255,206,110,0.30),rgba(255,170,60,0.10)_42%,transparent_70%)] blur-2xl" />
+          {/* 聚光暗角：四周压暗，龙所在处留亮，舞台感 */}
+          <div className="absolute inset-0 bg-[radial-gradient(125%_95%_at_74%_40%,transparent_34%,rgba(74,5,11,0.62)_100%)]" />
           {/* 暗祥云：衬龙，不压字 */}
           <svg className="absolute right-[2%] top-[8%] w-[42%] text-amber-200/[0.07] blur-[2px]" viewBox="0 0 200 90" fill="currentColor" aria-hidden>
             <path d="M30 60c-14 0-22-12-15-22 4-6 13-7 18-3 2-12 16-19 28-13 7 4 10 11 9 18 12-3 24 6 22 18-1 8-9 12-17 11-3 6-12 8-18 4-5 5-15 4-19-2-6 2-12-1-13-7 2-2 4-3 5-4z" />
@@ -49,19 +51,22 @@ export function HomeContent() {
           <div className="hero-float-slow absolute left-[24%] bottom-4 h-72 w-72 rounded-full bg-orange/10 blur-3xl" />
         </div>
 
-        {/* 右侧金龙：缩小、贴右、半身探出画外、斜昂——有势而非塞满 */}
-        <div aria-hidden className="pointer-events-none absolute right-0 top-0 flex h-full w-[74%] items-center justify-end opacity-35 sm:w-[42%] sm:opacity-100">
+        {/* 右侧金龙：绢本墨金，缩小、贴右、半身探出、斜昂——游在云气里 */}
+        <div aria-hidden className="pointer-events-none absolute right-0 top-0 flex h-full w-[74%] items-center justify-end opacity-40 sm:w-[42%] sm:opacity-100">
           <div className="relative h-[88%]">
-            {/* 龙身描边金光 */}
+            {/* 身后游动暖金雾 */}
+            <span className="dragon-mist pointer-events-none absolute left-1/2 top-[26%] h-40 w-72 -translate-x-1/2 rounded-full bg-amber-100/20 blur-3xl" />
             <Image
               src="/hero/golden-dragon.webp"
               alt=""
-              width={954}
-              height={1442}
+              width={984}
+              height={1500}
               priority
               sizes="(max-width: 640px) 74vw, 42vw"
-              className="hero-float-slow h-full w-auto translate-x-[18%] rotate-[-5deg] object-contain drop-shadow-[0_0_40px_rgba(255,196,84,0.45)] [filter:drop-shadow(0_14px_50px_rgba(120,40,0,0.45))_saturate(1.08)]"
+              className="hero-float-slow relative h-full w-auto translate-x-[16%] rotate-[-4deg] object-contain [filter:drop-shadow(0_14px_38px_rgba(54,8,0,0.5))_brightness(1.05)_contrast(1.05)_sepia(0.18)_saturate(1.08)]"
             />
+            {/* 身前穿行暖雾（琥珀而非死白，融进红金舞台） */}
+            <span className="dragon-mist-2 pointer-events-none absolute bottom-[16%] left-[34%] h-44 w-80 rounded-full bg-amber-100/14 blur-3xl" />
           </div>
         </div>
         {/* 左侧压字渐变，保证白字在龙/红上都清晰 */}
