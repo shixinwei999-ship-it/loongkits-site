@@ -39,25 +39,25 @@ const pages = [
   {
     name: "learn-3-6",
     path: "/learn/ages-3-6",
-    expectedImages: ["prek.webp", "preview-cover.webp", "preview-vocabulary.webp"],
+    expectedImages: ["prek.webp", "prek-zodiac.webp", "prek-red.webp", "prek-greet.webp", "preview-cover.webp"],
     downloads: [zodiacA4, zodiacLetter],
   },
   {
     name: "learn-6-11",
     path: "/learn/ages-6-11",
-    expectedImages: ["g15.webp", "preview-cover.webp", "preview-activity.webp"],
+    expectedImages: ["g15.webp", "g15-sequence.webp", "g15-riddle.webp", "g15-reunion.webp", "preview-cover.webp"],
     downloads: [festivalA4, festivalLetter],
   },
   {
     name: "learn-11-14",
     path: "/learn/ages-11-14",
-    expectedImages: ["g68.webp", "preview-cover.webp", "preview-activity.webp"],
+    expectedImages: ["g68.webp", "g68-region.webp", "g68-cycle.webp", "g68-silk.webp", "preview-cover.webp"],
     downloads: [motionA4, motionLetter],
   },
   {
     name: "learn-14-18",
     path: "/learn/ages-14-18",
-    expectedImages: ["g912.webp", "preview-cover.webp", "preview-activity.webp"],
+    expectedImages: ["g912.webp", "g912-object.webp", "g912-translate.webp", "g912-curate.webp", "preview-cover.webp"],
     downloads: [curatorA4, curatorLetter],
   },
 ];
@@ -79,7 +79,11 @@ try {
       // 0. 注入截图终态：让所有 data-reveal 渐显元素立即到完成态，
       //    全页截图不再依赖动画时序；真实访问者不带此类，照常看到动效。
       await page.addStyleTag({
-        content: ".shot-final [data-reveal]{opacity:1!important;transform:none!important;transition:none!important}",
+        content:
+          ".shot-final [data-reveal]{opacity:1!important;transform:none!important;transition:none!important}" +
+          // 全页截图保真：fixed 导航在整页截图里会浮在视口中部、盖住 hero。
+          // 终态下改回文档顶部绝对定位，截图即真实首屏；真实访问者不带此类。
+          ".shot-final nav.fixed{position:absolute!important;top:0!important}",
       });
       await page.evaluate(() => document.documentElement.classList.add("shot-final"));
 
