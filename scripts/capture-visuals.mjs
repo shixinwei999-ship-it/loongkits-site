@@ -21,14 +21,14 @@ try {
     });
 
     await page.goto(baseUrl, { waitUntil: "networkidle" });
-    const heroImage = page.getByAltText(/Hong and Qing, the Loong Kits dragon mascots/i);
-    const logoImage = page.getByAltText(/Loong Kits Hong and Qing dragon logo/i);
+    const heroImage = page.locator('img[src*="hong-qing-hero.webp"]');
+    const logoImage = page.locator('img[src*="hong-qing-logo.webp"]');
     await heroImage.waitFor();
     await logoImage.waitFor();
 
     const metrics = await page.evaluate(() => {
-      const hero = document.querySelector('img[alt="Hong and Qing, the Loong Kits dragon mascots"]');
-      const logo = document.querySelector('img[alt="Loong Kits Hong and Qing dragon logo"]');
+      const hero = document.querySelector('img[src*="hong-qing-hero.webp"]');
+      const logo = document.querySelector('img[src*="hong-qing-logo.webp"]');
 
       if (!(hero instanceof HTMLImageElement) || !(logo instanceof HTMLImageElement)) {
         throw new Error("Expected dragon artwork was not rendered.");
