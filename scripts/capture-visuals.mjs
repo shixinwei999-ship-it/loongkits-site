@@ -76,12 +76,26 @@ try {
 
       await page.goto(new URL(route.path, baseUrl).toString(), { waitUntil: "networkidle" });
 
+      // 0. 注入截图终态：让所有 data-reveal 渐显元素立即到完成态，
+      //    全页截图不再依赖动画时序；真实访问者不带此类，照常看到动效。
+      await page.addStyleTag({
+        content: ".shot-final [data-reveal]{opacity:1!important;transform:none!important;transition:none!important}",
+      });
+      await page.evaluate(() => document.documentElement.classList.add("shot-final"));
+
       // 1. 等所有期望图片进入 DOM。
       for (const imageName of route.expectedImages) {
         await page.locator(`img[src*="${imageName}"]`).first().waitFor();
       }
 
-      // 2. 先滚动整页，触发 next/image 的懒加载解码，再回到顶部。
+      // 1b. 对每张期望图精确滚入视口，确保懒加载的 IntersectionObserver 必触发，
+      //     不依赖盲滚步长（快速盲滚会漏触发，导致图片永远不发起请求）。
+      for (const imageName of route.expectedImages) {
+        await page.locator(`img[src*="${imageName}"]`).first().scrollIntoViewIfNeeded();
+        await page.waitForTimeout(120);
+      }
+
+      // 2. 再整页滚动一遍，触发其余懒加载元素的解码，然后回到顶部。
       const pageHeight = await page.evaluate(() => document.documentElement.scrollHeight);
       for (let y = 0; y < pageHeight; y += Math.max(400, viewport.height - 100)) {
         await page.evaluate((scrollY) => window.scrollTo(0, scrollY), y);
@@ -121,7 +135,12 @@ try {
         return {
           images,
           horizontalOverflow: document.documentElement.scrollWidth > window.innerWidth,
-          hiddenContent: document.querySelectorAll('[class*="opacity-0"]').length,
+          // 只查渐显容器是否真的可见（按计算 opacity，而非 class 名）：
+          // 注入 .shot-final 后这些容器计算 opacity 为 1，断言通过；
+          // 真实首屏若某块没渐显，opacity 仍 <1，照样能抓到。
+          hiddenContent: [...document.querySelectorAll("[data-reveal]")].filter(
+            (el) => parseFloat(getComputedStyle(el).opacity) < 0.99,
+          ).length,
         };
       }, route.expectedImages);
 

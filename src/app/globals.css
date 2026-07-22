@@ -280,3 +280,11 @@ h1, h2, h3, h4, h5, h6 {
     scroll-behavior: auto !important;
   }
 }
+
+/* 截图终态：视觉验收工具注入 .shot-final 后，所有渐显元素立即到完成态，
+   使全页截图不依赖动画时序；真实访问者不带此类，照常看到动效。 */
+.shot-final [data-reveal] {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
