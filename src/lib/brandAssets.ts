@@ -1,28 +1,27 @@
 // Loong Kits 品牌资产契约。
-// 真实 Hong/Qing 文件到位后，只改此文件的 `ready` 和路径；页面不会回退为手画假龙。
-// 资产规格见 docs-real/docs/品牌资产/双龙形象_定稿说明.md。
+// Hong/Qing 的成品资产只在此处登记，页面不会回退为手画假龙。
 
 export const dragonAssets = {
-  ready: false,
+  ready: true,
   hero: {
     src: "/brand/hong-qing-hero.webp",
-    width: 2048,
-    height: 2048,
+    width: 1536,
+    height: 1024,
   },
   logo: {
     src: "/brand/hong-qing-logo.webp",
-    width: 1024,
-    height: 1024,
+    width: 896,
+    height: 432,
   },
 } as const;
 
 export const dragonAssetBrief = {
-  finalSource: "docs-real/docs/品牌资产/双龙形象_定稿说明.md",
+  finalSource: "public/brand/hong-qing-hero.webp",
   requiredFiles: ["hong-qing-hero.webp", "hong-qing-logo.webp"],
   acceptance: [
     "Hong and Qing are unmistakably Eastern dragons at a glance.",
-    "Both have antlers, fluffy mane, long body, fish tail, eagle claws, and two flowing whiskers.",
-    "Hong waves with a tongue-out smile; Qing clasps hands with a calm smile.",
-    "No Western-dragon anatomy, realistic scales, tourism red-gold styling, or low-effort sticker look.",
+    "Both have antlers, soft manes, long bodies, fish tails, small paws, and two flowing whiskers.",
+    "Qing is sage green and calm; Hong is dusty rose and waves with a playful smile.",
+    "No Western-dragon anatomy, visible scale armor, tourism red-gold styling, or sticker look.",
   ],
 } as const;

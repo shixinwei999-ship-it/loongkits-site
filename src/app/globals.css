@@ -36,8 +36,8 @@ h1, h2, h3, h4, h5, h6 {
 .display {
   font-family: var(--font-nunito);
   font-weight: 800;
-  line-height: 0.98;
-  letter-spacing: -0.02em;
+  line-height: 1;
+  letter-spacing: 0;
   font-size: clamp(2.75rem, 7vw, 5.5rem);
 }
 
@@ -49,33 +49,20 @@ h1, h2, h3, h4, h5, h6 {
   font-size: clamp(2.5rem, 6.5vw, 5rem);
 }
 
-/* 纸感环境背景：柔光 + 细点纹 */
+/* 高级感来自留白和清晰层级，不来自多层渐变、点阵和装饰。 */
 .bg-paper {
-  background-image:
-    radial-gradient(55rem 28rem at 88% -12%, rgb(45 106 79 / 0.08), transparent 60%),
-    radial-gradient(46rem 26rem at -12% 38%, rgb(244 162 97 / 0.1), transparent 60%),
-    radial-gradient(rgb(45 106 79 / 0.05) 1px, transparent 1px);
-  background-size: auto, auto, 1.5rem 1.5rem;
+  background-color: var(--color-cream);
 }
 
-/* 深色反白 section：制造翻页节奏对比 */
+/* 深色反白只作为功能段，不再叠加舞台纹理。 */
 .section-teal {
   background-color: var(--color-teal-dark);
-  background-image:
-    radial-gradient(40rem 24rem at 90% 0%, rgb(244 162 97 / 0.16), transparent 60%),
-    radial-gradient(36rem 22rem at 0% 100%, rgb(212 128 122 / 0.14), transparent 60%),
-    radial-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px);
-  background-size: auto, auto, 1.6rem 1.6rem;
   color: #fff;
 }
 
-/* 暖橙浅 section */
+/* 暖色段保持平面、安静，作为产品说明的呼吸区。 */
 .section-warm {
   background-color: #fdf3e7;
-  background-image:
-    radial-gradient(40rem 22rem at 100% 0%, rgb(244 162 97 / 0.18), transparent 60%),
-    radial-gradient(rgb(45 106 79 / 0.04) 1px, transparent 1px);
-  background-size: auto, 1.5rem 1.5rem;
 }
 
 /* 书法水印：超大、极淡、竖排，文化记忆点 */
@@ -143,16 +130,17 @@ h1, h2, h3, h4, h5, h6 {
 /* 学习包卡片 */
 .card-kit {
   background-color: white;
-  border-radius: 1.25rem;
+  border-radius: 0.5rem;
   overflow: hidden;
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  border: 1px solid rgb(45 106 79 / 0.08);
-  transition: box-shadow 0.35s, transform 0.35s;
+  box-shadow: 0 1px 1px rgb(43 43 43 / 0.04);
+  border: 1px solid rgb(45 106 79 / 0.10);
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
 }
 
 .card-kit:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 22px 40px -12px rgb(45 106 79 / 0.28), 0 4px 8px -4px rgb(0 0 0 / 0.08);
+  transform: translateY(-4px);
+  border-color: rgb(45 106 79 / 0.28);
+  box-shadow: 0 16px 32px -24px rgb(31 74 56 / 0.45);
 }
 
 .card-kit:hover .kit-cover {
@@ -167,8 +155,8 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 1.25rem;
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  border-radius: 0.75rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .group\/step:hover .icon-stage {
   transform: translateY(-6px) rotate(-4deg);

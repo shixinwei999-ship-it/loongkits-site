@@ -6,7 +6,7 @@ const RED_D = "#9E0C24";
 const CREAM = "#FAF7F2";
 
 export function Logo({ size = 32, className = "" }: { size?: number; className?: string }) {
-  // 真实双龙 Logo 到位后自动使用；在此之前保留清晰、诚实的龙字印章。
+  // 紧凑裁切只保留双龙头部，导航尺寸仍能识别鹿角和相向关系。
   if (dragonAssets.ready) {
     return (
       <Image
@@ -14,8 +14,8 @@ export function Logo({ size = 32, className = "" }: { size?: number; className?:
         alt="Loong Kits Hong and Qing dragon logo"
         width={dragonAssets.logo.width}
         height={dragonAssets.logo.height}
-        className={`object-contain ${className}`}
-        style={{ width: size, height: size }}
+        className={`shrink-0 object-contain ${className}`}
+        style={{ width: Math.round(size * 1.75), height: size }}
       />
     );
   }
