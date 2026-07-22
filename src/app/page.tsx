@@ -11,13 +11,13 @@ export const metadata: Metadata = {
     description:
       "Hear it, say it, print it. A beginner Chinese classroom plus printable bilingual kits, with culture as the practice ground.",
     url: "/",
-    images: ["/brand/hong-qing-hero.webp"],
+    images: ["/hero/festive-hero.webp"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Learn to Speak Chinese · Loong Kits",
-    description: "Hear it, say it, print it — beginner Chinese lessons and printable bilingual kits.",
-    images: ["/brand/hong-qing-hero.webp"],
+    description: "Hear it, say it, print it — a level-based Chinese course and printable bilingual kits.",
+    images: ["/hero/festive-hero.webp"],
   },
 };
 

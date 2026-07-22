@@ -62,8 +62,8 @@ export const footer: Bi<{
 };
 
 export const home: Bi<{
-  hero: { title: string; subtitle: string; cta: string; ctaSecondary: string; learnCta: string; mascotAlt: string };
-  agePath: { title: string; desc: string; cta: string };
+  hero: { title: string; subtitle: string; cta: string; ctaSecondary: string; learnCta: string; earCta: string; mascotAlt: string };
+  agePath: { kicker: string; title: string; desc: string; cta: string; viewAll: string };
   howItWorks: { title: string; steps: { icon: string; title: string; desc: string }[] };
   featuredKits: { title: string; viewAll: string };
   audience: {
@@ -75,17 +75,20 @@ export const home: Bi<{
 }> = {
   en: {
     hero: {
-      title: "Learn to speak Chinese",
-      subtitle: "Bilingual printable kits turn pinyin, tones and characters into something kids hold, trace and say out loud — culture is where they practise.",
+      title: "Speak Chinese, level by level",
+      subtitle: "A complete path from your very first tone to your own bilingual voice — ten levels, real lessons, homework you can print. No age required: start at Level 1 whenever you begin.",
       cta: "Browse Kits",
       ctaSecondary: "Free Sample",
       learnCta: "Start learning Chinese",
-      mascotAlt: "Hong and Qing, the Loong Kits dragon mascots",
+      earCta: "Warm up your ear first",
+      mascotAlt: "A child writing a Chinese character on red paper",
     },
     agePath: {
-      title: "Find the right place to begin",
-      desc: "Every stage meets children where they are, then gives them room to go further with Chinese culture.",
-      cta: "Explore this age",
+      kicker: "One path · ten levels",
+      title: "From Level 1 to Level 10",
+      desc: "Not ages — levels. A teenager starting today and a six-year-old both begin at Level 1 and climb the same ladder, one rung at a time.",
+      cta: "See this level",
+      viewAll: "See all 10 levels",
     },
     howItWorks: {
       title: "How It Works",
@@ -113,17 +116,20 @@ export const home: Bi<{
   },
   zh: {
     hero: {
-      title: "开口说中文",
-      subtitle: "中英双语、可打印的学习包，把拼音、声调和汉字变成孩子能拿、能描、能说出口的东西——文化，是练习它们的地方。",
+      title: "一级一级，开口说中文",
+      subtitle: "从第一个声调，到属于你自己的双语声音——十个等级、真正的课、能打印的作业。不限年龄：无论你几岁开始，都从第 1 级起步。",
       cta: "浏览学习包",
       ctaSecondary: "免费样品",
       learnCta: "开始学中文",
-      mascotAlt: "Loong Kits 双龙形象：小红龙和小青龙",
+      earCta: "先练练耳朵",
+      mascotAlt: "一个孩子在红纸上写汉字",
     },
     agePath: {
-      title: "为孩子找到合适的起点",
-      desc: "每个阶段都从孩子当下的能力出发，再带他们走得更远、看得更深。",
-      cta: "查看这个年龄段",
+      kicker: "一条路 · 十个等级",
+      title: "从第 1 级，到第 10 级",
+      desc: "不按年龄，按等级。今天才开始的十几岁孩子，和六岁的孩子，都从第 1 级出发，一格一格往上爬。",
+      cta: "看这一级",
+      viewAll: "查看全部 10 级",
     },
     howItWorks: {
       title: "如何使用",

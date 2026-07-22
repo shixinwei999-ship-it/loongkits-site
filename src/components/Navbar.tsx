@@ -8,7 +8,7 @@ import { nav } from "@/lib/content";
 import { Logo } from "@/components/Logo";
 
 const links = [
-  { href: "/learn/chinese", key: "learn" },
+  { href: "/learn/levels", key: "learn" },
   { href: "/kits", key: "kits" },
   { href: "/free", key: "free" },
   { href: "/families", key: "families" },

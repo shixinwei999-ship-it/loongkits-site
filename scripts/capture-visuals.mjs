@@ -22,7 +22,7 @@ const pages = [
   {
     name: "home",
     path: "/",
-    expectedImages: ["hong-qing-hero.webp", "hong-qing-logo.webp", "prek.webp", "g15.webp", "g68.webp", "g912.webp"],
+    expectedImages: ["festive-hero.webp", "prek-greet.webp", "g15-reunion.webp", "g68-region.webp", "g912-curate.webp"],
   },
   {
     name: "free",
@@ -63,6 +63,11 @@ const pages = [
   {
     name: "chinese-class",
     path: "/learn/chinese",
+    expectedImages: [],
+  },
+  {
+    name: "levels",
+    path: "/learn/levels",
     expectedImages: [],
   },
 ];
