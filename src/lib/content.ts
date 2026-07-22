@@ -67,6 +67,7 @@ export const home: Bi<{
   howItWorks: { title: string; steps: { icon: string; title: string; desc: string }[] };
   featuredKits: { title: string; viewAll: string };
   audience: {
+    selfStudy: { title: string; desc: string; cta: string; badge: string };
     families: { title: string; desc: string; cta: string };
     teachers: { title: string; desc: string; cta: string };
   };
@@ -100,6 +101,12 @@ export const home: Bi<{
     },
     featuredKits: { title: "Featured Kits", viewAll: "View all kits" },
     audience: {
+      selfStudy: {
+        title: "For Self-Learners",
+        desc: "Learning for yourself — teens and adults welcome. No class, no schedule: start at Level 1 and climb the ladder at your own pace.",
+        cta: "Start the ladder",
+        badge: "Any age · start at Level 1",
+      },
       families: { title: "For Families", desc: "Culture roots for your kids", cta: "Explore" },
       teachers: { title: "For Teachers", desc: "Classroom-ready resources", cta: "Explore" },
     },
@@ -141,6 +148,12 @@ export const home: Bi<{
     },
     featuredKits: { title: "精选学习包", viewAll: "查看全部" },
     audience: {
+      selfStudy: {
+        title: "自学",
+        desc: "为自己学——青少年、成人都行。没有班级、没有课表：从第 1 级开始，按自己的节奏爬梯子。",
+        cta: "开始爬梯子",
+        badge: "不限年龄 · 从第 1 级起",
+      },
       families: { title: "给家庭", desc: "给孩子种下文化根", cta: "进入" },
       teachers: { title: "给老师", desc: "课堂即用资源", cta: "进入" },
     },

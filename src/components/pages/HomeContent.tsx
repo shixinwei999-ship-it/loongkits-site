@@ -33,24 +33,36 @@ export function HomeContent() {
     <>
       {/* ============ HERO：纯中国红 + 右侧金龙，单一行动 ============ */}
       <section className="group/hero relative isolate flex min-h-[92vh] items-center overflow-hidden bg-gradient-to-br from-[#c01525] via-[#b3121f] to-[#8e0d18]">
-        {/* 纸纹 + 金光氛围 */}
+        {/* 氛围层：纸纹 + 龙后放射金光 + 暗祥云，让红底有层次、有势 */}
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div className="paper-grain absolute inset-0 opacity-[0.12]" />
-          <div className="hero-float absolute left-[6%] top-16 h-72 w-72 rounded-full bg-amber-300/15 blur-3xl" />
-          <div className="hero-float-slow absolute left-[28%] bottom-6 h-80 w-80 rounded-full bg-orange/15 blur-3xl" />
+          {/* 龙背后的放射金光 */}
+          <div className="absolute right-[6%] top-1/2 h-[120%] w-[60%] -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(255,206,110,0.30),rgba(255,170,60,0.10)_42%,transparent_70%)] blur-2xl" />
+          {/* 暗祥云：衬龙，不压字 */}
+          <svg className="absolute right-[2%] top-[8%] w-[42%] text-amber-200/[0.07] blur-[2px]" viewBox="0 0 200 90" fill="currentColor" aria-hidden>
+            <path d="M30 60c-14 0-22-12-15-22 4-6 13-7 18-3 2-12 16-19 28-13 7 4 10 11 9 18 12-3 24 6 22 18-1 8-9 12-17 11-3 6-12 8-18 4-5 5-15 4-19-2-6 2-12-1-13-7 2-2 4-3 5-4z" />
+          </svg>
+          <svg className="absolute right-[20%] bottom-[6%] w-[30%] text-amber-200/[0.06] blur-[2px]" viewBox="0 0 200 90" fill="currentColor" aria-hidden>
+            <path d="M30 60c-14 0-22-12-15-22 4-6 13-7 18-3 2-12 16-19 28-13 7 4 10 11 9 18 12-3 24 6 22 18-1 8-9 12-17 11-3 6-12 8-18 4-5 5-15 4-19-2-6 2-12-1-13-7 2-2 4-3 5-4z" />
+          </svg>
+          <div className="hero-float absolute left-[4%] top-14 h-64 w-64 rounded-full bg-amber-300/10 blur-3xl" />
+          <div className="hero-float-slow absolute left-[24%] bottom-4 h-72 w-72 rounded-full bg-orange/10 blur-3xl" />
         </div>
 
-        {/* 右侧金龙：品牌呼应。桌面醒目、移动端淡纹理，单一节点避免歧义 */}
-        <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 flex w-[80%] items-end justify-end opacity-25 sm:w-[46%] sm:opacity-100">
-          <Image
-            src="/hero/golden-dragon.webp"
-            alt=""
-            width={954}
-            height={1442}
-            priority
-            sizes="(max-width: 640px) 80vw, 46vw"
-            className="hero-float-slow h-[112%] w-auto max-w-none object-contain object-right-bottom drop-shadow-[0_18px_60px_rgba(255,196,84,0.28)]"
-          />
+        {/* 右侧金龙：缩小、贴右、半身探出画外、斜昂——有势而非塞满 */}
+        <div aria-hidden className="pointer-events-none absolute right-0 top-0 flex h-full w-[74%] items-center justify-end opacity-35 sm:w-[42%] sm:opacity-100">
+          <div className="relative h-[88%]">
+            {/* 龙身描边金光 */}
+            <Image
+              src="/hero/golden-dragon.webp"
+              alt=""
+              width={954}
+              height={1442}
+              priority
+              sizes="(max-width: 640px) 74vw, 42vw"
+              className="hero-float-slow h-full w-auto translate-x-[18%] rotate-[-5deg] object-contain drop-shadow-[0_0_40px_rgba(255,196,84,0.45)] [filter:drop-shadow(0_14px_50px_rgba(120,40,0,0.45))_saturate(1.08)]"
+            />
+          </div>
         </div>
         {/* 左侧压字渐变，保证白字在龙/红上都清晰 */}
         <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-[#8e0d18] via-[#8e0d18]/55 to-transparent sm:via-[#8e0d18]/35" />
@@ -65,7 +77,7 @@ export function HomeContent() {
               </p>
             </Reveal>
             <Reveal delay={90}>
-              <h1 className="display-zh text-white !text-[clamp(2.9rem,8.5vw,6.25rem)] !leading-[0.96] drop-shadow-[0_2px_18px_rgba(0,0,0,0.3)]">
+              <h1 className="display-zh text-white !text-[clamp(2.9rem,8vw,6rem)] !leading-[0.95] drop-shadow-[0_3px_22px_rgba(0,0,0,0.35)]">
                 {t.hero.title}
               </h1>
             </Reveal>
@@ -290,25 +302,47 @@ export function HomeContent() {
                 {lang === "en" ? "Made for real learning contexts" : "为真实的学习场景而做"}
               </p>
               <h2 className="display !text-white !text-4xl sm:!text-5xl text-left">
-                {lang === "en" ? "Two ways in, one ladder" : "两个入口，同一架梯子"}
+                {lang === "en" ? "Three ways in, one ladder" : "三个入口，同一架梯子"}
               </h2>
             </div>
           </Reveal>
-          <div className="grid gap-6 md:grid-cols-2">
-            <Reveal>
-              <Link href="/families" className="group block h-full rounded-2xl bg-white p-9 sm:p-10 transition-transform duration-300 hover:-translate-y-1.5">
-                <p className="font-nunito text-sm font-extrabold text-teal/40 mb-4">01</p>
-                <h3 className="font-nunito text-3xl font-extrabold text-ink">{t.audience.families.title}</h3>
-                <p className="text-ink-light mt-4 leading-relaxed">{t.audience.families.desc}</p>
-                <span className="arrow-link text-teal font-bold mt-7 inline-flex">{t.audience.families.cta} <IconArrowRight size={18} className="arrow" /></span>
+          <div className="grid gap-6 md:grid-cols-3 md:grid-rows-2">
+            {/* 自学：红色大主块，呼应首屏金龙红，指向等级梯子 */}
+            <Reveal className="md:col-span-2 md:row-span-2">
+              <Link
+                href="/learn/levels"
+                className="group relative block h-full overflow-hidden rounded-2xl bg-gradient-to-br from-[#c01525] via-[#b3121f] to-[#8e0d18] p-9 text-white shadow-[0_28px_60px_-24px_rgba(142,13,24,0.8)] transition-transform duration-300 hover:-translate-y-1.5 sm:p-12"
+              >
+                <div aria-hidden className="paper-grain pointer-events-none absolute inset-0 opacity-[0.12]" />
+                <span aria-hidden className="vert-calligraphy pointer-events-none absolute -right-2 top-2 select-none text-[10rem] leading-none text-amber-200/[0.08]">自</span>
+                <div aria-hidden className="pointer-events-none absolute -bottom-10 -right-6 h-56 w-56 rounded-full bg-amber-300/15 blur-3xl" />
+                <div className="relative">
+                  <span className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-[0.7rem] font-bold uppercase tracking-wider text-amber-100 backdrop-blur-sm">
+                    <span className="hero-dot inline-block h-1.5 w-1.5 rounded-full bg-amber-300" />
+                    {t.audience.selfStudy.badge}
+                  </span>
+                  <h3 className="font-nunito mt-6 text-4xl font-extrabold leading-tight sm:text-5xl">{t.audience.selfStudy.title}</h3>
+                  <p className="mt-4 max-w-md text-lg leading-relaxed text-rose-50/90">{t.audience.selfStudy.desc}</p>
+                  <span className="arrow-link mt-8 inline-flex items-center gap-2 rounded-[0.85rem] bg-white px-6 py-3 text-base font-bold text-[#b3121f] transition-all duration-200 group-hover:gap-3">
+                    {t.audience.selfStudy.cta} <IconArrowRight size={18} />
+                  </span>
+                </div>
               </Link>
             </Reveal>
-            <Reveal delay={120}>
-              <Link href="/teachers" className="group block h-full rounded-2xl bg-orange p-9 sm:p-10 text-white shadow-[0_24px_50px_-20px_rgba(244,162,97,0.7)] transition-transform duration-300 hover:-translate-y-1.5">
-                <p className="font-nunito text-sm font-extrabold text-white/50 mb-4">02</p>
-                <h3 className="font-nunito text-3xl font-extrabold">{t.audience.teachers.title}</h3>
-                <p className="text-white/85 mt-4 leading-relaxed">{t.audience.teachers.desc}</p>
-                <span className="arrow-link font-bold mt-7 inline-flex">{t.audience.teachers.cta} <IconArrowRight size={18} className="arrow" /></span>
+            <Reveal delay={120} className="md:col-start-3 md:row-start-1">
+              <Link href="/families" className="group block h-full rounded-2xl bg-white p-8 transition-transform duration-300 hover:-translate-y-1.5 sm:p-9">
+                <p className="font-nunito text-sm font-extrabold text-teal/40 mb-3">02</p>
+                <h3 className="font-nunito text-2xl font-extrabold text-ink sm:text-3xl">{t.audience.families.title}</h3>
+                <p className="text-ink-light mt-3 leading-relaxed">{t.audience.families.desc}</p>
+                <span className="arrow-link text-teal font-bold mt-5 inline-flex">{t.audience.families.cta} <IconArrowRight size={18} className="arrow" /></span>
+              </Link>
+            </Reveal>
+            <Reveal delay={200} className="md:col-start-3 md:row-start-2">
+              <Link href="/teachers" className="group block h-full rounded-2xl bg-orange p-8 text-white shadow-[0_24px_50px_-20px_rgba(244,162,97,0.7)] transition-transform duration-300 hover:-translate-y-1.5 sm:p-9">
+                <p className="font-nunito text-sm font-extrabold text-white/50 mb-3">03</p>
+                <h3 className="font-nunito text-2xl font-extrabold sm:text-3xl">{t.audience.teachers.title}</h3>
+                <p className="text-white/85 mt-3 leading-relaxed">{t.audience.teachers.desc}</p>
+                <span className="arrow-link font-bold mt-5 inline-flex">{t.audience.teachers.cta} <IconArrowRight size={18} className="arrow" /></span>
               </Link>
             </Reveal>
           </div>
