@@ -16,7 +16,7 @@ export function AgePathGrid({ heading, description, cta }: AgePathGridProps) {
   const { lang } = useLang();
 
   return (
-    <section className="bg-paper py-24 px-4 sm:px-6 lg:px-8">
+    <section id="learn-paths" className="scroll-mt-20 bg-paper py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="max-w-2xl mb-12 lg:mb-16">
           <p className="font-inter font-semibold uppercase tracking-[0.12em] text-teal text-xs sm:text-sm mb-5">

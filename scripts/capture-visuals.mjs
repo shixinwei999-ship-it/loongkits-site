@@ -81,6 +81,9 @@ try {
       await page.addStyleTag({
         content:
           ".shot-final [data-reveal]{opacity:1!important;transform:none!important;transition:none!important}" +
+          // 终态下停掉所有持续动画（首屏 kenburns/float/bounce 等），否则元素永远
+          // “不稳定”，scrollIntoViewIfNeeded 会等到超时；截图本就该是静止成品。
+          ".shot-final *,.shot-final *::before,.shot-final *::after{animation:none!important}" +
           // 全页截图保真：fixed 导航在整页截图里会浮在视口中部、盖住 hero。
           // 终态下改回文档顶部绝对定位，截图即真实首屏；真实访问者不带此类。
           ".shot-final nav.fixed{position:absolute!important;top:0!important}",

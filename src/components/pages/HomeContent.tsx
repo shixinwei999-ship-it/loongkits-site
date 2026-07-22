@@ -6,7 +6,8 @@ import { home } from "@/lib/content";
 import { kits, featuredKitIds } from "@/lib/kits";
 import { KitCard } from "@/components/KitCard";
 import { Reveal } from "@/components/Reveal";
-import { DragonArtStage } from "@/components/DragonArtStage";
+import Image from "next/image";
+import { dragonAssets } from "@/lib/brandAssets";
 import { AgePathGrid } from "@/components/AgePathGrid";
 import {
   DecoCloud,
@@ -34,43 +35,100 @@ export function HomeContent() {
 
   return (
     <>
-      {/* ============ HERO：字体主导的编辑式首屏 ============ */}
-      <section className="bg-paper relative overflow-hidden pt-16 pb-20 px-4 sm:px-6 lg:px-8">
-        {/* 主视觉只留给双龙资产；不再用泛用民俗符号填满留白。 */}
+      {/* ============ HERO：电影感全出血首屏 ============ */}
+      <section className="group/hero relative isolate flex min-h-[90vh] items-center overflow-hidden bg-paper pt-24 pb-24 lg:pt-28 lg:pb-28">
+        {/* 右出血主视觉：双龙放大成主角，缓慢呼吸 */}
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-full lg:w-[58%]">
+          <Image
+            src={dragonAssets.hero.src}
+            alt={t.hero.mascotAlt}
+            fill
+            priority
+            sizes="(max-width: 1024px) 100vw, 58vw"
+            className="hero-kenburns object-cover object-[50%_28%] lg:object-[72%_center]"
+          />
+          {/* 防龙顶撞导航 + 移动端底部融回纸色 */}
+          <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-paper to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-paper to-transparent lg:hidden" />
+        </div>
 
-        <div className="max-w-7xl mx-auto relative">
-          <div className="grid lg:grid-cols-12 gap-10 lg:gap-4 items-center">
-            {/* 左：大字 */}
-            <Reveal className="lg:col-span-7">
-              <div className="relative z-10">
-                <p className="font-inter font-semibold uppercase tracking-[0.12em] text-teal text-xs sm:text-sm mb-5">
-                  {lang === "en" ? "Bilingual printable culture kits" : "中英双语 · 可打印文化学习包"}
-                </p>
+        {/* 文字背板：桌面左实色纸 + 短 feather，标题永不叠龙；移动顶实色 feather */}
+        <div className="absolute inset-0 bg-gradient-to-b from-paper/70 via-transparent to-paper lg:hidden" />
+        <div className="absolute inset-x-0 top-0 h-80 bg-gradient-to-b from-paper via-paper to-transparent lg:hidden" />
+        <div className="absolute inset-y-0 left-0 hidden w-[54%] bg-paper lg:block" />
+        <div className="absolute inset-y-0 left-[54%] hidden w-[18%] bg-gradient-to-r from-paper to-transparent lg:block" />
 
-                <h1 className="display-zh text-ink max-w-2xl">{t.hero.title}</h1>
+        {/* ambient 氛围层：柔光 + 竖排水印 + 龙身曲线 */}
+        <div aria-hidden className="pointer-events-none absolute inset-0">
+          <div className="hero-float absolute right-[6%] top-12 h-72 w-72 rounded-full bg-orange/10 blur-3xl" />
+          <div className="hero-float-slow absolute left-[6%] top-1/3 h-80 w-80 rounded-full bg-teal/[0.06] blur-3xl" />
+          <span className="vert-calligraphy absolute bottom-8 right-8 hidden text-[12rem] leading-none text-teal/[0.045] lg:block">
+            龙
+          </span>
+          <svg
+            className="absolute left-0 top-[58%] hidden w-[55%] text-teal/[0.08] lg:block"
+            viewBox="0 0 600 200"
+            fill="none"
+            aria-hidden
+          >
+            <path d="M0 120 C120 40 220 160 340 90 S520 40 600 110" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          </svg>
+        </div>
 
-                <p className="text-lg sm:text-xl text-ink-light mt-7 mb-9 max-w-md leading-relaxed">
-                  {t.hero.subtitle}
-                </p>
-                <div className="flex flex-wrap gap-4">
-                  <Link href="/kits" className="btn-primary text-base">
-                    {t.hero.cta} <IconArrowRight size={18} />
-                  </Link>
-                  <Link href="/free" className="btn-secondary text-base">
-                    {t.hero.ctaSecondary}
-                  </Link>
-                </div>
+        {/* 内容：左对齐，强字号对比 */}
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-xl lg:max-w-2xl">
+            <Reveal>
+              <p className="mb-6 inline-flex items-center gap-2.5 font-inter text-xs font-semibold uppercase tracking-[0.18em] text-teal sm:text-sm">
+                <span className="hero-dot inline-block h-2 w-2 rounded-full bg-orange" />
+                {lang === "en" ? "Bilingual · Printable · Ages 3–18" : "中英双语 · 可打印 · 3–18 岁"}
+              </p>
+            </Reveal>
+            <Reveal delay={90}>
+              <h1 className="display-zh text-ink !text-[clamp(2.9rem,8.5vw,6.25rem)] !leading-[0.96]">{t.hero.title}</h1>
+            </Reveal>
+            <Reveal delay={170}>
+              <p className="mt-7 max-w-md text-lg leading-relaxed text-ink-light sm:text-xl">{t.hero.subtitle}</p>
+            </Reveal>
+            <Reveal delay={250}>
+              <div className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">
+                <Link href="/free" className="btn-primary text-base">
+                  {t.hero.ctaSecondary} <IconArrowRight size={18} />
+                </Link>
+                <Link href="/kits" className="arrow-link text-base font-bold text-teal transition-colors hover:text-teal-dark">
+                  {t.hero.cta} <IconArrowRight size={18} className="arrow" />
+                </Link>
               </div>
             </Reveal>
-
-            {/* 右：双龙是首屏唯一主视觉，背景保持安静。 */}
-            <Reveal delay={150} className="lg:col-span-5">
-              <div className="dragon-art-stage relative mx-auto w-full max-w-[34rem] aspect-[3/2]">
-                <DragonArtStage className="h-full w-full" alt={t.hero.mascotAlt} />
-              </div>
+            <Reveal delay={330}>
+              <dl className="mt-12 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-teal/15 pt-6 text-xs font-medium text-ink-light sm:text-sm">
+                {(lang === "en"
+                  ? ["Bilingual EN / 中文", "Print at home", "4 age paths", "Real PDFs"]
+                  : ["中英双语对照", "在家即可打印", "4 条年龄路径", "真实可下载"]
+                ).map((label, i) => (
+                  <div key={label} className="flex items-center gap-5">
+                    {i > 0 && <span aria-hidden className="h-3 w-px bg-teal/20" />}
+                    <span>{label}</span>
+                  </div>
+                ))}
+              </dl>
             </Reveal>
           </div>
         </div>
+
+        {/* scroll cue */}
+        <a
+          href="#learn-paths"
+          aria-label={lang === "en" ? "Scroll to explore" : "向下浏览"}
+          className="absolute bottom-7 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-teal/50 transition-colors hover:text-teal lg:flex"
+        >
+          <span className="font-inter text-[0.62rem] font-semibold uppercase tracking-[0.22em]">
+            {lang === "en" ? "Explore" : "浏览"}
+          </span>
+          <svg className="hero-bounce h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </a>
       </section>
 
       <AgePathGrid heading={t.agePath.title} description={t.agePath.desc} cta={t.agePath.cta} />

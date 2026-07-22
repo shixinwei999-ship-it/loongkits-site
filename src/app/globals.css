@@ -288,3 +288,29 @@ h1, h2, h3, h4, h5, h6 {
   transform: none !important;
   transition: none !important;
 }
+
+/* ===== 首屏氛围动效（subtle，且被上方 reduced-motion 规则兜底） ===== */
+@keyframes heroKen {
+  from { transform: scale(1.05); }
+  to   { transform: scale(1.13); }
+}
+.hero-kenburns { animation: heroKen 24s ease-in-out infinite alternate; }
+
+@keyframes heroFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-20px); }
+}
+.hero-float      { animation: heroFloat 9s ease-in-out infinite; }
+.hero-float-slow { animation: heroFloat 14s ease-in-out infinite; }
+
+@keyframes heroPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.35; transform: scale(0.65); }
+}
+.hero-dot { animation: heroPulse 2.4s ease-in-out infinite; }
+
+@keyframes heroBounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(5px); }
+}
+.hero-bounce { animation: heroBounce 1.8s ease-in-out infinite; }
