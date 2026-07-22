@@ -289,6 +289,15 @@ h1, h2, h3, h4, h5, h6 {
   transition: none !important;
 }
 .shot-final .shot-hide { display: none !important; }
+/* 冻结终态下，所有“从隐藏起步、靠动画显现”的元素必须直接显示终态，
+   否则 animation:none 会把它们钉在 opacity:0 的起点（笔顺逐笔、墨迹揭示等）。 */
+.shot-final .seq-dot,
+.shot-final .ink-reveal {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+  animation: none !important;
+}
 
 /* ===== 首屏氛围动效（subtle，且被上方 reduced-motion 规则兜底） ===== */
 @keyframes heroKen {
@@ -325,3 +334,35 @@ h1, h2, h3, h4, h5, h6 {
   from { stroke-dashoffset: 1; }
   to   { stroke-dashoffset: 0; }
 }
+
+/* ===== 宣纸纤维纹理（纯 CSS 叠层，无外部图，给米白/深色带一点手工纸的呼吸感） ===== */
+.paper-grain {
+  background-image:
+    radial-gradient(circle at 18% 28%, rgba(120, 80, 40, 0.05) 0, transparent 42%),
+    radial-gradient(circle at 82% 72%, rgba(120, 80, 40, 0.04) 0, transparent 46%),
+    repeating-linear-gradient(0deg, rgba(120, 90, 50, 0.022) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(120, 90, 50, 0.018) 0 1px, transparent 1px 4px);
+}
+
+/* 今日一字：换字时的墨迹揭示（blur→清晰 + 轻微缩放，像墨落纸） */
+@keyframes inkReveal {
+  0%   { opacity: 0; transform: scale(0.82) translateY(8px); filter: blur(6px); }
+  60%  { opacity: 1; filter: blur(0); }
+  100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+}
+.ink-reveal { animation: inkReveal 0.6s cubic-bezier(0.2, 0.7, 0.2, 1); }
+
+/* 笔顺逐笔点亮：每片按 animation-delay 依次浮入 */
+@keyframes seqPop {
+  0%   { opacity: 0; transform: translateY(6px) scale(0.9); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.seq-dot { opacity: 0; animation: seqPop 0.4s ease forwards; }
+
+/* 跟读打勾的弹跳反馈 */
+@keyframes practicePop {
+  0%   { transform: scale(0); }
+  60%  { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+.practice-pop { display: inline-block; animation: practicePop 0.4s cubic-bezier(0.2, 0.8, 0.3, 1.4); }

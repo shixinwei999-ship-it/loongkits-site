@@ -1,16 +1,27 @@
 "use client";
 
 // 中文学习等级系统：用 1–10 级取代按年龄，因为十几岁才开始学的人也从 1 级走起。
-// 结构 = 篇章 → 等级 → 课(学什么 + 作业)。顶部一条“汉字三千年”演化时间线讲清中文怎么走到今天。
-// 每级可展开看课表、可发音词、本级产出与配套下载；篇章 chips 随滚动高亮，点任意一级可锚点定位。
+// 结构 = 篇章 → 等级 → 课(学什么 + 作业)。顶部一条“汉字三千年”演化时间线讲清中文怎么走到今天；
+// 等级区是一条贯穿的“闯关梯子”：节点带状态、可展开看技能标签/课表/可玩小测/可发音词/产出/下载；
+// 顶部活数字给真实体量感，3 题自评帮你定位起点。每级、每字都可点听。
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useLang } from "@/lib/i18n";
 import { Reveal } from "@/components/Reveal";
 import { SpeakButton, WordChip } from "@/components/Speak";
+import { CountUp } from "@/components/CountUp";
+import { Quiz } from "@/components/Quiz";
 import { IconArrowRight, IconDownload, IconCheck } from "@/components/icons";
-import { bands, levels, getBand, type Level } from "@/lib/levels";
+import {
+  bands,
+  levels,
+  getBand,
+  courseStats,
+  placementQuiz,
+  placementLevel,
+  type Level,
+} from "@/lib/levels";
 import { getResource } from "@/lib/learningPaths";
 
 type Bi<T> = Record<"en" | "zh", T>;
@@ -41,106 +52,125 @@ function useActiveBand(ids: string[]) {
   return active;
 }
 
-function LevelCard({ lv, defaultOpen }: { lv: Level; defaultOpen: boolean }) {
+function LevelCard({ lv, isFirst, isLast }: { lv: Level; isFirst: boolean; isLast: boolean }) {
   const { lang } = useLang();
-  const [open, setOpen] = useState(defaultOpen);
+  const [open, setOpen] = useState(lv.n === 1);
   const band = getBand(lv.band);
   const resource = lv.resourceSlug ? getResource(lv.resourceSlug) : undefined;
-  const dl = lang === "en" ? { a4: "A4 PDF", letter: "US Letter" } : { a4: "A4 PDF", letter: "US Letter" };
 
   return (
-    <div
-      id={`lvl-${lv.n}`}
-      className="scroll-mt-28 group/lv rounded-2xl border border-teal/12 bg-white transition-all duration-300 hover:border-[#b3121f]/35 hover:shadow-[0_22px_50px_-34px_rgba(157,15,27,0.55)]"
-    >
-      <button
-        type="button"
-        onClick={() => setOpen((o) => !o)}
-        aria-expanded={open}
-        className="flex w-full items-center gap-5 p-5 text-left sm:p-6"
-      >
-        <span className="font-nunito text-4xl font-extrabold leading-none text-[#b3121f]/25 tabular-nums transition-colors duration-300 group-hover/lv:text-[#b3121f]/50 sm:text-5xl">
-          {String(lv.n).padStart(2, "0")}
-        </span>
-        <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-center gap-2">
-            <h3 className="font-nunito text-xl font-extrabold text-ink sm:text-2xl">{lv.title[lang]}</h3>
-            {band && <span className={`rounded-full bg-teal/8 px-2.5 py-0.5 text-[0.62rem] font-semibold uppercase tracking-wider ${band.accent}`}>{band.name[lang]}</span>}
-          </div>
-          <p className="mt-1 text-sm text-ink-light leading-relaxed">{lv.tagline[lang]}</p>
-        </div>
-        <svg
-          viewBox="0 0 24 24"
-          className={`h-5 w-5 shrink-0 text-teal transition-transform duration-300 ${open ? "rotate-180" : ""}`}
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={2}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden
+    <div className="relative grid grid-cols-[2.75rem_1fr] gap-3 sm:gap-4">
+      {/* 梯子节点 + 连线 */}
+      <div className="flex flex-col items-center">
+        <span aria-hidden className={`w-0.5 ${isFirst ? "h-6 bg-transparent" : "h-6 bg-gradient-to-b from-[#b3121f]/15 to-[#b3121f]/30"}`} />
+        <button
+          type="button"
+          onClick={() => setOpen((o) => !o)}
+          aria-expanded={open}
+          aria-label={`${lang === "en" ? "Level" : "第"} ${lv.n}`}
+          className={`relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full font-nunito text-sm font-extrabold transition-all duration-300 ${
+            open ? "bg-[#b3121f] text-white shadow-[0_10px_24px_-10px_rgba(157,15,27,0.8)]" : "border-2 border-[#b3121f]/30 bg-white text-[#b3121f] hover:border-[#b3121f]"
+          }`}
         >
-          <path d="M6 9l6 6 6-6" />
-        </svg>
-      </button>
+          {open && <span aria-hidden className="absolute inset-0 animate-ping rounded-full bg-[#b3121f]/30" />}
+          <span className="relative">{lv.n}</span>
+        </button>
+        {!isLast && <span aria-hidden className="w-0.5 flex-1 bg-gradient-to-b from-[#b3121f]/25 to-[#b3121f]/10" />}
+      </div>
 
-      {open && (
-        <div className="border-t border-teal/10 px-5 pb-6 pt-5 sm:px-6">
-          {/* 课表：学什么 + 作业 */}
-          <ol className="space-y-3">
-            {lv.lessons.map((lesson, i) => (
-              <li key={i} className="rounded-xl bg-cream/70 p-4">
-                <p className="font-nunito text-sm font-bold text-[#b3121f]">{lesson.title[lang]}</p>
-                <p className="mt-1.5 text-sm text-ink leading-relaxed">
-                  <span className="font-semibold text-teal">{lang === "en" ? "Learn · " : "学 · "}</span>
-                  {lesson.learn[lang]}
+      {/* 卡 */}
+      <div
+        id={`lvl-${lv.n}`}
+        className={`scroll-mt-28 mb-5 rounded-2xl border bg-white transition-all duration-300 ${
+          open ? "border-[#b3121f]/35 shadow-[0_22px_50px_-34px_rgba(157,15,27,0.55)]" : "border-teal/12 hover:border-[#b3121f]/30"
+        }`}
+      >
+        <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} className="flex w-full items-center gap-4 p-5 text-left sm:p-6">
+          <div className="min-w-0 flex-1">
+            <div className="flex flex-wrap items-center gap-2">
+              <h3 className="font-nunito text-xl font-extrabold text-ink sm:text-2xl">{lv.title[lang]}</h3>
+              {band && <span className={`rounded-full bg-teal/8 px-2.5 py-0.5 text-[0.62rem] font-semibold uppercase tracking-wider ${band.accent}`}>{band.name[lang]}</span>}
+            </div>
+            <p className="mt-1 text-sm text-ink-light leading-relaxed">{lv.tagline[lang]}</p>
+          </div>
+          <svg viewBox="0 0 24 24" className={`h-5 w-5 shrink-0 text-teal transition-transform duration-300 ${open ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+
+        {open && (
+          <div className="space-y-5 border-t border-teal/10 px-5 pb-6 pt-5 sm:px-6">
+            {/* 技能标签云 */}
+            <div className="flex flex-wrap gap-2">
+              {lv.skillTags[lang].map((tag) => (
+                <span key={tag} className="rounded-full border border-[#b3121f]/15 bg-[#b3121f]/5 px-3 py-1 text-xs font-semibold text-[#b3121f]">{tag}</span>
+              ))}
+            </div>
+
+            {/* 课表 */}
+            <ol className="space-y-3">
+              {lv.lessons.map((lesson, i) => (
+                <li key={i} className="rounded-xl bg-cream/70 p-4">
+                  <p className="font-nunito text-sm font-bold text-[#b3121f]">{lesson.title[lang]}</p>
+                  <p className="mt-1.5 text-sm text-ink leading-relaxed">
+                    <span className="font-semibold text-teal">{lang === "en" ? "Learn · " : "学 · "}</span>
+                    {lesson.learn[lang]}
+                  </p>
+                  <p className="mt-1.5 flex items-start gap-2 rounded-lg bg-amber-50 px-3 py-2 text-sm text-ink leading-relaxed">
+                    <span className="mt-0.5 shrink-0 text-amber-600">✎</span>
+                    <span>
+                      <span className="font-semibold text-amber-700">{lang === "en" ? "Homework · " : "作业 · "}</span>
+                      {lesson.practice[lang]}
+                    </span>
+                  </p>
+                </li>
+              ))}
+            </ol>
+
+            {/* 本级小测 */}
+            <Quiz
+              questions={lv.quiz}
+              compact
+              intro={lang === "en" ? "Quick check — instant feedback, no saving." : "随堂小测——即时反馈，不存数据。"}
+            />
+
+            {/* 可发音词 + 产出 + 下载 */}
+            <div className="grid gap-5 lg:grid-cols-[1fr_auto] lg:items-end">
+              <div>
+                <p className="mb-2.5 font-inter text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-teal/70">
+                  {lang === "en" ? "Words in this level · tap to hear" : "本级的字 · 点一下听"}
                 </p>
-                <p className="mt-1.5 flex items-start gap-2 rounded-lg bg-amber-50 px-3 py-2 text-sm text-ink leading-relaxed">
-                  <span className="mt-0.5 shrink-0 text-amber-600">✎</span>
+                <div className="flex flex-wrap gap-2">
+                  {lv.words.map((w) => (
+                    <WordChip key={w.char} word={w} variant="inline" />
+                  ))}
+                </div>
+                <p className="mt-4 flex items-start gap-2 text-sm text-ink-light leading-relaxed">
+                  <IconCheck size={16} className="mt-0.5 shrink-0 text-teal" />
                   <span>
-                    <span className="font-semibold text-amber-700">{lang === "en" ? "Homework · " : "作业 · "}</span>
-                    {lesson.practice[lang]}
+                    <span className="font-semibold text-ink">{lang === "en" ? "By the end · " : "学完能 · "}</span>
+                    {lv.outcome[lang]}
                   </span>
                 </p>
-              </li>
-            ))}
-          </ol>
-
-          {/* 可发音词 + 产出 + 下载 */}
-          <div className="mt-5 grid gap-5 lg:grid-cols-[1fr_auto] lg:items-end">
-            <div>
-              <p className="mb-2.5 font-inter text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-teal/70">
-                {lang === "en" ? "Words in this level · tap to hear" : "本级的字 · 点一下听"}
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {lv.words.map((w) => (
-                  <WordChip key={w.char} word={w} variant="inline" />
-                ))}
               </div>
-              <p className="mt-4 flex items-start gap-2 text-sm text-ink-light leading-relaxed">
-                <IconCheck size={16} className="mt-0.5 shrink-0 text-teal" />
-                <span>
-                  <span className="font-semibold text-ink">{lang === "en" ? "By the end · " : "学完能 · "}</span>
-                  {lv.outcome[lang]}
-                </span>
-              </p>
-            </div>
-            {resource && (
-              <div className="flex flex-col gap-2 rounded-xl border border-teal/15 bg-white p-3 lg:w-52">
-                <span className="font-inter text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-orange">{lang === "en" ? "Printable pack" : "可打印包"}</span>
-                <span className="text-sm font-semibold text-ink leading-tight">{resource.title[lang]}</span>
-                <div className="flex gap-2 pt-1">
-                  <a href={resource.downloads.a4.href} download className="inline-flex flex-1 items-center justify-center gap-1 rounded-lg bg-teal px-2.5 py-1.5 text-xs font-bold text-white transition-colors hover:bg-teal-dark">
-                    <IconDownload size={13} /> {dl.a4}
-                  </a>
-                  <a href={resource.downloads.letter.href} download className="inline-flex flex-1 items-center justify-center gap-1 rounded-lg border border-teal px-2.5 py-1.5 text-xs font-bold text-teal transition-colors hover:bg-teal hover:text-white">
-                    <IconDownload size={13} /> {dl.letter}
-                  </a>
+              {resource && (
+                <div className="flex flex-col gap-2 rounded-xl border border-teal/15 bg-white p-3 lg:w-52">
+                  <span className="font-inter text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-orange">{lang === "en" ? "Printable pack" : "可打印包"}</span>
+                  <span className="text-sm font-semibold text-ink leading-tight">{resource.title[lang]}</span>
+                  <div className="flex gap-2 pt-1">
+                    <a href={resource.downloads.a4.href} download className="inline-flex flex-1 items-center justify-center gap-1 rounded-lg bg-teal px-2.5 py-1.5 text-xs font-bold text-white transition-colors hover:bg-teal-dark">
+                      <IconDownload size={13} /> A4
+                    </a>
+                    <a href={resource.downloads.letter.href} download className="inline-flex flex-1 items-center justify-center gap-1 rounded-lg border border-teal px-2.5 py-1.5 text-xs font-bold text-teal transition-colors hover:bg-teal hover:text-white">
+                      <IconDownload size={13} /> Letter
+                    </a>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
@@ -166,15 +196,28 @@ export function LevelSystem() {
       zh: "你要学的这些字，不是一下子出现的。它们被刻、被铸、被统一、被压方、被打磨——同一个字，被书写它的工具一次次重塑。跟着一套文字，从骨头走到你手里的纸。",
     },
     levelsEyebrow: { en: "The ten levels", zh: "十个等级" },
-    levelsTitle: { en: "Pick a rung, open it up", zh: "选一格，展开看" },
+    levelsTitle: { en: "Climb the ladder, rung by rung", zh: "一格一格，往上爬" },
     jump: { en: "Jump to", zh: "跳到" },
+    placeEyebrow: { en: "Not sure where to start?", zh: "不知道从哪级开始？" },
+    placeTitle: { en: "Three questions place you on the ladder", zh: "三道题，把你放到梯子上" },
+    placeNote: { en: "A rough nudge, not a verdict — the practice room refines it.", zh: "只是个大致参考，不是定论——练功房能帮你细调。" },
+    placeStart: { en: "Start the placement check", zh: "开始分级小测" },
+    placeResult: { en: "We'd start you at", zh: "我们建议从" },
+    placeResultTail: { en: "begin", zh: "开始" },
+    placeRefine: { en: "Refine it in the practice room", zh: "去练功房细调" },
+    statBands: { en: "stages", zh: "个篇章" },
+    statLevels: { en: "levels", zh: "个等级" },
+    statLessons: { en: "lessons", zh: "节课" },
+    statChars: { en: "tap-to-hear words", zh: "个可听字" },
+    statYears: { en: "years of script", zh: "年文字史" },
   };
 
   return (
     <div className="bg-paper">
       {/* HERO */}
-      <section className="relative isolate overflow-hidden pt-28 pb-16 sm:pt-32 sm:pb-20">
+      <section className="relative isolate overflow-hidden pt-28 pb-12 sm:pt-32 sm:pb-16">
         <div aria-hidden className="pointer-events-none absolute inset-0">
+          <div className="paper-grain absolute inset-0 opacity-50" />
           <div className="absolute -right-24 top-8 h-80 w-80 rounded-full bg-[#b3121f]/8 blur-3xl" />
           <div className="absolute left-1/4 top-1/2 h-72 w-72 rounded-full bg-amber-300/10 blur-3xl" />
           <span className="vert-calligraphy absolute bottom-2 right-6 hidden text-[14rem] leading-none text-[#b3121f]/[0.04] lg:block">级</span>
@@ -192,8 +235,29 @@ export function LevelSystem() {
           <Reveal delay={150}>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-light">{t.intro[lang]}</p>
           </Reveal>
+
+          {/* 活数字统计条 */}
           <Reveal delay={220}>
-            <div className="mt-8 flex flex-wrap items-center gap-4 rounded-2xl border border-teal/15 bg-white/70 p-5 sm:p-6 max-w-2xl">
+            <dl className="mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-teal/12 bg-teal/10 sm:grid-cols-5">
+              {[
+                { v: courseStats.bands, s: "", label: t.statBands },
+                { v: courseStats.levels, s: "", label: t.statLevels },
+                { v: courseStats.lessons, s: "", label: t.statLessons },
+                { v: courseStats.characters, s: "+", label: t.statChars },
+                { v: courseStats.years, s: "+", label: t.statYears },
+              ].map((stat, i) => (
+                <div key={i} className="bg-white px-4 py-5 text-center">
+                  <dd className="font-nunito text-3xl font-extrabold text-[#b3121f] sm:text-4xl">
+                    <CountUp to={stat.v} suffix={stat.s} />
+                  </dd>
+                  <dt className="mt-1 text-xs font-medium text-ink-light">{stat.label[lang]}</dt>
+                </div>
+              ))}
+            </dl>
+          </Reveal>
+
+          <Reveal delay={300}>
+            <div className="mt-6 flex flex-wrap items-center gap-4 rounded-2xl border border-teal/15 bg-white/70 p-5 sm:p-6 max-w-2xl">
               <div className="flex-1 min-w-0">
                 <p className="font-nunito text-lg font-extrabold text-ink">{t.earTitle[lang]}</p>
                 <p className="mt-1 text-sm text-ink-light leading-relaxed">{t.earText[lang]}</p>
@@ -214,10 +278,8 @@ export function LevelSystem() {
             <h2 className="display-zh text-ink !text-3xl sm:!text-4xl max-w-2xl">{t.evoTitle[lang]}</h2>
             <p className="mt-4 max-w-3xl text-ink-light leading-relaxed">{t.evoIntro[lang]}</p>
           </Reveal>
-
           <Reveal delay={80}>
             <div className="relative mt-12">
-              {/* 贯穿轴线 */}
               <div aria-hidden className="absolute left-0 right-0 top-[2.1rem] hidden h-0.5 bg-gradient-to-r from-[#b3121f]/30 via-amber-400/40 to-teal/30 lg:block" />
               <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
                 {EVOLUTION.map((e, i) => (
@@ -234,8 +296,7 @@ export function LevelSystem() {
                       </div>
                       <p className="mt-3 text-sm text-ink-light leading-relaxed">{e.note[lang]}</p>
                       <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-2.5 py-1 text-[0.65rem] font-semibold text-amber-700">
-                        {i < EVOLUTION.length - 1 ? "→ " : "✓ "}
-                        {e.trait[lang]}
+                        {i < EVOLUTION.length - 1 ? "→ " : "✓ "}{e.trait[lang]}
                       </p>
                     </div>
                   </div>
@@ -246,16 +307,55 @@ export function LevelSystem() {
         </div>
       </section>
 
-      {/* 等级体系：篇章 scroll-spy + 可展开等级卡 */}
+      {/* 分级自评 */}
+      <section className="px-4 pb-20 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-3xl">
+          <Reveal>
+            <div className="overflow-hidden rounded-3xl border border-[#b3121f]/15 bg-gradient-to-br from-[#fffaf6] to-[#fdf0ea] p-7 shadow-[0_24px_60px_-40px_rgba(157,15,27,0.5)] sm:p-9">
+              <p className="font-inter text-xs font-semibold uppercase tracking-[0.14em] text-[#b3121f]">{t.placeEyebrow[lang]}</p>
+              <h2 className="mt-2 font-nunito text-2xl font-extrabold text-ink sm:text-3xl">{t.placeTitle[lang]}</h2>
+              <p className="mt-2 text-sm text-ink-light">{t.placeNote[lang]}</p>
+              <div className="mt-5">
+                <Quiz
+                  questions={placementQuiz}
+                  intro={t.placeStart[lang]}
+                  renderResult={(score) => {
+                    const lvl = placementLevel(score);
+                    return (
+                      <div>
+                        <p className="text-sm text-ink">
+                          {t.placeResult[lang]}{" "}
+                          <span className="font-nunito text-2xl font-extrabold text-[#b3121f]">{lang === "en" ? `Level ${lvl}` : `第 ${lvl} 级`}</span>{" "}
+                          {t.placeResultTail[lang]}（{score}/{placementQuiz.length}）
+                        </p>
+                        <div className="mt-4 flex flex-wrap gap-3">
+                          <a href={`#lvl-${lvl}`} className="inline-flex items-center gap-1.5 rounded-lg bg-[#b3121f] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#9c0f1b]">
+                            {lang === "en" ? `Go to Level ${lvl}` : `去第 ${lvl} 级`} <IconArrowRight size={15} />
+                          </a>
+                          <Link href="/learn/chinese" className="inline-flex items-center gap-1.5 rounded-lg border border-teal px-4 py-2 text-sm font-bold text-teal transition-colors hover:bg-teal hover:text-white">
+                            {t.placeRefine[lang]}
+                          </Link>
+                        </div>
+                      </div>
+                    );
+                  }}
+                />
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 等级梯子 */}
       <section className="bg-cream/40 px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
-        <div className="mx-auto max-w-7xl">
+        <div className="mx-auto max-w-5xl">
           <Reveal>
             <p className="font-inter text-xs font-semibold uppercase tracking-[0.14em] text-[#b3121f] mb-4">{t.levelsEyebrow[lang]}</p>
             <h2 className="display-zh text-ink !text-3xl sm:!text-4xl">{t.levelsTitle[lang]}</h2>
           </Reveal>
 
           {/* 篇章跳转 chips */}
-          <div className="sticky top-16 z-30 -mx-4 mt-8 overflow-x-auto border-y border-teal/10 bg-cream/90 px-4 py-3 backdrop-blur sm:mx-0 sm:px-0">
+          <div className="sticky top-16 z-30 -mx-4 mt-8 overflow-x-auto border-y border-teal/10 bg-cream/90 px-4 py-3 backdrop-blur sm:mx-0 sm:rounded-xl sm:px-4">
             <div className="flex items-center gap-2">
               <span className="mr-1 shrink-0 font-inter text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-ink-light">{t.jump[lang]}</span>
               {bands.map((b) => {
@@ -275,26 +375,27 @@ export function LevelSystem() {
             </div>
           </div>
 
-          {/* 篇章区块 */}
-          <div className="mt-10 space-y-14">
-            {bands.map((b) => (
-              <div key={b.id} id={`band-${b.id}`} className="scroll-mt-32">
-                <div className="mb-5 flex items-baseline gap-4 border-b border-teal/15 pb-3">
-                  <span className={`font-nunito text-3xl font-extrabold ${b.accent}`}>{b.index}</span>
+          {/* 篇章区块 + 梯子 */}
+          <div className="mt-10 space-y-12">
+            {bands.map((b) => {
+              const bandLevels = levels.filter((lv) => lv.band === b.id);
+              return (
+                <div key={b.id} id={`band-${b.id}`} className="scroll-mt-32">
+                  <div className="mb-5 flex items-baseline gap-4 border-b border-teal/15 pb-3">
+                    <span className={`font-nunito text-3xl font-extrabold ${b.accent}`}>{b.index}</span>
+                    <div>
+                      <h3 className="font-nunito text-2xl font-extrabold text-ink">{b.name[lang]}</h3>
+                      <p className="text-sm text-ink-light">{b.motto[lang]}</p>
+                    </div>
+                  </div>
                   <div>
-                    <h3 className="font-nunito text-2xl font-extrabold text-ink">{b.name[lang]}</h3>
-                    <p className="text-sm text-ink-light">{b.motto[lang]}</p>
+                    {bandLevels.map((lv, i) => (
+                      <LevelCard key={lv.n} lv={lv} isFirst={i === 0} isLast={i === bandLevels.length - 1} />
+                    ))}
                   </div>
                 </div>
-                <div className="grid gap-4 lg:grid-cols-2">
-                  {levels
-                    .filter((lv) => lv.band === b.id)
-                    .map((lv) => (
-                      <LevelCard key={lv.n} lv={lv} defaultOpen={lv.n === 1} />
-                    ))}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

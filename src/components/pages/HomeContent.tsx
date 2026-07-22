@@ -8,6 +8,7 @@ import { kits, featuredKitIds } from "@/lib/kits";
 import { levels, getBand } from "@/lib/levels";
 import { KitCard } from "@/components/KitCard";
 import { Reveal } from "@/components/Reveal";
+import { CharacterSpotlight } from "@/components/CharacterSpotlight";
 import { DecoCloud, DecoSeal } from "@/components/Illustration";
 import {
   IconDownload,
@@ -119,6 +120,37 @@ export function HomeContent() {
             <path d="M6 9l6 6 6-6" />
           </svg>
         </a>
+      </section>
+
+      {/* ============ 此刻一字：进来就能学一个字（深色高对比带，打破米白单调） ============ */}
+      <section className="relative isolate overflow-hidden bg-teal-dark py-20 sm:py-24 px-4 sm:px-6 lg:px-8">
+        <div aria-hidden className="pointer-events-none absolute inset-0">
+          <div className="paper-grain absolute inset-0 opacity-[0.08]" />
+          <div className="hero-float absolute -left-16 top-10 h-72 w-72 rounded-full bg-orange/15 blur-3xl" />
+          <div className="hero-float-slow absolute right-0 bottom-0 h-80 w-80 rounded-full bg-amber-300/10 blur-3xl" />
+          <span className="vert-calligraphy absolute top-10 right-8 hidden text-[12rem] leading-none text-white/[0.04] lg:block">字</span>
+        </div>
+        <div className="relative mx-auto max-w-6xl">
+          <Reveal>
+            <div className="mb-8 max-w-2xl">
+              <p className="mb-4 inline-flex items-center gap-2.5 font-inter text-xs font-semibold uppercase tracking-[0.18em] text-amber-300 sm:text-sm">
+                <span className="hero-dot inline-block h-2 w-2 rounded-full bg-amber-300" />
+                {lang === "en" ? "Start right here · your first character" : "就从这里开始 · 你的第一个字"}
+              </p>
+              <h2 className="font-nunito text-3xl font-extrabold text-white sm:text-4xl">
+                {lang === "en" ? "Learn one character, right now" : "现在就学会一个字"}
+              </h2>
+              <p className="mt-3 text-white/70 leading-relaxed">
+                {lang === "en"
+                  ? "Tap the character to hear it, watch the strokes light up in order, read a real sentence, then mark it practised. This is exactly how every lesson feels."
+                  : "点这个字听发音，看笔画按顺序亮起，读一句真句子，再打个勾标记练过。每一课，都是这个感觉。"}
+              </p>
+            </div>
+          </Reveal>
+          <Reveal delay={120}>
+            <CharacterSpotlight />
+          </Reveal>
+        </div>
       </section>
 
       {/* ============ 等级里程碑墙：1→10 的代表级，大图形式 ============ */}
