@@ -29,7 +29,7 @@ export function AgePathGrid({ heading, description, cta }: AgePathGridProps) {
         <div className="grid md:grid-cols-2 gap-x-7 gap-y-12">
           {agePaths.map((path) => (
             <article key={path.id} className="group border-t border-teal/20 pt-4">
-              <Link href={`/kits?age=${path.id}`} className="block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal">
+              <Link href={`/learn/${path.slug}`} className="block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal">
                 <div className="overflow-hidden bg-teal/5 aspect-[3/2]">
                   <Image
                     src={path.image.src}

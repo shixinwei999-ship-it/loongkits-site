@@ -3,6 +3,7 @@ import type { AgeId } from "./kits";
 
 export interface AgePath {
   id: AgeId;
+  slug: string;
   image: {
     src: string;
     width: number;
@@ -18,6 +19,7 @@ export interface AgePath {
 export const agePaths: AgePath[] = [
   {
     id: "prek",
+    slug: "ages-3-6",
     image: { src: "/age-path/prek.webp", width: 1728, height: 1152 },
     focalPoint: "center",
     label: { en: "Ages 3–6", zh: "3–6 岁" },
@@ -27,6 +29,7 @@ export const agePaths: AgePath[] = [
   },
   {
     id: "g15",
+    slug: "ages-6-11",
     image: { src: "/age-path/g15.webp", width: 1728, height: 1152 },
     focalPoint: "center",
     label: { en: "Ages 6–11", zh: "6–11 岁" },
@@ -36,6 +39,7 @@ export const agePaths: AgePath[] = [
   },
   {
     id: "g68",
+    slug: "ages-11-14",
     image: { src: "/age-path/g68.webp", width: 1728, height: 1152 },
     focalPoint: "center",
     label: { en: "Ages 11–14", zh: "11–14 岁" },
@@ -45,6 +49,7 @@ export const agePaths: AgePath[] = [
   },
   {
     id: "g912",
+    slug: "ages-14-18",
     image: { src: "/age-path/g912.webp", width: 1728, height: 1152 },
     focalPoint: "center",
     label: { en: "Ages 14–18", zh: "14–18 岁" },

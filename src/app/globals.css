@@ -268,3 +268,15 @@ h1, h2, h3, h4, h5, h6 {
 ::-webkit-scrollbar-track { background: var(--color-cream); }
 ::-webkit-scrollbar-thumb { background: var(--color-teal); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--color-teal-dark); }
+
+/* 尊重减少动效偏好：专业站点不应让动画干扰阅读或前庭敏感用户 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
