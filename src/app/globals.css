@@ -288,6 +288,7 @@ h1, h2, h3, h4, h5, h6 {
   transform: none !important;
   transition: none !important;
 }
+.shot-final .shot-hide { display: none !important; }
 
 /* ===== 首屏氛围动效（subtle，且被上方 reduced-motion 规则兜底） ===== */
 @keyframes heroKen {
@@ -314,3 +315,13 @@ h1, h2, h3, h4, h5, h6 {
   50%      { transform: translateY(5px); }
 }
 .hero-bounce { animation: heroBounce 1.8s ease-in-out infinite; }
+
+/* 笔画书写动画：默认静态可见；仅在允许动效时，hover 卡片触发“一笔写出”。 */
+.stroke-path { stroke-dasharray: 1; stroke-dashoffset: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .group\/stroke:hover .stroke-path { animation: strokeWrite 0.9s cubic-bezier(0.65, 0, 0.35, 1); }
+}
+@keyframes strokeWrite {
+  from { stroke-dashoffset: 1; }
+  to   { stroke-dashoffset: 0; }
+}

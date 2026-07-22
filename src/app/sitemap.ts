@@ -4,6 +4,7 @@ import { site } from "@/lib/site";
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes: { path: string; priority: number }[] = [
     { path: "", priority: 1 },
+    { path: "/learn/chinese", priority: 0.95 },
     { path: "/kits", priority: 0.8 },
     { path: "/free", priority: 0.8 },
     { path: "/free/zodiac-animals", priority: 0.75 },

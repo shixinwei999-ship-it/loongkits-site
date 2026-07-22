@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useLang } from "@/lib/i18n";
 import { getResource, type LearningPath } from "@/lib/learningPaths";
 import { Reveal } from "@/components/Reveal";
+import { WordChip } from "@/components/Speak";
 import { IconArrowRight, IconClock, IconDownload } from "@/components/icons";
 
 export function LearningPathPage({ path }: { path: LearningPath }) {
@@ -77,6 +78,29 @@ export function LearningPathPage({ path }: { path: LearningPath }) {
               </article>
             </Reveal>
           ))}
+        </div>
+      </section>
+
+      {/* 本阶段练的中文：可发音词带，让中文成为主角 */}
+      <section className="px-4 sm:px-6 lg:px-8 pb-6">
+        <div className="max-w-6xl mx-auto">
+          <Reveal>
+            <div className="rounded-2xl border border-teal/12 bg-white/70 p-6 shadow-[0_18px_44px_-34px_rgb(31_74_56/0.5)] sm:p-8">
+              <div className="mb-5 flex items-baseline justify-between gap-4">
+                <h3 className="font-nunito text-xl font-extrabold text-ink sm:text-2xl">
+                  {lang === "en" ? "Practise these out loud" : "大声练这几个"}
+                </h3>
+                <span className="font-inter text-xs font-semibold uppercase tracking-[0.12em] text-teal/70">
+                  {lang === "en" ? "tap to hear" : "点一下听"}
+                </span>
+              </div>
+              <div className="flex flex-wrap gap-2.5">
+                {path.vocabulary.map((w) => (
+                  <WordChip key={w.char} word={w} variant="inline" />
+                ))}
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 

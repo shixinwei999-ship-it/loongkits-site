@@ -60,6 +60,11 @@ const pages = [
     expectedImages: ["g912.webp", "g912-object.webp", "g912-translate.webp", "g912-curate.webp", "preview-cover.webp"],
     downloads: [curatorA4, curatorLetter],
   },
+  {
+    name: "chinese-class",
+    path: "/learn/chinese",
+    expectedImages: [],
+  },
 ];
 
 await mkdir(outputDir, { recursive: true });

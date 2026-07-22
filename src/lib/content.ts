@@ -6,6 +6,7 @@ import type { Lang } from "./i18n";
 type Bi<T> = Record<Lang, T>;
 
 export const nav: Bi<{
+  learn: string;
   kits: string;
   free: string;
   families: string;
@@ -13,8 +14,8 @@ export const nav: Bi<{
   about: string;
   menu: string;
 }> = {
-  en: { kits: "Kits", free: "Free Resources", families: "For Families", teachers: "For Teachers", about: "About", menu: "Menu" },
-  zh: { kits: "学习包", free: "免费资源", families: "给家庭", teachers: "给老师", about: "关于我们", menu: "菜单" },
+  en: { learn: "Learn Chinese", kits: "Kits", free: "Free Resources", families: "For Families", teachers: "For Teachers", about: "About", menu: "Menu" },
+  zh: { learn: "学中文", kits: "学习包", free: "免费资源", families: "给家庭", teachers: "给老师", about: "关于我们", menu: "菜单" },
 };
 
 export const common: Bi<{
@@ -61,7 +62,7 @@ export const footer: Bi<{
 };
 
 export const home: Bi<{
-  hero: { title: string; subtitle: string; cta: string; ctaSecondary: string; mascotAlt: string };
+  hero: { title: string; subtitle: string; cta: string; ctaSecondary: string; learnCta: string; mascotAlt: string };
   agePath: { title: string; desc: string; cta: string };
   howItWorks: { title: string; steps: { icon: string; title: string; desc: string }[] };
   featuredKits: { title: string; viewAll: string };
@@ -74,10 +75,11 @@ export const home: Bi<{
 }> = {
   en: {
     hero: {
-      title: "Bring Chinese Culture to Life",
-      subtitle: "Printable bilingual kits for curious kids",
+      title: "Learn to speak Chinese",
+      subtitle: "Bilingual printable kits turn pinyin, tones and characters into something kids hold, trace and say out loud — culture is where they practise.",
       cta: "Browse Kits",
       ctaSecondary: "Free Sample",
+      learnCta: "Start learning Chinese",
       mascotAlt: "Hong and Qing, the Loong Kits dragon mascots",
     },
     agePath: {
@@ -111,10 +113,11 @@ export const home: Bi<{
   },
   zh: {
     hero: {
-      title: "让中国文化活起来",
-      subtitle: "为好奇宝宝准备的可打印双语学习包",
+      title: "开口说中文",
+      subtitle: "中英双语、可打印的学习包，把拼音、声调和汉字变成孩子能拿、能描、能说出口的东西——文化，是练习它们的地方。",
       cta: "浏览学习包",
       ctaSecondary: "免费样品",
+      learnCta: "开始学中文",
       mascotAlt: "Loong Kits 双龙形象：小红龙和小青龙",
     },
     agePath: {

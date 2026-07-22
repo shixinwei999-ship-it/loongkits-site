@@ -8,6 +8,7 @@ import { nav } from "@/lib/content";
 import { Logo } from "@/components/Logo";
 
 const links = [
+  { href: "/learn/chinese", key: "learn" },
   { href: "/kits", key: "kits" },
   { href: "/free", key: "free" },
   { href: "/families", key: "families" },
@@ -21,10 +22,10 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const t = nav[lang];
 
-  const linkClass = (href: string) =>
-    pathname === href
-      ? "text-teal font-semibold"
-      : "text-ink hover:text-teal transition-colors";
+  const linkClass = (href: string) => {
+    const on = href === "/learn/chinese" ? pathname.startsWith("/learn") : pathname === href;
+    return on ? "text-teal font-semibold" : "text-ink hover:text-teal transition-colors";
+  };
 
   return (
     <nav className="fixed top-0 w-full bg-cream/95 backdrop-blur-sm z-50 border-b border-teal/10">

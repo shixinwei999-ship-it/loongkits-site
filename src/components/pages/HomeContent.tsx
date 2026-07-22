@@ -81,7 +81,7 @@ export function HomeContent() {
             <Reveal>
               <p className="mb-6 inline-flex items-center gap-2.5 font-inter text-xs font-semibold uppercase tracking-[0.18em] text-teal sm:text-sm">
                 <span className="hero-dot inline-block h-2 w-2 rounded-full bg-orange" />
-                {lang === "en" ? "Bilingual · Printable · Ages 3–18" : "中英双语 · 可打印 · 3–18 岁"}
+                {lang === "en" ? "Chinese lessons · Printable · Ages 3–18" : "中文课 · 可打印 · 3–18 岁"}
               </p>
             </Reveal>
             <Reveal delay={90}>
@@ -92,8 +92,11 @@ export function HomeContent() {
             </Reveal>
             <Reveal delay={250}>
               <div className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">
-                <Link href="/free" className="btn-primary text-base">
-                  {t.hero.ctaSecondary} <IconArrowRight size={18} />
+                <Link href="/learn/chinese" className="btn-primary text-base">
+                  {t.hero.learnCta} <IconArrowRight size={18} />
+                </Link>
+                <Link href="/free" className="btn-secondary text-base">
+                  {t.hero.ctaSecondary}
                 </Link>
                 <Link href="/kits" className="arrow-link text-base font-bold text-teal transition-colors hover:text-teal-dark">
                   {t.hero.cta} <IconArrowRight size={18} className="arrow" />

@@ -5,6 +5,7 @@
 
 import type { Lang } from "./i18n";
 import type { AgeId } from "./kits";
+import type { Word } from "./chineseCurriculum";
 
 type Bi<T> = Record<Lang, T>;
 
@@ -45,6 +46,7 @@ export interface LearningPath {
   imageAlt: Bi<string>;
   topics: Topic[];
   activityLine: Bi<string>;
+  vocabulary: Word[];
   featuredResourceSlug: string;
   nextSlug: string | null;
   nextLabel: Bi<string>;
@@ -198,6 +200,16 @@ export const learningPaths: LearningPath[] = [
       zh: "10–15 分钟 · 指三个动物、折一盏灯笼、大声说一句祝福。",
     },
     featuredResourceSlug: "zodiac-animals",
+    vocabulary: [
+      { char: "你好", pinyin: "nǐ hǎo", en: { en: "hello", zh: "你好" } },
+      { char: "谢谢", pinyin: "xiè xie", en: { en: "thanks", zh: "谢谢" } },
+      { char: "妈妈", pinyin: "mā ma", en: { en: "mum", zh: "妈妈" } },
+      { char: "爸爸", pinyin: "bà ba", en: { en: "dad", zh: "爸爸" } },
+      { char: "年", pinyin: "nián", en: { en: "year", zh: "年" } },
+      { char: "家", pinyin: "jiā", en: { en: "home", zh: "家" } },
+      { char: "红", pinyin: "hóng", en: { en: "red", zh: "红" } },
+      { char: "龙", pinyin: "lóng", en: { en: "dragon", zh: "龙" } },
+    ],
     nextSlug: "ages-6-11",
     nextLabel: { en: "Next: Ages 6–11", zh: "下一步：6–11 岁" },
   },
@@ -240,6 +252,16 @@ export const learningPaths: LearningPath[] = [
       zh: "25–35 分钟 · 排好卡片、猜一道谜、问长辈一个习惯。",
     },
     featuredResourceSlug: "festival-detective",
+    vocabulary: [
+      { char: "春节", pinyin: "chūn jié", en: { en: "Spring Festival", zh: "春节" } },
+      { char: "元宵", pinyin: "yuán xiāo", en: { en: "Lantern Festival", zh: "元宵" } },
+      { char: "福", pinyin: "fú", en: { en: "fortune", zh: "福" } },
+      { char: "灯", pinyin: "dēng", en: { en: "lantern", zh: "灯" } },
+      { char: "团圆", pinyin: "tuán yuán", en: { en: "reunion", zh: "团圆" } },
+      { char: "饺子", pinyin: "jiǎo zi", en: { en: "dumpling", zh: "饺子" } },
+      { char: "谜", pinyin: "mí", en: { en: "riddle", zh: "谜" } },
+      { char: "年", pinyin: "nián", en: { en: "year", zh: "年" } },
+    ],
     nextSlug: "ages-11-14",
     nextLabel: { en: "Next: Ages 11–14", zh: "下一步：11–14 岁" },
   },
@@ -282,6 +304,16 @@ export const learningPaths: LearningPath[] = [
       zh: "45–60 分钟 · 标地图、比两份资料、用证据支持一个观点。",
     },
     featuredResourceSlug: "culture-in-motion",
+    vocabulary: [
+      { char: "俗", pinyin: "sú", en: { en: "custom", zh: "习俗" } },
+      { char: "历", pinyin: "lì", en: { en: "calendar", zh: "历法" } },
+      { char: "支", pinyin: "zhī", en: { en: "branch", zh: "地支" } },
+      { char: "路", pinyin: "lù", en: { en: "road", zh: "路" } },
+      { char: "网", pinyin: "wǎng", en: { en: "network", zh: "网络" } },
+      { char: "证", pinyin: "zhèng", en: { en: "evidence", zh: "证据" } },
+      { char: "变", pinyin: "biàn", en: { en: "change", zh: "变化" } },
+      { char: "源", pinyin: "yuán", en: { en: "source", zh: "来源" } },
+    ],
     nextSlug: "ages-14-18",
     nextLabel: { en: "Next: Ages 14–18", zh: "下一步：14–18 岁" },
   },
@@ -324,6 +356,16 @@ export const learningPaths: LearningPath[] = [
       zh: "90 分钟 + 研究 · 一个问题、两份来源、一段有引用的双语展签。",
     },
     featuredResourceSlug: "culture-curator",
+    vocabulary: [
+      { char: "物", pinyin: "wù", en: { en: "object", zh: "物件" } },
+      { char: "义", pinyin: "yì", en: { en: "meaning", zh: "意义" } },
+      { char: "译", pinyin: "yì", en: { en: "translate", zh: "翻译" } },
+      { char: "释", pinyin: "shì", en: { en: "interpret", zh: "诠释" } },
+      { char: "引", pinyin: "yǐn", en: { en: "cite", zh: "引用" } },
+      { char: "声", pinyin: "shēng", en: { en: "voice", zh: "声音" } },
+      { char: "境", pinyin: "jìng", en: { en: "context", zh: "语境" } },
+      { char: "证", pinyin: "zhèng", en: { en: "evidence", zh: "证据" } },
+    ],
     nextSlug: null,
     nextLabel: { en: "Top stage — share what you made", zh: "最高阶段——把你做的分享出来" },
   },
