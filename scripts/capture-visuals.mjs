@@ -12,7 +12,14 @@ const pages = [
   {
     name: "home",
     path: "/",
-    expectedImages: ["hong-qing-hero.webp", "hong-qing-logo.webp"],
+    expectedImages: [
+      "hong-qing-hero.webp",
+      "hong-qing-logo.webp",
+      "prek.webp",
+      "g15.webp",
+      "g68.webp",
+      "g912.webp",
+    ],
   },
   {
     name: "free",
@@ -51,6 +58,11 @@ try {
       for (const imageName of route.expectedImages) {
         await page.locator(`img[src*="${imageName}"]`).first().waitFor();
       }
+      await page.waitForFunction((expectedImages) => expectedImages.every((imageName) => {
+        const image = document.querySelector(`img[src*="${imageName}"]`);
+        return image instanceof HTMLImageElement && image.complete && image.naturalWidth > 0;
+      }), route.expectedImages);
+      await page.waitForTimeout(250);
 
       const metrics = await page.evaluate((expectedImages) => {
         const images = expectedImages.map((imageName) => {
@@ -92,6 +104,13 @@ try {
         }
       }
 
+      const pageHeight = await page.evaluate(() => document.documentElement.scrollHeight);
+      for (let y = 0; y < pageHeight; y += Math.max(400, viewport.height - 100)) {
+        await page.evaluate((scrollY) => window.scrollTo(0, scrollY), y);
+        await page.waitForTimeout(60);
+      }
+      await page.evaluate(() => window.scrollTo(0, 0));
+      await page.waitForTimeout(100);
       await page.screenshot({ path: path.join(outputDir, `${route.name}-${viewport.name}.png`), fullPage: true });
       console.log(`${route.name}/${viewport.name}: ${JSON.stringify(metrics)}`);
       await page.close();

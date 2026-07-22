@@ -62,6 +62,7 @@ export const footer: Bi<{
 
 export const home: Bi<{
   hero: { title: string; subtitle: string; cta: string; ctaSecondary: string; mascotAlt: string };
+  agePath: { title: string; desc: string; cta: string };
   howItWorks: { title: string; steps: { icon: string; title: string; desc: string }[] };
   featuredKits: { title: string; viewAll: string };
   audience: {
@@ -78,6 +79,11 @@ export const home: Bi<{
       cta: "Browse Kits",
       ctaSecondary: "Free Sample",
       mascotAlt: "Hong and Qing, the Loong Kits dragon mascots",
+    },
+    agePath: {
+      title: "Find the right place to begin",
+      desc: "Every stage meets children where they are, then gives them room to go further with Chinese culture.",
+      cta: "Explore this age",
     },
     howItWorks: {
       title: "How It Works",
@@ -110,6 +116,11 @@ export const home: Bi<{
       cta: "浏览学习包",
       ctaSecondary: "免费样品",
       mascotAlt: "Loong Kits 双龙形象：小红龙和小青龙",
+    },
+    agePath: {
+      title: "为孩子找到合适的起点",
+      desc: "每个阶段都从孩子当下的能力出发，再带他们走得更远、看得更深。",
+      cta: "查看这个年龄段",
     },
     howItWorks: {
       title: "如何使用",

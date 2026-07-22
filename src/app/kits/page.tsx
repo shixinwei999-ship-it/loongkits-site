@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { KitsContent } from "@/components/pages/KitsContent";
 
@@ -8,5 +9,9 @@ export const metadata: Metadata = {
 };
 
 export default function KitsPage() {
-  return <KitsContent />;
+  return (
+    <Suspense fallback={<div className="min-h-[50vh] bg-paper" />}>
+      <KitsContent />
+    </Suspense>
+  );
 }

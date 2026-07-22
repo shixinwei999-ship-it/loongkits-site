@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { useLang } from "@/lib/i18n";
 import { kitsPage } from "@/lib/content";
 import {
@@ -12,11 +13,23 @@ import {
 } from "@/lib/kits";
 import { KitCard } from "@/components/KitCard";
 
+const ageIds: AgeId[] = ["prek", "g15", "g68", "g912"];
+
+function isAgeId(value: string | null): value is AgeId {
+  return value !== null && ageIds.includes(value as AgeId);
+}
+
 export function KitsContent() {
   const { lang } = useLang();
+  const searchParams = useSearchParams();
   const t = kitsPage[lang];
+  const requestedAge = searchParams.get("age");
   const [themeFilter, setThemeFilter] = useState<ThemeId | "all">("all");
-  const [ageFilter, setAgeFilter] = useState<AgeId | "all">("all");
+  const [ageFilter, setAgeFilter] = useState<AgeId | "all">(() => (isAgeId(requestedAge) ? requestedAge : "all"));
+
+  useEffect(() => {
+    setAgeFilter(isAgeId(requestedAge) ? requestedAge : "all");
+  }, [requestedAge]);
 
   const filtered = kits.filter((kit) => {
     if (themeFilter !== "all" && kit.theme !== themeFilter) return false;

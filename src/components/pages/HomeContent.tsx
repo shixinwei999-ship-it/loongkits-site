@@ -7,6 +7,7 @@ import { kits, featuredKitIds } from "@/lib/kits";
 import { KitCard } from "@/components/KitCard";
 import { Reveal } from "@/components/Reveal";
 import { DragonArtStage } from "@/components/DragonArtStage";
+import { AgePathGrid } from "@/components/AgePathGrid";
 import {
   DecoCloud,
   DecoSeal,
@@ -15,32 +16,11 @@ import {
   IconDownload,
   IconPrint,
   IconHeartHands,
-  IconStack,
-  IconFamily,
-  IconBook,
-  IconSparkle,
-  IconTeacher,
   IconCheck,
   IconArrowRight,
 } from "@/components/icons";
 
 const stepIcons = [IconDownload, IconPrint, IconHeartHands];
-const statIcons = [IconStack, IconFamily, IconBook, IconSparkle];
-
-const stats = {
-  en: [
-    { value: "3", label: "Themes" },
-    { value: "4", label: "Age bands" },
-    { value: "12", label: "Printable kits" },
-    { value: "3–18", label: "Years old" },
-  ],
-  zh: [
-    { value: "3", label: "文化主题" },
-    { value: "4", label: "年龄段" },
-    { value: "12", label: "可打印学习包" },
-    { value: "3–18", label: "岁全覆盖" },
-  ],
-};
 
 // 竖排书法回声已撤：单字符水印（如承诺段的「印」）够用，多字竖排在窄视口会换行裁切，
 // 看起来像坏掉的东西——不冒这个险。
@@ -90,27 +70,10 @@ export function HomeContent() {
               </div>
             </Reveal>
           </div>
-
-          {/* 数据只作佐证，不再做成厚重的大型卡片。 */}
-          <Reveal delay={250}>
-            <dl className="relative z-10 mt-14 grid grid-cols-2 md:grid-cols-4 border-y border-teal/15">
-              {stats[lang].map((s, i) => {
-                const Ic = statIcons[i];
-                return (
-                  <div key={s.label} className="flex items-center gap-3 px-4 py-5 md:py-6 border-b md:border-b-0 md:border-r last:border-r-0 border-teal/10">
-                    <span className="text-teal shrink-0"><Ic size={18} /></span>
-                    <div>
-                      <dt className="sr-only">{s.label}</dt>
-                      <dd className="font-nunito font-extrabold text-2xl text-teal leading-none">{s.value}</dd>
-                      <dd className="text-xs text-ink-light mt-1 font-medium">{s.label}</dd>
-                    </div>
-                  </div>
-                );
-              })}
-            </dl>
-          </Reveal>
         </div>
       </section>
+
+      <AgePathGrid heading={t.agePath.title} description={t.agePath.desc} cta={t.agePath.cta} />
 
       {/* ============ HOW IT WORKS（深色翻页） ============ */}
       <section className="section-teal py-24 px-4 sm:px-6 lg:px-8">
@@ -196,37 +159,34 @@ export function HomeContent() {
         </div>
       </section>
 
-      {/* ============ AUDIENCE（深色翻页，非对称双面板） ============ */}
-      <section className="section-teal py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-7">
-          <Reveal>
-            <Link href="/families" className="group block h-full">
-              <div className="bg-white rounded-lg p-10 h-full transition-transform duration-300 group-hover:-translate-y-1.5">
-                <span className="icon-stage w-16 h-16 bg-teal/10 text-teal mb-6 group-hover:rotate-[-6deg] transition-transform">
-                  <IconFamily size={34} />
+      {/* ============ AUDIENCE：两条清晰入口，不做营销色块卡片 ============ */}
+      <section className="bg-paper py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <p className="font-inter font-semibold uppercase tracking-[0.12em] text-teal text-xs sm:text-sm mb-5">
+            {lang === "en" ? "Made for real learning contexts" : "为真实的学习场景而做"}
+          </p>
+          <div className="grid md:grid-cols-2 border-y border-teal/20">
+            <Reveal>
+              <Link href="/families" className="group block py-10 md:pr-12 md:border-r border-teal/15 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal">
+                <p className="text-sm font-semibold text-teal mb-4">01</p>
+                <h3 className="font-nunito text-3xl font-extrabold text-ink">{t.audience.families.title}</h3>
+                <p className="text-ink-light mt-4 max-w-md leading-relaxed">{t.audience.families.desc}</p>
+                <span className="arrow-link text-teal font-bold mt-7">
+                  {t.audience.families.cta} <IconArrowRight size={18} className="arrow" />
                 </span>
-                <h3 className="text-3xl font-extrabold text-ink mb-3 font-nunito">{t.audience.families.title}</h3>
-                <p className="text-ink-light mb-7 text-lg">{t.audience.families.desc}</p>
-                <span className="arrow-link text-teal font-bold text-lg">
-                  {t.audience.families.cta} <IconArrowRight size={20} className="arrow" />
+              </Link>
+            </Reveal>
+            <Reveal delay={100}>
+              <Link href="/teachers" className="group block py-10 md:pl-12 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal">
+                <p className="text-sm font-semibold text-orange mb-4">02</p>
+                <h3 className="font-nunito text-3xl font-extrabold text-ink">{t.audience.teachers.title}</h3>
+                <p className="text-ink-light mt-4 max-w-md leading-relaxed">{t.audience.teachers.desc}</p>
+                <span className="arrow-link text-teal font-bold mt-7">
+                  {t.audience.teachers.cta} <IconArrowRight size={18} className="arrow" />
                 </span>
-              </div>
-            </Link>
-          </Reveal>
-          <Reveal delay={130}>
-            <Link href="/teachers" className="group block h-full">
-              <div className="bg-orange rounded-lg p-10 h-full text-white transition-transform duration-300 group-hover:-translate-y-1.5 shadow-[0_24px_45px_-18px_rgb(244_162_97/0.7)]">
-                <span className="icon-stage w-16 h-16 bg-white/20 text-white mb-6 group-hover:rotate-[6deg] transition-transform">
-                  <IconTeacher size={34} />
-                </span>
-                <h3 className="text-3xl font-extrabold mb-3 font-nunito">{t.audience.teachers.title}</h3>
-                <p className="text-white/85 mb-7 text-lg">{t.audience.teachers.desc}</p>
-                <span className="arrow-link font-bold text-lg">
-                  {t.audience.teachers.cta} <IconArrowRight size={20} className="arrow" />
-                </span>
-              </div>
-            </Link>
-          </Reveal>
+              </Link>
+            </Reveal>
+          </div>
         </div>
       </section>
 
