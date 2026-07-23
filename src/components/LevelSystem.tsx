@@ -197,6 +197,17 @@ function LevelCard({
                       {lesson.practice[lang]}
                     </span>
                   </p>
+                  <div className="mt-3 flex justify-end">
+                    <Link
+                      href={`/learn/level/${lv.n}/lesson/${i + 1}`}
+                      className="inline-flex items-center gap-1 rounded-lg border border-teal/30 px-3 py-1.5 text-xs font-bold text-teal transition-colors hover:bg-teal hover:text-white"
+                    >
+                      {lv.n <= 1
+                        ? (lang === "en" ? "Enter lesson" : "进入本课")
+                        : (lang === "en" ? "View" : "查看")}
+                      <IconArrowRight size={13} />
+                    </Link>
+                  </div>
                 </li>
               ))}
             </ol>
