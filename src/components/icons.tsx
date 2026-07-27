@@ -209,6 +209,15 @@ export function IconClock(p: IconProps) {
   );
 }
 
+export function IconEdit(p: IconProps) {
+  return (
+    <Base {...p}>
+      <path d="M14 4l6 6L8 22H2v-6z" />
+      <path d="M12 6l6 6" />
+    </Base>
+  );
+}
+
 export function IconHome(p: IconProps) {
   return (
     <Base {...p}>

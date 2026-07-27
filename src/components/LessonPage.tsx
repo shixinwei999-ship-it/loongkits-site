@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useLang } from "@/lib/i18n";
 import { Reveal } from "@/components/Reveal";
 import { WordChip } from "@/components/Speak";
-import { IconArrowRight, IconCheck, IconClock } from "@/components/icons";
+import { IconArrowRight, IconCheck, IconClock, IconEdit, IconSparkle } from "@/components/icons";
 import type { Level, Lesson } from "@/lib/levels";
 
 function useLessonComplete(n: number, k: number) {
@@ -76,8 +76,7 @@ export function LessonPage({
       {/* HERO */}
       <section className="relative isolate overflow-hidden pt-24 pb-12 sm:pt-28 sm:pb-16">
         <div aria-hidden className="pointer-events-none absolute inset-0">
-          <div className="absolute -right-24 top-8 h-64 w-64 rounded-full bg-[#b3121f]/8 blur-3xl" />
-          <div className="absolute left-1/4 top-1/2 h-72 w-72 rounded-full bg-amber-300/10 blur-3xl" />
+          <div className="paper-grain absolute inset-0 opacity-40" />
           <span className="vert-calligraphy absolute bottom-2 right-6 hidden text-[12rem] leading-none text-[#b3121f]/[0.04] lg:block">
             {lang === "en" ? "L" : "课"}
           </span>
@@ -90,12 +89,12 @@ export function LessonPage({
           </Reveal>
           <Reveal delay={80}>
             <div className="mt-6 flex items-center gap-3">
-              <span className="rounded-full bg-[#b3121f] px-3 py-1 font-inter text-[0.62rem] font-bold uppercase tracking-wider text-white">
+              <span className="rounded-full bg-[#b3121f] px-3 py-1 font-inter text-xs font-bold uppercase tracking-wider text-white">
                 {lang === "en" ? `Level ${level.n}` : `第 ${level.n} 级`}
               </span>
               <span className="text-xs text-ink-light">{k}/{total}</span>
               {completed && (
-                <span className="inline-flex items-center gap-1 rounded-full bg-teal/10 px-2.5 py-0.5 text-[0.7rem] font-bold uppercase tracking-wider text-teal">
+                <span className="inline-flex items-center gap-1 rounded-full bg-teal/10 px-2.5 py-0.5 text-xs font-bold uppercase tracking-wider text-teal">
                   <IconCheck size={11} /> {lang === "en" ? "Completed" : "已学"}
                 </span>
               )}
@@ -113,9 +112,9 @@ export function LessonPage({
         <section className="px-4 pb-16 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl">
             <Reveal delay={80}>
-              <div className="rounded-2xl border border-teal/12 bg-white/80 p-6 sm:p-8 shadow-[0_24px_60px_-32px_rgb(31_74_56/0.5)]">
+              <div className="rounded-2xl border border-teal/12 bg-white/80 p-6 sm:p-8 shadow-[0_18px_44px_-30px_rgb(31_74_56/0.45)]">
                 <div className="mb-5 flex items-center gap-2">
-                  <span className="font-inter text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-[#b3121f]">
+                  <span className="font-inter text-xs font-semibold uppercase tracking-[0.14em] text-[#b3121f]">
                     {lang === "en" ? "Practice" : "练一练"}
                   </span>
                   <span aria-hidden className="h-px flex-1 bg-teal/10" />
@@ -161,7 +160,7 @@ export function LessonPage({
                   {lang === "en" ? "Homework" : "作业"}
                 </p>
                 <div className="flex items-start gap-3 rounded-xl bg-white/10 p-5 text-white/90 leading-relaxed">
-                  <span className="mt-0.5 shrink-0 text-amber-400">✎</span>
+                  <IconEdit size={16} className="mt-0.5 shrink-0 text-amber-400" />
                   <span>{lesson.practice[lang]}</span>
                 </div>
               </div>
@@ -172,7 +171,7 @@ export function LessonPage({
                   </Link>
                 ) : (
                   <span className="inline-flex items-center gap-2 rounded-full bg-amber-400 px-4 py-2 text-sm font-extrabold text-[#7a2a00]">
-                    🎉 {lang === "en" ? "End of this level" : "本级最后一课"}
+                    <IconSparkle size={16} /> {lang === "en" ? "End of this level" : "本级最后一课"}
                   </span>
                 )}
                 <Link href={backHref} className="text-xs text-white/70 hover:text-white transition-colors">
@@ -203,7 +202,7 @@ export function LessonPage({
                     <button
                       type="button"
                       onClick={unmark}
-                      className="text-[0.7rem] font-semibold uppercase tracking-wider text-ink-light underline-offset-2 hover:underline"
+                      className="text-xs font-semibold uppercase tracking-wider text-ink-light underline-offset-2 hover:underline"
                     >
                       {lang === "en" ? "Mark as not done" : "标记为未学"}
                     </button>
