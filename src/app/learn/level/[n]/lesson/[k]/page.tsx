@@ -111,6 +111,15 @@ const passages: Record<string, Passage> = {
   "7-1": { title: { en: "The shape of Chinese", zh: "汉字的形状" }, intro: { en: "How did the shape of Chinese characters change over time?", zh: "汉字的形状是怎样随时间变化的？" }, sentences: [ { zh: "很久以前, 汉字刻在骨头上。", en: "Long ago, Chinese was carved on bone.", pinyin: "hěn jiǔ yǐ qián, hàn zì kè zài gǔ tóu shàng." }, { zh: "后来, 铸在青铜上。", en: "Later, it was cast on bronze.", pinyin: "hòu lái, zhù zài qīng tóng shàng." }, { zh: "之后, 写在竹简上。", en: "After that, it was written on bamboo.", pinyin: "zhī hòu, xiě zài zhú jiǎn shàng." }, { zh: "现在, 写在纸上。", en: "Now it is written on paper.", pinyin: "xiàn zài, xiě zài zhǐ shàng." }, { zh: "形状一直在变, 意思没变。", en: "The shape kept changing; the meaning didn't.", pinyin: "xíng zhuàng yì zhí zài biàn, yì si méi biàn." } ] },
   "7-2": { title: { en: "Two idioms", zh: "两个成语" }, intro: { en: "Each idiom hides a small story. What does it mean?", zh: "每个成语都藏着一个故事。什么意思？" }, sentences: [ { zh: "画蛇添足: 给蛇画脚, 多此一举。", en: "Draw feet on a snake: do something unnecessary.", pinyin: "huà shé tiān zú: gěi shé huà jiǎo, duō cǐ yī jǔ." }, { zh: "守株待兔: 等兔子, 不努力。", en: "Wait for a rabbit by a stump: wait for luck, no effort.", pinyin: "shǒu zhū dài tù: děng tù zǐ, bù nǔ lì." } ] },
   "7-3": { title: { en: "Two more idioms", zh: "再两个成语" }, intro: { en: "Two more idioms with stories inside them.", zh: "再两个藏着故事的成语。" }, sentences: [ { zh: "一箭双雕: 一支箭射两只鸟。", en: "One arrow, two eagles: achieve two goals with one act.", pinyin: "yī jiàn shuāng diāo: yī zhī jiàn shè liǎng zhī niǎo." }, { zh: "杯弓蛇影: 看弓, 以为蛇。", en: "Cup with a bow's shadow: fear that comes from imagination.", pinyin: "bēi gōng shé yǐng: kàn gōng, yǐ wéi shé." } ] },
+  "8-1": { title: { en: "Oracle bone to paper", zh: "从甲骨到纸" }, intro: { en: "How did writing change when the tool changed?", zh: "工具变了, 字也变了。" }, sentences: [ { zh: "最早, 汉字刻在龟甲上。", en: "Earliest, characters were carved on turtle shells.", pinyin: "zuì zǎo, hàn zì kè zài guī jiǎ shàng." }, { zh: "后来, 铸在青铜器上。", en: "Later, cast on bronze vessels.", pinyin: "hòu lái, zhù zài qīng tóng qì shàng." }, { zh: "秦朝统一为小篆。", en: "The Qin dynasty unified them into seal script.", pinyin: "qín cháo tǒng yī wèi xiǎo zhuàn." }, { zh: "汉朝改为隶书, 变方了。", en: "The Han dynasty changed to clerical script, shapes became square.", pinyin: "hàn cháo gǎi wéi lì shū, biàn fāng le." }, { zh: "今天我们写楷书。", en: "Today we write regular script.", pinyin: "jīn tiān wǒ men xiě kǎi shū." } ] },
+  "8-2": { title: { en: "Idioms with stories", zh: "成语里的故事" }, intro: { en: "Four characters, one whole story.", zh: "四个字, 一个完整的故事。" }, sentences: [ { zh: "画蛇添足: 做多余的事。", en: "Drawing feet on a snake: doing something unnecessary.", pinyin: "huà shé tiān zú: zuò duō yú de shì." }, { zh: "守株待兔: 不劳而获。", en: "Waiting by a stump for a rabbit: hoping to get something for nothing.", pinyin: "shǒu zhū dài tù: bù láo ér huò." }, { zh: "两个成语都告诫人不要偷懒。", en: "Both idioms warn against laziness and shortcuts.", pinyin: "liǎng gè chéng yǔ dōu gào jiè rén bú yào tōu lǎn." } ] },
+  "8-3": { title: { en: "Two more idioms", zh: "再两个成语" }, intro: { en: "More wisdom in four characters.", zh: "四个字里更多智慧。" }, sentences: [ { zh: "亡羊补牢: 出了问题再补救。", en: "Mending the fence after losing a sheep: fix a problem after it happens.", pinyin: "wáng yáng bǔ láo: chū le wèn tí zài bǔ jiù." }, { zh: "塞翁失马: 坏事可能变好事。", en: "The old man lost his horse: bad luck may become good luck.", pinyin: "sāi wēng shī mǎ: huài shì kě néng biàn hǎo shì." }, { zh: "两个成语都讲变化。", en: "Both idioms are about change.", pinyin: "liǎng gè chéng yǔ dōu jiǎng biàn huà." } ] },
+  "9-1": { title: { en: "A line of classical", zh: "一句文言" }, intro: { en: "Short, dense, beautiful - and still alive today.", zh: "短、密、美--而且今天还活着。" }, sentences: [ { zh: "学而时习之, 不亦说乎?", en: "To learn and practice it regularly - is that not a pleasure?", pinyin: "xué ér shí xí zhī, bù yì yuè hū?" }, { zh: "这是孔子说的。", en: "This was said by Confucius.", pinyin: "zhè shì kǒng zǐ shuō de." }, { zh: "两千五百年了, 还在学。", en: "Two and a half thousand years, and we still learn it.", pinyin: "liǎng qiān wǔ bǎi nián le, hái zài xué." } ] },
+  "9-2": { title: { en: "Translate two ways", zh: "两种译法" }, intro: { en: "Literal or fluent - what do you keep?", zh: "直译还是意译--你保留什么?" }, sentences: [ { zh: "直译: 学, 然后, 经常, 温习, 它。", en: "Literal: Learn, then, often, review, it.", pinyin: "zhí yì: xué, rán hòu, jīng cháng, wēn xí, tā." }, { zh: "意译: 学了知识, 经常温习, 不也很快乐吗?", en: "Fluent: Having learned something, to review it often - is that not a joy?", pinyin: "yì yì: xué le zhī shi, jīng cháng wēn xí, bù yě hěn kuài lè ma?" }, { zh: "直译贴字面, 意译贴意思。", en: "Literal stays close to the words; fluent stays close to the meaning.", pinyin: "zhí yì tiē zì miàn, yì yì tiē yì si." } ] },
+  "9-3": { title: { en: "A short poem", zh: "一首短诗" }, intro: { en: "Feel the rhythm before you chase the meaning.", zh: "先感受节奏, 再求意思。" }, sentences: [ { zh: "床前明月光", en: "Before my bed, the bright moonlight.", pinyin: "chuáng qián míng yuè guāng" }, { zh: "疑是地上霜", en: "I wonder - is it frost on the ground?", pinyin: "yí shì dì shàng shuāng" }, { zh: "举头望明月", en: "I raise my head to gaze at the bright moon.", pinyin: "jǔ tóu wàng míng yuè" }, { zh: "低头思故乡", en: "I lower my head, thinking of home.", pinyin: "dī tóu sī gù xiāng" } ] },
+  "10-1": { title: { en: "Read like a curator", zh: "像策展人那样读" }, intro: { en: "Who wrote it? For whom? What is fact?", zh: "谁写的? 写给谁? 什么是事实?" }, sentences: [ { zh: "读一篇文章, 先问三个问题。", en: "When reading an article, first ask three questions.", pinyin: "dú yī piān wén zhāng, xiān wèn sān gè wèn tí." }, { zh: "谁写的? 为谁写的?", en: "Who wrote it? For whom was it written?", pinyin: "shuí xiě de? wèi shuí xiě de?" }, { zh: "哪些是事实? 哪些是观点?", en: "Which parts are facts? Which are opinions?", pinyin: "nǎ xiē shì shì shí? nǎ xiē shì guān diǎn?" } ] },
+  "10-2": { title: { en: "Write a label", zh: "写一段展签" }, intro: { en: "150 words. Bilingual. Cited.", zh: "150 字。双语。有引用。" }, sentences: [ { zh: "选一件你感兴趣的物品。", en: "Choose an object that interests you.", pinyin: "xuǎn yí jiàn nǐ gǎn xìng qù de wù pǐn." }, { zh: "写: 它是什么? 从哪来? 谁用过?", en: "Write: What is it? Where did it come from? Who used it?", pinyin: "xiě: tā shì shén me? cóng nǎ lái? shuí yòng guò?" }, { zh: "加上你的理解, 标明来源。", en: "Add your interpretation, cite your sources.", pinyin: "jiā shàng nǐ de lǐ jiě, biāo míng lái yuán." } ] },
+  "10-3": { title: { en: "Present it", zh: "做一次展示" }, intro: { en: "Three minutes. One clear point. Sources ready.", zh: "三分钟。一个清晰观点。来源就绪。" }, sentences: [ { zh: "把展签变成三分钟的讲稿。", en: "Turn the label into a three-minute talk.", pinyin: "bǎ zhǎn qiān biàn chéng sān fēn zhōng de jiǎng gǎo." }, { zh: "开头说一个观点。", en: "Start with one clear claim.", pinyin: "kāi tóu shuō yí gè guān diǎn." }, { zh: "中间给证据。", en: "Give evidence in the middle.", pinyin: "zhōng jiān gěi zhèng jù." }, { zh: "结尾回到观点, 致谢。", en: "Return to the claim at the end, and thank the audience.", pinyin: "jié wěi huí dào guān diǎn, zhì xiè." } ] },
 };
 
 const realLessons: Record<string, ReactNode> = {
@@ -204,12 +213,15 @@ const realLessons: Record<string, ReactNode> = {
   "7-1": <ReadingPassage passage={passages["7-1"]} />,
   "7-2": <ReadingPassage passage={passages["7-2"]} />,
   "7-3": <ReadingPassage passage={passages["7-3"]} />,
-  "8-1": <p className="text-ink-light">Lesson in progress …</p>,
-  "8-2": <p className="text-ink-light">Lesson in progress …</p>,
-  "9-1": <p className="text-ink-light">Lesson in progress …</p>,
-  "9-2": <p className="text-ink-light">Lesson in progress …</p>,
-  "10-1": <p className="text-ink-light">Lesson in progress …</p>,
-  "10-2": <p className="text-ink-light">Lesson in progress …</p>,
+  "8-1": <ReadingPassage passage={passages["8-1"]} />,
+  "8-2": <ReadingPassage passage={passages["8-2"]} />,
+  "8-3": <ReadingPassage passage={passages["8-3"]} />,
+  "9-1": <ReadingPassage passage={passages["9-1"]} />,
+  "9-2": <ReadingPassage passage={passages["9-2"]} />,
+  "9-3": <ReadingPassage passage={passages["9-3"]} />,
+  "10-1": <ReadingPassage passage={passages["10-1"]} />,
+  "10-2": <ReadingPassage passage={passages["10-2"]} />,
+  "10-3": <ReadingPassage passage={passages["10-3"]} />,
 };
 
 export default async function Page({ params }: { params: Promise<{ n: string; k: string }> }) {
@@ -222,7 +234,7 @@ export default async function Page({ params }: { params: Promise<{ n: string; k:
   const total = lv.lessons.length;
   const key = `${nNum}-${kNum}`;
   const interactive = realLessons[key] ?? null;
-  const isReal = ["1-1", "1-2", "1-3", "2-1", "2-2", "2-3", "3-1", "3-2", "3-3", "4-1", "4-2", "4-3", "5-1", "5-2", "5-3", "6-1", "6-2", "6-3", "7-1", "7-2", "7-3"].includes(key);
+  const isReal = ["1-1","1-2","1-3","2-1","2-2","2-3","3-1","3-2","3-3","4-1","4-2","4-3","5-1","5-2","5-3","6-1","6-2","6-3","7-1","7-2","7-3","8-1","8-2","8-3","9-1","9-2","9-3","10-1","10-2","10-3"].includes(key);
   const backHref = `/learn/levels#lvl-${nNum}`;
   const nextHref = kNum < total ? `/learn/level/${nNum}/lesson/${kNum + 1}` : null;
 
