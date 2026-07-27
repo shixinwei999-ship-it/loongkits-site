@@ -1,11 +1,53 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useLang } from "@/lib/i18n";
 import { Reveal } from "@/components/Reveal";
 import { WordChip } from "@/components/Speak";
 import { IconArrowRight, IconCheck, IconClock } from "@/components/icons";
 import type { Level, Lesson } from "@/lib/levels";
+
+function useLessonComplete(n: number, k: number) {
+  const key = `${n}-${k}`;
+  const [completed, setCompleted] = useState(false);
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem("lk-lessons-done-v1");
+      if (raw) {
+        const set = new Set<string>(JSON.parse(raw) as string[]);
+        setCompleted(set.has(key));
+      }
+    } catch {
+      /* ignore */
+    }
+  }, [key]);
+  const mark = () => {
+    setCompleted(true);
+    try {
+      const raw = localStorage.getItem("lk-lessons-done-v1");
+      const set = new Set<string>(raw ? JSON.parse(raw) as string[] : []);
+      set.add(key);
+      localStorage.setItem("lk-lessons-done-v1", JSON.stringify([...set]));
+    } catch {
+      /* ignore */
+    }
+  };
+  const unmark = () => {
+    setCompleted(false);
+    try {
+      const raw = localStorage.getItem("lk-lessons-done-v1");
+      if (raw) {
+        const set = new Set<string>(JSON.parse(raw) as string[]);
+        set.delete(key);
+        localStorage.setItem("lk-lessons-done-v1", JSON.stringify([...set]));
+      }
+    } catch {
+      /* ignore */
+    }
+  };
+  return { completed, mark, unmark };
+}
 
 export function LessonPage({
   level,
@@ -27,6 +69,7 @@ export function LessonPage({
   isReal: boolean;
 }) {
   const { lang } = useLang();
+  const { completed, mark, unmark } = useLessonComplete(level.n, k);
 
   return (
     <div className="bg-paper">
@@ -51,6 +94,11 @@ export function LessonPage({
                 {lang === "en" ? `Level ${level.n}` : `第 ${level.n} 级`}
               </span>
               <span className="text-xs text-ink-light">{k}/{total}</span>
+              {completed && (
+                <span className="inline-flex items-center gap-1 rounded-full bg-teal/10 px-2.5 py-0.5 text-[0.7rem] font-bold uppercase tracking-wider text-teal">
+                  <IconCheck size={11} /> {lang === "en" ? "Completed" : "已学"}
+                </span>
+              )}
             </div>
             <h1 className="display-zh text-ink mt-4 !text-[clamp(2rem,6vw,4rem)] !leading-[0.98]">{lesson.title[lang]}</h1>
           </Reveal>
@@ -130,6 +178,45 @@ export function LessonPage({
                 <Link href={backHref} className="text-xs text-white/70 hover:text-white transition-colors">
                   {lang === "en" ? "Back to level overview" : "回到等级总览"}
                 </Link>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 标记本课完成 */}
+      <section className="px-4 py-12 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl">
+          <Reveal>
+            <div className="rounded-2xl border border-teal/12 bg-white p-6 sm:p-8 shadow-[0_18px_44px_-30px_rgb(31_74_56/0.45)]">
+              <div className="flex flex-col items-center gap-4 text-center">
+                {completed ? (
+                  <>
+                    <span className="inline-flex items-center gap-2 rounded-full bg-teal/10 px-4 py-1.5 text-sm font-bold uppercase tracking-wider text-teal">
+                      <IconCheck size={14} /> {lang === "en" ? "Lesson complete" : "本课已学"}
+                    </span>
+                    <p className="text-sm text-ink-light">
+                      {lang === "en"
+                        ? "Nice. Your progress is saved on this device."
+                        : "不错。进度已记在这台设备上。"}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={unmark}
+                      className="text-[0.7rem] font-semibold uppercase tracking-wider text-ink-light underline-offset-2 hover:underline"
+                    >
+                      {lang === "en" ? "Mark as not done" : "标记为未学"}
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={mark}
+                    className="inline-flex items-center gap-2 rounded-full bg-teal px-5 py-2.5 text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-teal-dark"
+                  >
+                    <IconCheck size={14} /> {lang === "en" ? "Mark this lesson complete" : "标记本课完成"}
+                  </button>
+                )}
               </div>
             </div>
           </Reveal>
