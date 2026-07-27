@@ -209,11 +209,78 @@ export function IconClock(p: IconProps) {
   );
 }
 
-export function IconTag(p: IconProps) {
+export function IconHome(p: IconProps) {
   return (
     <Base {...p}>
-      <path d="M4 4h7l9 9-7 7-9-9Z" />
-      <circle cx="8" cy="8" r="1.3" fill={ACCENT} stroke="none" />
+      <path d="M3 12 12 4l9 8" />
+      <path d="M5 10v9h14v-9" />
+      <path d="M9 19v-6h6v6" />
+    </Base>
+  );
+}
+
+export function IconPhone(p: IconProps) {
+  return (
+    <Base {...p}>
+      <rect x="6" y="3" width="12" height="18" rx="2" />
+      <path d="M11 18h2" />
+    </Base>
+  );
+}
+
+export function IconUsers(p: IconProps) {
+  return (
+    <Base {...p}>
+      <circle cx="9" cy="8" r="3" />
+      <path d="M3 20c0-3 3-5 6-5s6 2 6 5" />
+      <circle cx="17" cy="9" r="2.5" />
+      <path d="M15 20c0-2 1.5-4 4-4" />
+    </Base>
+  );
+}
+
+export function IconTarget(p: IconProps) {
+  return (
+    <Base {...p}>
+      <circle cx="12" cy="12" r="8" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="12" cy="12" r="1" fill={ACCENT} stroke="none" />
+    </Base>
+  );
+}
+
+export function IconHeart(p: IconProps) {
+  return (
+    <Base {...p}>
+      <path d="M12 20s-7-5-7-11a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 6-7 11-7 11Z" />
+    </Base>
+  );
+}
+
+export function IconSparkles(p: IconProps) {
+  return (
+    <Base {...p}>
+      <path d="M12 3l1.5 5L19 9.5 13.5 11 12 16l-1.5-5L5 9.5 10.5 8z" />
+      <path d="M18 14l.7 2.3L21 17l-2.3.7L18 20l-.7-2.3L15 17l2.3-.7z" fill={ACCENT} stroke="none" />
+    </Base>
+  );
+}
+
+export function IconGlobe2(p: IconProps) {
+  return (
+    <Base {...p}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18M12 3c2.5 3 4 6 4 9s-1.5 6-4 9c-2.5-3-4-6-4-9s1.5-6 4-9z" />
+    </Base>
+  );
+}
+
+export function IconSprout(p: IconProps) {
+  return (
+    <Base {...p}>
+      <path d="M12 20v-8" />
+      <path d="M12 12c0-3 2-5 5-5-0 3-2 5-5 5z" />
+      <path d="M12 14c0-3-2-5-5-5 0 3 2 5 5 5z" fill={ACCENT} stroke="none" opacity="0.3" />
     </Base>
   );
 }

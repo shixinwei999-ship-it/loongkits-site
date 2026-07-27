@@ -8,7 +8,7 @@
   --color-orange: #f4a261;
   --color-red: #c8102e;
   --color-ink: #2b2b2b;
-  --color-ink-light: #8a8a8a;
+  --color-ink-light: #6b6b6b;
 
   --font-nunito: var(--font-nunito-base), "Nunito", "Noto Sans SC", sans-serif;
   --font-inter: var(--font-inter-base), "Inter", "Noto Sans SC", sans-serif;
@@ -25,6 +25,13 @@ body {
   color: var(--color-ink);
   font-family: var(--font-inter);
   -webkit-font-smoothing: antialiased;
+  /* next/font 的变量类挂在 <body> 上，但 @theme 的 --font-* 解析在 :root，
+     那里 --font-*-base 未定义导致整条链失效。在 body 上重新声明，让变量
+     在正确的 scope 里解析，全站字体才会真正加载。 */
+  --font-nunito: var(--font-nunito-base), "Nunito", "Noto Sans SC", sans-serif;
+  --font-inter: var(--font-inter-base), "Inter", "Noto Sans SC", sans-serif;
+  --font-serif-sc: var(--font-serif-sc-base), "Noto Serif SC", serif;
+  --font-sans-sc: var(--font-sans-sc-base), "Noto Sans SC", sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
