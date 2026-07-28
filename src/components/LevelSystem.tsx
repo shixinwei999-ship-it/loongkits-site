@@ -14,7 +14,7 @@ import { Reveal } from "@/components/Reveal";
 import { SpeakButton, WordChip } from "@/components/Speak";
 import { CountUp } from "@/components/CountUp";
 import { Quiz } from "@/components/Quiz";
-import { IconArrowRight, IconDownload, IconCheck } from "@/components/icons";
+import { IconArrowRight, IconDownload, IconCheck, IconEdit, IconSparkle } from "@/components/icons";
 import {
   bands,
   levels,
@@ -147,25 +147,37 @@ function LevelCard({
       {/* 卡 */}
       <div
         id={`lvl-${lv.n}`}
-        className={`scroll-mt-28 mb-5 rounded-2xl border bg-white transition-all duration-300 ${
-          open ? "border-[#b3121f]/40 shadow-[0_22px_50px_-34px_rgba(157,15,27,0.55)]" : done ? "border-teal/30" : "border-teal/12 hover:border-[#b3121f]/30"
-        }`}
+        className={`scroll-mt-28 mb-5 rounded-2xl border-l-4 bg-white transition-all duration-300 ${
+          open
+            ? "border-l-[#b3121f] shadow-[0_22px_50px_-34px_rgba(157,15,27,0.55)]"
+            : done
+              ? "border-l-teal/60"
+              : "border-l-teal/20 hover:border-l-[#b3121f]/50"
+        } ${open ? "ring-1 ring-[#b3121f]/20" : "border border-teal/12"}`}
       >
         <button type="button" onClick={onToggle} aria-expanded={open} className="flex w-full cursor-pointer items-center gap-4 p-5 text-left sm:p-6">
+          {/* 大号等级数字 */}
+          <span className={`shrink-0 font-nunito text-3xl sm:text-4xl font-extrabold leading-none ${done ? "text-teal/30" : "text-[#b3121f]/15"}`}>
+            {String(lv.n).padStart(2, "0")}
+          </span>
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2">
               <h3 className="font-nunito text-xl font-extrabold text-ink sm:text-2xl">{lv.title[lang]}</h3>
-              {band && <span className={`rounded-full bg-teal/8 px-2.5 py-0.5 text-[0.62rem] font-semibold uppercase tracking-wider ${band.accent}`}>{band.name[lang]}</span>}
+              {band && <span className={`rounded-full bg-teal/8 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider ${band.accent}`}>{band.name[lang]}</span>}
               {done && !open && (
-                <span className="inline-flex items-center gap-1 rounded-full bg-teal/10 px-2.5 py-0.5 text-[0.62rem] font-bold text-teal">
+                <span className="inline-flex items-center gap-1 rounded-full bg-teal/10 px-2.5 py-0.5 text-xs font-bold text-teal">
                   <IconCheck size={11} /> {lang === "en" ? "Cleared" : "已通关"}
                 </span>
               )}
             </div>
             <p className="mt-1 text-sm text-ink-light leading-relaxed">{lv.tagline[lang]}</p>
           </div>
-          <span className="hidden shrink-0 rounded-lg bg-[#b3121f] px-3 py-1.5 text-xs font-bold text-white sm:inline-flex sm:items-center sm:gap-1">
-            {open ? (lang === "en" ? "Close" : "收起") : (lang === "en" ? "Enter" : "进入")} <IconArrowRight size={13} className={open ? "rotate-90" : ""} />
+          <span className={`hidden shrink-0 rounded-xl px-4 py-2 text-sm font-bold transition-all duration-200 sm:inline-flex sm:items-center sm:gap-1.5 ${
+            open
+              ? "bg-ink/10 text-ink hover:bg-ink/15"
+              : "bg-[#b3121f] text-white hover:bg-[#9c0f1b] hover:-translate-y-0.5 shadow-[0_8px_20px_-8px_rgba(157,15,27,0.6)]"
+          }`}>
+            {open ? (lang === "en" ? "Close" : "收起") : (lang === "en" ? "Enter" : "进入")} <IconArrowRight size={14} className={open ? "rotate-90" : ""} />
           </span>
           <svg viewBox="0 0 24 24" className={`h-5 w-5 shrink-0 text-teal transition-transform duration-300 sm:hidden ${open ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
             <path d="M6 9l6 6 6-6" />
@@ -191,7 +203,7 @@ function LevelCard({
                     {lesson.learn[lang]}
                   </p>
                   <p className="mt-1.5 flex items-start gap-2 rounded-lg bg-amber-50 px-3 py-2 text-sm text-ink leading-relaxed">
-                    <span className="mt-0.5 shrink-0 text-amber-600">✎</span>
+                    <IconEdit size={14} className="mt-0.5 shrink-0 text-amber-600" />
                     <span>
                       <span className="font-semibold text-amber-700">{lang === "en" ? "Homework · " : "作业 · "}</span>
                       {lesson.practice[lang]}
@@ -222,7 +234,7 @@ function LevelCard({
             {/* 可发音词 + 产出 + 下载 */}
             <div className="grid gap-5 lg:grid-cols-[1fr_auto] lg:items-end">
               <div>
-                <p className="mb-2.5 font-inter text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-teal/70">
+                <p className="mb-2.5 font-inter text-xs font-semibold uppercase tracking-[0.14em] text-teal/70">
                   {lang === "en" ? "Words in this level · tap to hear" : "本级的字 · 点一下听"}
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -240,7 +252,7 @@ function LevelCard({
               </div>
               {resource && (
                 <div className="flex flex-col gap-2 rounded-xl border border-teal/15 bg-white p-3 lg:w-52">
-                  <span className="font-inter text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-orange">{lang === "en" ? "Printable pack" : "可打印包"}</span>
+                  <span className="font-inter text-xs font-semibold uppercase tracking-[0.12em] text-orange">{lang === "en" ? "Printable pack" : "可打印包"}</span>
                   <span className="text-sm font-semibold text-ink leading-tight">{resource.title[lang]}</span>
                   <div className="flex gap-2 pt-1">
                     <a href={resource.downloads.a4.href} download className="inline-flex flex-1 items-center justify-center gap-1 rounded-lg bg-teal px-2.5 py-1.5 text-xs font-bold text-white transition-colors hover:bg-teal-dark">
@@ -270,7 +282,7 @@ function LevelCard({
               </div>
               {isLastLevel ? (
                 <span className="inline-flex items-center gap-2 rounded-full bg-amber-400 px-4 py-2.5 text-sm font-extrabold text-[#7a2a00] shadow-sm">
-                  🎉 {lang === "en" ? "You reached the top" : "你已登顶"}
+                  <IconSparkle size={16} /> {lang === "en" ? "You reached the top" : "你已登顶"}
                 </span>
               ) : (
                 <button
@@ -284,7 +296,7 @@ function LevelCard({
                   <IconArrowRight size={16} className="transition-transform duration-200 group-hover/adv:translate-x-1" />
                 </button>
               )}
-              <span className="w-full text-[0.68rem] text-ink-light/80 sm:w-auto">
+              <span className="w-full text-xs text-ink-light/80 sm:w-auto">
                 {lang === "en" ? "Progress is saved on this device only." : "通关进度只记在这台设备上。"}
               </span>
             </div>
@@ -375,8 +387,6 @@ export function LevelSystem() {
       <section className="relative isolate overflow-hidden pt-28 pb-12 sm:pt-32 sm:pb-16">
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div className="paper-grain absolute inset-0 opacity-50" />
-          <div className="absolute -right-24 top-8 h-80 w-80 rounded-full bg-[#b3121f]/8 blur-3xl" />
-          <div className="absolute left-1/4 top-1/2 h-72 w-72 rounded-full bg-amber-300/10 blur-3xl" />
           <span className="vert-calligraphy absolute bottom-2 right-6 hidden text-[14rem] leading-none text-[#b3121f]/[0.04] lg:block">级</span>
         </div>
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -444,15 +454,15 @@ export function LevelSystem() {
                     <span aria-hidden className="absolute left-7 top-[1.7rem] hidden h-4 w-4 -translate-y-1/2 rounded-full border-2 border-white bg-[#b3121f] shadow lg:block" />
                     <div className="rounded-2xl border border-teal/12 bg-white p-5 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#b3121f]/35 hover:shadow-[0_20px_44px_-30px_rgba(157,15,27,0.5)] lg:mt-8">
                       <div className="flex items-center justify-between">
-                        <span className="font-inter text-[0.62rem] font-semibold uppercase tracking-wider text-ink-light">{e.era[lang]}</span>
-                        <span className="text-[0.62rem] font-medium text-teal/70">{e.when[lang]}</span>
+                        <span className="font-inter text-xs font-semibold uppercase tracking-wider text-ink-light">{e.era[lang]}</span>
+                        <span className="text-xs font-medium text-teal/70">{e.when[lang]}</span>
                       </div>
                       <div className="mt-3 flex items-center gap-3">
                         <span className="font-serif-sc text-5xl leading-none text-ink transition-colors duration-300 group-hover/evo:text-[#b3121f]">{e.char}</span>
                         <SpeakButton text={e.char} />
                       </div>
                       <p className="mt-3 text-sm text-ink-light leading-relaxed">{e.note[lang]}</p>
-                      <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-2.5 py-1 text-[0.65rem] font-semibold text-amber-700">
+                      <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-semibold text-amber-700">
                         {i < EVOLUTION.length - 1 ? "→ " : "✓ "}{e.trait[lang]}
                       </p>
                     </div>
@@ -503,85 +513,63 @@ export function LevelSystem() {
         </div>
       </section>
 
-      {/* 等级梯子 */}
-      <section className="bg-cream/40 px-4 py-20 sm:px-6 sm:py-24 lg:px-8">
-        <div className="mx-auto max-w-5xl">
-          <Reveal>
-            <div className="flex flex-wrap items-end justify-between gap-4">
-              <div>
-                <p className="font-inter text-xs font-semibold uppercase tracking-[0.14em] text-[#b3121f] mb-4">{t.levelsEyebrow[lang]}</p>
-                <h2 className="display-zh text-ink !text-3xl sm:!text-4xl">{t.levelsTitle[lang]}</h2>
-              </div>
-              {/* 进度 */}
-              <div className="flex items-center gap-3 rounded-full border border-teal/15 bg-white px-4 py-2">
-                <span className="font-inter text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-ink-light">{t.progressLabel[lang]}</span>
-                <span className="font-nunito text-lg font-extrabold text-[#b3121f]">{cleared}/{total}</span>
-                <span aria-hidden className="h-1.5 w-20 overflow-hidden rounded-full bg-teal/10">
-                  <span className="block h-full rounded-full bg-teal transition-all duration-500" style={{ width: `${pct}%` }} />
-                </span>
-                {cleared > 0 && (
-                  <button type="button" onClick={reset} className="text-[0.62rem] font-semibold text-ink-light underline-offset-2 hover:text-[#b3121f] hover:underline">
-                    {t.resetProgress[lang]}
-                  </button>
-                )}
-              </div>
-            </div>
-          </Reveal>
+      {/* 等级梯子 — 每个篇章独立色带，醒目入口 */}
+      {bands.map((b, bi) => {
+        const bandLevels = levels.filter((lv) => lv.band === b.id);
+        const bandDone = bandLevels.filter((lv) => done.has(lv.n)).length;
+        const bandTotal = bandLevels.length;
+        const bandPct = Math.round((bandDone / bandTotal) * 100);
+        const bgClass = bi % 2 === 0 ? "bg-paper" : "bg-cream/60";
+        const isDark = bi === 3; // Band IV gets teal-dark treatment
+        const sectionBg = isDark ? "section-teal" : bgClass;
+        const headingColor = isDark ? "text-white" : "text-ink";
+        const subColor = isDark ? "text-white/70" : "text-ink-light";
+        const chipBg = isDark ? "bg-white/10 text-white border-white/20" : "bg-white text-ink border-teal/20";
+        const chipActive = isDark ? "bg-white text-teal-dark border-white" : "bg-[#b3121f] text-white border-[#b3121f]";
 
-          {/* 篇章跳转 chips */}
-          <div className="sticky top-16 z-30 -mx-4 mt-8 overflow-x-auto border-y border-teal/10 bg-cream/90 px-4 py-3 backdrop-blur sm:mx-0 sm:rounded-xl sm:px-4">
-            <div className="flex items-center gap-2">
-              <span className="mr-1 shrink-0 font-inter text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-ink-light">{t.jump[lang]}</span>
-              {bands.map((b) => {
-                const on = active === `band-${b.id}`;
-                return (
-                  <a
-                    key={b.id}
-                    href={`#band-${b.id}`}
-                    className={`shrink-0 rounded-full border px-3.5 py-1.5 text-sm font-semibold transition-colors ${
-                      on ? "border-[#b3121f] bg-[#b3121f] text-white" : "border-teal/20 bg-white text-ink hover:border-[#b3121f]/40 hover:text-[#b3121f]"
-                    }`}
-                  >
-                    <span className="opacity-60">{b.index}</span> {b.name[lang]}
-                  </a>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* 篇章区块 + 梯子 */}
-          <div className="mt-10 space-y-12">
-            {bands.map((b) => {
-              const bandLevels = levels.filter((lv) => lv.band === b.id);
-              return (
-                <div key={b.id} id={`band-${b.id}`} className="scroll-mt-32">
-                  <div className="mb-5 flex items-baseline gap-4 border-b border-teal/15 pb-3">
-                    <span className={`font-nunito text-3xl font-extrabold ${b.accent}`}>{b.index}</span>
+        return (
+          <section key={b.id} id={`band-${b.id}`} className={`scroll-mt-20 ${sectionBg} px-4 py-16 sm:px-6 sm:py-20 lg:px-8`}>
+            <div className="mx-auto max-w-5xl">
+              {/* 篇章头 — 大号醒目 */}
+              <Reveal>
+                <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
+                  <div className="flex items-center gap-5">
+                    <span className={`font-nunito text-5xl sm:text-6xl font-extrabold leading-none ${isDark ? "text-white/20" : "text-[#b3121f]/15"}`}>
+                      {b.index}
+                    </span>
                     <div>
-                      <h3 className="font-nunito text-2xl font-extrabold text-ink">{b.name[lang]}</h3>
-                      <p className="text-sm text-ink-light">{b.motto[lang]}</p>
+                      <h2 className={`font-nunito text-2xl sm:text-3xl font-extrabold ${headingColor}`}>{b.name[lang]}</h2>
+                      <p className={`text-sm mt-1 ${subColor}`}>{b.motto[lang]}</p>
                     </div>
                   </div>
-                  <div>
-                    {bandLevels.map((lv) => (
-                      <LevelCard
-                        key={lv.n}
-                        lv={lv}
-                        open={openLevel === lv.n}
-                        done={done.has(lv.n)}
-                        onEnter={() => enter(lv.n)}
-                        onToggle={() => toggle(lv.n)}
-                        onAdvance={() => advance(lv.n)}
-                        isLastLevel={lv.n === total}
-                      />
-                    ))}
+                  <div className="flex items-center gap-3">
+                    <span className={`text-xs font-bold ${subColor}`}>{bandDone}/{bandTotal}</span>
+                    <span aria-hidden className={`h-1.5 w-16 overflow-hidden rounded-full ${isDark ? "bg-white/15" : "bg-teal/10"}`}>
+                      <span className="block h-full rounded-full bg-teal transition-all duration-500" style={{ width: `${bandPct}%` }} />
+                    </span>
                   </div>
                 </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+              </Reveal>
+
+              {/* 该篇章的等级卡 — 醒目大卡 */}
+              <div className="space-y-5">
+                {bandLevels.map((lv) => (
+                  <LevelCard
+                    key={lv.n}
+                    lv={lv}
+                    open={openLevel === lv.n}
+                    done={done.has(lv.n)}
+                    onEnter={() => enter(lv.n)}
+                    onToggle={() => toggle(lv.n)}
+                    onAdvance={() => advance(lv.n)}
+                    isLastLevel={lv.n === total}
+                  />
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      })}
     </div>
   );
 }
