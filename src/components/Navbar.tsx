@@ -9,10 +9,8 @@ import { Logo } from "@/components/Logo";
 
 const links = [
   { href: "/learn/levels", key: "learn" },
-  { href: "/kits", key: "kits" },
-  { href: "/free", key: "free" },
-  { href: "/families", key: "families" },
-  { href: "/teachers", key: "teachers" },
+  { href: "/members", key: "members" },
+  { href: "/shop", key: "shop" },
   { href: "/about", key: "about" },
 ] as const;
 
@@ -23,7 +21,7 @@ export function Navbar() {
   const t = nav[lang];
 
   const linkClass = (href: string) => {
-    const on = href === "/learn/chinese" ? pathname.startsWith("/learn") : pathname === href;
+    const on = pathname === href || (href === "/learn/levels" && pathname.startsWith("/learn"));
     return on ? "text-teal font-semibold" : "text-ink hover:text-teal transition-colors";
   };
 

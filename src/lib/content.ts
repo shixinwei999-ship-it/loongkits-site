@@ -7,15 +7,13 @@ type Bi<T> = Record<Lang, T>;
 
 export const nav: Bi<{
   learn: string;
-  kits: string;
-  free: string;
-  families: string;
-  teachers: string;
+  members: string;
+  shop: string;
   about: string;
   menu: string;
 }> = {
-  en: { learn: "Learn Chinese", kits: "Kits", free: "Free Resources", families: "For Families", teachers: "For Teachers", about: "About", menu: "Menu" },
-  zh: { learn: "学中文", kits: "学习包", free: "免费资源", families: "给家庭", teachers: "给老师", about: "关于我们", menu: "菜单" },
+  en: { learn: "Learn Chinese", members: "Members", shop: "Shop", about: "About", menu: "Menu" },
+  zh: { learn: "学中文", members: "会员", shop: "商城", about: "关于", menu: "菜单" },
 };
 
 export const common: Bi<{

@@ -20,10 +20,10 @@ export function Footer() {
         <div>
           <p className="font-semibold mb-3">{t.explore}</p>
           <ul className="space-y-2 text-sm text-white/60">
-            <li><Link href="/kits" className="hover:text-white transition-colors">{nav[lang].kits}</Link></li>
-            <li><Link href="/free" className="hover:text-white transition-colors">{nav[lang].free}</Link></li>
-            <li><Link href="/families" className="hover:text-white transition-colors">{nav[lang].families}</Link></li>
-            <li><Link href="/teachers" className="hover:text-white transition-colors">{nav[lang].teachers}</Link></li>
+            <li><Link href="/learn/levels" className="hover:text-white transition-colors">{nav[lang].learn}</Link></li>
+            <li><Link href="/members" className="hover:text-white transition-colors">{nav[lang].members}</Link></li>
+            <li><Link href="/shop" className="hover:text-white transition-colors">{nav[lang].shop}</Link></li>
+            <li><Link href="/free" className="hover:text-white transition-colors">{lang === "en" ? "Free Resources" : "免费资源"}</Link></li>
             <li><Link href="/about" className="hover:text-white transition-colors">{nav[lang].about}</Link></li>
           </ul>
         </div>

@@ -6,11 +6,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "", priority: 1 },
     { path: "/learn/levels", priority: 0.95 },
     { path: "/learn/chinese", priority: 0.9 },
-    { path: "/kits", priority: 0.8 },
+    { path: "/members", priority: 0.9 },
+    { path: "/shop", priority: 0.85 },
     { path: "/free", priority: 0.8 },
     { path: "/free/zodiac-animals", priority: 0.75 },
-    { path: "/families", priority: 0.6 },
-    { path: "/teachers", priority: 0.6 },
     { path: "/about", priority: 0.5 },
   ];
   return routes.map((r) => ({
