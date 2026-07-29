@@ -412,3 +412,12 @@ h1, h2, h3, h4, h5, h6 {
 .dragon-breathe { animation: dragon-breathe 8s ease-in-out infinite; }
 .calligraphy-pulse { animation: calligraphy-pulse 6s ease-in-out infinite; }
 .mist-drift { animation: mist-drift 20s ease-in-out infinite alternate; }
+
+/* ===== 跑马灯 ===== */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 30s linear infinite;
+}
