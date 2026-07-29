@@ -385,3 +385,30 @@ h1, h2, h3, h4, h5, h6 {
 }
 .dragon-mist   { animation: mistDrift 11s ease-in-out infinite; }
 .dragon-mist-2 { animation: mistDrift2 9s ease-in-out infinite; }
+
+/* ===== 首屏中国风动画 ===== */
+@keyframes ink-bloom {
+  0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.035; }
+  50% { transform: scale(1.18) translate(12px, -8px); opacity: 0.065; }
+}
+@keyframes ink-bloom-2 {
+  0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.025; }
+  50% { transform: scale(1.12) translate(-10px, 6px); opacity: 0.05; }
+}
+@keyframes dragon-breathe {
+  0%, 100% { transform: scale(1) translateY(0) rotate(-4deg); }
+  50% { transform: scale(1.025) translateY(-10px) rotate(-3deg); }
+}
+@keyframes calligraphy-pulse {
+  0%, 100% { opacity: 0.04; }
+  50% { opacity: 0.09; }
+}
+@keyframes mist-drift {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(40px); }
+}
+.ink-bloom { animation: ink-bloom 12s ease-in-out infinite; }
+.ink-bloom-2 { animation: ink-bloom-2 15s ease-in-out infinite; }
+.dragon-breathe { animation: dragon-breathe 8s ease-in-out infinite; }
+.calligraphy-pulse { animation: calligraphy-pulse 6s ease-in-out infinite; }
+.mist-drift { animation: mist-drift 20s ease-in-out infinite alternate; }

@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useLang } from "@/lib/i18n";
 import { home } from "@/lib/content";
 import { levels, getBand } from "@/lib/levels";
 import { Reveal } from "@/components/Reveal";
-import { IconArrowRight, IconBook, IconUsers, IconTeacher, IconDownload } from "@/components/icons";
+import { IconArrowRight, IconDownload } from "@/components/icons";
 
 export function HomeContent() {
   const { lang } = useLang();
@@ -13,42 +14,58 @@ export function HomeContent() {
 
   return (
     <>
-      {/* ═══════════ HERO ═══════════ */}
-      <section className="group/hero relative isolate flex min-h-[88vh] items-center overflow-hidden bg-[#1c1917]">
+      {/* ═══════════ HERO：亮底 + 金龙动画 + 极简文字 + 零按钮 ═══════════ */}
+      <section className="group/hero relative isolate flex min-h-[92vh] items-center overflow-hidden bg-paper">
+        {/* 水墨晕染动画背景 */}
         <div aria-hidden className="pointer-events-none absolute inset-0">
-          <div className="paper-grain absolute inset-0 opacity-[0.06]" />
-          <span className="absolute right-[2%] top-1/2 -translate-y-1/2 select-none font-serif-sc text-[28rem] sm:text-[36rem] leading-none text-amber-400/[0.06] lg:text-[42rem]">龙</span>
-          <div className="absolute right-[10%] top-1/2 h-[80%] w-[50%] -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_center,rgba(217,169,90,0.12),transparent_70%)] blur-2xl" />
-          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#1c1917] to-transparent" />
+          <div className="ink-bloom absolute left-[10%] top-[20%] h-[40rem] w-[40rem] rounded-full bg-[radial-gradient(circle,rgba(45,106,79,0.06),transparent_70%)]" />
+          <div className="ink-bloom-2 absolute right-[20%] bottom-[15%] h-[35rem] w-[35rem] rounded-full bg-[radial-gradient(circle,rgba(217,169,90,0.05),transparent_70%)]" />
+          <div className="mist-drift absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232d6a4f' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")" }} />
         </div>
+
+        {/* 龙字书法暗纹 — 呼吸脉动 */}
+        <span aria-hidden className="calligraphy-pulse pointer-events-none absolute right-[8%] top-1/2 -translate-y-1/2 select-none font-serif-sc text-[24rem] sm:text-[32rem] leading-none text-teal/[0.04] lg:text-[40rem]">
+          龙
+        </span>
+
+        {/* 金龙图 — 呼吸浮动动画 */}
+        <div aria-hidden className="pointer-events-none absolute right-0 top-0 flex h-full w-[55%] items-center justify-end sm:w-[48%]">
+          <div className="dragon-breathe relative h-[85%] w-full">
+            <Image
+              src="/hero/golden-dragon.webp"
+              alt=""
+              fill
+              priority
+              sizes="(max-width: 640px) 55vw, 48vw"
+              className="object-contain object-right drop-shadow-[0_20px_60px_rgba(180,140,60,0.15)]"
+            />
+          </div>
+        </div>
+
+        {/* 左侧极简文字 — 零按钮 */}
         <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-xl lg:max-w-2xl">
+          <div className="max-w-lg lg:max-w-xl">
             <Reveal>
-              <p className="mb-6 inline-flex items-center gap-2.5 font-inter text-xs font-semibold uppercase tracking-[0.2em] text-amber-400/80 sm:text-sm">
-                <span className="hero-dot inline-block h-2 w-2 rounded-full bg-amber-400" />
-                {lang === "en" ? "A real Chinese course · 10 levels" : "一门真正的中文课 · 十个等级"}
+              <p className="mb-5 font-inter text-xs font-semibold uppercase tracking-[0.2em] text-teal/60 sm:text-sm">
+                {lang === "en" ? "Loong Kits" : "龙基特"}
               </p>
             </Reveal>
-            <Reveal delay={90}>
-              <h1 className="display-zh text-white !text-[clamp(2.9rem,8vw,6rem)] !leading-[0.95]">{t.hero.title}</h1>
+            <Reveal delay={100}>
+              <h1 className="display-zh text-ink !text-[clamp(2.8rem,7vw,5.5rem)] !leading-[0.95]">
+                {t.hero.title}
+              </h1>
             </Reveal>
-            <Reveal delay={170}>
-              <p className="mt-7 max-w-md text-lg leading-relaxed text-stone-300 sm:text-xl">{t.hero.subtitle}</p>
-            </Reveal>
-            <Reveal delay={250}>
-              <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
-                <Link href="/learn/levels" className="group/btn inline-flex items-center gap-2 rounded-[0.85rem] bg-amber-500 px-7 py-3.5 text-base font-bold text-stone-900 shadow-[0_16px_36px_-14px_rgba(217,169,90,0.4)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-amber-400">
-                  {t.hero.learnCta} <IconArrowRight size={18} className="transition-transform duration-200 group-hover/btn:translate-x-1" />
-                </Link>
-                <Link href="/learn/chinese" className="inline-flex items-center gap-2 rounded-[0.85rem] border-2 border-stone-500/50 px-6 py-3 text-base font-semibold text-stone-200 transition-colors duration-200 hover:border-amber-400/60 hover:text-amber-300">
-                  {t.hero.earCta}
-                </Link>
-              </div>
+            <Reveal delay={200}>
+              <p className="mt-6 max-w-md text-base leading-relaxed text-ink-light sm:text-lg">
+                {t.hero.subtitle}
+              </p>
             </Reveal>
           </div>
         </div>
-        <a href="#free-learn" aria-label={lang === "en" ? "Scroll" : "向下"} className="absolute bottom-7 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-stone-500 transition-colors hover:text-amber-400 lg:flex">
-          <span className="font-inter text-xs font-semibold uppercase tracking-[0.22em]">{lang === "en" ? "Explore" : "浏览"}</span>
+
+        {/* 向下滚动提示 */}
+        <a href="#free-learn" aria-label={lang === "en" ? "Scroll" : "向下"} className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-teal/40 transition-colors hover:text-teal">
+          <span className="font-inter text-[0.65rem] font-semibold uppercase tracking-[0.25em]">{lang === "en" ? "Explore" : "探索"}</span>
           <svg className="hero-bounce h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M6 9l6 6 6-6" /></svg>
         </a>
       </section>
@@ -111,26 +128,24 @@ export function HomeContent() {
           </Reveal>
           <div className="grid gap-6 md:grid-cols-3">
             {[
-              { href: "/members", tab: "kids", icon: IconBook, title: { en: "Kids", zh: "儿童" }, desc: { en: "Pre-K to Grade 6. Textbook-style units with poems, stories, and tests. For children learning Chinese from the start.", zh: "学前到六年级。教材式单元，含古诗、故事、试卷。适合从小开始学中文的孩子。" }, accent: "bg-teal/8 text-teal border-teal/20" },
-              { href: "/members", tab: "self", icon: IconUsers, title: { en: "Self-Study", zh: "自学" }, desc: { en: "Beginner to Advanced, HSK-aligned. For teens and adults learning on their own or in a class.", zh: "入门到高级，对标 HSK。适合自学或培训班学习的青少年和成人。" }, accent: "bg-amber-50 text-amber-700 border-amber-200/50" },
-              { href: "/members", tab: "teachers", icon: IconTeacher, title: { en: "Teachers", zh: "教师" }, desc: { en: "Lesson plans, classical poems, history, culture notes, and printable tests by grade. Everything you need for a class.", zh: "教案、古诗、历史、文化注、按年级的可打印试卷。上课需要的一切。" }, accent: "bg-[#b3121f]/8 text-[#b3121f] border-[#b3121f]/20" },
-            ].map((card, i) => {
-              const Ic = card.icon;
-              return (
-                <Reveal key={card.tab} delay={i * 80}>
-                  <Link href={`${card.href}?tab=${card.tab}`} className="group block h-full rounded-2xl border border-teal/12 bg-white p-7 sm:p-8 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#b3121f]/30 hover:shadow-[0_20px_40px_-24px_rgba(157,15,27,0.4)]">
-                    <span className={`inline-flex h-12 w-12 items-center justify-center rounded-xl ${card.accent} mb-5 transition-transform duration-300 group-hover:scale-110`}>
-                      <Ic size={26} />
-                    </span>
-                    <h3 className="font-nunito text-2xl font-extrabold text-ink mb-3 group-hover:text-[#b3121f] transition-colors">{card.title[lang]}</h3>
-                    <p className="text-sm text-ink-light leading-relaxed mb-5">{card.desc[lang]}</p>
-                    <span className="inline-flex items-center gap-1.5 text-sm font-bold text-[#b3121f]">
+              { href: "/members", tab: "kids", title: { en: "Kids", zh: "儿童" }, desc: { en: "Pre-K to Grade 6. Textbook-style units with poems, stories, and tests.", zh: "学前到六年级。教材式单元，含古诗、故事、试卷。" }, img: "/age-topics/prek-greet.webp" },
+              { href: "/members", tab: "self", title: { en: "Self-Study", zh: "自学" }, desc: { en: "Beginner to Advanced, HSK-aligned. For teens and adults.", zh: "入门到高级，对标 HSK。适合青少年和成人。" }, img: "/age-topics/g68-region.webp" },
+              { href: "/members", tab: "teachers", title: { en: "Teachers", zh: "教师" }, desc: { en: "Lesson plans, poems, history, culture notes, printable tests.", zh: "教案、古诗、历史、文化注、可打印试卷。" }, img: "/age-topics/g15-reunion.webp" },
+            ].map((card, i) => (
+              <Reveal key={card.tab} delay={i * 80}>
+                <Link href={`${card.href}?tab=${card.tab}`} className="group relative block h-80 sm:h-96 overflow-hidden rounded-2xl">
+                  <Image src={card.img} alt={card.title[lang]} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/30 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
+                    <h3 className="font-nunito text-2xl sm:text-3xl font-extrabold text-white mb-2">{card.title[lang]}</h3>
+                    <p className="text-sm text-white/80 leading-relaxed mb-4">{card.desc[lang]}</p>
+                    <span className="inline-flex items-center gap-1.5 text-sm font-bold text-amber-300">
                       {lang === "en" ? "Explore" : "查看"} <IconArrowRight size={16} className="transition-transform duration-200 group-hover:translate-x-1" />
                     </span>
-                  </Link>
-                </Reveal>
-              );
-            })}
+                  </div>
+                </Link>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
@@ -179,20 +194,20 @@ export function HomeContent() {
       </section>
 
       {/* ═══════════ 底部行动带 ═══════════ */}
-      <section className="relative isolate overflow-hidden bg-[#1c1917] py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
+      <section className="relative isolate overflow-hidden bg-cream/80 py-20 sm:py-24 px-4 sm:px-6 lg:px-8">
         <div aria-hidden className="pointer-events-none absolute inset-0">
-          <div className="paper-grain absolute inset-0 opacity-[0.04]" />
-          <span className="absolute left-[5%] top-1/2 -translate-y-1/2 select-none font-serif-sc text-[16rem] sm:text-[20rem] leading-none text-amber-400/[0.04]">学</span>
+          <div className="ink-bloom absolute left-[15%] top-[30%] h-[30rem] w-[30rem] rounded-full bg-[radial-gradient(circle,rgba(45,106,79,0.04),transparent_70%)]" />
+          <span className="calligraphy-pulse absolute left-[3%] top-1/2 -translate-y-1/2 select-none font-serif-sc text-[14rem] sm:text-[18rem] leading-none text-teal/[0.03]">学</span>
         </div>
         <div className="relative mx-auto max-w-4xl text-center">
           <Reveal>
-            <h2 className="display-zh text-white !text-3xl sm:!text-4xl !leading-[1.05]">{t.freeSample.title}</h2>
-            <p className="mt-4 text-lg text-stone-300 leading-relaxed max-w-xl mx-auto">{t.freeSample.desc}</p>
+            <h2 className="display-zh text-ink !text-3xl sm:!text-4xl !leading-[1.05]">{t.freeSample.title}</h2>
+            <p className="mt-4 text-lg text-ink-light leading-relaxed max-w-xl mx-auto">{t.freeSample.desc}</p>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <Link href="/free/zodiac-animals" className="inline-flex items-center gap-2 rounded-[0.85rem] bg-amber-500 px-7 py-3.5 text-base font-bold text-stone-900 shadow-[0_12px_30px_-10px_rgba(217,169,90,0.4)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-amber-400">
+              <Link href="/free/zodiac-animals" className="inline-flex items-center gap-2 rounded-[0.85rem] bg-[#b3121f] px-7 py-3.5 text-base font-bold text-white shadow-[0_12px_30px_-10px_rgba(179,18,31,0.3)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#9c0f1b]">
                 {t.freeSample.cta} <IconArrowRight size={18} />
               </Link>
-              <Link href="/learn/levels" className="inline-flex items-center gap-2 rounded-[0.85rem] border-2 border-stone-500/50 px-6 py-3 text-base font-semibold text-stone-200 transition-colors duration-200 hover:border-amber-400/60 hover:text-amber-300">
+              <Link href="/learn/levels" className="inline-flex items-center gap-2 rounded-[0.85rem] border-2 border-teal/30 px-6 py-3 text-base font-semibold text-teal transition-colors duration-200 hover:border-teal hover:bg-teal/5">
                 {t.hero.learnCta} <IconArrowRight size={18} />
               </Link>
             </div>
