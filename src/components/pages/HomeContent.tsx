@@ -14,43 +14,62 @@ export function HomeContent() {
 
   return (
     <>
-      {/* ═══════════ HERO：龙做全屏背景 + 文字叠在上面 ═══════════ */}
-      <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#f5f2ed]">
-        {/* 龙 — 全屏背景，object-cover 铺满 */}
-        <div className="absolute inset-0">
-          <Image
-            src="/hero/golden-dragon.webp"
-            alt={lang === "en" ? "Golden Chinese dragon" : "金色中国龙"}
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-[center_30%] opacity-90"
-          />
-          {/* 文字可读性遮罩 — 中心实白椭圆，边缘透出龙 */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_48%,rgba(245,242,237,0.97),rgba(245,242,237,0.7)_55%,rgba(245,242,237,0.15)_80%,transparent)]" />
+      {/* ═══════════ HERO：Scope 式留白排版 + 烫金龙字 monogram ═══════════ */}
+      <section className="relative flex min-h-screen items-center overflow-hidden bg-[#f5f2ed]">
+        {/* 极淡龍字水印 + ambient 暖光，作为背景纹理 */}
+        <div aria-hidden className="pointer-events-none absolute inset-0">
+          <span className="calligraphy-pulse absolute -right-[6%] top-1/2 -translate-y-1/2 select-none font-serif-sc text-[44vw] leading-none text-[#2d6a4f]/[0.035] sm:text-[34vw]">
+            龍
+          </span>
+          <div className="ink-bloom absolute left-[8%] top-[18%] h-[34rem] w-[34rem] rounded-full bg-[radial-gradient(circle,rgba(45,106,79,0.05),transparent_70%)]" />
+          <div className="ink-bloom-2 absolute bottom-[12%] right-[28%] h-[26rem] w-[26rem] rounded-full bg-[radial-gradient(circle,rgba(201,162,74,0.06),transparent_70%)]" />
         </div>
 
-        {/* 文字 — 叠在龙上面 */}
-        <div className="relative z-10 px-5 text-center sm:px-8">
-          <Reveal>
-            <p className="mb-5 font-inter text-[0.6rem] font-medium uppercase tracking-[0.4em] text-[#2d6a4f]/50 sm:text-[0.7rem] sm:tracking-[0.5em]">
-              {lang === "en" ? "Bilingual Chinese Curriculum" : "中 英 双 语 中 文 课 程"}
-            </p>
-          </Reveal>
-          <Reveal delay={100}>
-            <h1 className="font-serif-sc text-[clamp(2.2rem,7.5vw,6.5rem)] font-bold leading-[1.15] tracking-[0.1em] text-[#1a1a1a] sm:tracking-[0.15em]">
-              {lang === "en" ? (
-                <>Speak Chinese,<br />level by level.</>
-              ) : (
-                <>一级一级，<br />开口说中文。</>
-              )}
-            </h1>
-          </Reveal>
-          <Reveal delay={200}>
-            <p className="mx-auto mt-6 max-w-sm text-xs leading-relaxed text-[#1a1a1a]/40 sm:text-sm">
-              {t.hero.subtitle}
-            </p>
-          </Reveal>
+        <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-5 sm:px-8 lg:grid-cols-12 lg:gap-6 lg:px-12">
+          {/* 左：克制排版 */}
+          <div className="lg:col-span-7">
+            <Reveal>
+              <p className="mb-7 font-inter text-[0.62rem] font-medium uppercase tracking-[0.42em] text-[#2d6a4f]/55 sm:text-[0.72rem] sm:tracking-[0.5em]">
+                {lang === "en" ? "Bilingual Chinese Curriculum" : "中 英 双 语 中 文 课 程"}
+              </p>
+            </Reveal>
+            <Reveal delay={100}>
+              <h1 className="font-serif-sc text-[clamp(2.4rem,6.5vw,5.5rem)] font-bold leading-[1.08] tracking-[0.04em] text-[#1a1a1a] sm:tracking-[0.06em]">
+                {lang === "en" ? (
+                  <>Speak Chinese,<br />level by level.</>
+                ) : (
+                  <>一级一级，<br />开口说中文。</>
+                )}
+              </h1>
+            </Reveal>
+            <Reveal delay={200}>
+              <p className="mt-7 max-w-md text-sm leading-relaxed text-[#1a1a1a]/45 sm:text-base">
+                {t.hero.subtitle}
+              </p>
+            </Reveal>
+            <Reveal delay={300}>
+              <Link
+                href="/learn/levels"
+                className="group mt-10 inline-flex items-center gap-3 border-b border-[#1a1a1a]/30 pb-1.5 font-serif-sc text-lg font-bold tracking-[0.08em] text-[#1a1a1a] transition-colors duration-300 hover:border-[#2d6a4f] hover:text-[#2d6a4f] sm:text-xl"
+              >
+                {lang === "en" ? "Start learning" : "开始学习"}
+                <IconArrowRight size={20} className="transition-transform duration-300 group-hover:translate-x-1.5" />
+              </Link>
+            </Reveal>
+          </div>
+
+          {/* 右：烫金「龙」monogram */}
+          <div className="flex items-center justify-center lg:col-span-5">
+            <Reveal delay={150}>
+              <span
+                aria-hidden
+                className="gold-foil select-none font-serif-sc font-bold leading-none"
+                style={{ fontSize: "clamp(11rem, 26vw, 24rem)" }}
+              >
+                龙
+              </span>
+            </Reveal>
+          </div>
         </div>
 
         {/* 底部滚动提示 */}
@@ -93,7 +112,7 @@ export function HomeContent() {
 
         {/* 全宽图 */}
         <div className="relative w-full overflow-hidden" style={{ height: "clamp(30vh, 40vw, 50vh)" }}>
-          <Image src="/age-topics/prek-greet.webp" alt="" fill sizes="100vw" className="object-cover object-center" />
+          <Image src="/age-topics/prek-greet.webp" alt="" fill sizes="100vw" loading="eager" className="object-cover object-center" />
         </div>
 
         {/* 10 级列表 */}
@@ -143,7 +162,7 @@ export function HomeContent() {
 
         {/* 全宽图 */}
         <div className="relative w-full overflow-hidden" style={{ height: "clamp(30vh, 40vw, 50vh)" }}>
-          <Image src="/age-topics/g68-region.webp" alt="" fill sizes="100vw" className="object-cover object-center" />
+          <Image src="/age-topics/g68-region.webp" alt="" fill sizes="100vw" loading="eager" className="object-cover object-center" />
         </div>
 
         {/* 列表 */}
@@ -190,7 +209,7 @@ export function HomeContent() {
 
         {/* 全宽图 */}
         <div className="relative w-full overflow-hidden" style={{ height: "clamp(30vh, 40vw, 50vh)" }}>
-          <Image src="/age-topics/g15-reunion.webp" alt="" fill sizes="100vw" className="object-cover object-center" />
+          <Image src="/age-topics/g15-reunion.webp" alt="" fill sizes="100vw" loading="eager" className="object-cover object-center" />
         </div>
 
         {/* 列表 */}

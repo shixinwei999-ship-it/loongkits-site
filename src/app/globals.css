@@ -421,3 +421,13 @@ h1, h2, h3, h4, h5, h6 {
 .marquee-track {
   animation: marquee 30s linear infinite;
 }
+
+/* ===== 烫金质感字（首屏龙字 monogram） ===== */
+.gold-foil {
+  background: linear-gradient(150deg, #a87a1a 0%, #e8d089 20%, #f7ecb8 36%, #c9a24a 52%, #ecd98f 70%, #9c7016 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 3px 4px rgba(120, 80, 10, 0.22)) drop-shadow(0 1px 0 rgba(255, 245, 200, 0.5));
+}
