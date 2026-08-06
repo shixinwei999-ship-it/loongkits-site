@@ -15,7 +15,7 @@ export function HomeContent() {
   return (
     <>
       {/* ═══════════ HERO：Scope 式留白排版 + 烫金龙字 monogram ═══════════ */}
-      <section className="relative flex min-h-screen items-center overflow-hidden bg-[#f5f2ed]">
+      <section className="relative flex items-center overflow-hidden bg-[#f5f2ed] py-16 sm:py-24">
         {/* 极淡龍字水印 + ambient 暖光，作为背景纹理 */}
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <span className="calligraphy-pulse absolute -right-[6%] top-1/2 -translate-y-1/2 select-none font-serif-sc text-[44vw] leading-none text-[#2d6a4f]/[0.035] sm:text-[34vw]">
@@ -64,7 +64,7 @@ export function HomeContent() {
               <span
                 aria-hidden
                 className="gold-foil select-none font-serif-sc font-bold leading-none"
-                style={{ fontSize: "clamp(11rem, 26vw, 24rem)" }}
+                style={{ fontSize: "clamp(14rem, 30vw, 30rem)" }}
               >
                 龙
               </span>
@@ -94,8 +94,8 @@ export function HomeContent() {
         {/* 居中大标题 */}
         <div className="px-5 py-14 text-center sm:px-8 sm:py-20 lg:py-28">
           <Reveal>
-            <p className="mb-4 font-inter text-[0.6rem] font-medium uppercase tracking-[0.35em] text-[#2d6a4f]/35 sm:text-[0.7rem]">
-              {lang === "en" ? "Free · Open to everyone" : "免 费 · 所 有 人 开 放"}
+            <p className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#c8102e] px-4 py-1.5 font-inter text-[0.62rem] font-bold uppercase tracking-[0.25em] text-white sm:text-[0.7rem]">
+              {lang === "en" ? "100% Free · No signup" : "免费 · 无需注册"}
             </p>
           </Reveal>
           <Reveal delay={80}>
@@ -174,18 +174,18 @@ export function HomeContent() {
           </Reveal>
         </div>
 
-        {/* 三角色图文卡 — 图铺底 + 文字压图上 */}
+        {/* 三角色图文卡 — 图铺底 + 文字压图上 + 包含内容 */}
         <div className="mx-auto grid max-w-7xl gap-4 px-5 sm:grid-cols-3 sm:px-8 lg:px-12">
           {[
-            { href: "/members?tab=kids", img: "/age-topics/g15-reunion.webp", num: "01", title: { en: "Kids", zh: "家长 · 儿童" }, desc: { en: "Pre-K to Grade 6 — textbook units with poems, stories, tests", zh: "学前到六年级 — 教材式单元，含古诗、故事、试卷" } },
-            { href: "/members?tab=teachers", img: "/age-topics/g68-region.webp", num: "02", title: { en: "Teachers", zh: "教师" }, desc: { en: "Lesson plans, poems, history, culture notes, printable tests", zh: "教案、古诗、历史、文化注、可打印试卷" } },
-            { href: "/members?tab=self", img: "/age-topics/g912-object.webp", num: "03", title: { en: "Self-Study", zh: "自学" }, desc: { en: "Beginner to Advanced, HSK-aligned — teens & adults", zh: "入门到高级，对标 HSK — 青少年与成人" } },
+            { href: "/members?tab=kids", img: "/age-topics/g15-reunion.webp", num: "01", title: { en: "Kids", zh: "家长 · 儿童" }, desc: { en: "Pre-K to Grade 6 — textbook units", zh: "学前到六年级 — 教材式单元" }, includes: { en: ["Poems & stories", "Printable worksheets", "Unit tests", "Parent guides"], zh: ["古诗与故事", "可打印练习", "单元测试", "家长指南"] } },
+            { href: "/members?tab=teachers", img: "/age-topics/g68-region.webp", num: "02", title: { en: "Teachers", zh: "教师" }, desc: { en: "Classroom-ready, by grade", zh: "课堂即用，按年级" }, includes: { en: ["Lesson plans", "Culture notes", "Printable tests", "Answer keys"], zh: ["教案", "文化注", "可打印试卷", "答案"] } },
+            { href: "/members?tab=self", img: "/age-topics/g912-object.webp", num: "03", title: { en: "Self-Study", zh: "自学" }, desc: { en: "Beginner→Advanced, HSK-aligned", zh: "入门→高级，对标 HSK" }, includes: { en: ["HSK tracks", "Graded readers", "Mock exams", "Audio"], zh: ["HSK 轨道", "分级读物", "模拟考", "音频"] } },
           ].map((item, i) => (
             <Reveal key={item.num} delay={i * 60}>
               <Link
                 href={item.href}
                 className="group relative block overflow-hidden rounded-xl"
-                style={{ height: "clamp(16rem, 24vw, 22rem)" }}
+                style={{ height: "clamp(20rem, 28vw, 26rem)" }}
               >
                 <Image
                   src={item.img}
@@ -195,13 +195,20 @@ export function HomeContent() {
                   loading={i === 0 ? "eager" : "lazy"}
                   className="object-cover object-center transition-all duration-700 group-hover:scale-[1.05] group-hover:brightness-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a]/85 via-[#1a1a1a]/25 to-transparent transition-colors duration-500 group-hover:from-[#1a1a1a]/70" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a]/90 via-[#1a1a1a]/35 to-transparent transition-colors duration-500 group-hover:from-[#1a1a1a]/75" />
                 <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7">
                   <span className="font-inter text-[0.62rem] font-semibold tabular-nums tracking-[0.25em] text-[#e8d089]">{item.num}</span>
                   <h3 className="mt-1 font-serif-sc text-2xl font-bold text-white transition-transform duration-500 group-hover:translate-x-1.5 sm:text-3xl">
                     {item.title[lang]}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-white/60">{item.desc[lang]}</p>
+                  <p className="mt-1.5 text-sm leading-relaxed text-white/60">{item.desc[lang]}</p>
+                  <ul className="mt-3 grid grid-cols-2 gap-x-3 gap-y-1.5">
+                    {item.includes[lang].map((inc) => (
+                      <li key={inc} className="flex items-center gap-1.5 text-xs text-white/70">
+                        <span className="h-1 w-1 rounded-full bg-[#e8d089]" /> {inc}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </Link>
             </Reveal>
@@ -225,25 +232,42 @@ export function HomeContent() {
           </Reveal>
         </div>
 
-        {/* 列表 */}
-        <div className="divide-y divide-[#1a1a1a]/8">
+        {/* 商城列表 — 图铺底 + 文字压图上，与免费区同款 */}
+        <div className="mx-auto max-w-7xl space-y-4 px-5 sm:px-8 lg:px-12">
           {[
-            { title: { en: "Test Packs", zh: "试卷包" }, price: "$2.99–3.99", desc: { en: "By grade, 3 tests each", zh: "按年级，每包 3 份" } },
-            { title: { en: "Stroke Workbooks", zh: "笔顺练习册" }, price: "$5.99", desc: { en: "100 chars, trace grids", zh: "100 字，描红格" } },
-            { title: { en: "Poem Flashcards", zh: "古诗闪卡" }, price: "$4.99", desc: { en: "Tang & Song, 20 cards", zh: "唐宋，20 张" } },
-            { title: { en: "HSK Mock Exams", zh: "HSK 模拟考" }, price: "$3.99–4.99", desc: { en: "Full exams + answer key", zh: "完整试卷 + 答案" } },
+            { img: "/kit-covers/cny.webp", title: { en: "Test Packs", zh: "试卷包" }, price: "$2.99–3.99", desc: { en: "By grade, 3 tests each", zh: "按年级，每包 3 份" } },
+            { img: "/kit-covers/zodiac.webp", title: { en: "Stroke Workbooks", zh: "笔顺练习册" }, price: "$5.99", desc: { en: "100 chars, trace grids", zh: "100 字，描红格" } },
+            { img: "/kit-covers/panda.webp", title: { en: "Poem Flashcards", zh: "古诗闪卡" }, price: "$4.99", desc: { en: "Tang & Song, 20 cards", zh: "唐宋，20 张" } },
+            { img: "/age-topics/g912-object.webp", title: { en: "HSK Mock Exams", zh: "HSK 模拟考" }, price: "$3.99–4.99", desc: { en: "Full exams + answer key", zh: "完整试卷 + 答案" } },
           ].map((item, i) => (
             <Reveal key={i} delay={i * 40}>
               <Link
                 href="/shop"
-                className="group flex items-baseline gap-4 px-5 py-5 transition-colors duration-300 hover:bg-[#2d6a4f]/[0.03] sm:gap-8 sm:px-8 sm:py-6 lg:px-12 lg:py-7"
+                className="group relative block overflow-hidden rounded-xl"
+                style={{ height: "clamp(6rem, 11vw, 9rem)" }}
               >
-                <span className="flex-1 font-serif-sc text-xl font-bold text-[#1a1a1a] transition-colors duration-300 group-hover:text-[#2d6a4f] sm:text-2xl lg:text-3xl">
-                  {item.title[lang]}
-                </span>
-                <span className="hidden font-inter text-xs text-[#1a1a1a]/25 sm:block">{item.desc[lang]}</span>
-                <span className="font-inter text-sm font-medium text-[#b3121f]">{item.price}</span>
-                <IconArrowRight size={16} className="text-[#1a1a1a]/15 transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#2d6a4f]" />
+                <Image
+                  src={item.img}
+                  alt={item.title[lang]}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 80vw"
+                  loading="lazy"
+                  className="object-cover object-center transition-all duration-700 group-hover:scale-[1.04] group-hover:brightness-110"
+                />
+                <div className="absolute inset-0 bg-[#faf7f2]/60 transition-colors duration-500 group-hover:bg-[#faf7f2]/25" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#1a1a1a]/25 to-transparent" />
+                <div className="absolute inset-0 flex items-center justify-between px-6 sm:px-10">
+                  <div className="flex items-baseline gap-4 sm:gap-6">
+                    <span className="font-serif-sc text-xl font-bold text-[#1a1a1a] transition-transform duration-500 group-hover:translate-x-2 sm:text-3xl">
+                      {item.title[lang]}
+                    </span>
+                    <span className="hidden font-inter text-xs text-[#1a1a1a]/40 sm:block">{item.desc[lang]}</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="font-inter text-sm font-bold text-[#b3121f]">{item.price}</span>
+                    <IconArrowRight size={18} className="text-[#1a1a1a]/40 transition-all duration-300 group-hover:translate-x-1.5 group-hover:text-[#2d6a4f]" />
+                  </div>
+                </div>
               </Link>
             </Reveal>
           ))}
