@@ -5,8 +5,13 @@ import { useLang } from "@/lib/i18n";
 import { Reveal } from "@/components/Reveal";
 import { IconArrowRight, IconBook, IconUsers, IconTeacher } from "@/components/icons";
 import { kidsTracks, selfStudyTracks, teacherTracks, type Unit, type LessonItem } from "@/lib/curriculum";
+import { BookReader, type Book } from "@/components/BookReader";
+import { grade1Book } from "@/lib/books/grade1";
 
 type Tab = "kids" | "self" | "teachers";
+
+// 已完成的完整书。未列出的年级 = 编写中。
+const books: Record<string, Book> = { g1: grade1Book };
 
 function LessonRow({ lesson, lang }: { lesson: LessonItem; lang: "en" | "zh" }) {
   const [open, setOpen] = useState(false);
@@ -99,6 +104,7 @@ function UnitCard({ unit, lang }: { unit: Unit; lang: "en" | "zh" }) {
 export function MembersContent() {
   const { lang } = useLang();
   const [tab, setTab] = useState<Tab>("kids");
+  const [openBook, setOpenBook] = useState<Book | null>(null);
 
   const tabs: { id: Tab; label: Bi<string>; icon: typeof IconBook; desc: Bi<string> }[] = [
     { id: "kids", label: { en: "Kids", zh: "儿童" }, icon: IconBook, desc: { en: "By grade · Pre-K to Grade 6 · textbook-style units with poems & tests", zh: "按年级 · 学前到六年级 · 教材式单元，含古诗和试卷" } },
@@ -171,6 +177,18 @@ export function MembersContent() {
                   <div className="mb-4 flex items-baseline gap-3">
                     <h3 className="font-nunito text-2xl font-extrabold text-ink">{track.label[lang]}</h3>
                     <span className="text-sm text-ink-light">{track.ageRange[lang]}</span>
+                    <button
+                      type="button"
+                      onClick={() => books[track.id] && setOpenBook(books[track.id])}
+                      disabled={!books[track.id]}
+                      className={`ml-auto rounded-lg px-4 py-2 text-sm font-bold transition-all ${
+                        books[track.id]
+                          ? "bg-[#b3121f] text-white hover:-translate-y-0.5 hover:bg-[#9d0f1b]"
+                          : "cursor-not-allowed border border-teal/15 text-ink-light/50"
+                      }`}
+                    >
+                      {books[track.id] ? (lang === "en" ? "📖 Open the book" : "📖 打开这本书") : (lang === "en" ? "In progress" : "本书编写中")}
+                    </button>
                   </div>
                   <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                     {track.units.map((unit) => (
@@ -220,6 +238,8 @@ export function MembersContent() {
           )}
         </div>
       </section>
+
+      {openBook && <BookReader book={openBook} onClose={() => setOpenBook(null)} />}
     </div>
   );
 }
