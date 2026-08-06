@@ -110,33 +110,47 @@ export function HomeContent() {
           </Reveal>
         </div>
 
-        {/* 全宽图 */}
-        <div className="relative w-full overflow-hidden" style={{ height: "clamp(30vh, 40vw, 50vh)" }}>
-          <Image src="/age-topics/prek-greet.webp" alt="" fill sizes="100vw" loading="eager" className="object-cover object-center" />
-        </div>
-
-        {/* 10 级列表 */}
-        <div className="divide-y divide-[#1a1a1a]/8">
+        {/* 10 级列表 — 图铺底 + 文字压图上，划过图更亮、大词前移 */}
+        <div className="mx-auto max-w-7xl space-y-4 px-5 sm:px-8 lg:px-12">
           {levels.map((lv, i) => {
             const band = getBand(lv.band);
             return (
-              <Reveal key={lv.n} delay={i * 25}>
+              <Reveal key={lv.n} delay={i * 30}>
                 <Link
                   href={`/learn/levels#lvl-${lv.n}`}
-                  className="group flex items-baseline gap-4 px-5 py-5 transition-colors duration-300 hover:bg-[#2d6a4f]/[0.03] sm:gap-8 sm:px-8 sm:py-6 lg:px-12 lg:py-7"
+                  className="group relative block overflow-hidden rounded-xl"
+                  style={{ height: "clamp(7rem, 14vw, 11rem)" }}
                 >
-                  <span className="font-inter text-xs font-medium tabular-nums text-[#1a1a1a]/20 sm:text-sm">
-                    {String(lv.n).padStart(2, "0")}
-                  </span>
-                  <span className="flex-1 font-serif-sc text-xl font-bold text-[#1a1a1a] transition-colors duration-300 group-hover:text-[#2d6a4f] sm:text-2xl lg:text-3xl">
-                    {lv.title[lang]}
-                  </span>
-                  {band && (
-                    <span className="hidden font-inter text-[0.6rem] font-medium uppercase tracking-[0.15em] text-[#1a1a1a]/25 sm:block">
-                      {band.name[lang]}
-                    </span>
-                  )}
-                  <IconArrowRight size={16} className="text-[#1a1a1a]/15 transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#2d6a4f]" />
+                  <Image
+                    src={lv.image ?? "/age-topics/prek-greet.webp"}
+                    alt={lv.title[lang]}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 80vw"
+                    loading={i < 2 ? "eager" : "lazy"}
+                    className="object-cover object-center transition-all duration-700 group-hover:scale-[1.04] group-hover:brightness-110"
+                  />
+                  {/* 宣纸罩：划过变亮 */}
+                  <div className="absolute inset-0 bg-[#faf7f2]/60 transition-colors duration-500 group-hover:bg-[#faf7f2]/25" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#1a1a1a]/25 to-transparent" />
+                  {/* 文字压图上 */}
+                  <div className="absolute inset-0 flex items-center justify-between px-6 sm:px-10">
+                    <div className="flex items-baseline gap-4 sm:gap-6">
+                      <span className="font-inter text-xs font-semibold tabular-nums tracking-[0.2em] text-[#c9a24a] sm:text-sm">
+                        {String(lv.n).padStart(2, "0")}
+                      </span>
+                      <span className="font-serif-sc text-2xl font-bold text-[#1a1a1a] transition-transform duration-500 group-hover:translate-x-2 sm:text-4xl">
+                        {lv.title[lang]}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      {band && (
+                        <span className="hidden rounded-full bg-[#faf7f2]/80 px-3 py-1 font-inter text-[0.6rem] font-semibold uppercase tracking-[0.15em] text-[#2d6a4f] sm:block">
+                          {band.name[lang]}
+                        </span>
+                      )}
+                      <IconArrowRight size={20} className="text-[#1a1a1a]/40 transition-all duration-300 group-hover:translate-x-1.5 group-hover:text-[#2d6a4f]" />
+                    </div>
+                  </div>
                 </Link>
               </Reveal>
             );
@@ -160,31 +174,35 @@ export function HomeContent() {
           </Reveal>
         </div>
 
-        {/* 全宽图 */}
-        <div className="relative w-full overflow-hidden" style={{ height: "clamp(30vh, 40vw, 50vh)" }}>
-          <Image src="/age-topics/g68-region.webp" alt="" fill sizes="100vw" loading="eager" className="object-cover object-center" />
-        </div>
-
-        {/* 列表 */}
-        <div className="divide-y divide-white/8">
+        {/* 三角色图文卡 — 图铺底 + 文字压图上 */}
+        <div className="mx-auto grid max-w-7xl gap-4 px-5 sm:grid-cols-3 sm:px-8 lg:px-12">
           {[
-            { href: "/members?tab=kids", num: "01", title: { en: "Kids", zh: "儿童" }, desc: { en: "Pre-K to Grade 6 — textbook-style units with poems, stories, and tests", zh: "学前到六年级 — 教材式单元，含古诗、故事、试卷" } },
-            { href: "/members?tab=self", num: "02", title: { en: "Self-Study", zh: "自学" }, desc: { en: "Beginner to Advanced, HSK-aligned — for teens and adults", zh: "入门到高级，对标 HSK — 适合青少年和成人" } },
-            { href: "/members?tab=teachers", num: "03", title: { en: "Teachers", zh: "教师" }, desc: { en: "Lesson plans, poems, history, culture notes, printable tests", zh: "教案、古诗、历史、文化注、可打印试卷" } },
+            { href: "/members?tab=kids", img: "/age-topics/g15-reunion.webp", num: "01", title: { en: "Kids", zh: "家长 · 儿童" }, desc: { en: "Pre-K to Grade 6 — textbook units with poems, stories, tests", zh: "学前到六年级 — 教材式单元，含古诗、故事、试卷" } },
+            { href: "/members?tab=teachers", img: "/age-topics/g68-region.webp", num: "02", title: { en: "Teachers", zh: "教师" }, desc: { en: "Lesson plans, poems, history, culture notes, printable tests", zh: "教案、古诗、历史、文化注、可打印试卷" } },
+            { href: "/members?tab=self", img: "/age-topics/g912-object.webp", num: "03", title: { en: "Self-Study", zh: "自学" }, desc: { en: "Beginner to Advanced, HSK-aligned — teens & adults", zh: "入门到高级，对标 HSK — 青少年与成人" } },
           ].map((item, i) => (
             <Reveal key={item.num} delay={i * 60}>
               <Link
                 href={item.href}
-                className="group flex items-baseline gap-4 px-5 py-8 transition-colors duration-300 hover:bg-white/[0.03] sm:gap-8 sm:px-8 sm:py-10 lg:px-12 lg:py-12"
+                className="group relative block overflow-hidden rounded-xl"
+                style={{ height: "clamp(16rem, 24vw, 22rem)" }}
               >
-                <span className="font-inter text-xs font-medium tabular-nums text-white/15 sm:text-sm">{item.num}</span>
-                <div className="flex-1">
-                  <h3 className="font-serif-sc text-2xl font-bold text-white transition-colors duration-300 group-hover:text-[#d4a853] sm:text-3xl lg:text-4xl">
+                <Image
+                  src={item.img}
+                  alt={item.title[lang]}
+                  fill
+                  sizes="(max-width: 640px) 100vw, 33vw"
+                  loading={i === 0 ? "eager" : "lazy"}
+                  className="object-cover object-center transition-all duration-700 group-hover:scale-[1.05] group-hover:brightness-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a]/85 via-[#1a1a1a]/25 to-transparent transition-colors duration-500 group-hover:from-[#1a1a1a]/70" />
+                <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7">
+                  <span className="font-inter text-[0.62rem] font-semibold tabular-nums tracking-[0.25em] text-[#e8d089]">{item.num}</span>
+                  <h3 className="mt-1 font-serif-sc text-2xl font-bold text-white transition-transform duration-500 group-hover:translate-x-1.5 sm:text-3xl">
                     {item.title[lang]}
                   </h3>
-                  <p className="mt-2 max-w-md text-sm text-white/30">{item.desc[lang]}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-white/60">{item.desc[lang]}</p>
                 </div>
-                <IconArrowRight size={20} className="text-white/15 transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#d4a853]" />
               </Link>
             </Reveal>
           ))}
@@ -205,11 +223,6 @@ export function HomeContent() {
               {lang === "en" ? "Test packs & workbooks" : "试卷包 与练习册"}
             </h2>
           </Reveal>
-        </div>
-
-        {/* 全宽图 */}
-        <div className="relative w-full overflow-hidden" style={{ height: "clamp(30vh, 40vw, 50vh)" }}>
-          <Image src="/age-topics/g15-reunion.webp" alt="" fill sizes="100vw" loading="eager" className="object-cover object-center" />
         </div>
 
         {/* 列表 */}
