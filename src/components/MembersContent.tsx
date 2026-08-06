@@ -4,41 +4,92 @@ import { useState } from "react";
 import { useLang } from "@/lib/i18n";
 import { Reveal } from "@/components/Reveal";
 import { IconArrowRight, IconBook, IconUsers, IconTeacher } from "@/components/icons";
-import { kidsTracks, selfStudyTracks, teacherTracks, type Unit } from "@/lib/curriculum";
+import { kidsTracks, selfStudyTracks, teacherTracks, type Unit, type LessonItem } from "@/lib/curriculum";
 
 type Tab = "kids" | "self" | "teachers";
+
+function LessonRow({ lesson, lang }: { lesson: LessonItem; lang: "en" | "zh" }) {
+  const [open, setOpen] = useState(false);
+  const typeLabel: Record<string, Bi<string>> = {
+    vocab: { en: "Vocab", zh: "词汇" },
+    reading: { en: "Reading", zh: "阅读" },
+    writing: { en: "Writing", zh: "写作" },
+    grammar: { en: "Grammar", zh: "语法" },
+    culture: { en: "Culture", zh: "文化" },
+    listening: { en: "Listening", zh: "听力" },
+  };
+  return (
+    <li className="rounded-lg border border-teal/8 bg-white/60">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="flex w-full items-start gap-2 px-3 py-2 text-left text-sm"
+      >
+        <span className="mt-0.5 shrink-0 font-inter text-[0.6rem] font-bold uppercase tracking-wider text-[#b3121f]">
+          {typeLabel[lesson.type]?.[lang]}
+        </span>
+        <div className="flex-1">
+          <span className="font-semibold text-ink">{lesson.title[lang]}</span>
+          <span className="text-ink-light"> — {lesson.summary[lang]}</span>
+        </div>
+        <span className={`mt-1 shrink-0 text-ink-light transition-transform ${open ? "rotate-90" : ""}`}>›</span>
+      </button>
+      {open && (
+        <p className="border-t border-teal/8 px-3 py-2.5 text-sm leading-relaxed text-ink-light">
+          {lesson.content[lang]}
+        </p>
+      )}
+    </li>
+  );
+}
 
 function UnitCard({ unit, lang }: { unit: Unit; lang: "en" | "zh" }) {
   return (
     <div className="rounded-xl border border-teal/12 bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:border-teal/30 hover:shadow-[0_14px_30px_-20px_rgba(31,74,56,0.4)]">
       <h4 className="font-nunito text-lg font-extrabold text-ink mb-1">{unit.title[lang]}</h4>
       <p className="text-xs text-ink-light mb-3">{unit.theme[lang]}</p>
-      <ul className="space-y-2">
+      <ul className="space-y-1.5">
         {unit.lessons.map((lesson, i) => (
-          <li key={i} className="flex items-start gap-2 text-sm">
-            <span className="mt-0.5 shrink-0 text-[#b3121f] text-xs font-bold">{i + 1}</span>
-            <div>
-              <span className="font-semibold text-ink">{lesson.title[lang]}</span>
-              <span className="text-ink-light"> — {lesson.summary[lang]}</span>
-            </div>
-          </li>
+          <LessonRow key={i} lesson={lesson} lang={lang} />
         ))}
       </ul>
       {unit.poem && (
         <div className="mt-3 rounded-lg bg-amber-50/60 border border-amber-200/40 p-3">
           <p className="text-xs font-bold text-amber-700 mb-1">📜 {unit.poem.title[lang]} — {unit.poem.author[lang]}</p>
-          <p className="text-sm text-ink leading-relaxed font-serif-sc">{unit.poem.lines[lang].join(" ")}</p>
+          <p className="text-sm text-ink leading-relaxed font-serif-sc">{unit.poem.lines.zh.join(" ")}</p>
+          {unit.poem.pinyin && (
+            <p className="mt-1 text-xs text-amber-700/70 leading-relaxed">{unit.poem.pinyin.join(" ")}</p>
+          )}
+          <p className="mt-1.5 text-xs text-ink-light leading-relaxed">{unit.poem.note[lang]}</p>
         </div>
       )}
       {unit.test && (
         <div className="mt-3 rounded-lg bg-teal/5 border border-teal/15 p-3">
-          <p className="text-xs font-bold text-teal mb-1">📝 {unit.test.title[lang]} — {unit.test.questions.length} {lang === "en" ? "questions" : "题"}</p>
+          <p className="text-xs font-bold text-teal mb-2">📝 {unit.test.title[lang]}</p>
+          <ol className="space-y-1.5">
+            {unit.test.questions.map((qst, i) => (
+              <li key={i} className="text-xs text-ink-light">
+                <span className="text-ink">{i + 1}. {qst.q[lang]}</span>
+                <span className="ml-1 text-teal font-semibold">✓ {qst.options[lang][qst.answer]}</span>
+              </li>
+            ))}
+          </ol>
         </div>
       )}
       {unit.culture && (
         <div className="mt-3 rounded-lg bg-stone-50 border border-stone-200/60 p-3">
           <p className="text-xs font-bold text-stone-600 mb-1">🌏 {lang === "en" ? "Culture note" : "文化注"}</p>
           <p className="text-sm text-ink-light leading-relaxed">{unit.culture[lang]}</p>
+        </div>
+      )}
+      {unit.vocab && (
+        <div className="mt-3">
+          <p className="text-xs font-bold text-stone-600 mb-1.5">字 {lang === "en" ? "Vocab list" : "识字表"}</p>
+          <div className="flex flex-wrap gap-1.5">
+            {unit.vocab[lang].map((v) => (
+              <span key={v} className="rounded-md bg-teal/8 px-2 py-0.5 text-xs text-teal-dark font-medium">{v}</span>
+            ))}
+          </div>
         </div>
       )}
     </div>
