@@ -163,8 +163,8 @@ export function HomeContent() {
         {/* 居中大标题 */}
         <div className="px-5 py-14 text-center sm:px-8 sm:py-20 lg:py-28">
           <Reveal>
-            <p className="mb-4 font-inter text-[0.6rem] font-medium uppercase tracking-[0.35em] text-white/20 sm:text-[0.7rem]">
-              {lang === "en" ? "Members · Structured Curriculum" : "会 员 · 成 套 教 材"}
+            <p className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#c9a24a] px-4 py-1.5 font-inter text-[0.62rem] font-bold uppercase tracking-[0.25em] text-[#1a1a1a] sm:text-[0.7rem]">
+              {lang === "en" ? "Members · Full Curriculum" : "会员 · 成套教材"}
             </p>
           </Reveal>
           <Reveal delay={80}>
@@ -214,6 +214,30 @@ export function HomeContent() {
             </Reveal>
           ))}
         </div>
+        {/* 会员权益条 + CTA，增加篇幅与分量 */}
+        <div className="mx-auto mt-10 max-w-7xl px-5 sm:px-8 lg:px-12">
+          <div className="grid grid-cols-2 gap-6 rounded-xl border border-white/10 bg-white/[0.03] p-8 sm:grid-cols-4">
+            {[
+              { n: "10", label: { en: "Levels included", zh: "个等级全含" } },
+              { n: "30", label: { en: "Lessons", zh: "节课" } },
+              { n: "120+", label: { en: "Printable pages", zh: "页可打印" } },
+              { n: "∞", label: { en: "Reprints & updates", zh: "无限重印与更新" } },
+            ].map((s) => (
+              <div key={s.n} className="text-center">
+                <p className="font-serif-sc text-3xl font-bold text-[#e8d089] sm:text-4xl">{s.n}</p>
+                <p className="mt-1 text-xs text-white/50">{s.label[lang]}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-8 text-center">
+            <Link
+              href="/members"
+              className="inline-flex items-center gap-2 rounded-[0.85rem] bg-[#c9a24a] px-8 py-3.5 text-base font-bold text-[#1a1a1a] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#e8d089]"
+            >
+              {lang === "en" ? "Become a member" : "成为会员"} <IconArrowRight size={18} />
+            </Link>
+          </div>
+        </div>
       </section>
 
       {/* ═══════════ 板块三：商城 ═══════════ */}
@@ -221,8 +245,8 @@ export function HomeContent() {
         {/* 居中大标题 */}
         <div className="px-5 py-14 text-center sm:px-8 sm:py-20 lg:py-28">
           <Reveal>
-            <p className="mb-4 font-inter text-[0.6rem] font-medium uppercase tracking-[0.35em] text-[#2d6a4f]/35 sm:text-[0.7rem]">
-              {lang === "en" ? "Shop · Printable Downloads" : "商 城 · 可 打 印 下 载"}
+            <p className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#c8102e] px-4 py-1.5 font-inter text-[0.62rem] font-bold uppercase tracking-[0.25em] text-white sm:text-[0.7rem]">
+              {lang === "en" ? "Shop · Printable Downloads" : "商城 · 可打印下载"}
             </p>
           </Reveal>
           <Reveal delay={80}>
