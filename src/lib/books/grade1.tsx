@@ -83,6 +83,161 @@ function Practice({ items }: { items: string[] }) {
   );
 }
 
+// 课文插图：每篇一幅干净的 SVG 线条画，不用 AI 生图（生图不可靠）。
+function Illustration({ topic }: { topic: string }) {
+  const C = { line: "#2d6a4f", red: "#c8102e", amber: "#c9a24a", ink: "#1a1a1a" };
+  const wrap = (children: React.ReactNode) => (
+    <div className="my-5 flex justify-center">
+      <svg viewBox="0 0 220 130" className="h-32 w-auto" role="img" aria-label={topic}>
+        {children}
+      </svg>
+    </div>
+  );
+  switch (topic) {
+    case "秋天":
+      return wrap(<>
+        <line x1="110" y1="20" x2="110" y2="100" stroke={C.ink} strokeWidth="3" strokeLinecap="round" />
+        <path d="M70 40 Q110 30 150 40" stroke={C.line} strokeWidth="2" fill="none" />
+        <ellipse cx="60" cy="95" rx="9" ry="5" fill={C.amber} transform="rotate(-30 60 95)" />
+        <ellipse cx="95" cy="110" rx="9" ry="5" fill={C.amber} transform="rotate(20 95 110)" />
+        <ellipse cx="150" cy="100" rx="9" ry="5" fill={C.red} transform="rotate(40 150 100)" />
+        <ellipse cx="175" cy="115" rx="9" ry="5" fill={C.amber} transform="rotate(-15 175 115)" />
+      </>);
+    case "小小的船":
+      return wrap(<>
+        <path d="M70 60 A40 40 0 1 0 150 60 Q110 45 70 60 Z" fill={C.amber} />
+        <circle cx="50" cy="30" r="2.5" fill={C.amber} />
+        <circle cx="180" cy="25" r="2" fill={C.amber} />
+        <circle cx="160" cy="45" r="2.5" fill={C.amber} />
+        <circle cx="40" cy="55" r="2" fill={C.amber} />
+      </>);
+    case "江南":
+      return wrap(<>
+        <ellipse cx="110" cy="55" rx="55" ry="20" fill={C.line} opacity="0.35" />
+        <ellipse cx="110" cy="55" rx="55" ry="20" fill="none" stroke={C.line} strokeWidth="2" />
+        <path d="M80 100 Q90 90 100 100 M110 95 Q120 85 130 95" stroke={C.red} strokeWidth="2.5" fill="none" />
+        <circle cx="85" cy="100" r="2" fill={C.ink} />
+        <circle cx="125" cy="95" r="2" fill={C.ink} />
+      </>);
+    case "四季":
+      return wrap(<>
+        <path d="M30 90 Q30 60 45 60 Q60 60 60 90" stroke={C.line} strokeWidth="2" fill="none" />
+        <circle cx="100" cy="75" r="14" fill={C.amber} />
+        <path d="M140 90 Q150 70 160 90" stroke={C.amber} strokeWidth="2" fill="none" />
+        <circle cx="195" cy="80" r="8" fill="none" stroke={C.line} strokeWidth="2" />
+        <text x="30" y="110" fontSize="9" fill={C.ink}>春</text>
+        <text x="95" y="110" fontSize="9" fill={C.ink}>夏</text>
+        <text x="148" y="110" fontSize="9" fill={C.ink}>秋</text>
+        <text x="190" y="110" fontSize="9" fill={C.ink}>冬</text>
+      </>);
+    case "画":
+      return wrap(<>
+        <rect x="55" y="20" width="110" height="80" rx="4" fill="none" stroke={C.ink} strokeWidth="3" />
+        <path d="M55 70 L90 45 L115 60 L165 30 L165 100 L55 100 Z" fill={C.line} opacity="0.3" />
+        <circle cx="140" cy="40" r="8" fill={C.amber} />
+      </>);
+    case "大小多少":
+      return wrap(<>
+        <circle cx="70" cy="70" r="35" fill="none" stroke={C.ink} strokeWidth="3" />
+        <circle cx="160" cy="80" r="12" fill="none" stroke={C.red} strokeWidth="3" />
+        <text x="55" y="120" fontSize="11" fill={C.ink}>大</text>
+        <text x="153" y="120" fontSize="11" fill={C.ink}>小</text>
+      </>);
+    case "小书包":
+      return wrap(<>
+        <rect x="70" y="45" width="80" height="65" rx="10" fill={C.red} />
+        <rect x="70" y="45" width="80" height="18" rx="9" fill={C.red} opacity="0.7" />
+        <rect x="95" y="70" width="30" height="22" rx="4" fill="#faf7f2" />
+        <line x1="85" y1="45" x2="85" y2="30" stroke={C.ink} strokeWidth="2" />
+        <line x1="135" y1="45" x2="135" y2="30" stroke={C.ink} strokeWidth="2" />
+      </>);
+    case "日月明":
+      return wrap(<>
+        <circle cx="65" cy="55" r="20" fill={C.amber} />
+        <path d="M135 35 A20 20 0 1 0 135 75 Q120 55 135 35 Z" fill="none" stroke={C.ink} strokeWidth="3" />
+        <text x="100" y="110" fontSize="13" fontWeight="700" fill={C.line}>明</text>
+      </>);
+    case "影子":
+      return wrap(<>
+        <circle cx="90" cy="40" r="12" fill={C.ink} />
+        <rect x="78" y="52" width="24" height="40" rx="8" fill={C.ink} />
+        <ellipse cx="90" cy="100" rx="30" ry="6" fill={C.ink} opacity="0.2" />
+        <line x1="120" y1="20" x2="120" y2="110" stroke={C.amber} strokeWidth="2" strokeDasharray="3 3" />
+      </>);
+    case "比尾巴":
+      return wrap(<>
+        <path d="M50 70 Q70 50 90 70 Q80 85 90 100" stroke={C.amber} strokeWidth="4" fill="none" strokeLinecap="round" />
+        <path d="M130 70 Q150 50 170 70 Q160 85 170 100" stroke={C.line} strokeWidth="4" fill="none" strokeLinecap="round" />
+        <text x="60" y="120" fontSize="10" fill={C.ink}>长</text>
+        <text x="148" y="120" fontSize="10" fill={C.ink}>短</text>
+      </>);
+    case "青蛙写诗":
+      return wrap(<>
+        <ellipse cx="110" cy="75" rx="35" ry="22" fill={C.line} />
+        <circle cx="95" cy="60" r="6" fill="#faf7f2" /><circle cx="125" cy="60" r="6" fill="#faf7f2" />
+        <circle cx="95" cy="60" r="2.5" fill={C.ink} /><circle cx="125" cy="60" r="2.5" fill={C.ink} />
+        <line x1="40" y1="20" x2="40" y2="40" stroke="#5b9bd5" strokeWidth="2" />
+        <line x1="180" y1="15" x2="180" y2="38" stroke="#5b9bd5" strokeWidth="2" />
+        <line x1="70" y1="25" x2="70" y2="45" stroke="#5b9bd5" strokeWidth="2" />
+      </>);
+    case "雨点儿":
+      return wrap(<>
+        <ellipse cx="110" cy="35" rx="50" ry="12" fill="#d0d0d0" />
+        {[40, 70, 100, 130, 160].map((x, i) => (
+          <line key={i} x1={x} y1="55" x2={x - 8} y2="95" stroke="#5b9bd5" strokeWidth="2.5" strokeLinecap="round" />
+        ))}
+      </>);
+    case "明天要远足":
+      return wrap(<>
+        <rect x="50" y="70" width="100" height="25" rx="4" fill={C.ink} />
+        <rect x="60" y="50" width="35" height="22" rx="3" fill="#faf7f2" />
+        <path d="M55 70 L75 58 L95 70" fill="none" stroke="#faf7f2" strokeWidth="2" />
+        <circle cx="170" cy="35" r="12" fill={C.amber} />
+        <circle cx="158" cy="33" r="2" fill="#faf7f2" />
+      </>);
+    case "大还是小":
+      return wrap(<>
+        <circle cx="60" cy="45" r="10" fill={C.ink} />
+        <rect x="50" y="55" width="20" height="35" rx="6" fill={C.ink} />
+        <circle cx="150" cy="40" r="20" fill={C.ink} opacity="0.3" />
+        <rect x="130" y="60" width="40" height="40" rx="10" fill={C.ink} opacity="0.3" />
+      </>);
+    case "项链":
+      return wrap(<>
+        <path d="M60 50 Q110 90 160 50" stroke={C.amber} strokeWidth="2" fill="none" />
+        {[70, 95, 120, 145].map((x, i) => <circle key={i} cx={x} cy={70 + Math.sin(i) * 8} r="6" fill="#faf7f2" stroke={C.amber} strokeWidth="2" />)}
+        <path d="M108 62 q-8 12 0 18 q8 -6 0 -18" fill={C.amber} />
+      </>);
+    case "雪地里的小画家":
+      return wrap(<>
+        <rect x="20" y="80" width="180" height="30" rx="6" fill="#faf7f2" />
+        <text x="60" y="100" fontSize="10" fill={C.line}>个</text>
+        <text x="100" y="100" fontSize="10" fill={C.line}>个</text>
+        <text x="140" y="100" fontSize="10" fill={C.line}>个</text>
+        <circle cx="60" cy="55" r="3" fill={C.red} /><circle cx="100" cy="50" r="3" fill={C.amber} /><circle cx="140" cy="58" r="3" fill={C.line} />
+      </>);
+    case "乌鸦喝水":
+      return wrap(<>
+        <ellipse cx="120" cy="40" rx="22" ry="16" fill={C.ink} />
+        <circle cx="135" cy="35" r="3" fill={C.amber} />
+        <path d="M120 56 L120 75 M110 75 L130 75" stroke={C.ink} strokeWidth="3" strokeLinecap="round" />
+        <rect x="70" y="75" width="40" height="40" rx="6" fill="none" stroke={C.line} strokeWidth="2.5" />
+        <rect x="72" y="90" width="36" height="23" fill="#5b9bd5" opacity="0.4" />
+        <circle cx="80" cy="100" r="3" fill={C.amber} /><circle cx="92" cy="105" r="3" fill={C.amber} /><circle cx="100" cy="98" r="3" fill={C.amber} />
+      </>);
+    case "小壁虎借尾巴":
+      return wrap(<>
+        <path d="M40 70 Q70 50 100 70 Q120 75 140 60 Q160 50 175 60" stroke={C.line} strokeWidth="4" fill="none" strokeLinecap="round" />
+        <circle cx="175" cy="60" r="9" fill={C.line} />
+        <circle cx="178" cy="57" r="2" fill="#faf7f2" />
+        <path d="M40 70 q-12 -2 -8 10" stroke={C.red} strokeWidth="2.5" fill="none" />
+        <text x="80" y="95" fontSize="9" fill={C.ink}>断尾</text>
+      </>);
+    default:
+      return wrap(<rect x="60" y="30" width="100" height="70" rx="6" fill="none" stroke={C.line} strokeWidth="2" strokeDasharray="4 4" />);
+  }
+}
+
 export const grade1Book: Book = {
   gradeId: "g1",
   title: { en: "Grade 1 · Book One", zh: "一年级 · 上册" },
@@ -414,6 +569,7 @@ function lessonPage(opts: {
       title: { en: opts.enTitle, zh: opts.zhTitle },
       body: {
         en: <>
+          <Illustration topic={opts.zhTitle} />
           <Passage pairs={opts.passage} />
           <p className="mt-2 text-xs text-ink-light/60">{opts.pinyin}</p>
           <div className="mt-4 rounded-lg bg-teal/5 p-3">
@@ -430,6 +586,7 @@ function lessonPage(opts: {
           <p className="mt-4 text-sm leading-relaxed text-ink/70"><b>讲一讲：</b>{opts.note}</p>
         </>,
         zh: <>
+          <Illustration topic={opts.zhTitle} />
           <Passage pairs={opts.passage} />
           <p className="mt-2 text-xs text-ink-light/60">{opts.pinyin}</p>
           <div className="mt-4 rounded-lg bg-teal/5 p-3">
