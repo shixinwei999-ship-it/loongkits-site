@@ -123,7 +123,7 @@ export const grade1Book: Book = {
     pinyinPage("ang eng ing ong", ["bāng 帮", "fēng 风", "xīng 星", "dōng 东"], "后鼻韵母，结尾舌根抵软腭，气流从鼻出，比前鼻音更沉。", "后鼻音都以 ng 结尾。", "帮助 bāng zhù，星星 xīng xing"),
 
     // ── 课文 1 秋天 ──
-    lessonPage({
+    ...lessonPage({
       zhTitle: "秋天", enTitle: "Autumn", pinyin: "qiū tiān",
       passage: [
         ["qiū", "秋"], ["tiān", "天"], ["qì", "气"], ["liáng", "凉"], ["le", "了"], ["，", "，"],
@@ -150,7 +150,7 @@ export const grade1Book: Book = {
     }),
 
     // ── 课文 2 小小的船 ──
-    lessonPage({
+    ...lessonPage({
       zhTitle: "小小的船", enTitle: "The Small Boat", pinyin: "xiǎo xiǎo de chuán",
       passage: [
         ["wān", "弯"], ["wān", "弯"], ["de", "的"], ["yuè", "月"], ["er", "儿"], ["xiǎo", "小"], ["xiǎo", "小"], ["de", "的"], ["chuán", "船"], ["，", "，"],
@@ -178,7 +178,7 @@ export const grade1Book: Book = {
     }),
 
     // ── 课文 3 江南 ──
-    lessonPage({
+    ...lessonPage({
       zhTitle: "江南", enTitle: "Jiangnan", pinyin: "jiāng nán",
       passage: [
         ["jiāng", "江"], ["nán", "南"], ["kě", "可"], ["cǎi", "采"], ["lián", "莲"], ["，", "，"],
@@ -209,7 +209,7 @@ export const grade1Book: Book = {
     }),
 
     // ── 课文 4 四季 ──
-    lessonPage({
+    ...lessonPage({
       zhTitle: "四季", enTitle: "Four Seasons", pinyin: "sì jì",
       passage: [
         ["cǎo", "草"], ["yá", "芽"], ["jiān", "尖"], ["jiān", "尖"], ["，", "，"], ["tā", "他"], ["duì", "对"], ["xiǎo", "小"], ["niǎo", "鸟"], ["shuō", "说"], ["：", "："], ["「", "「"], ["wǒ", "我"], ["shì", "是"], ["chūn", "春"], ["tiān", "天"], ["。", "。"], ["」", "」"],
@@ -246,7 +246,7 @@ export const grade1Book: Book = {
     },
 
     // ── 课文 5 画 ──
-    lessonPage({
+    ...lessonPage({
       zhTitle: "画", enTitle: "A Painting", pinyin: "huà",
       passage: [
         ["yuǎn", "远"], ["kàn", "看"], ["shān", "山"], ["yǒu", "有"], ["sè", "色"], ["，", "，"],
@@ -274,7 +274,7 @@ export const grade1Book: Book = {
     }),
 
     // ── 课文 6 大小多少 ──
-    lessonPage({
+    ...lessonPage({
       zhTitle: "大小多少", enTitle: "Big, Small, More, Less", pinyin: "dà xiǎo duō shǎo",
       passage: [
         ["yī", "一"], ["gè", "个"], ["dà", "大"], ["，", "，"], ["yī", "一"], ["gè", "个"], ["xiǎo", "小"], ["，", "，"], ["yī", "一"], ["zhī", "只"], ["huáng", "黄"], ["niú", "牛"], ["yī", "一"], ["zhī", "只"], ["māo", "猫"], ["。", "。"],
@@ -302,7 +302,7 @@ export const grade1Book: Book = {
     }),
 
     // ── 课文 7 小书包 ──
-    lessonPage({
+    ...lessonPage({
       zhTitle: "小书包", enTitle: "My Little Schoolbag", pinyin: "xiǎo shū bāo",
       passage: [
         ["wǒ", "我"], ["de", "的"], ["xiǎo", "小"], ["shū", "书"], ["bāo", "包"], ["，", "，"], ["bǎo", "宝"], ["bèi", "贝"], ["zhēn", "真"], ["bù", "不"], ["shǎo", "少"], ["。", "。"],
@@ -331,7 +331,7 @@ export const grade1Book: Book = {
     }),
 
     // ── 课文 8 日月明 ──
-    lessonPage({
+    ...lessonPage({
       zhTitle: "日月明", enTitle: "Sun, Moon, Bright", pinyin: "rì yuè míng",
       passage: [
         ["rì", "日"], ["yuè", "月"], ["míng", "明"], ["，", "，"], ["tián", "田"], ["lì", "力"], ["nán", "男"], ["。", "。"],
@@ -364,6 +364,68 @@ export const grade1Book: Book = {
       body: {
         en: <><b>识字加油站：</b> 一→十、百、千、万。数字越拼越大。<br/><br/><b>我的发现：</b> 「明、男、林、森」都是两个字合起来的「会意字」。再找一个：休=人+木。<br/><br/><b>字词句运用：</b> 把这册学过的字读给家人听，错一个重学一个。<br/><br/><b>日积月累：</b> 咏鹅--鹅鹅鹅，曲项向天歌。白毛浮绿水，红掌拨清波。<br/><br/><b>和大人一起读：</b>《小白兔和小灰兔》--说说两只兔子哪里不一样。</>,
         zh: <><b>识字加油站：</b> 一→十、百、千、万。数字越拼越大。<br/><br/><b>我的发现：</b>「明、男、林、森」都是两个字合起来的「会意字」。再找一个：休=人+木。<br/><br/><b>字词句运用：</b> 把这册学过的字读给家人听，错一个重学一个。<br/><br/><b>日积月累：</b> 咏鹅--鹅鹅鹅，曲项向天歌。白毛浮绿水，红掌拨清波。<br/><br/><b>和大人一起读：</b>《小白兔和小灰兔》--说说两只兔子哪里不一样。</>,
+      },
+    },
+
+    // ── 三字经精选（14 段，每段原文带拼音 + 释义 + 小故事）──
+    sanzijing([["rén","人"],["zhī","之"],["chū","初"],["，","，"],["xìng","性"],["běn","本"],["shàn","善"],["。","。"]], "人刚出生时，本性都是善良的。", "孟母三迁：孟子的母亲为了让他有个好环境，搬了三次家。"),
+    sanzijing([["xìng","性"],["xiāng","相"],["jìn","近"],["，","，"],["xí","习"],["xiāng","相"],["yuǎn","远"],["。","。"]], "本性相近，但后天的习惯让人越差越远。", "两个小孩从小一样，一个勤学一个贪玩，长大后大不一样。"),
+    sanzijing([["gǒu","苟"],["bù","不"],["jiào","教"],["，","，"],["xìng","性"],["nǎi","乃"],["qiān","迁"],["。","。"]], "如果不教育，善良的本性就会变坏。", "一棵小树不修剪就会长歪，孩子不教也会走偏。"),
+    sanzijing([["jiào","教"],["zhī","之"],["dào","道"],["，","，"],["guì","贵"],["yǐ","以"],["zhuān","专"],["。","。"]], "教育的方法，最重要的是专心。", "弈秋教两个学生下棋，一个专心一个走神，专心的学成了。"),
+    sanzijing([["xī","昔"],["mèng","孟"],["mǔ","母"],["，","，"],["zé","择"],["lín","邻"],["chǔ","处"],["。","。"]], "从前孟子的母亲，选择好的邻居居住。", "孟母为了孟子，搬到了学校旁边住。"),
+    sanzijing([["zǐ","子"],["bù","不"],["xué","学"],["，","，"],["duàn","断"],["jī","机"],["zhù","杼"],["。","。"]], "孩子不学习，母亲就剪断织布机上的线。", "孟子逃学，母亲剪断织机，告诉他半途而废就像断了的布。"),
+    sanzijing([["dòu","窦"],["yān","燕"],["shān","山"],["，","，"],["yǒu","有"],["yì","义"],["fāng","方"],["。","。"]], "窦燕山有好的教育方法。", "窦禹钧教五个儿子都成才，人称五子登科。"),
+    sanzijing([["jiào","教"],["wǔ","五"],["zǐ","子"],["，","，"],["míng","名"],["jù","俱"],["yáng","扬"],["。","。"]], "他教五个儿子，名声都传扬开来。", "五个儿子都考中，是因为父亲教得正。"),
+    sanzijing([["yǎng","养"],["bù","不"],["jiào","教"],["，","，"],["fù","父"],["zhī","之"],["guò","过"],["。","。"]], "只养育不教育，是父亲的过错。", "给孩子吃穿却不教做人，等于没尽到责任。"),
+    sanzijing([["jiào","教"],["bù","不"],["yán","严"],["，","，"],["shī","师"],["zhī","之"],["duò","惰"],["。","。"]], "教育不严格，是老师的怠惰。", "老师对学生放松要求，是老师的失职。"),
+    sanzijing([["zǐ","子"],["bù","不"],["xué","学"],["，","，"],["fēi","非"],["suǒ","所"],["yí","宜"],["。","。"]], "孩子不学习，是不应该的。", "小时候不学，长大就来不及了。"),
+    sanzijing([["yòu","幼"],["bù","不"],["xué","学"],["，","，"],["lǎo","老"],["hé","何"],["wéi","为"],["。","。"]], "小时候不学，老了能做什么？", "少壮不努力，老大徒伤悲。"),
+    sanzijing([["yù","玉"],["bù","不"],["zhuó","琢"],["，","，"],["bù","不"],["chéng","成"],["qì","器"],["。","。"]], "玉不雕琢，成不了器物。", "和氏璧不雕琢也只是石头，雕琢后才成国宝。"),
+    sanzijing([["rén","人"],["bù","不"],["xué","学"],["，","，"],["bù","不"],["zhī","知"],["yì","义"],["。","。"]], "人不学习，就不懂道理。", "学了才懂礼义，不学就只是活着。"),
+
+    sanzijing([["wéi","为"],["rén","人"],["zǐ","子"],["，","，"],["fāng","方"],["shào","少"],["shí","时"],["。","。"]], "做人的子弟，在年少的时候。", "黄香九岁就懂得孝顺父亲，冬天先暖被窝。"),
+    sanzijing([["qīn","亲"],["shī","师"],["yǒu","友"],["，","，"],["xí","习"],["lǐ","礼"],["yí","仪"],["。","。"]], "亲近老师和朋友，学习礼仪。", "近朱者赤近墨者黑，交什么样的朋友很重要。"),
+    sanzijing([["xiāng","香"],["jiǔ","九"],["líng","龄"],["，","，"],["néng","能"],["wēn","温"],["xí","席"],["。","。"]], "黄香九岁，就能温暖父亲的床席。", "黄香冬天用身体暖被，让父亲睡得暖。"),
+    sanzijing([["xiào","孝"],["yú","于"],["qīn","亲"],["，","，"],["suǒ","所"],["dāng","当"],["zhí","执"],["。","。"]], "孝顺父母，是应当做的事。", "孝顺是天经地义，不是交换。"),
+    sanzijing([["róng","融"],["sì","四"],["suì","岁"],["，","，"],["néng","能"],["ràng","让"],["lí","梨"],["。","。"]], "孔融四岁，就懂得让梨。", "孔融把大梨让给哥哥，自己拿小的。"),
+    sanzijing([["dì","弟"],["yú","于"],["zhǎng","长"],["，","，"],["yí","宜"],["xiān","先"],["zhī","知"],["。","。"]], "对兄长恭敬，应当先懂得。", "弟弟尊敬哥哥，是从小就该学的。"),
+    sanzijing([["shǒu","首"],["xiào","孝"],["tì","悌"],["，","，"],["cì","次"],["jiàn","见"],["wén","闻"],["。","。"]], "首要孝顺父母敬爱兄长，其次多见多闻。", "做人是第一位的，知识是第二位。"),
+    sanzijing([["zhī","知"],["mǒu","某"],["shù","数"],["，","，"],["shí","识"],["mǒu","某"],["wén","文"],["。","。"]], "知道一些算术，认识一些文字。", "先学做人，再学知识。"),
+    sanzijing([["yī","一"],["ér","而"],["shí","十"],["，","，"],["shí","十"],["ér","而"],["bǎi","百"],["。","。"]], "一而十，十而百。", "数数从一到十到百到千到万。"),
+    sanzijing([["bǎi","百"],["ér","而"],["qiān","千"],["，","，"],["qiān","千"],["ér","而"],["wàn","万"],["。","。"]], "百而千，千而万。", "数学的开始，从简单的数数起步。"),
+    sanzijing([["sān","三"],["cái","才"],["zhě","者"],["，","，"],["tiān","天"],["dì","地"],["rén","人"],["。","。"]], "三才，是天、地、人。", "古人把天地人看作世界的三大要素。"),
+    sanzijing([["sān","三"],["guāng","光"],["zhě","者"],["，","，"],["rì","日"],["yuè","月"],["xīng","星"],["。","。"]], "三光，是日、月、星。", "天上的三种光：太阳、月亮、星星。"),
+    sanzijing([["sān","三"],["gāng","纲"],["zhě","者"],["，","，"],["jūn","君"],["chén","臣"],["yì","义"],["。","。"]], "三纲，是君臣有义。", "君待臣以礼，臣事君以忠。"),
+    sanzijing([["fù","父"],["zǐ","子"],["qīn","亲"],["，","，"],["fū","夫"],["fù","妇"],["shùn","顺"],["。","。"]], "父子有亲，夫妇和顺。", "家庭里父慈子孝、夫妻和顺。"),
+    sanzijing([["yuē","曰"],["chūn","春"],["xià","夏"],["，","，"],["yuē","曰"],["qiū","秋"],["dōng","冬"],["。","。"]], "春、夏、秋、冬，叫四季。", "一年四季，循环不止。"),
+    sanzijing([["cǐ","此"],["sì","四"],["shí","时"],["，","，"],["yùn","运"],["bù","不"],["qióng","穷"],["。","。"]], "这四季，运转无穷。", "四季轮转，年年如此，永不停。"),
+    sanzijing([["yuē","曰"],["nán","南"],["běi","北"],["，","，"],["yuē","曰"],["xī","西"],["dōng","东"],["。","。"]], "南、北、西、东，叫四方。", "四个方向，定出方位。"),
+    sanzijing([["cǐ","此"],["sì","四"],["fāng","方"],["，","，"],["yīng","应"],["hū","乎"],["zhōng","中"],["。","。"]], "这四方，对应中央。", "东西南北中，五个方位。"),
+    sanzijing([["yuē","曰"],["shuǐ","水"],["huǒ","火"],["，","，"],["mù","木"],["jīn","金"],["tǔ","土"],["。","。"]], "水、火、木、金、土，叫五行。", "五行是古人给万物分的五大类。"),
+    sanzijing([["cǐ","此"],["wǔ","五"],["xíng","行"],["，","，"],["běn","本"],["hū","乎"],["shù","数"],["。","。"]], "这五行，本于数。", "五行相生相克，背后是数理。"),
+    sanzijing([["shí","十"],["gān","干"],["zhě","者"],["，","，"],["jiǎ","甲"],["zhì","至"],["guǐ","癸"],["。","。"]], "十干，是甲到癸。", "天干有十个：甲乙丙丁戊己庚辛壬癸。"),
+    sanzijing([["shí","十"],["èr","二"],["zhī","支"],["，","，"],["zǐ","子"],["zhì","至"],["hài","亥"],["。","。"]], "十二支，是子到亥。", "地支有十二，配十二生肖。"),
+    sanzijing([["yuē","曰"],["huáng","黄"],["dào","道"],["，","，"],["rì","日"],["suǒ","所"],["chán","躔"],["。","。"]], "黄道，是太阳走的路。", "太阳一年在天上走的轨迹叫黄道。"),
+    sanzijing([["yuē","曰"],["chì","赤"],["dào","道"],["，","，"],["dāng","当"],["quán","权"],["zhōng","中"],["。","。"]], "赤道，在当中。", "地球中间最热的一圈叫赤道。"),
+
+    // ── 笔顺与偏旁 ──
+    strokePage("笔顺规则", "汉字笔顺七条规则：先横后竖（十）、先撇后捺（人）、从上到下（三）、从左到右（川）、先外后内（月）、先中间后两边（小）、先里头后封口（田）。写字前先想笔顺，字才端正。"),
+    strokePage("常用偏旁", "偏旁是汉字的部件，能猜字义。氵（水）-> 河、海、洗；扌（手）-> 打、拍、拉；木（木）-> 树、林、森；艹（草）-> 花、草、茶；日（日）-> 明、早、星；女（女）-> 妈、姐、妹；心（心）-> 想、念、忘。认偏旁，猜字义，是识字的好办法。"),
+
+    // ── 语文园地三 ──
+    {
+      kind: "garden", title: { en: "Language Garden 3", zh: "语文园地 三" },
+      body: {
+        en: <><b>识字加油站：</b> 反义词对对子：大-小、多-少、上-下、左-右、前-后、长-短。<br/><br/><b>字词句运用：</b> 用「也」造句：我是学生，他也是学生。<br/><br/><b>书写提示：</b> 笔顺「先撇后捺」。写「人」：先撇后捺。<br/><br/><b>日积月累：</b> 一寸光阴一寸金，寸金难买寸光阴。</>,
+        zh: <><b>识字加油站：</b> 反义词对对子：大-小、多-少、上-下、左-右、前-后、长-短。<br/><br/><b>字词句运用：</b> 用「也」造句：我是学生，他也是学生。<br/><br/><b>书写提示：</b> 笔顺「先撇后捺」。写「人」：先撇后捺。<br/><br/><b>日积月累：</b> 一寸光阴一寸金，寸金难买寸光阴。</>,
+      },
+    },
+    // ── 语文园地四 ──
+    {
+      kind: "garden", title: { en: "Language Garden 4", zh: "语文园地 四" },
+      body: {
+        en: <><b>识字加油站：</b> 量词朋友：一只猫、一条鱼、一本书、一棵树、一朵花、一辆车。<br/><br/><b>字词句运用：</b> 把「大、小、多、少」各组一个词。<br/><br/><b>书写提示：</b> 笔顺「先中间后两边」。写「小」：先竖钩，后两点。<br/><br/><b>日积月累：</b> 谁知盘中餐，粒粒皆辛苦。</>,
+        zh: <><b>识字加油站：</b> 量词朋友：一只猫、一条鱼、一本书、一棵树、一朵花、一辆车。<br/><br/><b>字词句运用：</b> 把「大、小、多、少」各组一个词。<br/><br/><b>书写提示：</b> 笔顺「先中间后两边」。写「小」：先竖钩，后两点。<br/><br/><b>日积月累：</b> 谁知盘中餐，粒粒皆辛苦。</>,
       },
     },
 
@@ -466,28 +528,69 @@ function lessonPage(opts: {
   practice: string[];
   think: string;
 }) {
+  return [
+    {
+      kind: "lesson" as const,
+      title: { en: opts.enTitle, zh: opts.zhTitle },
+      body: {
+        en: <>
+          <Passage pairs={opts.passage} />
+          <p className="mt-2 text-xs text-ink-light/60">{opts.pinyin}</p>
+          <p className="mt-4 text-sm leading-relaxed text-ink/70"><b>讲一讲：</b>{opts.note}</p>
+          <Recognize rows={opts.recognize} />
+          <Write rows={opts.write} />
+        </>,
+        zh: <>
+          <Passage pairs={opts.passage} />
+          <p className="mt-2 text-xs text-ink-light/60">{opts.pinyin}</p>
+          <p className="mt-4 text-sm leading-relaxed text-ink/70"><b>讲一讲：</b>{opts.note}</p>
+          <Recognize rows={opts.recognize} />
+          <Write rows={opts.write} />
+        </>,
+      },
+    },
+    {
+      kind: "practice" as const,
+      title: { en: `${opts.enTitle} · Practice`, zh: `${opts.zhTitle} · 课后练习` },
+      body: {
+        en: <>
+          <Practice items={opts.practice} />
+          <p className="mt-4 rounded-lg bg-amber-50/60 p-3 text-sm text-ink/80"><b>Think:</b> {opts.think}</p>
+        </>,
+        zh: <>
+          <Practice items={opts.practice} />
+          <p className="mt-4 rounded-lg bg-amber-50/60 p-3 text-sm text-ink/80"><b>思考：</b>{opts.think}</p>
+        </>,
+      },
+    },
+  ];
+}
+
+// 三字经精选一页：原文（带拼音）+ 释义 + 小故事
+function sanzijing(lines: [string, string][], meaning: string, story: string) {
   return {
-    kind: "lesson" as const,
-    title: { en: opts.enTitle, zh: opts.zhTitle },
+    kind: "reading" as const,
+    title: { en: "Three-Character Classic", zh: "三字经 · 精选" },
     body: {
       en: <>
-        <Passage pairs={opts.passage} />
-        <p className="mt-2 text-xs text-ink-light/60">{opts.pinyin}</p>
-        <p className="mt-4 text-sm leading-relaxed text-ink/70"><b>讲一讲：</b>{opts.note}</p>
-        <Recognize rows={opts.recognize} />
-        <Write rows={opts.write} />
-        <Practice items={opts.practice} />
-        <p className="mt-4 rounded-lg bg-amber-50/60 p-3 text-sm text-ink/80"><b>思考：</b>{opts.think}</p>
+        <p className="font-serif-sc text-2xl leading-[2.6] text-ink">{lines.map(([py, ch], i) => (<ruby className="ruby-zh" key={i}>{ch}<rt>{py}</rt></ruby>))}</p>
+        <p className="mt-4 text-sm leading-relaxed text-ink/80"><b>Meaning:</b> {meaning}</p>
+        <p className="mt-3 text-sm leading-relaxed text-ink/70"><b>Story:</b> {story}</p>
       </>,
       zh: <>
-        <Passage pairs={opts.passage} />
-        <p className="mt-2 text-xs text-ink-light/60">{opts.pinyin}</p>
-        <p className="mt-4 text-sm leading-relaxed text-ink/70"><b>讲一讲：</b>{opts.note}</p>
-        <Recognize rows={opts.recognize} />
-        <Write rows={opts.write} />
-        <Practice items={opts.practice} />
-        <p className="mt-4 rounded-lg bg-amber-50/60 p-3 text-sm text-ink/80"><b>思考：</b>{opts.think}</p>
+        <p className="font-serif-sc text-2xl leading-[2.6] text-ink">{lines.map(([py, ch], i) => (<ruby className="ruby-zh" key={i}>{ch}<rt>{py}</rt></ruby>))}</p>
+        <p className="mt-4 text-sm leading-relaxed text-ink/80"><b>释义：</b>{meaning}</p>
+        <p className="mt-3 text-sm leading-relaxed text-ink/70"><b>小故事：</b>{story}</p>
       </>,
     },
+  };
+}
+
+// 笔顺与偏旁页
+function strokePage(title: string, content: string) {
+  return {
+    kind: "writing" as const,
+    title: { en: title, zh: title },
+    body: { en: <p className="text-base leading-relaxed text-ink/80">{content}</p>, zh: <p className="text-base leading-relaxed text-ink/80">{content}</p> },
   };
 }

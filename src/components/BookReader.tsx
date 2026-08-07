@@ -5,7 +5,7 @@ import { useLang } from "@/lib/i18n";
 
 // 一页书的内容
 export interface BookPage {
-  kind: "cover" | "copyright" | "toc" | "lesson" | "practice" | "garden" | "speaking" | "reading" | "vocablist" | "back";
+  kind: "cover" | "copyright" | "toc" | "lesson" | "practice" | "writing" | "garden" | "speaking" | "reading" | "vocablist" | "back";
   title: { en: string; zh: string };
   // 自由内容块
   body?: { en: ReactNode; zh: ReactNode };
@@ -111,6 +111,7 @@ function kindLabel(kind: BookPage["kind"], lang: "en" | "zh") {
     toc: { en: "Contents", zh: "目录" },
     lesson: { en: "Lesson", zh: "课文" },
     practice: { en: "Practice", zh: "练习" },
+    writing: { en: "Writing", zh: "写字" },
     garden: { en: "Language Garden", zh: "语文园地" },
     speaking: { en: "Speaking", zh: "口语交际" },
     reading: { en: "Reading Club", zh: "快乐读书吧" },
