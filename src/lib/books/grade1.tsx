@@ -402,7 +402,12 @@ function lessonPage(opts: {
   write: { ch: string; py: string; strokes: number; radical: string; word: string }[];
   practice: string[];
   think: string;
+  readWords?: string[];
+  picture?: string;
 }) {
+  const readWords = opts.readWords ?? opts.recognize.map((r) => r.word);
+  const picture = opts.picture ?? `课文配插图，帮助理解《${opts.zhTitle}》的内容。看图读课文，图意和文字互相印证。`;
+  const strokeHint = opts.write.map((w) => `${w.ch}（${w.strokes}画，${w.radical}部）`).join("  ");
   return [
     {
       kind: "lesson" as const,
@@ -411,16 +416,34 @@ function lessonPage(opts: {
         en: <>
           <Passage pairs={opts.passage} />
           <p className="mt-2 text-xs text-ink-light/60">{opts.pinyin}</p>
-          <p className="mt-4 text-sm leading-relaxed text-ink/70"><b>讲一讲：</b>{opts.note}</p>
+          <div className="mt-4 rounded-lg bg-teal/5 p-3">
+            <p className="text-sm font-bold text-teal">朗读与背诵</p>
+            <p className="mt-1 text-sm text-ink/80">朗读课文，读准字音，注意停顿。短课文试着背诵。</p>
+          </div>
           <Recognize rows={opts.recognize} />
           <Write rows={opts.write} />
+          <p className="mt-3 text-xs text-ink-light">笔顺书空：{strokeHint}</p>
+          <div className="mt-4 rounded-lg bg-amber-50/60 p-3">
+            <p className="mb-1 text-sm font-bold text-amber-700">读一读</p>
+            <p className="font-serif-sc text-lg">{readWords.join("  ")}</p>
+          </div>
+          <p className="mt-4 text-sm leading-relaxed text-ink/70"><b>讲一讲：</b>{opts.note}</p>
         </>,
         zh: <>
           <Passage pairs={opts.passage} />
           <p className="mt-2 text-xs text-ink-light/60">{opts.pinyin}</p>
-          <p className="mt-4 text-sm leading-relaxed text-ink/70"><b>讲一讲：</b>{opts.note}</p>
+          <div className="mt-4 rounded-lg bg-teal/5 p-3">
+            <p className="text-sm font-bold text-teal">朗读与背诵</p>
+            <p className="mt-1 text-sm text-ink/80">朗读课文，读准字音，注意停顿。短课文试着背诵。</p>
+          </div>
           <Recognize rows={opts.recognize} />
           <Write rows={opts.write} />
+          <p className="mt-3 text-xs text-ink-light">笔顺书空：{strokeHint}</p>
+          <div className="mt-4 rounded-lg bg-amber-50/60 p-3">
+            <p className="mb-1 text-sm font-bold text-amber-700">读一读</p>
+            <p className="font-serif-sc text-lg">{readWords.join("  ")}</p>
+          </div>
+          <p className="mt-4 text-sm leading-relaxed text-ink/70"><b>讲一讲：</b>{opts.note}</p>
         </>,
       },
     },
@@ -429,12 +452,20 @@ function lessonPage(opts: {
       title: { en: `${opts.enTitle} · Practice`, zh: `${opts.zhTitle} · 课后练习` },
       body: {
         en: <>
+          <div className="mb-4 rounded-lg bg-stone-50 p-3">
+            <p className="mb-1 text-sm font-bold text-stone-600">插图</p>
+            <p className="text-sm text-ink-light">{picture}</p>
+          </div>
           <Practice items={opts.practice} />
-          <p className="mt-4 rounded-lg bg-amber-50/60 p-3 text-sm text-ink/80"><b>Think:</b> {opts.think}</p>
+          <p className="mt-4 rounded-lg bg-amber-50/60 p-3 text-sm text-ink/80"><b>Think & speak:</b> {opts.think}</p>
         </>,
         zh: <>
+          <div className="mb-4 rounded-lg bg-stone-50 p-3">
+            <p className="mb-1 text-sm font-bold text-stone-600">插图</p>
+            <p className="text-sm text-ink-light">{picture}</p>
+          </div>
           <Practice items={opts.practice} />
-          <p className="mt-4 rounded-lg bg-amber-50/60 p-3 text-sm text-ink/80"><b>思考：</b>{opts.think}</p>
+          <p className="mt-4 rounded-lg bg-amber-50/60 p-3 text-sm text-ink/80"><b>思考说话：</b>{opts.think}</p>
         </>,
       },
     },
