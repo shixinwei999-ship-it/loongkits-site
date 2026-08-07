@@ -431,3 +431,8 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 3px 4px rgba(120, 80, 10, 0.22)) drop-shadow(0 1px 0 rgba(255, 245, 200, 0.5));
 }
+
+/* ===== 拼音注音（ruby） ===== */
+.ruby-zh { ruby-position: over; ruby-align: center; }
+.ruby-zh rt { font-size: 0.34em; font-weight: 500; color: #b3121f; letter-spacing: 0.02em; font-family: 'Inter','Nunito',system-ui,sans-serif; line-height: 1; }
+.prose-book table { font-size: 0.9rem; }

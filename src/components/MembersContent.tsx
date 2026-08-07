@@ -169,73 +169,66 @@ export function MembersContent() {
             </p>
           </Reveal>
 
-          {/* Track content */}
-          {tab === "kids" && (
-            <div className="space-y-12">
-              {kidsTracks.map((track) => (
-                <Reveal key={track.id}>
-                  <div className="mb-4 flex items-baseline gap-3">
-                    <h3 className="font-nunito text-2xl font-extrabold text-ink">{track.label[lang]}</h3>
-                    <span className="text-sm text-ink-light">{track.ageRange[lang]}</span>
+          {/* Track content = 书架：每本只是一本书的封面，点封面翻开 */}
+          {(() => {
+            type Cover = { id: string; label: Bi<string>; sub: Bi<string>; book?: Book };
+            let shelf: Cover[] = [];
+            if (tab === "kids") shelf = kidsTracks.map((t) => ({ id: t.id, label: t.label, sub: t.ageRange, book: books[t.id] }));
+            else if (tab === "self") shelf = selfStudyTracks.map((t) => ({ id: t.id, label: t.label, sub: { en: t.hskRange, zh: t.hskRange } }));
+            else shelf = kidsTracks.map((t) => ({ id: t.id, label: { en: `${t.label.en} Teacher`, zh: `${t.label.zh} · 教师` }, sub: t.ageRange }));
+
+            const palette = ["#b3121f", "#2d6a4f", "#c9a24a", "#1f4a38", "#7c3aed", "#92400e", "#334155", "#0f766e", "#9f1239", "#4c1d95", "#115e59", "#7c2d12"];
+            return (
+              <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
+                {shelf.map((c, i) => {
+                  const color = palette[i % palette.length];
+                  const ready = !!c.book;
+                  return (
                     <button
+                      key={c.id}
                       type="button"
-                      onClick={() => books[track.id] && setOpenBook(books[track.id])}
-                      disabled={!books[track.id]}
-                      className={`ml-auto rounded-lg px-4 py-2 text-sm font-bold transition-all ${
-                        books[track.id]
-                          ? "bg-[#b3121f] text-white hover:-translate-y-0.5 hover:bg-[#9d0f1b]"
-                          : "cursor-not-allowed border border-teal/15 text-ink-light/50"
-                      }`}
+                      onClick={() => ready && setOpenBook(c.book!)}
+                      disabled={!ready}
+                      className="group relative aspect-[3/4] text-left disabled:cursor-default"
+                      style={{ perspective: "800px" }}
                     >
-                      {books[track.id] ? (lang === "en" ? "📖 Open the book" : "📖 打开这本书") : (lang === "en" ? "In progress" : "本书编写中")}
+                      {/* 书脊阴影 */}
+                      <div className="absolute -inset-x-2 bottom-2 top-4 rounded-lg bg-black/10 blur-md transition-opacity group-hover:opacity-80" />
+                      {/* 书面 */}
+                      <div
+                        className={`relative h-full w-full overflow-hidden rounded-r-md rounded-l-sm shadow-lg transition-all duration-300 ${ready ? "group-hover:-translate-y-2 group-hover:rotate-[-1deg]" : "opacity-60"}`}
+                        style={{
+                          background: `linear-gradient(135deg, ${color} 0%, ${color} 60%, rgba(0,0,0,0.25) 100%)`,
+                          boxShadow: "inset 6px 0 10px -6px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.08)",
+                        }}
+                      >
+                        {/* 书脊高光 */}
+                        <div className="absolute inset-y-0 left-0 w-2 bg-white/15" />
+                        <div className="absolute inset-y-0 left-2 w-px bg-black/30" />
+                        {/* 内容 */}
+                        <div className="flex h-full flex-col items-center justify-between p-4 pt-6 text-center text-white">
+                          <p className="font-inter text-[0.55rem] font-bold uppercase tracking-[0.3em] text-white/70">Loong Kits</p>
+                          <div className="flex flex-col items-center">
+                            <span className="font-serif-sc text-5xl font-bold leading-none text-white/90">{c.label.zh}</span>
+                            <span className="mt-2 font-inter text-[0.6rem] font-medium uppercase tracking-[0.2em] text-white/60">{c.label.en}</span>
+                          </div>
+                          <div className="flex flex-col items-center gap-1">
+                            <span className="font-serif-sc text-3xl font-bold text-white/20">龙</span>
+                            <span className="text-[0.6rem] text-white/60">{c.sub[lang]}</span>
+                            {ready ? (
+                              <span className="mt-1 rounded-full bg-white/90 px-3 py-0.5 text-[0.6rem] font-bold text-[#1a1a1a]">{lang === "en" ? "Open" : "翻开"}</span>
+                            ) : (
+                              <span className="mt-1 rounded-full bg-black/30 px-3 py-0.5 text-[0.6rem] font-medium text-white/70">{lang === "en" ? "Soon" : "编写中"}</span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
                     </button>
-                  </div>
-                  <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                    {track.units.map((unit) => (
-                      <UnitCard key={unit.id} unit={unit} lang={lang} />
-                    ))}
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          )}
-
-          {tab === "self" && (
-            <div className="space-y-12">
-              {selfStudyTracks.map((track) => (
-                <Reveal key={track.id}>
-                  <div className="mb-4 flex items-baseline gap-3">
-                    <h3 className="font-nunito text-2xl font-extrabold text-ink">{track.label[lang]}</h3>
-                    <span className="text-sm text-ink-light">{track.hskRange}</span>
-                  </div>
-                  <p className="text-sm text-ink-light mb-4">{track.desc[lang]}</p>
-                  <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                    {track.units.map((unit) => (
-                      <UnitCard key={unit.id} unit={unit} lang={lang} />
-                    ))}
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          )}
-
-          {tab === "teachers" && (
-            <div className="space-y-12">
-              {teacherTracks.map((track) => (
-                <Reveal key={track.id}>
-                  <div className="mb-4 flex items-baseline gap-3">
-                    <h3 className="font-nunito text-2xl font-extrabold text-ink">{track.label[lang]}</h3>
-                    <span className="text-sm text-ink-light">{track.ageRange[lang]}</span>
-                  </div>
-                  <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                    {track.units.map((unit) => (
-                      <UnitCard key={unit.id} unit={unit} lang={lang} />
-                    ))}
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          )}
+                  );
+                })}
+              </div>
+            );
+          })()}
         </div>
       </section>
 
