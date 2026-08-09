@@ -7,11 +7,12 @@ import { IconArrowRight, IconBook, IconUsers, IconTeacher } from "@/components/i
 import { kidsTracks, selfStudyTracks, teacherTracks, type Unit, type LessonItem } from "@/lib/curriculum";
 import { BookReader, type Book } from "@/components/BookReader";
 import { grade1Book } from "@/lib/books/grade1";
+import { grade2Book } from "@/lib/books/grade2";
 
 type Tab = "kids" | "self" | "teachers";
 
 // 已完成的完整书。未列出的年级 = 编写中。
-const books: Record<string, Book> = { g1: grade1Book };
+const books: Record<string, Book> = { g1: grade1Book, g2: grade2Book };
 
 function LessonRow({ lesson, lang }: { lesson: LessonItem; lang: "en" | "zh" }) {
   const [open, setOpen] = useState(false);

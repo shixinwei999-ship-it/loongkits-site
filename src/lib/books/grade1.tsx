@@ -1151,3 +1151,9 @@ function gardenPage(num: string, sections: string[], poem?: { zhTitle: string; l
     },
   };
 }
+
+// 供其他年级书复用
+export {
+  Passage, Recognize, Write, Practice, TianZiGe, CharPic, Illustration,
+  pinyinPage, lessonPage, sanzijing, strokePage, unitPage, poemPage, songPage, shiziPage, speakPage, gardenPage,
+};

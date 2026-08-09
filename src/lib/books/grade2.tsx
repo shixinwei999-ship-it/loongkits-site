@@ -1,0 +1,292 @@
+import type { Book } from "@/components/BookReader";
+import {
+  lessonPage, shiziPage, gardenPage, speakPage, unitPage, poemPage, strokePage,
+} from "./grade1";
+
+// 二年级 · 上册（按部编版二年级上册结构：课文/识字八单元 + 语文园地 + 口语交际 + 附表）
+export const grade2Book: Book = {
+  gradeId: "g2",
+  title: { en: "Grade 2 · Book One", zh: "二年级 · 上册" },
+  subtitle: { en: "Stories & Seasons", zh: "故事与四季" },
+  pages: [
+    { kind: "cover", title: { en: "Cover", zh: "封面" } },
+    {
+      kind: "copyright", title: { en: "About this book", zh: "出版说明" },
+      body: {
+        en: <>Loong Kits Grade 2 Book One, structured after the People's Education Press second-grade textbook. Eight units of texts and characters, language gardens, speaking practice, and reference tables.</>,
+        zh: <>《Loong Kits 二年级 · 上册》。按部编版二年级上册结构编写：八个单元的课文与识字、语文园地、口语交际、附表。</>,
+      },
+    },
+    { kind: "toc", title: { en: "Contents", zh: "目录" } },
+
+    // ── 第一单元 课文 ──
+    unitPage("一", "课文", "Texts", "动物的成长与智慧：小蝌蚪、水、植物妈妈。", ["小蝌蚪找妈妈", "我是什么", "植物妈妈有办法"]),
+    ...lessonPage({
+      zhTitle: "小蝌蚪找妈妈", enTitle: "Little Tadpoles Look for Mum", pinyin: "xiǎo kē dǒu zhǎo mā ma",
+      passage: [["chí","池"],["táng","塘"],["lǐ","里"],["yǒu","有"],["yì","一"],["qún","群"],["xiǎo","小"],["kē","蝌"],["dǒu","蚪"],["，","，"],["dà","大"],["nǎo","脑"],["dai","袋"],["，","，"],["cháng","长"],["wěi","尾"],["ba","巴"],["。","。"],["tā","它"],["men","们"],["wà","瓦"],["jiě","解"],["mā","妈"],["mā","妈"],["。","。"]],
+      note: "小蝌蚪先长后腿、再长前腿、尾巴变短，最后变成青蛙。找妈妈的过程就是成长的过程。",
+      recognize: [{ch:"塘",py:"táng",word:"池塘"},{ch:"蝌",py:"kē",word:"蝌蚪"},{ch:"蚪",py:"dǒu",word:"蝌蚪"},{ch:"脑",py:"nǎo",word:"大脑"},{ch:"袋",py:"dài",word:"口袋"},{ch:"蛙",py:"wā",word:"青蛙"}],
+      write: [{ch:"两",py:"liǎng",strokes:7,radical:"一",word:"两个"},{ch:"就",py:"jiù",strokes:12,radical:"尢",word:"就是"},{ch:"哪",py:"nǎ",strokes:9,radical:"口",word:"哪里"},{ch:"孩",py:"hái",strokes:9,radical:"子",word:"孩子"}],
+      practice: ["朗读课文，注意小蝌蚪变化的顺序。","小蝌蚪先长什么？再长什么？","青蛙妈妈长什么样？"],
+      think: "小蝌蚪为什么会认错妈妈？",
+    }),
+    ...lessonPage({
+      zhTitle: "我是什么", enTitle: "What Am I", pinyin: "wǒ shì shén me",
+      passage: [["wǒ","我"],["huì","会"],["biàn","变"],["。","。"],["tài","太"],["阳","阳"],["yí","一"],["shài","晒"],["，","，"],["wǒ","我"],["biàn","变"],["chéng","成"],["qì","气"],["。","。"],["shēng","升"],["shàng","上"],["tiān","天"],["，","，"],["wǒ","我"],["biàn","变"],["chéng","成"],["yún","云"],["。","。"]],
+      note: "「我」是水。水会变：汽、云、雨、雹子、雪。一篇讲水的变化的科学小品。",
+      recognize: [{ch:"晒",py:"shài",word:"晒太阳"},{ch:"汽",py:"qì",word:"汽水"},{ch:"云",py:"yún",word:"白云"},{ch:"雹",py:"báo",word:"雹子"},{ch:"雪",py:"xuě",word:"下雪"},{ch:"溪",py:"xī",word:"小溪"}],
+      write: [{ch:"变",py:"biàn",strokes:8,radical:"又",word:"变化"},{ch:"片",py:"piàn",strokes:4,radical:"片",word:"一片"},{ch:"海",py:"hǎi",strokes:10,radical:"氵",word:"大海"},{ch:"洋",py:"yáng",strokes:9,radical:"氵",word:"海洋"}],
+      practice: ["朗读课文，猜猜「我」是什么。","水会变成哪些样子？","你在哪里见过水？"],
+      think: "水对人类有什么好处？",
+    }),
+    ...lessonPage({
+      zhTitle: "植物妈妈有办法", enTitle: "Plant Mums Have Ways", pinyin: "zhí wù mā ma yǒu bàn fǎ",
+      passage: [["hái","孩"],["zi","子"],["rú","如"],["guǒ","果"],["yǐ","已"],["jīng","经"],["zhǎng","长"],["dà","大"],["，","，"],["jiù","就"],["yào","要"],["gào","告"],["bié","别"],["mā","妈"],["妈","妈"],["。","。"],["pú","蒲"],["公","公"],["yīng","英"],["mā","妈"],["mā","妈"],["zhǔn","准"],["bèi","备"],["le","了"],["jiàng","降"],["luò","落"],["sǎn","伞"],["。","。"]],
+      note: "植物传播种子的办法：蒲公英靠风、苍耳靠动物、豌豆靠太阳晒炸开。大自然真奇妙。",
+      recognize: [{ch:"植",py:"zhí",word:"植物"},{ch:"如",py:"rú",word:"如果"},{ch:"旅",py:"lǚ",word:"旅行"},{ch:"降",py:"jiàng",word:"降落"},{ch:"蒲",py:"pú",word:"蒲公英"},{ch:"苍",py:"cāng",word:"苍耳"}],
+      write: [{ch:"法",py:"fǎ",strokes:8,radical:"氵",word:"办法"},{ch:"脚",py:"jiǎo",strokes:11,radical:"月",word:"手脚"},{ch:"娃",py:"wá",strokes:9,radical:"女",word:"娃娃"},{ch:"它",py:"tā",strokes:5,radical:"宀",word:"它们"}],
+      practice: ["朗读课文，背诵。","蒲公英、苍耳、豌豆各靠什么传播种子？","你还知道哪种植物传播种子的办法？"],
+      think: "为什么说植物妈妈「有办法」？",
+    }),
+    speakPage("有趣的动物", "向大家介绍一种你觉得有趣的动物，说出它有趣在哪里。", ["说清楚动物的样子和习性。", "听别人说，可以提问。"], ["我觉得鹦鹉很有趣，它会学人说话。","松鼠的尾巴像降落伞，很有趣。"]),
+    gardenPage("一", ["识字加油站：去野外郊游--帐篷、水壶、地图、指南针。","字词句运用：用「有时候……有时候……」说话。","书写提示：左右结构的字，左窄右宽。","日积月累：梅花--墙角数枝梅，凌寒独自开。"], { zhTitle: "梅花", lines: ["墙角数枝梅，", "凌寒独自开。", "遥知不是雪", "为有暗香来。"] }),
+    {
+      kind: "reading", title: { en: "Happy Reading", zh: "快乐读书吧 · 读童话故事" },
+      body: {
+        en: <>Read fairy tales: 《安徒生童话》《格林童话》《稻草人》. Read one story a day and tell it to someone.</>,
+        zh: <>读童话故事：《安徒生童话》《格林童话》《稻草人》。每天读一个故事，讲给家人听。</>,
+      },
+    },
+
+    // ── 第二单元 识字 ──
+    unitPage("二", "识字", "Characters", "场景、树木、动物、四季--在儿歌中识字。", ["场景歌", "树之歌", "拍手歌", "田家四季歌"]),
+    shiziPage("场景歌", [{ch:"海",py:"hǎi",word:"大海"},{ch:"滩",py:"tān",word:"沙滩"},{ch:"军",py:"jūn",word:"军舰"},{ch:"帆",py:"fān",word:"帆船"}], "一只海鸥，一片沙滩。一艘军舰，一条帆船。--用量词认识场景。", "一只海鸥一片沙滩，一艘军舰一条帆船。一方鱼塘一块稻田，一行垂柳一座花园。"),
+    shiziPage("树之歌", [{ch:"杨",py:"yáng",word:"杨树"},{ch:"桐",py:"tóng",word:"梧桐"},{ch:"枫",py:"fēng",word:"枫叶"},{ch:"松",py:"sōng",word:"松树"},{ch:"柏",py:"bǎi",word:"柏树"}], "杨树高，榕树壮，梧桐树叶像手掌。--认识各种树。", "杨树高，榕树壮，梧桐树叶像手掌。枫树秋天叶儿红，松柏四季披绿装。"),
+    shiziPage("拍手歌", [{ch:"雀",py:"què",word:"孔雀"},{ch:"锦",py:"jǐn",word:"锦鸡"},{ch:"鹰",py:"yīng",word:"老鹰"},{ch:"鹂",py:"lí",word:"黄鹂"}], "你拍一，我拍一，动物世界很新奇。--在拍手歌中识动物字。", "你拍一，我拍一，动物世界很新奇。你拍二，我拍二，孔雀锦鸡是伙伴。"),
+    shiziPage("田家四季歌", [{ch:"季",py:"jì",word:"四季"},{ch:"蝴",py:"hú",word:"蝴蝶"},{ch:"蝶",py:"dié",word:"蝴蝶"},{ch:"麦",py:"mài",word:"麦苗"},{ch:"苗",py:"miáo",word:"麦苗"}], "春季里，春风吹，花开草长蝴蝶飞。--四季农事歌。", "春季里，春风吹，花开草长蝴蝶飞。夏季里，农事忙，采了蚕桑又插秧。"),
+    gardenPage("二", ["识字加油站：用部首猜字义--「氵」多与水有关，「木」多与树有关。","字词句运用：比一比，组词--「园/圆」「旗/棋」。","书写提示：上下结构的字，上紧下松。","日积月累：有山皆图画，无水不文章。"], { zhTitle: "树之歌", lines: ["杨树高，榕树壮，", "梧桐树叶像手掌。"] }),
+
+    // ── 第三单元 课文 ──
+    unitPage("三", "课文", "Texts", "智慧与亲情：曹冲称象、玲玲的画、一封信、妈妈睡了。", ["曹冲称象", "玲玲的画", "一封信", "妈妈睡了"]),
+    ...lessonPage({
+      zhTitle: "曹冲称象", enTitle: "Cao Chong Weighs the Elephant", pinyin: "cáo chōng chēng xiàng",
+      passage: [["gǔ","古"],["shí","时"],["hou","候"],["yǒu","有"],["gè","个"],["xiǎo","小"],["hái","孩"],["zi","子"],["，","，"],["jiào","叫"],["cáo","曹"],["chōng","冲"],["。","。"],["rén","人"],["jiā","家"],["sòng","送"],["tā","他"],["yì","一"],["tóu","头"],["dà","大"],["xiàng","象"],["。","。"]],
+      note: "曹冲用船和石头称象：把象赶上船，画线；换石头到线，称石头。聪明的办法。",
+      recognize: [{ch:"曹",py:"cáo",word:"曹冲"},{ch:"称",py:"chēng",word:"称象"},{ch:"象",py:"xiàng",word:"大象"},{ch:"船",py:"chuán",word:"大船"},{ch:"杆",py:"gǎn",word:"秤杆"},{ch:"秤",py:"chèng",word:"大秤"}],
+      write: [{ch:"称",py:"chēng",strokes:10,radical:"禾",word:"称象"},{ch:"柱",py:"zhù",strokes:9,radical:"木",word:"柱子"},{ch:"议",py:"yì",strokes:5,radical:"讠",word:"议论"},{ch:"杆",py:"gǎn",strokes:7,radical:"木",word:"秤杆"}],
+      practice: ["朗读课文，说说曹冲的办法。","官员们想了什么办法？曹冲的呢？","曹冲的办法好在哪里？"],
+      think: "你还能想出别的称象办法吗？",
+    }),
+    ...lessonPage({
+      zhTitle: "玲玲的画", enTitle: "Lingling's Drawing", pinyin: "líng ling de huà",
+      passage: [["líng","玲"],["líng","玲"],["dé","得"],["yì","意"],["dì","地"],["huà","画"],["le","了"],["yì","一"],["fú","幅"],["huà","画"],["。","。"],["kě","可"],["shì","是"],["huà","画"],["nòng","弄"],["zāng","脏"],["le","了"],["。","。"]],
+      note: "画弄脏了，爸爸让玲玲在脏的地方画点什么。玲玲画了只小狗，画更好了。坏事有时能变好事。",
+      recognize: [{ch:"玲",py:"líng",word:"玲玲"},{ch:"幅",py:"fú",word:"一幅"},{ch:"脏",py:"zāng",word:"弄脏"},{ch:"报",py:"bào",word:"报纸"},{ch:"奖",py:"jiǎng",word:"评奖"}],
+      write: [{ch:"画",py:"huà",strokes:8,radical:"田",word:"画画"},{ch:"幅",py:"fú",strokes:12,radical:"巾",word:"一幅"},{ch:"评",py:"píng",strokes:7,radical:"讠",word:"评奖"},{ch:"奖",py:"jiǎng",strokes:9,radical:"大",word:"奖状"}],
+      practice: ["朗读课文。","画弄脏后玲玲做了什么？","爸爸说的好办法是什么？"],
+      think: "你遇到过坏事变好事的事吗？",
+    }),
+    ...lessonPage({
+      zhTitle: "一封信", enTitle: "A Letter", pinyin: "yì fēng xìn",
+      passage: [["bà","爸"],["ba","爸"],["bú","不"],["zài","在"],["jiā","家"],["，","，"],["lù","露"],["lu","露"],["xī","西"],["gěi","给"],["bà","爸"],["ba","爸"],["xiě","写"],["xìn","信"],["。","。"]],
+      note: "露西给爸爸写信。第一封写得难过，第二封写得开心。同一件事，换个心情写就不一样。",
+      recognize: [{ch:"封",py:"fēng",word:"一封信"},{ch:"信",py:"xìn",word:"写信"},{ch:"削",py:"xiāo",word:"削铅笔"},{ch:"锅",py:"guō",word:"铁锅"},{ch:"朝",py:"cháo",word:"朝向"}],
+      write: [{ch:"信",py:"xìn",strokes:9,radical:"亻",word:"写信"},{ch:"今",py:"jīn",strokes:4,radical:"人",word:"今天"},{ch:"写",py:"xiě",strokes:5,radical:"冖",word:"写字"},{ch:"支",py:"zhī",strokes:4,radical:"支",word:"一支"}],
+      practice: ["朗读课文。","露西写了几封信？内容有什么不同？","你更喜欢哪一封？为什么？"],
+      think: "给家人写一句话吧。",
+    }),
+    ...lessonPage({
+      zhTitle: "妈妈睡了", enTitle: "Mum Is Asleep", pinyin: "mā ma shuì le",
+      passage: [["mā","妈"],["ma","妈"],["shuì","睡"],["le","了"],["。","。"],["mā","妈"],["ma","妈"],["hǒng","哄"],["wǒ","我"],["shuì","睡"],["wǔ","午"],["jiào","觉"],["，","，"],["zì","自"],["jǐ","己"],["xiān","先"],["shuì","睡"],["le","了"],["。","。"]],
+      note: "妈妈哄我睡，自己先睡了。我看着睡着的妈妈，觉得她好温柔、好累。体会对妈妈的爱。",
+      recognize: [{ch:"哄",py:"hǒng",word:"哄我"},{ch:"睡",py:"shuì",word:"睡觉"},{ch:"润",py:"rùn",word:"红润"},{ch:"乏",py:"fá",word:"疲乏"}],
+      write: [{ch:"哄",py:"hǒng",strokes:9,radical:"口",word:"哄我"},{ch:"先",py:"xiān",strokes:6,radical:"儿",word:"先睡"},{ch:"闭",py:"bì",strokes:6,radical:"门",word:"闭眼"},{ch:"脸",py:"liǎn",strokes:11,radical:"月",word:"脸蛋"}],
+      practice: ["朗读课文，读出温柔。","睡着的妈妈是什么样？","你为妈妈做过什么？"],
+      think: "妈妈为什么这么累？",
+    }),
+    gardenPage("三", ["识字加油站：数量词--一（支）笔、一（张）纸、一（封）信。","字词句运用：用「一边……一边……」说话。","书写提示：左右结构的字，注意高低。","日积月累：小儿垂钓--蓬头稚子学垂纶，侧坐莓苔草映身。"], { zhTitle: "小儿垂钓", lines: ["蓬头稚子学垂纶，", "侧坐莓苔草映身。", "路人借问遥招手，", "怕得鱼惊不应人。"] }),
+
+    // ── 第四单元 课文 ──
+    unitPage("四", "课文", "Texts", "祖国山河：黄山、日月潭、葡萄沟。", ["古诗二首", "黄山奇石", "日月潭", "葡萄沟"]),
+    ...lessonPage({
+      zhTitle: "登鹳雀楼", enTitle: "Climbing Stork Tower", pinyin: "dēng guàn què lóu",
+      passage: [["bái","白"],["rì","日"],["yī","依"],["shān","山"],["jìn","尽"],["，","，"],["huáng","黄"],["hé","河"],["rù","入"],["hǎi","海"],["liú","流"],["。","。"],["yù","欲"],["qióng","穷"],["qiān","千"],["lǐ","里"],["mù","目"],["，","，"],["gèng","更"],["shàng","上"],["yì","一"],["céng","层"],["lóu","楼"],["。","。"]],
+      note: "王之涣。站得高看得远，鼓励人不断向上。",
+      recognize: [{ch:"鹳",py:"guàn",word:"鹳雀楼"},{ch:"雀",py:"què",word:"孔雀"},{ch:"楼",py:"lóu",word:"高楼"},{ch:"穷",py:"qióng",word:"穷尽"}],
+      write: [{ch:"楼",py:"lóu",strokes:13,radical:"木",word:"高楼"},{ch:"依",py:"yī",strokes:8,radical:"亻",word:"依山"},{ch:"尽",py:"jìn",strokes:6,radical:"尸",word:"尽头"},{ch:"更",py:"gèng",strokes:7,radical:"一",word:"更加"}],
+      practice: ["朗读并背诵。","诗人看到了什么？","「更上一层楼」告诉我们什么？"],
+      think: "你登过高处吗？看到什么？",
+    }),
+    ...lessonPage({
+      zhTitle: "黄山奇石", enTitle: "Strange Stones of Huangshan", pinyin: "huáng shān qí shí",
+      passage: [["wén","闻"],["míng","名"],["zhōng","中"],["wài","外"],["de","的"],["huáng","黄"],["shān","山"],["，","，"],["yǒu","有"],["xǔ","许"],["duō","多"],["qí","奇"],["shí","石"],["。","。"]],
+      note: "黄山有「仙桃石」「猴子观海」「仙人指路」等奇石，形状像各种东西，很有趣。",
+      recognize: [{ch:"黄",py:"huáng",word:"黄山"},{ch:"奇",py:"qí",word:"奇石"},{ch:"仙",py:"xiān",word:"仙人"},{ch:"桃",py:"táo",word:"仙桃"},{ch:"著",py:"zhù",word:"著名"}],
+      write: [{ch:"奇",py:"qí",strokes:8,radical:"大",word:"奇怪"},{ch:"石",py:"shí",strokes:5,radical:"石",word:"石头"},{ch:"巨",py:"jù",strokes:4,radical:"匚",word:"巨大"},{ch:"位",py:"wèi",strokes:7,radical:"亻",word:"一位"}],
+      practice: ["朗读课文。","黄山有哪些奇石？","选一块奇石，说说它像什么。"],
+      think: "给一块奇石起个名字。",
+    }),
+    ...lessonPage({
+      zhTitle: "日月潭", enTitle: "Sun-Moon Lake", pinyin: "rì yuè tán",
+      passage: [["rì","日"],["yuè","月"],["tán","潭"],["zài","在"],["tái","台"],["wān","湾"],["shěng","省"],["zhōng","中"],["bù","部"],["de","的"],["shān","山"],["qū","区"],["。","。"]],
+      note: "日月潭在台湾。湖中央小岛把湖分成两半：一边圆像太阳叫日潭，一边弯像月亮叫月潭。",
+      recognize: [{ch:"潭",py:"tán",word:"日月潭"},{ch:"湾",py:"wān",word:"台湾"},{ch:"省",py:"shěng",word:"省份"},{ch:"环",py:"huán",word:"环绕"},{ch:"绕",py:"rào",word:"环绕"}],
+      write: [{ch:"湾",py:"wān",strokes:12,radical:"氵",word:"台湾"},{ch:"名",py:"míng",strokes:6,radical:"口",word:"名字"},{ch:"胜",py:"shèng",strokes:9,radical:"月",word:"名胜"},{ch:"迹",py:"jì",strokes:9,radical:"辶",word:"古迹"}],
+      practice: ["朗读课文。","日月潭的名字怎么来的？","日月潭什么时候最美？"],
+      think: "你想去日月潭吗？为什么？",
+    }),
+    ...lessonPage({
+      zhTitle: "葡萄沟", enTitle: "Grape Valley", pinyin: "pú tao gōu",
+      passage: [["xīn","新"],["jiāng","疆"],["tǔ","吐"],["lù","鲁"],["fān","番"],["yǒu","有"],["gè","个"],["pú","葡"],["tao","萄"],["gōu","沟"],["。","。"]],
+      note: "新疆吐鲁番的葡萄沟盛产葡萄，葡萄干有名。那里的人热情好客。",
+      recognize: [{ch:"葡",py:"pú",word:"葡萄"},{ch:"萄",py:"tao",word:"葡萄"},{ch:"沟",py:"gōu",word:"葡萄沟"},{ch:"疆",py:"jiāng",word:"新疆"},{ch:"维",py:"wéi",word:"维吾尔"}],
+      write: [{ch:"沟",py:"gōu",strokes:7,radical:"氵",word:"水沟"},{ch:"产",py:"chǎn",strokes:6,radical:"立",word:"生产"},{ch:"枝",py:"zhī",strokes:8,radical:"木",word:"枝叶"},{ch:"收",py:"shōu",strokes:6,radical:"攵",word:"收到"}],
+      practice: ["朗读课文。","葡萄沟在哪里？盛产什么？","为什么说葡萄沟是好地方？"],
+      think: "你喜欢葡萄沟的什么？",
+    }),
+    gardenPage("四", ["识字加油站：地名--黄山、日月潭、葡萄沟，在地图上找一找。","字词句运用：用「像」写比喻句。","书写提示：半包围结构的字，先外后内。","日积月累：桂林山水甲天下。"], { zhTitle: "望庐山瀑布", lines: ["日照香炉生紫烟，", "遥看瀑布挂前川。", "飞流直下三千尺，", "疑是银河落九天。"] }),
+
+    // ── 第五单元 课文 ──
+    unitPage("五", "课文", "Texts", "寓言与道理：坐井观天、寒号鸟、我要的是葫芦。", ["坐井观天", "寒号鸟", "我要的是葫芦"]),
+    ...lessonPage({
+      zhTitle: "坐井观天", enTitle: "The Frog in the Well", pinyin: "zuò jǐng guān tiān",
+      passage: [["qīng","青"],["wā","蛙"],["zuò","坐"],["zài","在"],["jǐng","井"],["lǐ","里"],["，","，"],["tā","它"],["shuō","说"],["：","："],["tiān","天"],["bú","不"],["guò","过"],["jǐng","井"],["kǒu","口"],["nà","那"],["me","么"],["dà","大"],["。","。"]],
+      note: "青蛙在井里，以为天只有井口大。小鸟说天无边无际。眼界小了，看到的世界就小。",
+      recognize: [{ch:"井",py:"jǐng",word:"井口"},{ch:"观",py:"guān",word:"观看"},{ch:"沿",py:"yán",word:"井沿"},{ch:"际",py:"jì",word:"无边无际"}],
+      write: [{ch:"井",py:"jǐng",strokes:4,radical:"二",word:"井口"},{ch:"观",py:"guān",strokes:6,radical:"又",word:"观看"},{ch:"沿",py:"yán",strokes:8,radical:"氵",word:"井沿"},{ch:"际",py:"jì",strokes:7,radical:"阝",word:"国际"}],
+      practice: ["朗读课文，分角色读。","青蛙和小鸟对「天」的看法有什么不同？","谁说得对？为什么？"],
+      think: "你做过「坐井观天」的事吗？",
+    }),
+    ...lessonPage({
+      zhTitle: "寒号鸟", enTitle: "The Cold Bird", pinyin: "hán hào niǎo",
+      passage: [["hán","寒"],["hào","号"],["niǎo","鸟"],["tīng","听"],["xǐ","喜"],["què","鹊"],["quàn","劝"],["tā","它"],["lěi","垒"],["wō","窝"],["，","，"],["tā","它"],["shuō","说"],["：","："],["duō","哆"],["luo","啰"],["啰","啰"],["，","，"],["míng","明"],["tiān","天"],["jiù","就"],["lěi","垒"],["。","。"]],
+      note: "寒号鸟懒惰，不听喜鹊劝，不垒窝，冬天冻死了。懒惰、拖延没有好结果。",
+      recognize: [{ch:"寒",py:"hán",word:"寒冷"},{ch:"号",py:"hào",word:"寒号鸟"},{ch:"鹊",py:"què",word:"喜鹊"},{ch:"劝",py:"quàn",word:"劝告"},{ch:"垒",py:"lěi",word:"垒窝"}],
+      write: [{ch:"寒",py:"hán",strokes:12,radical:"宀",word:"寒冷"},{ch:"却",py:"què",strokes:7,radical:"卩",word:"却"},{ch:"将",py:"jiāng",strokes:9,radical:"丬",word:"将来"},{ch:"纷",py:"fēn",strokes:7,radical:"纟",word:"纷纷"}],
+      practice: ["朗读课文。","喜鹊怎么劝寒号鸟？寒号鸟怎么回答？","寒号鸟最后怎样了？"],
+      think: "你想对寒号鸟说什么？",
+    }),
+    ...lessonPage({
+      zhTitle: "我要的是葫芦", enTitle: "What I Want Is the Gourd", pinyin: "wǒ yào de shì hú lu",
+      passage: [["cóng","从"],["qián","前"],["yǒu","有"],["gè","个"],["rén","人"],["zhòng","种"],["le","了"],["yì","一"],["kē","棵"],["hú","葫"],["lu","芦"],["。","。"]],
+      note: "种葫芦的人只要葫芦，不管叶子上的蚜虫。叶子被虫吃了，葫芦也落了。事物是互相联系的。",
+      recognize: [{ch:"葫",py:"hú",word:"葫芦"},{ch:"芦",py:"lu",word:"葫芦"},{ch:"蚜",py:"yá",word:"蚜虫"},{ch:"盯",py:"dīng",word:"盯着"}],
+      write: [{ch:"葫",py:"hú",strokes:12,radical:"艹",word:"葫芦"},{ch:"芦",py:"lú",strokes:7,radical:"艹",word:"芦苇"},{ch:"蚜",py:"yá",strokes:10,radical:"虫",word:"蚜虫"},{ch:"盯",py:"dīng",strokes:7,radical:"目",word:"盯着"}],
+      practice: ["朗读课文。","种葫芦的人想要什么？他管叶子吗？","葫芦为什么落了？"],
+      think: "叶子和葫芦有什么关系？",
+    }),
+    gardenPage("五", ["识字加油站：反义词--快-慢、冷-热、勤-懒。","字词句运用：用「为什么」提问。","书写提示：左右结构的字，左小右大。","日积月累：江雪--千山鸟飞绝，万径人踪灭。"], { zhTitle: "江雪", lines: ["千山鸟飞绝，", "万径人踪灭。", "孤舟蓑笠翁，", "独钓寒江雪。"] }),
+
+    // ── 第六单元 课文 ──
+    unitPage("六", "课文", "Texts", "伟人故事：大禹治水、朱德的扁担、难忘的泼水节。", ["大禹治水", "朱德的扁担", "难忘的泼水节"]),
+    ...lessonPage({
+      zhTitle: "大禹治水", enTitle: "Yu Controls the Flood", pinyin: "dà yǔ zhì shuǐ",
+      passage: [["gǔ","古"],["shí","时"],["hou","候"],["hóng","洪"],["shuǐ","水"],["fàn","泛"],["làn","滥"],["，","，"],["dà","大"],["yǔ","禹"],["qù","去"],["zhì","治"],["shuǐ","水"],["。","。"]],
+      note: "大禹治水十三年，三过家门而不入，用疏导的办法治好了洪水。为民奉献。",
+      recognize: [{ch:"禹",py:"yǔ",word:"大禹"},{ch:"治",py:"zhì",word:"治水"},{ch:"洪",py:"hóng",word:"洪水"},{ch:"疏",py:"shū",word:"疏导"}],
+      write: [{ch:"治",py:"zhì",strokes:8,radical:"氵",word:"治水"},{ch:"洪",py:"hóng",strokes:9,radical:"氵",word:"洪水"},{ch:"灾",py:"zāi",strokes:7,radical:"宀",word:"灾难"},{ch:"难",py:"nán",strokes:10,radical:"隹",word:"困难"}],
+      practice: ["朗读课文。","大禹治水用了多少年？","「三过家门而不入」说明什么？"],
+      think: "大禹是个怎样的人？",
+    }),
+    ...lessonPage({
+      zhTitle: "朱德的扁担", enTitle: "Zhu De's Carrying Pole", pinyin: "zhū dé de biǎn dan",
+      passage: [["zhū","朱"],["dé","德"],["tóng","同"],["zhì","志"],["hé","和"],["zhàn","战"],["shì","士"],["men","们"],["yì","一"],["qǐ","起"],["tiāo","挑"],["liáng","粮"],["。","。"]],
+      note: "朱德和战士一起挑粮，战士藏他的扁担，他又做一根写上「朱德的扁担」。与群众同甘共苦。",
+      recognize: [{ch:"朱",py:"zhū",word:"朱德"},{ch:"德",py:"dé",word:"品德"},{ch:"扁",py:"biǎn",word:"扁担"},{ch:"担",py:"dan",word:"扁担"}],
+      write: [{ch:"朱",py:"zhū",strokes:6,radical:"木",word:"朱德"},{ch:"德",py:"dé",strokes:15,radical:"彳",word:"品德"},{ch:"扁",py:"biǎn",strokes:9,radical:"户",word:"扁担"},{ch:"担",py:"dān",strokes:8,radical:"扌",word:"担心"}],
+      practice: ["朗读课文。","战士为什么藏朱德的扁担？","朱德又做了什么？"],
+      think: "朱德是个怎样的人？",
+    }),
+    ...lessonPage({
+      zhTitle: "难忘的泼水节", enTitle: "An Unforgettable Water Festival", pinyin: "nán wàng de pō shuǐ jié",
+      passage: [["huǒ","火"],["hóng","红"],["de","的"],["fèng","凤"],["wěi","尾"],["zhú","竹"],["zài","在"],["dì","地"],["shàng","上"],["tiào","跳"],["wa","哇"],["tiào","跳"],["。","。"]],
+      note: "周总理和傣族人民一起过泼水节，互相泼水祝福。难忘是因为总理和人民心连心。",
+      recognize: [{ch:"泼",py:"pō",word:"泼水"},{ch:"节",py:"jié",word:"节日"},{ch:"凤",py:"fèng",word:"凤凰"},{ch:"凰",py:"huáng",word:"凤凰"},{ch:"傣",py:"dǎi",word:"傣族"}],
+      write: [{ch:"泼",py:"pō",strokes:8,radical:"氵",word:"泼水"},{ch:"节",py:"jié",strokes:5,radical:"艹",word:"节日"},{ch:"令",py:"lìng",strokes:5,radical:"人",word:"命令"},{ch:"度",py:"dù",strokes:9,radical:"广",word:"度过"}],
+      practice: ["朗读课文。","泼水节是哪个民族的节日？","为什么难忘？"],
+      think: "你和家人过什么难忘的节日？",
+    }),
+    gardenPage("六", ["识字加油站：伟人名字--大禹、朱德、周恩来。","字词句运用：用「一边……一边……」写伟人。","书写提示：注意「德」「难」的笔顺。","日积月累：有志者事竟成。"], { zhTitle: "夜宿山寺", lines: ["危楼高百尺，", "手可摘星辰。", "不敢高声语，", "恐惊天上人。"] }),
+
+    // ── 第七单元 课文 ──
+    unitPage("七", "课文", "Texts", "想象与童话：雾在哪里、雪孩子。", ["古诗二首", "雾在哪里", "雪孩子"]),
+    ...lessonPage({
+      zhTitle: "雾在哪里", enTitle: "Where Is the Fog", pinyin: "wù zài nǎ lǐ",
+      passage: [["cóng","从"],["qián","前"],["yǒu","有"],["yí","一"],["piàn","片"],["wù","雾"],["，","，"],["tā","它"],["bǎ","把"],["dà","大"],["hǎi","海"],["cáng","藏"],["le","了"],["qǐ","起"],["lái","来"],["。","。"]],
+      note: "雾是个淘气的孩子，把大海、天空、城市都藏起来，最后把自己也藏了。想象丰富。",
+      recognize: [{ch:"雾",py:"wù",word:"大雾"},{ch:"淘",py:"táo",word:"淘气"},{ch:"藏",py:"cáng",word:"藏起"},{ch:"暗",py:"àn",word:"黑暗"},{ch:"岸",py:"àn",word:"海岸"}],
+      write: [{ch:"雾",py:"wù",strokes:13,radical:"雨",word:"大雾"},{ch:"淘",py:"táo",strokes:11,radical:"氵",word:"淘气"},{ch:"藏",py:"cáng",strokes:17,radical:"艹",word:"躲藏"},{ch:"暗",py:"àn",strokes:13,radical:"日",word:"黑暗"}],
+      practice: ["朗读课文。","雾把哪些东西藏起来了？","雾最后把自己藏哪了？"],
+      think: "雾还会把什么藏起来？",
+    }),
+    ...lessonPage({
+      zhTitle: "雪孩子", enTitle: "The Snow Child", pinyin: "xuě hái zi",
+      passage: [["xià","下"],["xuě","雪"],["la","啦"],["！","！"],["tù","兔"],["mā","妈"],["mā","妈"],["gěi","给"],["xiǎo","小"],["bái","白"],["tù","兔"],["duī","堆"],["le","了"],["gè","个"],["xuě","雪"],["hái","孩"],["zi","子"],["。","。"]],
+      note: "雪孩子为救小白兔，冲进火里，自己化了。善良和舍己救人。",
+      recognize: [{ch:"雪",py:"xuě",word:"下雪"},{ch:"孩",py:"hái",word:"孩子"},{ch:"救",py:"jiù",word:"救人"},{ch:"化",py:"huà",word:"化了"}],
+      write: [{ch:"雪",py:"xuě",strokes:11,radical:"雨",word:"下雪"},{ch:"孩",py:"hái",strokes:9,radical:"子",word:"孩子"},{ch:"唱",py:"chàng",strokes:11,radical:"口",word:"唱歌"},{ch:"赶",py:"gǎn",strokes:10,radical:"走",word:"赶快"}],
+      practice: ["朗读课文。","雪孩子怎么救小白兔的？","雪孩子最后变成了什么？"],
+      think: "你喜欢雪孩子吗？为什么？",
+    }),
+    gardenPage("七", ["识字加油站：天气字--雾、雪、风、霜。","字词句运用：用「像」写雪。","书写提示：雨字头的字，四点变点。","日积月累：数九歌--一九二九不出手，三九四九冰上走。"], { zhTitle: "敕勒歌", lines: ["敕勒川，阴山下。", "天似穹庐，笼盖四野。", "天苍苍，野茫茫，", "风吹草低见牛羊。"] }),
+
+    // ── 第八单元 课文 ──
+    unitPage("八", "课文", "Texts", "狐狸的故事：狐假虎威、狐狸分奶酪、纸船和风筝、风娃娃。", ["狐假虎威", "狐狸分奶酪", "纸船和风筝", "风娃娃"]),
+    ...lessonPage({
+      zhTitle: "狐假虎威", enTitle: "The Fox Borrows the Tiger's Power", pinyin: "hú jiǎ hǔ wēi",
+      passage: [["lǎo","老"],["hǔ","虎"],["zhuā","抓"],["zhù","住"],["le","了"],["hú","狐"],["li","狸"],["。","。"],["hú","狐"],["li","狸"],["shuō","说"],["：","："],["nǐ","你"],["bù","不"],["gǎn","敢"],["chī","吃"],["wǒ","我"],["！","！"]],
+      note: "狐狸借老虎的威风吓跑百兽。比喻借别人的势力欺压人。",
+      recognize: [{ch:"假",py:"jiǎ",word:"假借"},{ch:"威",py:"wēi",word:"威风"},{ch:"转",py:"zhuàn",word:"转身"},{ch:"扯",py:"chě",word:"扯着"}],
+      write: [{ch:"假",py:"jiǎ",strokes:11,radical:"亻",word:"真假"},{ch:"威",py:"wēi",strokes:9,radical:"戈",word:"威风"},{ch:"转",py:"zhuǎn",strokes:8,radical:"车",word:"转身"},{ch:"扯",py:"chě",strokes:7,radical:"扌",word:"拉扯"}],
+      practice: ["分角色朗读。","狐狸用了什么办法？","百兽怕的是谁？"],
+      think: "「狐假虎威」是什么意思？",
+    }),
+    ...lessonPage({
+      zhTitle: "狐狸分奶酪", enTitle: "The Fox Divides the Cheese", pinyin: "hú li fēn nǎo lào",
+      passage: [["liǎng","两"],["zhī","只"],["xiǎo","小"],["xióng","熊"],["jiǎn","捡"],["dào","到"],["le","了"],["yí","一"],["kuài","块"],["nǎi","奶"],["lào","酪"],["。","。"]],
+      note: "两只熊分奶酪不均，狐狸来「公平」地分，结果全吃光了。贪小便宜、不团结会吃亏。",
+      recognize: [{ch:"酪",py:"lào",word:"奶酪"},{ch:"捡",py:"jiǎn",word:"捡到"},{ch:"拌",py:"bàn",word:"拌嘴"},{ch:"匀",py:"yún",word:"均匀"}],
+      write: [{ch:"奶",py:"nǎi",strokes:5,radical:"女",word:"牛奶"},{ch:"酪",py:"lào",strokes:13,radical:"酉",word:"奶酪"},{ch:"捡",py:"jiǎn",strokes:10,radical:"扌",word:"捡起"},{ch:"始",py:"shǐ",strokes:8,radical:"女",word:"开始"}],
+      practice: ["朗读课文。","两只熊为什么拌嘴？","狐狸是怎么分的？结果呢？"],
+      think: "如果你是熊，你会怎么做？",
+    }),
+    ...lessonPage({
+      zhTitle: "纸船和风筝", enTitle: "Paper Boats and Kites", pinyin: "zhǐ chuán hé fēng zheng",
+      passage: [["sōng","松"],["shǔ","鼠"],["hé","和"],["xiǎo","小"],["xióng","熊"],["shì","是"],["hǎo","好"],["péng","朋"],["you","友"],["。","。"]],
+      note: "松鼠和小熊用纸船和风筝传递友谊。吵架后，又用纸船和风筝和好。友谊需要维护。",
+      recognize: [{ch:"筝",py:"zheng",word:"风筝"},{ch:"鼠",py:"shǔ",word:"松鼠"},{ch:"幸",py:"xìng",word:"幸福"},{ch:"福",py:"fú",word:"幸福"}],
+      write: [{ch:"纸",py:"zhǐ",strokes:7,radical:"纟",word:"纸船"},{ch:"筝",py:"zhēng",strokes:12,radical:"竹",word:"风筝"},{ch:"幸",py:"xìng",strokes:8,radical:"土",word:"幸福"},{ch:"福",py:"fú",strokes:13,radical:"礻",word:"幸福"}],
+      practice: ["朗读课文。","松鼠和小熊怎么传友谊？","吵架后他们怎么和好的？"],
+      think: "你和朋友吵架后怎么和好？",
+    }),
+    ...lessonPage({
+      zhTitle: "风娃娃", enTitle: "The Wind Baby", pinyin: "fēng wá wa",
+      passage: [["fēng","风"],["wá","娃"],["wa","娃"],["xiǎng","想"],["bāng","帮"],["rén","人"],["men","们"],["zuò","做"],["shì","事"],["。","。"]],
+      note: "风娃娃好心帮忙：吹动风车、吹动船帆是好事；吹跑衣服、吹断小树是坏事。好心也要看结果。",
+      recognize: [{ch:"娃",py:"wá",word:"娃娃"},{ch:"帮",py:"bāng",word:"帮忙"},{ch:"帆",py:"fān",word:"船帆"},{ch:"筝",py:"zheng",word:"风筝"}],
+      write: [{ch:"娃",py:"wá",strokes:9,radical:"女",word:"娃娃"},{ch:"帮",py:"bāng",strokes:9,radical:"巾",word:"帮忙"},{ch:"助",py:"zhù",strokes:7,radical:"力",word:"帮助"},{ch:"使",py:"shǐ",strokes:8,radical:"亻",word:"使劲"}],
+      practice: ["朗读课文。","风娃娃做了哪些好事？哪些坏事？","妈妈对他说了什么？"],
+      think: "做好事要注意什么？",
+    }),
+    gardenPage("八", ["识字加油站：动物字--狐、狸、熊、鼠。","字词句运用：用「先……然后……」讲故事。","书写提示：注意「狐」「狸」的反犬旁。","日积月累：狼吞虎咽、惊弓之鸟、漏网之鱼--动物成语。"], { zhTitle: "风", lines: ["解落三秋叶，", "能开二月花。", "过江千尺浪，", "入竹万竿斜。"] }),
+
+    // ── 古诗选读 ──
+    poemPage("望庐山瀑布", "李白", [["rì","日"],["zhào","照"],["xiāng","香"],["lú","炉"],["shēng","生"],["zǐ","紫"],["yān","烟"],["，","，"],["yáo","遥"],["kàn","看"],["pù","瀑"],["bù","布"],["guà","挂"],["qián","前"],["chuān","川"],["。","。"],["fēi","飞"],["liú","流"],["zhí","直"],["xià","下"],["sān","三"],["qiān","千"],["chǐ","尺"],["，","，"],["yí","疑"],["shì","是"],["yín","银"],["hé","河"],["luò","落"],["jiǔ","九"],["tiān","天"],["。","。"]], "香炉峰升起紫烟，远看瀑布像挂在前川。飞流直下三千尺，疑是银河落九天。", "李白用夸张写瀑布的壮美。"),
+    poemPage("夜宿山寺", "李白", [["wēi","危"],["lóu","楼"],["gāo","高"],["bǎi","百"],["chǐ","尺"],["，","，"],["shǒu","手"],["kě","可"],["zhāi","摘"],["xīng","星"],["chén","辰"],["。","。"],["bù","不"],["gǎn","敢"],["gāo","高"],["shēng","声"],["yǔ","语"],["，","，"],["kǒng","恐"],["jīng","惊"],["tiān","天"],["shàng","上"],["rén","人"],["。","。"]], "楼高百尺，手可摘星。不敢高声说话，怕惊动天上人。", "写山寺之高，想象奇特。"),
+    poemPage("敕勒歌", "北朝民歌", [["chì","敕"],["lè","勒"],["chuān","川"],["，","，"],["yīn","阴"],["shān","山"],["xià","下"],["。","。"],["tiān","天"],["cāng","苍"],["cāng","苍"],["，","，"],["yě","野"],["máng","茫"],["máng","茫"],["，","，"],["fēng","风"],["chuī","吹"],["cǎo","草"],["dī","低"],["jiàn","见"],["niú","牛"],["yáng","羊"],["。","。"]], "敕勒川在阴山下。天苍苍野茫茫，风吹草低见牛羊。", "北朝民歌，写草原辽阔。"),
+    poemPage("江雪", "柳宗元", [["qiān","千"],["shān","山"],["niǎo","鸟"],["fēi","飞"],["jué","绝"],["，","，"],["wàn","万"],["jìng","径"],["rén","人"],["zōng","踪"],["miè","灭"],["。","。"],["gū","孤"],["zhōu","舟"],["suō","蓑"],["lì","笠"],["wēng","翁"],["，","，"],["dú","独"],["diào","钓"],["hán","寒"],["jiāng","江"],["xuě","雪"],["。","。"]], "千山无鸟，万径无人。孤舟蓑笠翁，独钓寒江雪。", "写雪后的寂静与孤高。"),
+    poemPage("梅花", "王安石", [["qiáng","墙"],["jiǎo","角"],["shù","数"],["zhī","枝"],["méi","梅"],["，","，"],["líng","凌"],["hán","寒"],["dú","独"],["zì","自"],["kāi","开"],["。","。"],["yáo","遥"],["zhī","知"],["bú","不"],["shì","是"],["xuě","雪"],["，","，"],["wèi","为"],["yǒu","有"],["àn","暗"],["xiāng","香"],["lái","来"],["。","。"]], "墙角几枝梅，凌寒独自开。遥知不是雪，为有暗香来。", "写梅花不畏严寒、暗香浮动。"),
+
+    // ── 附表 ──
+    strokePage("识字表（会认）", "二年级上册会认字约 450 个。本册重点：塘、蝌、蚪、脑、袋、蛙、晒、汽、雹、溪、植、旅、降、蒲、苍、曹、称、象、船、杆、秤、玲、幅、脏、报、奖、封、信、削、锅、哄、睡、润、乏、雀、锦、鹰、鹂、蝴、蝶、麦、苗、季、葡、萄、沟、疆、维、葫、芦、蚜、盯、寒、号、鹊、劝、垒、禹、治、洪、疏、泼、凤、凰、傣、雾、淘、藏、暗、岸、假、威、转、扯、酪、捡、拌、匀、筝、鼠、幸、福、娃、帮、帆。"),
+    strokePage("写字表（会写）", "二年级上册会写字约 250 个。本册重点：两、就、哪、孩、变、片、海、洋、法、脚、娃、它、称、柱、议、杆、画、幅、评、奖、信、今、写、支、哄、先、闭、脸、楼、依、尽、更、奇、石、巨、位、湾、名、胜、迹、沟、产、枝、收、井、观、沿、际、寒、却、将、纷、治、洪、灾、难、朱、德、扁、担、泼、节、令、度、雾、淘、藏、暗、雪、孩、唱、赶、假、威、转、扯、奶、酪、捡、始、纸、筝、幸、福、娃、帮、助、使。"),
+    strokePage("常用笔画与偏旁", "笔画：横、竖、撇、捺、点、提、横折、竖弯钩、横撇、竖钩、撇点、横折弯钩。偏旁：氵（水）、扌（手）、木、艹、日、女、心、宀、虫、辶、、讠、纟、雨、酉、礻、反犬旁（犭）。认偏旁，猜字义。"),
+    {
+      kind: "back", title: { en: "Afterword", zh: "后记" },
+      body: {
+        en: <>You finished Grade 2 Book One. You read 24 stories and poems and learned hundreds of characters. Grade 2 Book Two continues.</>,
+        zh: <>你读完了二年级上册。你读了 24 篇故事和古诗，认识了几百个字。二年级 · 下册 从这里继续。</>,
+      },
+    },
+  ],
+};
