@@ -296,21 +296,64 @@ export const grade1Book: Book = {
     },
 
     // ── 第一单元 识字 ──
-    unitPage("一", "识字", "First Characters", "第一批汉字：天地人、五行、身体、自然、对韵。"),
+    unitPage("一", "识字", "First Characters", "第一批汉字：天地人、五行、身体、自然、对韵。", ["天地人", "金木水火土", "口耳目", "日月水火", "对韵歌"]),
     shiziPage("天地人", [{ch:"天",py:"tiān",word:"天空"},{ch:"地",py:"dì",word:"大地"},{ch:"人",py:"rén",word:"人们"}], "天在上，地在下，人在中间--孩子最先认识的三个最大的字。", "一二三，三二一，一二三四五六七。天大地大，人也大。"),
     shiziPage("金木水火土", [{ch:"金",py:"jīn",word:"金子"},{ch:"木",py:"mù",word:"树木"},{ch:"水",py:"shuǐ",word:"流水"},{ch:"火",py:"huǒ",word:"生火"},{ch:"土",py:"tǔ",word:"泥土"}], "古人把世界分成金木水火土五行，它们会变化、相生相克。", "一二三四五，金木水火土。天地分上下，日月照今古。"),
     shiziPage("口耳目", [{ch:"口",py:"kǒu",word:"口腔"},{ch:"耳",py:"ěr",word:"耳朵"},{ch:"目",py:"mù",word:"目光"}], "口像张开的嘴，耳像耳朵，目像侧面的眼--都是象形字。", "口耳目，手足心。站如松，坐如钟。行如风，卧如弓。"),
     shiziPage("日月水火", [{ch:"日",py:"rì",word:"日月"},{ch:"月",py:"yuè",word:"月亮"},{ch:"水",py:"shuǐ",word:"山水"},{ch:"火",py:"huǒ",word:"火苗"}], "日是太阳，月是月亮，水火相伴--自然里最基本的字。", "日圆圆，月弯弯。水清清，火红红。"),
     shiziPage("对韵歌", [{ch:"云",py:"yún",word:"白云"},{ch:"雨",py:"yǔ",word:"下雨"},{ch:"风",py:"fēng",word:"刮风"},{ch:"雪",py:"xuě",word:"下雪"}], "云对雨，雪对风--中文喜欢成对、押韵的反义词。", "云对雨，雪对风。花对树，鸟对虫。山清对水秀，柳绿对桃红。"),
-    speakPage("我说你做", "一人发指令，一人照做：请你举起右手、摸摸左耳。练习听和做，认识身体词。"),
+    speakPage("我说你做", "一人发指令，一人照做，练习听和做，认识身体词。", ["大声说，让别人听得见。", "听清楚，再做动作。"], ["请你举起右手。", "请你摸摸左耳。", "请你拍拍手。", "请你站起来。"]),
     gardenPage("一", ["识字加油站：人 口 手 目 耳 足--六字都是身体，也都是象形字。","字词句运用：比一比「人」和「入」、「大」和「天」，差一笔意思全不同。","书写提示：笔顺「从上到下，先横后竖」。写「十」先横后竖。"], { zhTitle: "咏鹅", lines: ["鹅鹅鹅，","曲项向天歌。","白毛浮绿水，","红掌拨清波。"] }),
     {
       kind: "reading", title: { en: "Happy Reading", zh: "快乐读书吧 · 读书真快乐" },
-      body: { en: <>Read any picture book in Chinese. Find the characters you know and read them aloud. 读书不是等认识所有字才读，是享受你已经认识的字。</>, zh: <>读任何一本中文图画书。把你认识的字找出来大声读。读书不是等认识所有字才读，是享受你已经认识的字。</> },
+      body: {
+        en: <>
+          <p className="text-sm leading-relaxed text-ink/80">读书不是等认识所有字才读，是享受你已经认识的字。找一本中文图画书，把认识的字大声读出来。</p>
+          <div className="mt-4 rounded-lg bg-amber-50/60 p-4">
+            <p className="mb-2 text-sm font-bold text-amber-700">推荐书目</p>
+            <ul className="list-disc space-y-1 pl-5 text-sm text-ink/80">
+              <li>《猜猜我有多爱你》</li>
+              <li>《好饿的毛毛虫》</li>
+              <li>《爷爷一定有办法》</li>
+              <li>《逃家小兔》</li>
+            </ul>
+          </div>
+          <div className="mt-4 rounded-lg bg-teal/5 p-4">
+            <p className="mb-2 text-sm font-bold text-teal">怎么读</p>
+            <ol className="list-decimal space-y-1 pl-5 text-sm text-ink/80">
+              <li>先看封面，猜一猜讲什么。</li>
+              <li>一边看图，一边读认识的字。</li>
+              <li>读给爸爸妈妈听。</li>
+              <li>读完说一说：你最喜欢谁？</li>
+            </ol>
+          </div>
+        </>,
+        zh: <>
+          <p className="text-sm leading-relaxed text-ink/80">读书不是等认识所有字才读，是享受你已经认识的字。找一本中文图画书，把认识的字大声读出来。</p>
+          <div className="mt-4 rounded-lg bg-amber-50/60 p-4">
+            <p className="mb-2 text-sm font-bold text-amber-700">推荐书目</p>
+            <ul className="list-disc space-y-1 pl-5 text-sm text-ink/80">
+              <li>《猜猜我有多爱你》</li>
+              <li>《好饿的毛毛虫》</li>
+              <li>《爷爷一定有办法》</li>
+              <li>《逃家小兔》</li>
+            </ul>
+          </div>
+          <div className="mt-4 rounded-lg bg-teal/5 p-4">
+            <p className="mb-2 text-sm font-bold text-teal">怎么读</p>
+            <ol className="list-decimal space-y-1 pl-5 text-sm text-ink/80">
+              <li>先看封面，猜一猜讲什么。</li>
+              <li>一边看图，一边读认识的字。</li>
+              <li>读给爸爸妈妈听。</li>
+              <li>读完说一说：你最喜欢谁？</li>
+            </ol>
+          </div>
+        </>,
+      },
     },
 
     // ── 第二单元 汉语拼音（一）──
-    unitPage("二", "汉语拼音", "Pinyin (1)", "声母和单韵母，13 课的第一半。"),
+    unitPage("二", "汉语拼音", "Pinyin (1)", "声母和单韵母，13 课的第一半。", ["a o e", "i u ü", "b p m f", "d t n l", "g k h", "j q x", "z c s", "zh ch sh r"]),
     pinyinPage("a o e", ["a -> mā 妈妈", "o -> ó 哦", "e -> é 鹅"], "三个开口韵母。张大嘴发 a，圆唇发 o，嘴角咧发 e。", "a：左半圆竖右弯。o：一笔圆。e：中格横再左半圆。", "哥哥打鼓 gē ge dǎ gǔ"),
     pinyinPage("i u ü", ["i -> yī 一", "u -> wǔ 五", "ü -> yú 鱼"], "i 齐齿，u 圆唇，ü 先发 i 再把嘴唇前突。", "i：竖加一点。u：竖右弯。ü：同 u 加两点。", "马虎 mǎ hu"),
     pinyinPage("b p m f", ["bà 爸", "pí 皮", "mā 妈", "fá 罚"], "双唇音。b 不送气，p 送气，m 鼻音，f 咬下唇。", "b：右半圆竖。p：竖出格。m：两半圆。f：竖弯加点。", "八百标兵 bā bǎi biāo bīng"),
@@ -322,7 +365,7 @@ export const grade1Book: Book = {
     gardenPage("二", ["识字加油站：用拼音读同学的名字。","字词句运用：读一读，连一连。","书写提示：拼音字母写在中格。"]),
 
     // ── 第三单元 汉语拼音（二）──
-    unitPage("三", "汉语拼音（续）", "Pinyin (2)", "复韵母和鼻韵母，13 课的后半。"),
+    unitPage("三", "汉语拼音（续）", "Pinyin (2)", "复韵母和鼻韵母，13 课的后半。", ["ai ei ui", "ao ou iu", "ie üe er", "an en in un ün", "ang eng ing ong"]),
     pinyinPage("ai ei ui", ["ài 爱", "hěi 黑", "shuǐ 水"], "复韵母，两音连读。ai 像爱，ei 像诶，ui 像威。", "ai：先 a 后 i。ei：先 e 后 i。ui：先 u 后 i。", "白菜 bái cài"),
     pinyinPage("ao ou iu", ["hǎo 好", "gǒu 狗", "liù 六"], "ao 像奥，ou 像欧，iu 像优。", "ao：先 a 后 o。ou：先 o 后 u。iu：先 i 后 u。", "小猫 xiǎo māo"),
     pinyinPage("ie üe er", ["jié 节", "xuě 雪", "èr 二"], "ie 像耶，üe 像约，er 卷舌单独成音节。", "ie üe：前音后 e。er：e 加 r。", "下雪 xià xuě"),
@@ -331,7 +374,7 @@ export const grade1Book: Book = {
     gardenPage("三", ["识字加油站：拼一拼，读一读。","字词句运用：比一比，读一读。","日积月累：春眠不觉晓，处处闻啼鸟。"]),
 
     // ── 第四单元 课文 ──
-    unitPage("四", "课文", "Texts", "秋天、小船、江南、四季--最早的散文诗。"),
+    unitPage("四", "课文", "Texts", "秋天、小船、江南、四季--最早的散文诗。", ["秋天", "小小的船", "江南", "四季"]),
     ...lessonPage({
       zhTitle: "秋天", enTitle: "Autumn", pinyin: "qiū tiān",
       passage: [["qiū","秋"],["tiān","天"],["qì","气"],["liáng","凉"],["le","了"],["，","，"],["shù","树"],["yè","叶"],["huáng","黄"],["le","了"],["，","，"],["yī","一"],["piàn","片"],["piàn","片"],["yè","叶"],["zi","子"],["cóng","从"],["shù","树"],["shàng","上"],["luò","落"],["xià","下"],["lái","来"],["。","。"]],
@@ -368,11 +411,11 @@ export const grade1Book: Book = {
       practice: ["朗读，每季不同语气。","背诵全诗。","四季分别用什么代表？什么形状？","仿写一句「我是×天」。"],
       think: "你最喜欢哪个季节？为什么？",
     }),
-    speakPage("我们做朋友", "找一个同学，说：你好，我叫……，我们做朋友吧。听对方姓名并复述。真正的友谊，从把对方名字听对开始。"),
+    speakPage("我们做朋友", "找一个同学，主动介绍自己，记住对方的名字。", ["看着对方的眼睛。", "说清楚自己的名字。", "记住对方的名字。"], ["你好，我叫小明，我们做朋友吧。", "你好，我叫小红，很高兴认识你。", "你叫什么名字？我们一起玩吧。"]),
     gardenPage("四", ["识字加油站：一年四季：春夏秋冬。","字词句运用：用「也」造句--我是学生，他也是学生。","书写提示：先撇后捺。写「人」先撇后捺。","展示台：把学过的字读给家人听。"], { zhTitle: "静夜思", lines: ["床前明月光，","疑是地上霜。","举头望明月，","低头思故乡。"] }),
 
     // ── 第五单元 识字 ──
-    unitPage("五", "识字", "More Characters", "画、大小多少、小书包、日月明、升国旗。"),
+    unitPage("五", "识字", "More Characters", "画、大小多少、小书包、日月明、升国旗。", ["画", "大小多少", "小书包", "日月明", "升国旗"]),
     ...lessonPage({
       zhTitle: "画", enTitle: "A Painting", pinyin: "huà",
       passage: [["yuǎn","远"],["kàn","看"],["shān","山"],["yǒu","有"],["sè","色"],["，","，"],["jìn","近"],["tīng","听"],["shuǐ","水"],["wú","无"],["shēng","声"],["。","。"],["chūn","春"],["qù","去"],["huā","花"],["hái","还"],["zài","在"],["，","，"],["rén","人"],["lái","来"],["niǎo","鸟"],["bù","不"],["jīng","惊"],["。","。"]],
@@ -413,7 +456,7 @@ export const grade1Book: Book = {
     gardenPage("五", ["识字加油站：量词朋友--一只猫、一条鱼、一本书、一棵树、一朵花。","字词句运用：把「大、小、多、少」各组一个词。","书写提示：先中间后两边。写「小」先竖钩后两点。"], { zhTitle: "悯农", lines: ["锄禾日当午，","汗滴禾下土。","谁知盘中餐，","粒粒皆辛苦。"] }),
 
     // ── 第六单元 课文 ──
-    unitPage("六", "课文", "Texts", "影子、尾巴、青蛙、雨点--身边的奇妙。"),
+    unitPage("六", "课文", "Texts", "影子、尾巴、青蛙、雨点--身边的奇妙。", ["影子", "比尾巴", "青蛙写诗", "雨点儿"]),
     ...lessonPage({
       zhTitle: "影子", enTitle: "Shadow", pinyin: "yǐng zi",
       passage: [["yǐng","影"],["zi","子"],["zài","在"],["qián","前"],["，","，"],["yǐng","影"],["zi","子"],["zài","在"],["hòu","后"],["。","。"],["yǐng","影"],["zi","子"],["cháng","常"],["cháng","常"],["gēn","跟"],["zhe","着"],["wǒ","我"],["，","，"],["jiù","就"],["xiàng","像"],["yī","一"],["tiáo","条"],["xiǎo","小"],["hēi","黑"],["gǒu","狗"],["。","。"]],
@@ -450,11 +493,11 @@ export const grade1Book: Book = {
       practice: ["朗读，大雨点小雨点不同语气。","大雨点去哪？小雨点去哪？","雨点落下，大地有什么变化？"],
       think: "花和草有雨会怎样？没雨呢？",
     }),
-    speakPage("用多大的声音", "什么时候要大声说话？什么时候要小声？讨论：在操场上喊同学要大声，在图书馆要说悄悄话。声音大小要看场合。"),
+    speakPage("用多大的声音", "讨论什么时候大声、什么时候小声，声音大小要看场合。", ["看场合决定声音大小。", "公共场所不大喊大叫。"], ["操场上喊同学：大声。", "图书馆里说话：小声。", "课堂上回答：清楚响亮。"]),
     gardenPage("六", ["识字加油站：我的前后左右都有谁。","字词句运用：读一读，说一说。","书写提示：笔顺「先外后内」。写「月」先外后内。"], { zhTitle: "古朗月行", lines: ["小时不识月，","呼作白玉盘。","又疑瑶台镜，","飞在青云端。"] }),
 
     // ── 第七单元 课文 ──
-    unitPage("七", "课文", "Texts", "远足的期待、自己的大小、海边的项链。"),
+    unitPage("七", "课文", "Texts", "远足的期待、自己的大小、海边的项链。", ["明天要远足", "大还是小", "项链"]),
     ...lessonPage({
       zhTitle: "明天要远足", enTitle: "Hiking Tomorrow", pinyin: "míng tiān yào yuǎn zú",
       passage: [["fān","翻"],["guò","过"],["lái","来"],["，","，"],["āi","哎"],["yā","呀"],["！","！"],["wàng","望"],["zhe","着"],["nà","那"],["dì","地"],["fāng","方"],["，","，"],["shuì","睡"],["bù","不"],["zháo","着"],["le","了"],["。","。"]],
@@ -485,7 +528,7 @@ export const grade1Book: Book = {
     gardenPage("七", ["识字加油站：哥哥、弟弟、姐姐、妹妹--家人称呼。","字词句运用：读一读，比一比。","展示台：在街上找认识的字。"], { zhTitle: "登鹳雀楼", lines: ["白日依山尽，","黄河入海流。","欲穷千里目，","更上一层楼。"] }),
 
     // ── 第八单元 课文 ──
-    unitPage("八", "课文", "Texts", "雪地画画、乌鸦喝水、小壁虎借尾巴。"),
+    unitPage("八", "课文", "Texts", "雪地画画、乌鸦喝水、小壁虎借尾巴。", ["雪地里的小画家", "乌鸦喝水", "小壁虎借尾巴"]),
     ...lessonPage({
       zhTitle: "雪地里的小画家", enTitle: "Painters in the Snow", pinyin: "xuě dì lǐ de xiǎo huà jiā",
       passage: [["xià","下"],["xuě","雪"],["le","了"],["，","，"],["xuě","雪"],["dì","地"],["lǐ","里"],["lái","来"],["le","了"],["yī","一"],["qún","群"],["xiǎo","小"],["huà","画"],["jiā","家"],["。","。"],["xiǎo","小"],["jī","鸡"],["huà","画"],["zhú","竹"],["yè","叶"],["，","，"],["xiǎo","小"],["gǒu","狗"],["huà","画"],["méi","梅"],["huā","花"],["。","。"]],
@@ -513,7 +556,7 @@ export const grade1Book: Book = {
       practice: ["朗读，读出借尾巴的语气。","小壁虎向谁借了？它们怎么说？","为什么都没借到？","小壁虎最后怎样了？（长出新尾巴）"],
       think: "每种动物的尾巴有什么用？",
     }),
-    speakPage("小兔运南瓜", "小兔要把大南瓜运回家，想了什么办法？讨论：可以滚、可以抱、可以请人帮忙。说说你想到的办法，哪种最好？"),
+    speakPage("小兔运南瓜", "小兔要把大南瓜运回家，想办法并说出理由。", ["先想一想，再说一说。", "说出你的理由。"], ["我把南瓜滚回家，因为南瓜是圆的。", "我请朋友帮忙抬回家。", "我用小车把南瓜推回家。"]),
     gardenPage("八", ["识字加油站：冬天的字--雪、冰、冷、风。","字词句运用：读一读，演一演。","书写提示：笔顺「先里头后封口」。写「田」先里后封。"], { zhTitle: "风", lines: ["解落三秋叶，","能开二月花。","过江千尺浪，","入竹万竿斜。"] }),
 
     // ── 附表 ──
@@ -720,13 +763,45 @@ function strokePage(title: string, content: string) {
 }
 
 // 单元扉页
-function unitPage(num: string, zhTitle: string, enTitle: string, desc: string) {
+function unitPage(num: string, zhTitle: string, enTitle: string, desc: string, lessons?: string[]) {
   return {
     kind: "reading" as const,
     title: { en: `Unit ${num}`, zh: `第${num}单元 · ${zhTitle}` },
     body: {
-      en: <><p className="font-serif-sc text-3xl font-bold text-ink">{enTitle}</p><p className="mt-3 text-sm text-ink/70">{desc}</p></>,
-      zh: <><p className="font-serif-sc text-3xl font-bold text-ink">{zhTitle}</p><p className="mt-3 text-sm text-ink/70">{desc}</p></>,
+      en: <>
+        <p className="font-serif-sc text-3xl font-bold text-ink">{enTitle}</p>
+        <p className="mt-3 rounded-lg bg-[#2d6a4f]/5 p-4 text-sm leading-relaxed text-ink/80"><b>单元导语：</b>{desc}</p>
+        {lessons && lessons.length > 0 && (
+          <div className="mt-4">
+            <p className="mb-2 text-sm font-bold text-teal">本单元我们将学习</p>
+            <div className="flex flex-wrap gap-2">
+              {lessons.map((l) => (
+                <span key={l} className="rounded-md border border-teal/20 bg-white px-3 py-1.5 font-serif-sc text-base text-ink">{l}</span>
+              ))}
+            </div>
+          </div>
+        )}
+        <div className="mt-5 rounded-lg bg-amber-50/60 p-4 text-sm leading-relaxed text-ink/70">
+          <b>怎么学：</b>先看图猜一猜，再读课文认一认，最后写一写。每课都有会认字、会写字和练习。
+        </div>
+      </>,
+      zh: <>
+        <p className="font-serif-sc text-3xl font-bold text-ink">{zhTitle}</p>
+        <p className="mt-3 rounded-lg bg-[#2d6a4f]/5 p-4 text-sm leading-relaxed text-ink/80"><b>单元导语：</b>{desc}</p>
+        {lessons && lessons.length > 0 && (
+          <div className="mt-4">
+            <p className="mb-2 text-sm font-bold text-teal">本单元我们将学习</p>
+            <div className="flex flex-wrap gap-2">
+              {lessons.map((l) => (
+                <span key={l} className="rounded-md border border-teal/20 bg-white px-3 py-1.5 font-serif-sc text-base text-ink">{l}</span>
+              ))}
+            </div>
+          </div>
+        )}
+        <div className="mt-5 rounded-lg bg-amber-50/60 p-4 text-sm leading-relaxed text-ink/70">
+          <b>怎么学：</b>先看图猜一猜，再读课文认一认，最后写一写。每课都有会认字、会写字和练习。
+        </div>
+      </>,
     },
   };
 }
@@ -845,13 +920,43 @@ function shiziPage(zhTitle: string, chars: { ch: string; py: string; word: strin
 }
 
 // 口语交际页
-function speakPage(zhTitle: string, task: string) {
+function speakPage(zhTitle: string, task: string, tips?: string[], examples?: string[]) {
+  const tipsList = tips ?? ["大声说，让别人听得见。", "注意听别人说话。"];
+  const exList = examples ?? [task];
   return {
     kind: "speaking" as const,
     title: { en: `Speaking · ${zhTitle}`, zh: `口语交际 · ${zhTitle}` },
     body: {
-      en: <><b>Task:</b> {task}</>,
-      zh: <><b>任务：</b> {task}</>,
+      en: <>
+        <div className="mb-4 rounded-lg bg-[#2d6a4f]/5 p-4">
+          <p className="mb-2 text-sm font-bold text-teal">交际要求</p>
+          <ul className="list-disc space-y-1 pl-5 text-sm text-ink/80">{tipsList.map((t) => (<li key={t}>{t}</li>))}</ul>
+        </div>
+        <p className="text-sm leading-relaxed text-ink/80"><b>任务：</b>{task}</p>
+        <div className="mt-4 rounded-lg bg-amber-50/60 p-4">
+          <p className="mb-2 text-sm font-bold text-amber-700">这样说</p>
+          <ul className="space-y-1.5 text-sm text-ink/80">{exList.map((e) => (<li key={e} className="rounded-md bg-white px-3 py-1.5 font-serif-sc">「{e}」</li>))}</ul>
+        </div>
+        <div className="mt-4 rounded-lg bg-teal/5 p-4">
+          <p className="mb-1 text-sm font-bold text-teal">练一练</p>
+          <p className="text-sm text-ink/80">和同桌或家人一起做一做，轮流说和做。</p>
+        </div>
+      </>,
+      zh: <>
+        <div className="mb-4 rounded-lg bg-[#2d6a4f]/5 p-4">
+          <p className="mb-2 text-sm font-bold text-teal">交际要求</p>
+          <ul className="list-disc space-y-1 pl-5 text-sm text-ink/80">{tipsList.map((t) => (<li key={t}>{t}</li>))}</ul>
+        </div>
+        <p className="text-sm leading-relaxed text-ink/80"><b>任务：</b>{task}</p>
+        <div className="mt-4 rounded-lg bg-amber-50/60 p-4">
+          <p className="mb-2 text-sm font-bold text-amber-700">这样说</p>
+          <ul className="space-y-1.5 text-sm text-ink/80">{exList.map((e) => (<li key={e} className="rounded-md bg-white px-3 py-1.5 font-serif-sc">「{e}」</li>))}</ul>
+        </div>
+        <div className="mt-4 rounded-lg bg-teal/5 p-4">
+          <p className="mb-1 text-sm font-bold text-teal">练一练</p>
+          <p className="text-sm text-ink/80">和同桌或家人一起做一做，轮流说和做。</p>
+        </div>
+      </>,
     },
   };
 }
