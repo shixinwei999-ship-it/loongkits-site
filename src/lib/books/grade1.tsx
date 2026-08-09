@@ -264,11 +264,11 @@ export const grade1Book: Book = {
 
     // ── 第一单元 识字 ──
     unitPage("一", "识字", "First Characters", "第一批汉字：天地人、五行、身体、自然、对韵。"),
-    shiziPage("天地人", [{ch:"天",py:"tiān",word:"天空"},{ch:"地",py:"dì",word:"大地"},{ch:"人",py:"rén",word:"人们"}], "天在上，地在下，人在中间--孩子最先认识的三个最大的字。"),
-    shiziPage("金木水火土", [{ch:"金",py:"jīn",word:"金子"},{ch:"木",py:"mù",word:"树木"},{ch:"水",py:"shuǐ",word:"流水"},{ch:"火",py:"huǒ",word:"生火"},{ch:"土",py:"tǔ",word:"泥土"}], "古人把世界分成金木水火土五行，它们会变化、相生相克。"),
-    shiziPage("口耳目", [{ch:"口",py:"kǒu",word:"口腔"},{ch:"耳",py:"ěr",word:"耳朵"},{ch:"目",py:"mù",word:"目光"}], "口像张开的嘴，耳像耳朵，目像侧面的眼--都是象形字。"),
-    shiziPage("日月水火", [{ch:"日",py:"rì",word:"日月"},{ch:"月",py:"yuè",word:"月亮"},{ch:"水",py:"shuǐ",word:"山水"},{ch:"火",py:"huǒ",word:"火苗"}], "日是太阳，月是月亮，水火相伴--自然里最基本的字。"),
-    shiziPage("对韵歌", [{ch:"云",py:"yún",word:"白云"},{ch:"雨",py:"yǔ",word:"下雨"},{ch:"风",py:"fēng",word:"刮风"},{ch:"雪",py:"xuě",word:"下雪"}], "云对雨，雪对风--中文喜欢成对、押韵的反义词。"),
+    shiziPage("天地人", [{ch:"天",py:"tiān",word:"天空"},{ch:"地",py:"dì",word:"大地"},{ch:"人",py:"rén",word:"人们"}], "天在上，地在下，人在中间--孩子最先认识的三个最大的字。", "一二三，三二一，一二三四五六七。天大地大，人也大。"),
+    shiziPage("金木水火土", [{ch:"金",py:"jīn",word:"金子"},{ch:"木",py:"mù",word:"树木"},{ch:"水",py:"shuǐ",word:"流水"},{ch:"火",py:"huǒ",word:"生火"},{ch:"土",py:"tǔ",word:"泥土"}], "古人把世界分成金木水火土五行，它们会变化、相生相克。", "一二三四五，金木水火土。天地分上下，日月照今古。"),
+    shiziPage("口耳目", [{ch:"口",py:"kǒu",word:"口腔"},{ch:"耳",py:"ěr",word:"耳朵"},{ch:"目",py:"mù",word:"目光"}], "口像张开的嘴，耳像耳朵，目像侧面的眼--都是象形字。", "口耳目，手足心。站如松，坐如钟。行如风，卧如弓。"),
+    shiziPage("日月水火", [{ch:"日",py:"rì",word:"日月"},{ch:"月",py:"yuè",word:"月亮"},{ch:"水",py:"shuǐ",word:"山水"},{ch:"火",py:"huǒ",word:"火苗"}], "日是太阳，月是月亮，水火相伴--自然里最基本的字。", "日圆圆，月弯弯。水清清，火红红。"),
+    shiziPage("对韵歌", [{ch:"云",py:"yún",word:"白云"},{ch:"雨",py:"yǔ",word:"下雨"},{ch:"风",py:"fēng",word:"刮风"},{ch:"雪",py:"xuě",word:"下雪"}], "云对雨，雪对风--中文喜欢成对、押韵的反义词。", "云对雨，雪对风。花对树，鸟对虫。山清对水秀，柳绿对桃红。"),
     speakPage("我说你做", "一人发指令，一人照做：请你举起右手、摸摸左耳。练习听和做，认识身体词。"),
     gardenPage("一", ["识字加油站：人 口 手 目 耳 足--六字都是身体，也都是象形字。","字词句运用：比一比「人」和「入」、「大」和「天」，差一笔意思全不同。","书写提示：笔顺「从上到下，先横后竖」。写「十」先横后竖。"], { zhTitle: "咏鹅", lines: ["鹅鹅鹅，","曲项向天歌。","白毛浮绿水，","红掌拨清波。"] }),
     {
@@ -376,7 +376,7 @@ export const grade1Book: Book = {
       practice: ["朗读，注意每字都由两字合成。","背诵全诗。","日+月=？田+力=？小+大=？","猜：人+木=？（休）"],
       think: "汉字像积木，能拼。再想几个会意字？",
     }),
-    shiziPage("升国旗", [{ch:"升",py:"shēng",word:"升起"},{ch:"国",py:"guó",word:"国旗"},{ch:"旗",py:"qí",word:"红旗"},{ch:"中",py:"zhōng",word:"中国"}], "国旗缓缓升起，我们立正敬礼。升、国、旗、中--认识国家。"),
+    shiziPage("升国旗", [{ch:"升",py:"shēng",word:"升起"},{ch:"国",py:"guó",word:"国旗"},{ch:"旗",py:"qí",word:"红旗"},{ch:"中",py:"zhōng",word:"中国"}], "国旗缓缓升起，我们立正敬礼。升、国、旗、中--认识国家。", "五星红旗，我们的国旗。国歌声中，徐徐升起。我们立正，向您敬礼。"),
     gardenPage("五", ["识字加油站：量词朋友--一只猫、一条鱼、一本书、一棵树、一朵花。","字词句运用：把「大、小、多、少」各组一个词。","书写提示：先中间后两边。写「小」先竖钩后两点。"], { zhTitle: "悯农", lines: ["锄禾日当午，","汗滴禾下土。","谁知盘中餐，","粒粒皆辛苦。"] }),
 
     // ── 第六单元 课文 ──
@@ -510,7 +510,23 @@ export const grade1Book: Book = {
   ],
 };
 // ── 页面构造辅助 ──
+// 由声母/韵母自动派生拼读音节，让拼音课有真实的"拼读"练习。
+function deriveBlends(title: string): string[] {
+  const finals = ["a", "o", "e", "i", "u"];
+  const tokens = title.split(/\s+/).filter(Boolean);
+  const out: string[] = [];
+  for (const t of tokens) {
+    if (/^[bpmfdtnlgkhjqxzcs]$|^(zh|ch|sh|r)$/.test(t)) {
+      out.push(`${t}-a→${t}a`, `${t}-o→${t}o`);
+    } else if (/^[aeiuvü]/.test(t)) {
+      out.push(`${t}→${t}ā`, `${t}→${t}á`);
+    }
+  }
+  return out.slice(0, 8);
+}
+
 function pinyinPage(title: string, words: string[], teach: string, stroke: string, tongue: string) {
+  const blends = deriveBlends(title);
   return {
     kind: "lesson" as const,
     title: { en: `Pinyin: ${title}`, zh: `汉语拼音：${title}` },
@@ -521,8 +537,14 @@ function pinyinPage(title: string, words: string[], teach: string, stroke: strin
           <p className="mb-2 font-bold text-[#b3121f]">读一读</p>
           <p className="font-serif-sc text-2xl tracking-wider">{words.join("   ")}</p>
         </div>
+        {blends.length > 0 && (
+          <div className="mt-4 rounded-lg bg-[#2d6a4f]/5 p-4">
+            <p className="mb-2 font-bold text-teal">拼一拼</p>
+            <p className="font-serif-sc text-xl tracking-wide">{blends.join("   ")}</p>
+          </div>
+        )}
         <div className="mt-4 rounded-lg bg-teal/5 p-4">
-          <p className="mb-2 font-bold text-teal">书写提示</p>
+          <p className="mb-2 font-bold text-teal">书写提示（四线三格）</p>
           <p className="text-sm text-ink/80">{stroke}</p>
         </div>
         <div className="mt-4 rounded-lg bg-amber-50/60 p-4">
@@ -536,12 +558,18 @@ function pinyinPage(title: string, words: string[], teach: string, stroke: strin
           <p className="mb-2 font-bold text-[#b3121f]">读一读</p>
           <p className="font-serif-sc text-2xl tracking-wider">{words.join("   ")}</p>
         </div>
+        {blends.length > 0 && (
+          <div className="mt-4 rounded-lg bg-[#2d6a4f]/5 p-4">
+            <p className="mb-2 font-bold text-teal">拼一拼</p>
+            <p className="font-serif-sc text-xl tracking-wide">{blends.join("   ")}</p>
+          </div>
+        )}
         <div className="mt-4 rounded-lg bg-teal/5 p-4">
-          <p className="mb-2 font-bold text-teal">书写提示</p>
+          <p className="mb-2 font-bold text-teal">书写提示（四线三格）</p>
           <p className="text-sm text-ink/80">{stroke}</p>
         </div>
         <div className="mt-4 rounded-lg bg-amber-50/60 p-4">
-          <p className="mb-2 font-bold text-amber-700">绕口令</p>
+          <p className="mb-2 font-bold text-amber-700">练口令</p>
           <p className="font-serif-sc text-lg">{tongue}</p>
         </div>
       </>,
@@ -710,8 +738,9 @@ function songPage(zhTitle: string, pairs: [string, string][], tip: string) {
   };
 }
 
-// 识字课页：一组字 + 拼音 + 词语 + 简短讲解
-function shiziPage(zhTitle: string, chars: { ch: string; py: string; word: string }[], teach: string) {
+// 识字课页：一组字 + 拼音 + 词语 + 短儿歌 + 讲解 + 课后题
+function shiziPage(zhTitle: string, chars: { ch: string; py: string; word: string }[], teach: string, rhyme?: string) {
+  const words = chars.map((c) => c.word);
   return {
     kind: "lesson" as const,
     title: { en: `Characters · ${zhTitle}`, zh: `识字 · ${zhTitle}` },
@@ -726,7 +755,25 @@ function shiziPage(zhTitle: string, chars: { ch: string; py: string; word: strin
             </div>
           ))}
         </div>
-        <p className="mt-5 text-sm leading-relaxed text-ink/80">{teach}</p>
+        <div className="mt-4 rounded-lg bg-amber-50/60 p-3">
+          <p className="mb-1 text-sm font-bold text-amber-700">读词语</p>
+          <p className="font-serif-sc text-lg">{words.join("  ")}</p>
+        </div>
+        {rhyme && (
+          <div className="mt-4 rounded-lg bg-[#2d6a4f]/5 p-3">
+            <p className="mb-1 text-sm font-bold text-teal">读儿歌</p>
+            <p className="font-serif-sc text-base leading-relaxed">{rhyme}</p>
+          </div>
+        )}
+        <p className="mt-4 text-sm leading-relaxed text-ink/80">{teach}</p>
+        <div className="mt-4 rounded-lg bg-teal/5 p-3">
+          <p className="mb-1 text-sm font-bold text-teal">课后题</p>
+          <ol className="list-decimal space-y-1 pl-5 text-sm text-ink/80">
+            <li>读一读这些字和词语。</li>
+            <li>用每个字组一个新词。</li>
+            <li>在生活中找一找这些字。</li>
+          </ol>
+        </div>
       </>,
       zh: <>
         <div className="grid grid-cols-3 gap-3 sm:grid-cols-5">
@@ -738,7 +785,25 @@ function shiziPage(zhTitle: string, chars: { ch: string; py: string; word: strin
             </div>
           ))}
         </div>
-        <p className="mt-5 text-sm leading-relaxed text-ink/80">{teach}</p>
+        <div className="mt-4 rounded-lg bg-amber-50/60 p-3">
+          <p className="mb-1 text-sm font-bold text-amber-700">读词语</p>
+          <p className="font-serif-sc text-lg">{words.join("  ")}</p>
+        </div>
+        {rhyme && (
+          <div className="mt-4 rounded-lg bg-[#2d6a4f]/5 p-3">
+            <p className="mb-1 text-sm font-bold text-teal">读儿歌</p>
+            <p className="font-serif-sc text-base leading-relaxed">{rhyme}</p>
+          </div>
+        )}
+        <p className="mt-4 text-sm leading-relaxed text-ink/80">{teach}</p>
+        <div className="mt-4 rounded-lg bg-teal/5 p-3">
+          <p className="mb-1 text-sm font-bold text-teal">课后题</p>
+          <ol className="list-decimal space-y-1 pl-5 text-sm text-ink/80">
+            <li>读一读这些字和词语。</li>
+            <li>用每个字组一个新词。</li>
+            <li>在生活中找一找这些字。</li>
+          </ol>
+        </div>
       </>,
     },
   };
