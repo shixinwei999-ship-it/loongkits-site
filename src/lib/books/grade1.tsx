@@ -40,32 +40,65 @@ function Recognize({ rows }: { rows: { ch: string; py: string; word: string }[] 
 }
 
 // 会写字表（笔画/部首/组词）
+// 田字格：带虚线十字的方格，可放字或留空描红
+function TianZiGe({ ch, faint }: { ch?: string; faint?: boolean }) {
+  return (
+    <span className="relative inline-flex h-12 w-12 items-center justify-center border border-teal/40 bg-white">
+      <span className="pointer-events-none absolute left-1/2 top-0 h-full w-px border-l border-dashed border-teal/30" />
+      <span className="pointer-events-none absolute left-0 top-1/2 h-px w-full border-t border-dashed border-teal/30" />
+      {ch && (
+        <span className={`font-serif-sc text-2xl font-bold ${faint ? "text-teal/30" : "text-ink"}`}>{ch}</span>
+      )}
+    </span>
+  );
+}
+
+// 象形配字小图：给象形字配一幅小画（日/月/水/火/山/石/田/禾/口/耳/目/手/木/人…）
+function CharPic({ ch }: { ch: string }) {
+  const box = (children: React.ReactNode) => (
+    <span className="inline-flex h-14 w-14 items-center justify-center rounded-md border border-stone-300 bg-white">
+      <svg viewBox="0 0 40 40" className="h-11 w-11">{children}</svg>
+    </span>
+  );
+  switch (ch) {
+    case "日": return box(<circle cx="20" cy="20" r="12" fill="#e05a3a" />);
+    case "月": return box(<path d="M26 6 A14 14 0 1 0 26 34 Q18 20 26 6 Z" fill="#f2c14e" />);
+    case "水": return box(<><path d="M12 8 Q16 20 12 32 M20 6 Q24 20 20 34 M28 8 Q32 20 28 32" stroke="#5b9bd5" strokeWidth="3" fill="none" strokeLinecap="round" /></>);
+    case "火": return box(<><path d="M20 6 Q28 16 24 24 Q30 22 28 30 Q24 36 16 34 Q10 28 14 20 Q16 12 20 6 Z" fill="#e07a3a" /><line x1="12" y1="34" x2="28" y2="30" stroke="#8a5a2a" strokeWidth="2" /></>);
+    case "山": return box(<path d="M6 32 L16 12 L22 24 L28 10 L34 32 Z" fill="#7a9b6a" />);
+    case "石": return box(<><ellipse cx="16" cy="26" rx="9" ry="6" fill="#8a7a6a" /><ellipse cx="28" cy="28" rx="7" ry="5" fill="#a09080" /></>);
+    case "田": return box(<><rect x="8" y="10" width="24" height="20" fill="#8ab06a" /><line x1="20" y1="10" x2="20" y2="30" stroke="#5a7a4a" strokeWidth="2" /><line x1="8" y1="20" x2="32" y2="20" stroke="#5a7a4a" strokeWidth="2" /></>);
+    case "禾": return box(<><line x1="20" y1="10" x2="20" y2="34" stroke="#5a7a4a" strokeWidth="2" /><path d="M20 14 Q12 18 10 24 M20 14 Q28 18 30 24 M20 22 Q14 26 12 30 M20 22 Q26 26 28 30" stroke="#7a9b6a" strokeWidth="2" fill="none" /><path d="M20 10 Q24 6 26 8" stroke="#c9a24a" strokeWidth="2" fill="none" /></>);
+    case "口": return box(<rect x="12" y="14" width="16" height="12" rx="2" fill="none" stroke="#c8102e" strokeWidth="3" />);
+    case "耳": return box(<path d="M16 8 Q28 8 26 20 Q24 30 18 32 M20 14 L24 14 M19 20 L24 20" stroke="#8a5a2a" strokeWidth="2.5" fill="none" />);
+    case "目": return box(<><ellipse cx="20" cy="20" rx="8" ry="12" fill="none" stroke="#1a1a1a" strokeWidth="2.5" /><circle cx="20" cy="20" r="3.5" fill="#1a1a1a" /></>);
+    case "手": return box(<path d="M14 10 L14 26 M20 8 L20 28 M26 10 L26 26 M12 30 Q20 36 28 30" stroke="#8a5a2a" strokeWidth="2.5" fill="none" strokeLinecap="round" />);
+    case "木": return box(<><line x1="20" y1="8" x2="20" y2="34" stroke="#8a5a2a" strokeWidth="2.5" /><path d="M20 16 Q12 20 10 26 M20 16 Q28 20 30 26" stroke="#7a9b6a" strokeWidth="2.5" fill="none" /></>);
+    case "人": return box(<path d="M20 8 Q18 20 12 32 M20 14 Q26 24 30 32" stroke="#1a1a1a" strokeWidth="3" fill="none" strokeLinecap="round" />);
+    case "天": return box(<><line x1="10" y1="10" x2="30" y2="10" stroke="#1a1a1a" strokeWidth="2.5" /><line x1="8" y1="16" x2="32" y2="16" stroke="#1a1a1a" strokeWidth="2.5" /><path d="M20 16 Q16 26 10 32 M20 16 Q26 26 30 32" stroke="#1a1a1a" strokeWidth="2.5" fill="none" /></>);
+    case "地": return box(<><ellipse cx="20" cy="26" rx="14" ry="6" fill="#c9a24a" /><path d="M8 26 Q20 18 32 26" stroke="#8a5a2a" strokeWidth="2" fill="none" /></>);
+    default: return box(<rect x="10" y="10" width="20" height="20" rx="3" fill="none" stroke="#c9a24a" strokeWidth="2" strokeDasharray="3 3" />);
+  }
+}
+
 function Write({ rows }: { rows: { ch: string; py: string; strokes: number; radical: string; word: string }[] }) {
   return (
     <div className="mt-5">
-      <p className="mb-2 font-bold text-[#2d6a4f]">会写字</p>
-      <table className="w-full border-collapse text-sm">
-        <thead>
-          <tr className="text-xs text-ink-light">
-            <th className="border-b border-teal/15 py-1 text-left">字</th>
-            <th className="border-b border-teal/15 py-1 text-left">拼音</th>
-            <th className="border-b border-teal/15 py-1 text-left">笔画</th>
-            <th className="border-b border-teal/15 py-1 text-left">部首</th>
-            <th className="border-b border-teal/15 py-1 text-left">组词</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((r) => (
-            <tr key={r.ch} className="border-b border-teal/8">
-              <td className="py-2 font-serif-sc text-xl font-bold text-ink">{r.ch}</td>
-              <td className="py-2 text-ink-light">{r.py}</td>
-              <td className="py-2 text-ink-light">{r.strokes} 画</td>
-              <td className="py-2 text-ink-light">{r.radical}</td>
-              <td className="py-2 text-teal-dark">{r.word}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <p className="mb-2 font-bold text-[#2d6a4f]">会写字（田字格描红）</p>
+      <div className="space-y-3">
+        {rows.map((r) => (
+          <div key={r.ch} className="flex flex-wrap items-center gap-3">
+            <div className="flex items-center gap-1">
+              <TianZiGe ch={r.ch} />
+              <TianZiGe ch={r.ch} faint />
+              <TianZiGe />
+            </div>
+            <div className="text-xs leading-relaxed text-ink-light">
+              <span className="font-serif-sc text-base font-bold text-ink">{r.ch}</span> {r.py} · {r.strokes} 画 · {r.radical}部 · 组词：{r.word}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -748,8 +781,9 @@ function shiziPage(zhTitle: string, chars: { ch: string; py: string; word: strin
       en: <>
         <div className="grid grid-cols-3 gap-3 sm:grid-cols-5">
           {chars.map((c) => (
-            <div key={c.ch} className="rounded-lg bg-[#b3121f]/5 px-2 py-3 text-center">
-              <div className="font-serif-sc text-4xl font-bold text-ink">{c.ch}</div>
+            <div key={c.ch} className="flex flex-col items-center rounded-lg bg-[#b3121f]/5 px-2 py-3">
+              <CharPic ch={c.ch} />
+              <div className="mt-1 font-serif-sc text-3xl font-bold text-ink">{c.ch}</div>
               <div className="text-xs text-ink-light">{c.py}</div>
               <div className="text-xs text-teal-dark">{c.word}</div>
             </div>
@@ -778,8 +812,9 @@ function shiziPage(zhTitle: string, chars: { ch: string; py: string; word: strin
       zh: <>
         <div className="grid grid-cols-3 gap-3 sm:grid-cols-5">
           {chars.map((c) => (
-            <div key={c.ch} className="rounded-lg bg-[#b3121f]/5 px-2 py-3 text-center">
-              <div className="font-serif-sc text-4xl font-bold text-ink">{c.ch}</div>
+            <div key={c.ch} className="flex flex-col items-center rounded-lg bg-[#b3121f]/5 px-2 py-3">
+              <CharPic ch={c.ch} />
+              <div className="mt-1 font-serif-sc text-3xl font-bold text-ink">{c.ch}</div>
               <div className="text-xs text-ink-light">{c.py}</div>
               <div className="text-xs text-teal-dark">{c.word}</div>
             </div>

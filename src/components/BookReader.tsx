@@ -24,6 +24,12 @@ export function BookReader({ book, onClose }: { book: Book; onClose: () => void 
   const page = book.pages[i];
   const total = book.pages.length;
   const isCover = page.kind === "cover";
+  // 当前页所属单元（仿人教版页眉"第一单元·识字"）
+  let unitHeader = "";
+  for (let k = i; k >= 0; k--) {
+    const t = book.pages[k].title.zh;
+    if (/^第.+单元/.test(t)) { unitHeader = t; break; }
+  }
 
   return (
     <div className="fixed inset-0 z-[100] flex flex-col bg-[#1a1a1a]/95 backdrop-blur-sm">
@@ -55,6 +61,11 @@ export function BookReader({ book, onClose }: { book: Book; onClose: () => void 
               <TocPage book={book} onJump={(n) => setI(n)} />
             ) : (
               <article className="prose-book">
+                {unitHeader && (
+                  <p className="mb-3 inline-block rounded-sm bg-[#2d6a4f]/10 px-2 py-0.5 font-serif-sc text-xs font-medium text-[#2d6a4f]">
+                    {unitHeader}
+                  </p>
+                )}
                 <p className="mb-2 font-inter text-[0.6rem] font-bold uppercase tracking-[0.25em] text-[#b3121f]">
                   {kindLabel(page.kind, lang)}
                 </p>
@@ -138,24 +149,46 @@ function CoverPage({ book }: { book: Book }) {
 
 function TocPage({ book, onJump }: { book: Book; onJump: (n: number) => void }) {
   const { lang } = useLang();
+  // 按单元分组（仿人教版目录：单元为栏头，课编号+页码）
+  const groups: { header?: { title: string; n: number }; items: { title: string; n: number; num?: number }[] }[] = [];
+  let cur: { header?: { title: string; n: number }; items: { title: string; n: number; num?: number }[] } | null = null;
+  book.pages.forEach((p, n) => {
+    if (p.kind === "cover" || p.kind === "copyright" || p.kind === "toc") return;
+    const t = p.title.zh;
+    if (/^第.+单元/.test(t)) {
+      cur = { header: { title: t, n }, items: [] };
+      groups.push(cur);
+    } else {
+      if (!cur) { cur = { items: [] }; groups.push(cur); }
+      cur.items.push({ title: t, n });
+    }
+  });
   return (
     <div>
-      <h2 className="mb-5 font-serif-sc text-2xl font-bold text-ink">{lang === "en" ? "Contents" : "目录"}</h2>
-      <ol className="space-y-2 text-sm">
-        {book.pages.map((p, n) =>
-          p.kind === "cover" || p.kind === "copyright" || p.kind === "toc" ? null : (
-            <li key={n}>
-              <button
-                onClick={() => onJump(n)}
-                className="flex w-full items-baseline gap-2 text-left text-ink/80 hover:text-[#b3121f]"
-              >
-                <span className="font-inter text-xs text-ink-light/50 tabular-nums">{String(n + 1).padStart(2, "0")}</span>
-                <span className="font-serif-sc font-medium">{p.title[lang]}</span>
+      <h2 className="mb-5 text-center font-serif-sc text-2xl font-bold text-ink">{lang === "en" ? "Contents" : "目录"}</h2>
+      <div className="space-y-5">
+        {groups.map((g, gi) => (
+          <div key={gi}>
+            {g.header && (
+              <button onClick={() => onJump(g.header!.n)} className="mb-2 block font-serif-sc text-base font-bold text-[#2d6a4f] hover:text-[#b3121f]">
+                {g.header.title}
               </button>
-            </li>
-          )
-        )}
-      </ol>
+            )}
+            <ol className="space-y-1.5 pl-4 text-sm">
+              {g.items.map((it, ii) => (
+                <li key={it.n}>
+                  <button onClick={() => onJump(it.n)} className="group flex w-full items-baseline gap-2 text-left text-ink/80 hover:text-[#b3121f]">
+                    <span className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#2d6a4f]/10 font-inter text-[0.6rem] font-bold text-[#2d6a4f]">{ii + 1}</span>
+                    <span className="font-serif-sc font-medium">{it.title}</span>
+                    <span className="mx-1 flex-1 border-b border-dotted border-ink/20" />
+                    <span className="font-inter text-xs text-ink-light/60 tabular-nums">{it.n + 1}</span>
+                  </button>
+                </li>
+              ))}
+            </ol>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
