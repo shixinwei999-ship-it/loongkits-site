@@ -290,8 +290,84 @@ export const grade1Book: Book = {
     {
       kind: "lesson", title: { en: "I Start School", zh: "我上学了" },
       body: {
-        en: <>Welcome! 你好 (nǐ hǎo) = hello. 老师 (lǎo shī) = teacher. 同学 (tóng xué) = classmate. 学校 (xué xiào) = school. 中文不更难，只是不一样。每个字都是一幅有故事的小画。</>,
-        zh: <>欢迎！你好（nǐ hǎo）= hello。老师（lǎo shī）= teacher。同学（tóng xué）= classmate。学校（xué xiào）= school。中文不更难，只是不一样。每个字都是一幅有故事的小画。</>,
+        en: <>
+          <div className="my-4 flex justify-center">
+            <svg viewBox="0 0 220 120" className="h-32 w-auto" role="img" aria-label="school">
+              <rect x="70" y="40" width="80" height="60" fill="#c8102e" />
+              <path d="M60 40 L110 15 L160 40 Z" fill="#9d0f1b" />
+              <rect x="100" y="70" width="20" height="30" fill="#faf7f2" />
+              <rect x="80" y="50" width="14" height="14" fill="#faf7f2" />
+              <rect x="126" y="50" width="14" height="14" fill="#faf7f2" />
+              <circle cx="40" cy="80" r="8" fill="#1a1a1a" /><rect x="34" y="88" width="12" height="20" rx="4" fill="#1a1a1a" />
+              <circle cx="185" cy="80" r="8" fill="#2d6a4f" /><rect x="179" y="88" width="12" height="20" rx="4" fill="#2d6a4f" />
+            </svg>
+          </div>
+          <p className="text-sm leading-relaxed text-ink/80">欢迎！中文不更难，只是不一样。每个字都是一幅有故事的小画。先认识这四个词：</p>
+          <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {[{ch:"你好",py:"nǐ hǎo",en:"hello"},{ch:"老师",py:"lǎo shī",en:"teacher"},{ch:"同学",py:"tóng xué",en:"classmate"},{ch:"学校",py:"xué xiào",en:"school"}].map((w) => (
+              <div key={w.ch} className="rounded-lg bg-[#b3121f]/5 px-2 py-3 text-center">
+                <div className="font-serif-sc text-2xl font-bold text-ink">{w.ch}</div>
+                <div className="text-xs text-ink-light">{w.py}</div>
+                <div className="text-xs text-teal-dark">{w.en}</div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-4">
+            <p className="mb-2 font-bold text-[#2d6a4f]">描一描，写一写</p>
+            <div className="flex flex-wrap gap-4">
+              {["学", "校", "你", "好"].map((c) => (
+                <div key={c} className="flex items-center gap-1">
+                  <TianZiGe ch={c} />
+                  <TianZiGe ch={c} faint />
+                  <TianZiGe />
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="mt-4 rounded-lg bg-amber-50/60 p-3">
+            <p className="mb-1 text-sm font-bold text-amber-700">读儿歌</p>
+            <p className="font-serif-sc text-base leading-relaxed">太阳当空照，花儿对我笑。小鸟说早早早，你为什么背上小书包？</p>
+          </div>
+        </>,
+        zh: <>
+          <div className="my-4 flex justify-center">
+            <svg viewBox="0 0 220 120" className="h-32 w-auto" role="img" aria-label="学校">
+              <rect x="70" y="40" width="80" height="60" fill="#c8102e" />
+              <path d="M60 40 L110 15 L160 40 Z" fill="#9d0f1b" />
+              <rect x="100" y="70" width="20" height="30" fill="#faf7f2" />
+              <rect x="80" y="50" width="14" height="14" fill="#faf7f2" />
+              <rect x="126" y="50" width="14" height="14" fill="#faf7f2" />
+              <circle cx="40" cy="80" r="8" fill="#1a1a1a" /><rect x="34" y="88" width="12" height="20" rx="4" fill="#1a1a1a" />
+              <circle cx="185" cy="80" r="8" fill="#2d6a4f" /><rect x="179" y="88" width="12" height="20" rx="4" fill="#2d6a4f" />
+            </svg>
+          </div>
+          <p className="text-sm leading-relaxed text-ink/80">欢迎！中文不更难，只是不一样。每个字都是一幅有故事的小画。先认识这四个词：</p>
+          <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {[{ch:"你好",py:"nǐ hǎo",en:"hello"},{ch:"老师",py:"lǎo shī",en:"teacher"},{ch:"同学",py:"tóng xué",en:"classmate"},{ch:"学校",py:"xué xiào",en:"school"}].map((w) => (
+              <div key={w.ch} className="rounded-lg bg-[#b3121f]/5 px-2 py-3 text-center">
+                <div className="font-serif-sc text-2xl font-bold text-ink">{w.ch}</div>
+                <div className="text-xs text-ink-light">{w.py}</div>
+                <div className="text-xs text-teal-dark">{w.en}</div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-4">
+            <p className="mb-2 font-bold text-[#2d6a4f]">描一描，写一写</p>
+            <div className="flex flex-wrap gap-4">
+              {["学", "校", "你", "好"].map((c) => (
+                <div key={c} className="flex items-center gap-1">
+                  <TianZiGe ch={c} />
+                  <TianZiGe ch={c} faint />
+                  <TianZiGe />
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="mt-4 rounded-lg bg-amber-50/60 p-3">
+            <p className="mb-1 text-sm font-bold text-amber-700">读儿歌</p>
+            <p className="font-serif-sc text-base leading-relaxed">太阳当空照，花儿对我笑。小鸟说早早早，你为什么背上小书包？</p>
+          </div>
+        </>,
       },
     },
 
@@ -883,6 +959,29 @@ function shiziPage(zhTitle: string, chars: { ch: string; py: string; word: strin
             <li>在生活中找一找这些字。</li>
           </ol>
         </div>
+        <div className="mt-4">
+          <p className="mb-2 font-bold text-[#2d6a4f]">描一描，写一写</p>
+          <div className="flex flex-wrap gap-4">
+            {chars.map((c) => (
+              <div key={c.ch} className="flex items-center gap-1">
+                <TianZiGe ch={c.ch} />
+                <TianZiGe ch={c.ch} faint />
+                <TianZiGe />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="mt-4 rounded-lg bg-stone-50 p-3">
+          <p className="mb-2 text-sm font-bold text-stone-600">猜一猜，连一连</p>
+          <div className="flex flex-wrap gap-3">
+            {chars.map((c) => (
+              <div key={c.ch} className="flex items-center gap-1">
+                <CharPic ch={c.ch} />
+                <span className="font-serif-sc text-xl font-bold text-ink">{c.ch}</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </>,
       zh: <>
         <div className="grid grid-cols-3 gap-3 sm:grid-cols-5">
@@ -913,6 +1012,29 @@ function shiziPage(zhTitle: string, chars: { ch: string; py: string; word: strin
             <li>用每个字组一个新词。</li>
             <li>在生活中找一找这些字。</li>
           </ol>
+        </div>
+        <div className="mt-4">
+          <p className="mb-2 font-bold text-[#2d6a4f]">描一描，写一写</p>
+          <div className="flex flex-wrap gap-4">
+            {chars.map((c) => (
+              <div key={c.ch} className="flex items-center gap-1">
+                <TianZiGe ch={c.ch} />
+                <TianZiGe ch={c.ch} faint />
+                <TianZiGe />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="mt-4 rounded-lg bg-stone-50 p-3">
+          <p className="mb-2 text-sm font-bold text-stone-600">猜一猜，连一连</p>
+          <div className="flex flex-wrap gap-3">
+            {chars.map((c) => (
+              <div key={c.ch} className="flex items-center gap-1">
+                <CharPic ch={c.ch} />
+                <span className="font-serif-sc text-xl font-bold text-ink">{c.ch}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </>,
     },
