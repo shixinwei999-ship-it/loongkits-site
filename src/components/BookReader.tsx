@@ -44,9 +44,9 @@ export function BookReader({ book, onClose }: { book: Book; onClose: () => void 
       </div>
 
       {/* 书页 */}
-      <div className="flex flex-1 items-center justify-center overflow-hidden px-3 pb-3 sm:px-8 sm:pb-8">
+      <div className="flex flex-1 items-stretch justify-center overflow-hidden px-3 pb-3 sm:px-8 sm:pb-8">
         <div
-          className={`relative flex w-full max-w-3xl flex-col overflow-hidden rounded-r-sm bg-[#fbf8f2] shadow-2xl max-h-full ${
+          className={`relative flex w-full max-w-3xl flex-col overflow-hidden rounded-r-sm bg-[#fbf8f2] shadow-2xl ${
             isCover ? "" : "ring-1 ring-black/5"
           }`}
           style={{ boxShadow: "inset 6px 0 12px -8px rgba(0,0,0,0.15)" }}
@@ -54,13 +54,13 @@ export function BookReader({ book, onClose }: { book: Book; onClose: () => void 
           {/* 装订线 */}
           {!isCover && <div className="absolute inset-y-0 left-0 w-4 bg-gradient-to-r from-[#e8e0d0] to-transparent" />}
 
-          <div className="min-h-0 overflow-y-auto px-6 py-8 sm:px-14 sm:py-12">
+          <div className="flex flex-1 flex-col overflow-y-auto px-6 py-8 sm:px-14 sm:py-12">
             {page.kind === "cover" ? (
               <CoverPage book={book} />
             ) : page.kind === "toc" ? (
               <TocPage book={book} onJump={(n) => setI(n)} />
             ) : (
-              <article className="prose-book">
+              <article className="prose-book flex flex-1 flex-col">
                 {unitHeader && (
                   <p className="mb-3 inline-block rounded-sm bg-[#2d6a4f]/10 px-2 py-0.5 font-serif-sc text-xs font-medium text-[#2d6a4f]">
                     {unitHeader}
@@ -71,6 +71,15 @@ export function BookReader({ book, onClose }: { book: Book; onClose: () => void 
                 </p>
                 <h2 className="mb-4 font-serif-sc text-2xl font-bold text-ink sm:text-3xl">{page.title[lang]}</h2>
                 <div className="text-[15px] leading-[1.9] text-ink/85">{page.body?.[lang]}</div>
+                {/* 底部撑底装饰，让每页视觉饱满、大小统一 */}
+                <div className="mt-auto flex justify-center pt-10">
+                  <svg viewBox="0 0 220 60" className="h-14 w-auto opacity-70" aria-hidden>
+                    <path d="M10 45 Q60 30 110 42 Q160 52 210 38" stroke="#2d6a4f" strokeWidth="2" fill="none" strokeLinecap="round" />
+                    <path d="M30 52 Q80 42 130 50 Q170 55 200 48" stroke="#c9a24a" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.7" />
+                    <circle cx="185" cy="20" r="7" fill="#c8102e" opacity="0.85" />
+                    <text x="185" y="24" textAnchor="middle" fontSize="9" fill="#faf7f2" fontWeight="700">龙</text>
+                  </svg>
+                </div>
               </article>
             )}
           </div>
@@ -135,7 +144,7 @@ function kindLabel(kind: BookPage["kind"], lang: "en" | "zh") {
 function CoverPage({ book }: { book: Book }) {
   const { lang } = useLang();
   return (
-    <div className="flex min-h-[70vh] flex-col items-center justify-center text-center">
+    <div className="flex flex-1 flex-col items-center justify-center text-center">
       <div className="mb-6 h-px w-16 bg-[#b3121f]" />
       <p className="mb-3 font-inter text-[0.65rem] font-bold uppercase tracking-[0.4em] text-[#b3121f]">Loong Kits</p>
       <h1 className="font-serif-sc text-4xl font-bold text-ink sm:text-6xl">{book.title[lang]}</h1>
