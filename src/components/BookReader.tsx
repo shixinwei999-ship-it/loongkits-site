@@ -44,9 +44,9 @@ export function BookReader({ book, onClose }: { book: Book; onClose: () => void 
       </div>
 
       {/* 书页 */}
-      <div className="flex flex-1 items-stretch justify-center overflow-hidden px-3 pb-3 sm:px-8 sm:pb-8">
+      <div className="flex flex-1 items-center justify-center overflow-hidden px-3 pb-3 sm:px-8 sm:pb-8">
         <div
-          className={`relative flex w-full max-w-3xl flex-col overflow-hidden rounded-r-sm bg-[#fbf8f2] shadow-2xl ${
+          className={`relative flex w-full max-w-3xl flex-col overflow-hidden rounded-r-sm bg-[#fbf8f2] shadow-2xl max-h-full ${
             isCover ? "" : "ring-1 ring-black/5"
           }`}
           style={{ boxShadow: "inset 6px 0 12px -8px rgba(0,0,0,0.15)" }}
@@ -54,7 +54,7 @@ export function BookReader({ book, onClose }: { book: Book; onClose: () => void 
           {/* 装订线 */}
           {!isCover && <div className="absolute inset-y-0 left-0 w-4 bg-gradient-to-r from-[#e8e0d0] to-transparent" />}
 
-          <div className="flex-1 overflow-y-auto px-6 py-8 sm:px-14 sm:py-12">
+          <div className="min-h-0 overflow-y-auto px-6 py-8 sm:px-14 sm:py-12">
             {page.kind === "cover" ? (
               <CoverPage book={book} />
             ) : page.kind === "toc" ? (
@@ -135,7 +135,7 @@ function kindLabel(kind: BookPage["kind"], lang: "en" | "zh") {
 function CoverPage({ book }: { book: Book }) {
   const { lang } = useLang();
   return (
-    <div className="flex h-full flex-col items-center justify-center text-center">
+    <div className="flex min-h-[70vh] flex-col items-center justify-center text-center">
       <div className="mb-6 h-px w-16 bg-[#b3121f]" />
       <p className="mb-3 font-inter text-[0.65rem] font-bold uppercase tracking-[0.4em] text-[#b3121f]">Loong Kits</p>
       <h1 className="font-serif-sc text-4xl font-bold text-ink sm:text-6xl">{book.title[lang]}</h1>
