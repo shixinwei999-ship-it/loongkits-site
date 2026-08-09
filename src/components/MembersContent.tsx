@@ -8,11 +8,22 @@ import { kidsTracks, selfStudyTracks, teacherTracks, type Unit, type LessonItem 
 import { BookReader, type Book } from "@/components/BookReader";
 import { grade1Book } from "@/lib/books/grade1";
 import { grade2Book } from "@/lib/books/grade2";
+import { grade3Book } from "@/lib/books/grade3";
+import { grade4Book } from "@/lib/books/grade4";
+import { grade5Book } from "@/lib/books/grade5";
+import { grade6Book } from "@/lib/books/grade6";
+import { grade7Book } from "@/lib/books/grade7";
+import { grade8Book } from "@/lib/books/grade8";
+import { grade9Book } from "@/lib/books/grade9";
+import { grade10Book } from "@/lib/books/grade10";
 
 type Tab = "kids" | "self" | "teachers";
 
-// 已完成的完整书。未列出的年级 = 编写中。
-const books: Record<string, Book> = { g1: grade1Book, g2: grade2Book };
+// 已完成的完整书（一年级到十年级）。
+const books: Record<string, Book> = {
+  g1: grade1Book, g2: grade2Book, g3: grade3Book, g4: grade4Book, g5: grade5Book,
+  g6: grade6Book, g7: grade7Book, g8: grade8Book, g9: grade9Book, g10: grade10Book,
+};
 
 function LessonRow({ lesson, lang }: { lesson: LessonItem; lang: "en" | "zh" }) {
   const [open, setOpen] = useState(false);
@@ -174,7 +185,15 @@ export function MembersContent() {
           {(() => {
             type Cover = { id: string; label: Bi<string>; sub: Bi<string>; book?: Book };
             let shelf: Cover[] = [];
-            if (tab === "kids") shelf = kidsTracks.map((t) => ({ id: t.id, label: t.label, sub: t.ageRange, book: books[t.id] }));
+            if (tab === "kids") {
+              shelf = kidsTracks.map((t) => ({ id: t.id, label: t.label, sub: t.ageRange, book: books[t.id] }));
+              shelf = shelf.concat([
+                { id: "g7", label: { en: "Grade 7", zh: "七年级" }, sub: { en: "Ages 12-13", zh: "12-13 岁" }, book: books.g7 },
+                { id: "g8", label: { en: "Grade 8", zh: "八年级" }, sub: { en: "Ages 13-14", zh: "13-14 岁" }, book: books.g8 },
+                { id: "g9", label: { en: "Grade 9", zh: "九年级" }, sub: { en: "Ages 14-15", zh: "14-15 岁" }, book: books.g9 },
+                { id: "g10", label: { en: "Grade 10", zh: "十年级" }, sub: { en: "Ages 15-16", zh: "15-16 岁" }, book: books.g10 },
+              ]);
+            }
             else if (tab === "self") shelf = selfStudyTracks.map((t) => ({ id: t.id, label: t.label, sub: { en: t.hskRange, zh: t.hskRange } }));
             else shelf = kidsTracks.map((t) => ({ id: t.id, label: { en: `${t.label.en} Teacher`, zh: `${t.label.zh} · 教师` }, sub: t.ageRange }));
 
