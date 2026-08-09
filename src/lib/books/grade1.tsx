@@ -570,7 +570,7 @@ export const grade1Book: Book = {
       think: "花和草有雨会怎样？没雨呢？",
     }),
     speakPage("用多大的声音", "讨论什么时候大声、什么时候小声，声音大小要看场合。", ["看场合决定声音大小。", "公共场所不大喊大叫。"], ["操场上喊同学：大声。", "图书馆里说话：小声。", "课堂上回答：清楚响亮。"]),
-    gardenPage("六", ["识字加油站：我的前后左右都有谁。","字词句运用：读一读，说一说。","书写提示：笔顺「先外后内」。写「月」先外后内。"], { zhTitle: "古朗月行", lines: ["小时不识月，","呼作白玉盘。","又疑瑶台镜，","飞在青云端。"] }),
+    gardenPage("六", ["识字加油站：我的前后左右都有谁--前桌、后桌、左边、右边。","字词句运用：读一读，说一说--用「渐渐」说话：天气渐渐冷了。","书写提示：笔顺「先外后内」。写「月」先外后内。","和大人一起读：《小兔子乖乖》--和大人分角色读一读。"], { zhTitle: "古朗月行", lines: ["小时不识月，","呼作白玉盘。","又疑瑶台镜，","飞在青云端。"] }),
 
     // ── 第七单元 课文 ──
     unitPage("七", "课文", "Texts", "远足的期待、自己的大小、海边的项链。", ["明天要远足", "大还是小", "项链"]),
@@ -601,7 +601,7 @@ export const grade1Book: Book = {
       practice: ["朗读，读出海的辽阔。","大海是什么颜色？什么样？","用「又……又……」造句（又宽又远）。","捡贝壳当什么？"],
       think: "你去过海边吗？海边还有什么？",
     }),
-    gardenPage("七", ["识字加油站：哥哥、弟弟、姐姐、妹妹--家人称呼。","字词句运用：读一读，比一比。","展示台：在街上找认识的字。"], { zhTitle: "登鹳雀楼", lines: ["白日依山尽，","黄河入海流。","欲穷千里目，","更上一层楼。"] }),
+    gardenPage("七", ["识字加油站：哥哥、弟弟、姐姐、妹妹--家人称呼，你还知道哪些？","字词句运用：读一读，比一比--「明天」和「天明」意思一样吗？","展示台：在街上、超市里找一找认识的字，记下来。","和大人一起读：《拔萝卜》--和大人一起演一演。"], { zhTitle: "登鹳雀楼", lines: ["白日依山尽，","黄河入海流。","欲穷千里目，","更上一层楼。"] }),
 
     // ── 第八单元 课文 ──
     unitPage("八", "课文", "Texts", "雪地画画、乌鸦喝水、小壁虎借尾巴。", ["雪地里的小画家", "乌鸦喝水", "小壁虎借尾巴"]),
@@ -633,7 +633,7 @@ export const grade1Book: Book = {
       think: "每种动物的尾巴有什么用？",
     }),
     speakPage("小兔运南瓜", "小兔要把大南瓜运回家，想办法并说出理由。", ["先想一想，再说一说。", "说出你的理由。"], ["我把南瓜滚回家，因为南瓜是圆的。", "我请朋友帮忙抬回家。", "我用小车把南瓜推回家。"]),
-    gardenPage("八", ["识字加油站：冬天的字--雪、冰、冷、风。","字词句运用：读一读，演一演。","书写提示：笔顺「先里头后封口」。写「田」先里后封。"], { zhTitle: "风", lines: ["解落三秋叶，","能开二月花。","过江千尺浪，","入竹万竿斜。"] }),
+    gardenPage("八", ["识字加油站：冬天的字--雪、冰、冷、风，它们都是什么偏旁？","字词句运用：读一读，演一演--表演「雪花飘」。","书写提示：笔顺「先里头后封口」。写「田」先里后封。","和大人一起读：《春节童谣》--和大人一起读，准备过年。"], { zhTitle: "风", lines: ["解落三秋叶，","能开二月花。","过江千尺浪，","入竹万竿斜。"] }),
 
     // ── 附表 ──
     {
@@ -651,7 +651,7 @@ export const grade1Book: Book = {
       },
     },
     strokePage("常用偏旁名称表", "氵（三点水）-> 河、海；扌（提手旁）-> 打、拍；木（木字旁）-> 树、林；艹（草字头）-> 花、草；日（日字旁）-> 明、早；女（女字旁）-> 妈、姐；心（心字底）-> 想、念；宀（宝盖头）-> 家、它；虫（虫字旁）-> 虾、蚁；辶（走之底）-> 进、远。认偏旁，猜字义。"),
-    strokePage("常用笔画名称表", "横（一）、竖（丨）、撇（丿）、捺（㇏）、点（丶）、提（㇀）、横折（ㄱ）、竖弯钩（乚）、横撇（㇇）、竖钩（亅）。写字前先认笔画，再按笔顺写。"),
+    strokePage("常用笔画名称表", "横（一）如「十、三」；竖（丨）如「中、木」；撇（丿）如「人、八」；捺（㇏）如「大、人」；点（丶）如「小、头」；提（㇀）如「打、冰」；横折（ㄱ）如「口、日」；竖弯钩（乚）如「儿、电」；横撇（㇇）如「水、又」；竖钩（亅）如「小、手」。写字前先认笔画，再按笔顺写。"),
     {
       kind: "back", title: { en: "Afterword", zh: "后记" },
       body: {
@@ -794,6 +794,18 @@ function lessonPage(opts: {
             <p className="text-sm text-ink-light">{picture}</p>
           </div>
           <Practice items={opts.practice} />
+          <div className="mt-4">
+            <p className="mb-2 font-bold text-[#2d6a4f]">抄一抄（田字格）</p>
+            <div className="flex flex-wrap gap-3">
+              {opts.write.map((w) => (
+                <div key={w.ch} className="flex items-center gap-1">
+                  <TianZiGe ch={w.ch} />
+                  <TianZiGe ch={w.ch} faint />
+                  <TianZiGe />
+                </div>
+              ))}
+            </div>
+          </div>
           <p className="mt-4 rounded-lg bg-amber-50/60 p-3 text-sm text-ink/80"><b>Think & speak:</b> {opts.think}</p>
         </>,
         zh: <>
@@ -802,6 +814,18 @@ function lessonPage(opts: {
             <p className="text-sm text-ink-light">{picture}</p>
           </div>
           <Practice items={opts.practice} />
+          <div className="mt-4">
+            <p className="mb-2 font-bold text-[#2d6a4f]">抄一抄（田字格）</p>
+            <div className="flex flex-wrap gap-3">
+              {opts.write.map((w) => (
+                <div key={w.ch} className="flex items-center gap-1">
+                  <TianZiGe ch={w.ch} />
+                  <TianZiGe ch={w.ch} faint />
+                  <TianZiGe />
+                </div>
+              ))}
+            </div>
+          </div>
           <p className="mt-4 rounded-lg bg-amber-50/60 p-3 text-sm text-ink/80"><b>思考说话：</b>{opts.think}</p>
         </>,
       },
@@ -845,6 +869,14 @@ function unitPage(num: string, zhTitle: string, enTitle: string, desc: string, l
     title: { en: `Unit ${num}`, zh: `第${num}单元 · ${zhTitle}` },
     body: {
       en: <>
+        <div className="my-4 flex justify-center">
+          <svg viewBox="0 0 200 90" className="h-24 w-auto" role="img" aria-label={zhTitle}>
+            <path d="M100 20 Q60 8 20 18 L20 75 Q60 65 100 75 Q140 65 180 75 L180 18 Q140 8 100 20 Z" fill="none" stroke="#2d6a4f" strokeWidth="2.5" />
+            <line x1="100" y1="20" x2="100" y2="75" stroke="#2d6a4f" strokeWidth="2" />
+            <path d="M32 30 Q60 24 88 30 M32 42 Q60 36 88 42 M32 54 Q60 48 88 54" stroke="#2d6a4f" strokeWidth="1.5" fill="none" opacity="0.5" />
+            <path d="M112 30 Q140 24 168 30 M112 42 Q140 36 168 42 M112 54 Q140 48 168 54" stroke="#2d6a4f" strokeWidth="1.5" fill="none" opacity="0.5" />
+          </svg>
+        </div>
         <p className="font-serif-sc text-3xl font-bold text-ink">{enTitle}</p>
         <p className="mt-3 rounded-lg bg-[#2d6a4f]/5 p-4 text-sm leading-relaxed text-ink/80"><b>单元导语：</b>{desc}</p>
         {lessons && lessons.length > 0 && (
@@ -862,6 +894,14 @@ function unitPage(num: string, zhTitle: string, enTitle: string, desc: string, l
         </div>
       </>,
       zh: <>
+        <div className="my-4 flex justify-center">
+          <svg viewBox="0 0 200 90" className="h-24 w-auto" role="img" aria-label={zhTitle}>
+            <path d="M100 20 Q60 8 20 18 L20 75 Q60 65 100 75 Q140 65 180 75 L180 18 Q140 8 100 20 Z" fill="none" stroke="#2d6a4f" strokeWidth="2.5" />
+            <line x1="100" y1="20" x2="100" y2="75" stroke="#2d6a4f" strokeWidth="2" />
+            <path d="M32 30 Q60 24 88 30 M32 42 Q60 36 88 42 M32 54 Q60 48 88 54" stroke="#2d6a4f" strokeWidth="1.5" fill="none" opacity="0.5" />
+            <path d="M112 30 Q140 24 168 30 M112 42 Q140 36 168 42 M112 54 Q140 48 168 54" stroke="#2d6a4f" strokeWidth="1.5" fill="none" opacity="0.5" />
+          </svg>
+        </div>
         <p className="font-serif-sc text-3xl font-bold text-ink">{zhTitle}</p>
         <p className="mt-3 rounded-lg bg-[#2d6a4f]/5 p-4 text-sm leading-relaxed text-ink/80"><b>单元导语：</b>{desc}</p>
         {lessons && lessons.length > 0 && (
