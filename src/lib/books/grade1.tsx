@@ -438,7 +438,7 @@ export const grade1Book: Book = {
     pinyinPage("j q x", ["jī 鸡", "qì 气", "xī 西"], "舌面音。j 紧贴，q 送气，x 留缝擦。j q x 后 ü 写 u。", "j：竖弯左斜加点。q：半圆竖右弯。x：两斜交叉。", "鸡吃米 jī chī mǐ"),
     pinyinPage("z c s", ["zì 字", "cǎi 彩", "sān 三"], "平舌音，舌尖抵齿背。z 不送气，c 送气，s 擦。", "z：左半圆横。c：左半圆。s：半圆连弯。", "三思 sān sī"),
     pinyinPage("zh ch sh r", ["zhī 知", "chī 吃", "shī 师", "rì 日"], "翘舌音，舌尖翘起抵硬腭。r 是浊擦音。", "zh ch sh：z c s 后加 h。r：竖弯带捺。", "四是四 shì shì shì"),
-    gardenPage("二", ["识字加油站：用拼音读同学的名字。","字词句运用：读一读，连一连。","书写提示：拼音字母写在中格。"]),
+    gardenPage("二", ["识字加油站：用拼音读同学的名字：zhāng 张、lǐ 李、wáng 王、liú 刘、chén 陈。","字词句运用：读一读，连一连。把拼音和字连起来：bà-爸、mā-妈、dà-大、mǐ-米。","书写提示：拼音字母写在中格。b 的竖伸出上格，p 的竖伸出下格，写时注意上下格。","展示台：在生活中找一找认识的拼音和字，读给家人听。"], { zhTitle: "咏鹅", lines: ["鹅鹅鹅，", "曲项向天歌。", "白毛浮绿水", "红掌拨清波。"] }),
 
     // ── 第三单元 汉语拼音（二）──
     unitPage("三", "汉语拼音（续）", "Pinyin (2)", "复韵母和鼻韵母，13 课的后半。", ["ai ei ui", "ao ou iu", "ie üe er", "an en in un ün", "ang eng ing ong"]),
@@ -447,7 +447,7 @@ export const grade1Book: Book = {
     pinyinPage("ie üe er", ["jié 节", "xuě 雪", "èr 二"], "ie 像耶，üe 像约，er 卷舌单独成音节。", "ie üe：前音后 e。er：e 加 r。", "下雪 xià xuě"),
     pinyinPage("an en in un ün", ["sān 三", "rén 人", "jīn 金", "chūn 春", "yún 云"], "前鼻韵母，结尾舌尖抵上齿龈，气流从鼻出。", "都以 n 结尾。", "蓝天 lán tiān"),
     pinyinPage("ang eng ing ong", ["bāng 帮", "fēng 风", "xīng 星", "dōng 东"], "后鼻韵母，结尾舌根抵软腭，比前鼻更沉。", "都以 ng 结尾。", "帮助 bāng zhù"),
-    gardenPage("三", ["识字加油站：拼一拼，读一读。","字词句运用：比一比，读一读。","日积月累：春眠不觉晓，处处闻啼鸟。"]),
+    gardenPage("三", ["识字加油站：拼一拼，读一读：b-a→ba、p-o→po、m-i→mi、f-u→fu。","字词句运用：比一比，读一读：b-d、p-q，分清左下半圆和右下半圆、右上半圆。","书写提示：复韵母两个字母要写得紧凑，不能分家。","展示台：用拼音拼一拼家里的物品，读给家人听。"], { zhTitle: "春晓", lines: ["春眠不觉晓，", "处处闻啼鸟。", "夜来风雨声", "花落知多少。"] }),
 
     // ── 第四单元 课文 ──
     unitPage("四", "课文", "Texts", "秋天、小船、江南、四季--最早的散文诗。", ["秋天", "小小的船", "江南", "四季"]),
@@ -1085,15 +1085,29 @@ function speakPage(zhTitle: string, task: string, tips?: string[], examples?: st
 
 // 语文园地页（含日积月累古诗）
 function gardenPage(num: string, sections: string[], poem?: { zhTitle: string; lines: string[] }) {
+  const renderSection = (s: string, i: number) => {
+    const idx = s.indexOf("：");
+    const head = idx > -1 ? s.slice(0, idx) : s;
+    const rest = idx > -1 ? s.slice(idx + 1) : "";
+    return (
+      <div key={i} className="mt-3 rounded-lg bg-[#2d6a4f]/5 p-3">
+        <p className="text-sm font-bold text-teal">{head}</p>
+        {rest && <p className="mt-1 text-sm leading-relaxed text-ink/80">{rest}</p>}
+      </div>
+    );
+  };
   const poemBlock = poem ? (
-    <p className="mt-3 rounded-lg bg-amber-50/60 p-3"><b>日积月累：</b>{poem.zhTitle} - {poem.lines.join(" ")}</p>
+    <div className="mt-3 rounded-lg bg-amber-50/60 p-3">
+      <p className="text-sm font-bold text-amber-700">日积月累</p>
+      <p className="mt-1 font-serif-sc text-base leading-relaxed text-ink/85">{poem.zhTitle} · {poem.lines.join(" ")}</p>
+    </div>
   ) : null;
   return {
     kind: "garden" as const,
     title: { en: `Language Garden ${num}`, zh: `语文园地 ${num}` },
     body: {
-      en: <>{sections.map((s, i) => (<p key={i} className="mt-2 text-sm leading-relaxed text-ink/80">{s}</p>))}{poemBlock}</>,
-      zh: <>{sections.map((s, i) => (<p key={i} className="mt-2 text-sm leading-relaxed text-ink/80">{s}</p>))}{poemBlock}</>,
+      en: <>{sections.map(renderSection)}{poemBlock}</>,
+      zh: <>{sections.map(renderSection)}{poemBlock}</>,
     },
   };
 }
