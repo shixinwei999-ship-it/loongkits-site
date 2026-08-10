@@ -16,6 +16,7 @@ import { grade7Book } from "@/lib/books/grade7";
 import { grade8Book } from "@/lib/books/grade8";
 import { grade9Book } from "@/lib/books/grade9";
 import { grade10Book } from "@/lib/books/grade10";
+import { teacherBooks, selfBooks } from "@/lib/books/variants";
 
 type Tab = "kids" | "self" | "teachers";
 
@@ -194,8 +195,16 @@ export function MembersContent() {
                 { id: "g10", label: { en: "Grade 10", zh: "十年级" }, sub: { en: "Ages 15-16", zh: "15-16 岁" }, book: books.g10 },
               ]);
             }
-            else if (tab === "self") shelf = selfStudyTracks.map((t) => ({ id: t.id, label: t.label, sub: { en: t.hskRange, zh: t.hskRange } }));
-            else shelf = kidsTracks.map((t) => ({ id: t.id, label: { en: `${t.label.en} Teacher`, zh: `${t.label.zh} · 教师` }, sub: t.ageRange }));
+            else if (tab === "self") shelf = selfStudyTracks.map((t) => ({ id: t.id, label: t.label, sub: { en: t.hskRange, zh: t.hskRange }, book: selfBooks[`s-${t.id}`] }));
+            else {
+              const zhNum = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十"];
+              shelf = zhNum.map((z, i) => ({
+                id: `t-g${i + 1}`,
+                label: { en: `Grade ${i + 1} Teacher`, zh: `${z}年级 · 教师用书` },
+                sub: { en: "Teaching ed.", zh: "教案·注解·答案" },
+                book: teacherBooks[`t-g${i + 1}`],
+              }));
+            }
 
             const palette = ["#b3121f", "#2d6a4f", "#c9a24a", "#1f4a38", "#7c3aed", "#92400e", "#334155", "#0f766e", "#9f1239", "#4c1d95", "#115e59", "#7c2d12"];
             return (
