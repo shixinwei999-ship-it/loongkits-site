@@ -267,7 +267,12 @@ function Illustration({ topic }: { topic: string }) {
         <text x="80" y="95" fontSize="9" fill={C.ink}>断尾</text>
       </>);
     default:
-      return wrap(<rect x="60" y="30" width="100" height="70" rx="6" fill="none" stroke={C.line} strokeWidth="2" strokeDasharray="4 4" />);
+      return wrap(<>
+        <circle cx="170" cy="30" r="14" fill="#f2c14e" />
+        <path d="M20 95 L70 40 L100 75 L130 45 L160 95 Z" fill="#7a9b6a" opacity="0.8" />
+        <path d="M90 95 L140 55 L200 95 Z" fill="#2d6a4f" opacity="0.6" />
+        <path d="M10 105 Q60 98 110 105 Q160 112 210 105" stroke="#5b9bd5" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+      </>);
   }
 }
 
@@ -789,6 +794,7 @@ function lessonPage(opts: {
       title: { en: `${opts.enTitle} · Practice`, zh: `${opts.zhTitle} · 课后练习` },
       body: {
         en: <>
+          <Illustration topic={opts.zhTitle} />
           <div className="mb-4 rounded-lg bg-stone-50 p-3">
             <p className="mb-1 text-sm font-bold text-stone-600">插图</p>
             <p className="text-sm text-ink-light">{picture}</p>
@@ -809,6 +815,7 @@ function lessonPage(opts: {
           <p className="mt-4 rounded-lg bg-amber-50/60 p-3 text-sm text-ink/80"><b>Think & speak:</b> {opts.think}</p>
         </>,
         zh: <>
+          <Illustration topic={opts.zhTitle} />
           <div className="mb-4 rounded-lg bg-stone-50 p-3">
             <p className="mb-1 text-sm font-bold text-stone-600">插图</p>
             <p className="text-sm text-ink-light">{picture}</p>
@@ -929,12 +936,14 @@ function poemPage(zhTitle: string, author: string, pairs: [string, string][], tr
     title: { en: `Poem · ${zhTitle}`, zh: `古诗 · ${zhTitle}` },
     body: {
       en: <>
+        <Illustration topic={zhTitle} />
         <p className="font-serif-sc text-2xl leading-[2.6] text-ink">{pairs.map(([py, ch], i) => (<ruby className="ruby-zh" key={i}>{ch}<rt>{py}</rt></ruby>))}</p>
         <p className="mt-1 text-xs text-ink-light/60">-- {author}</p>
         <p className="mt-4 text-sm leading-relaxed text-ink/80"><b>译文：</b>{trans}</p>
         <p className="mt-2 text-sm leading-relaxed text-ink/70"><b>题解：</b>{note}</p>
       </>,
       zh: <>
+        <Illustration topic={zhTitle} />
         <p className="font-serif-sc text-2xl leading-[2.6] text-ink">{pairs.map(([py, ch], i) => (<ruby className="ruby-zh" key={i}>{ch}<rt>{py}</rt></ruby>))}</p>
         <p className="mt-1 text-xs text-ink-light/60">-- {author}</p>
         <p className="mt-4 text-sm leading-relaxed text-ink/80"><b>译文：</b>{trans}</p>
@@ -1090,6 +1099,7 @@ function speakPage(zhTitle: string, task: string, tips?: string[], examples?: st
     title: { en: `Speaking · ${zhTitle}`, zh: `口语交际 · ${zhTitle}` },
     body: {
       en: <>
+        <Illustration topic={zhTitle} />
         <div className="mb-4 rounded-lg bg-[#2d6a4f]/5 p-4">
           <p className="mb-2 text-sm font-bold text-teal">交际要求</p>
           <ul className="list-disc space-y-1 pl-5 text-sm text-ink/80">{tipsList.map((t) => (<li key={t}>{t}</li>))}</ul>
@@ -1105,6 +1115,7 @@ function speakPage(zhTitle: string, task: string, tips?: string[], examples?: st
         </div>
       </>,
       zh: <>
+        <Illustration topic={zhTitle} />
         <div className="mb-4 rounded-lg bg-[#2d6a4f]/5 p-4">
           <p className="mb-2 text-sm font-bold text-teal">交际要求</p>
           <ul className="list-disc space-y-1 pl-5 text-sm text-ink/80">{tipsList.map((t) => (<li key={t}>{t}</li>))}</ul>
@@ -1146,8 +1157,8 @@ function gardenPage(num: string, sections: string[], poem?: { zhTitle: string; l
     kind: "garden" as const,
     title: { en: `Language Garden ${num}`, zh: `语文园地 ${num}` },
     body: {
-      en: <>{sections.map(renderSection)}{poemBlock}</>,
-      zh: <>{sections.map(renderSection)}{poemBlock}</>,
+      en: <><Illustration topic="语文园地" />{sections.map(renderSection)}{poemBlock}</>,
+      zh: <><Illustration topic="语文园地" />{sections.map(renderSection)}{poemBlock}</>,
     },
   };
 }
