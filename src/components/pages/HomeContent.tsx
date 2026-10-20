@@ -58,15 +58,15 @@ export function HomeContent() {
             </Reveal>
           </div>
 
-          {/* 右：烫金「龙」monogram */}
+          {/* 右：烫金「神龙」monogram */}
           <div className="flex items-center justify-center lg:col-span-5">
             <Reveal delay={150}>
               <span
                 aria-hidden
                 className="gold-foil select-none font-serif-sc font-bold leading-none"
-                style={{ fontSize: "clamp(14rem, 30vw, 30rem)" }}
+                style={{ fontSize: "clamp(8rem, 15vw, 15rem)" }}
               >
-                龙
+                神龙
               </span>
             </Reveal>
           </div>
